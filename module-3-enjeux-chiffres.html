@@ -101,6 +101,15 @@
   .source{font-size:.82rem;color:var(--gris-2);border-top:1px solid var(--bordure);margin-top:2rem;padding-top:1rem;}
   footer.site{background:var(--blanc);border-top:6px solid var(--jaune);padding:1.6rem 0;font-size:.88rem;color:var(--gris-2);}
   footer.site a{color:var(--noir);font-weight:700;}
+  .schema{margin:1.7rem 0;border:1px solid var(--bordure);border-radius:12px;padding:1.3rem;background:#fff;}
+  .schema h4{margin:0 0 1rem;font-size:1.05rem;border-left:6px solid var(--jaune);padding-left:.55rem;}
+  .schema svg{width:100%;height:auto;display:block;overflow:visible;}
+  .schema figcaption{font-size:.82rem;color:var(--gris-2);margin-top:.8rem;}
+  .schema .src{font-size:.78rem;color:var(--gris-2);margin-top:.45rem;font-style:italic;}
+  .stat-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem;margin:1.2rem 0;}
+  .stat-cards .sc{background:var(--gris-clair);border-radius:10px;padding:1rem;text-align:center;border-bottom:4px solid var(--jaune);}
+  .stat-cards .sc b{display:block;font-size:1.7rem;line-height:1.1;}
+  .stat-cards .sc span{font-size:.82rem;color:var(--gris);}
   @media (max-width:880px){
     .layout{grid-template-columns:1fr;}
     .stepper{position:static;}
@@ -215,11 +224,80 @@
         <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
         <div class="org" data-explore="1">
           <div class="cartes">
-            <button class="role" aria-expanded="false"><p class="sigle">Bilan 2024 — France</p><p class="nom">Mortalité</p><span class="plus">+</span><div class="detail">Environ 3 190 tués sur les routes de France métropolitaine ; 3 431 décès en comptant l'outre-mer. Les hommes ont été impliqués dans 84 % des accidents mortels.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Répartition par usager (2024)</p><p class="nom">Qui sont les victimes ?</p><span class="plus">+</span><div class="detail">Piétons : 451 ; vélo : 222 ; EDPM : 44 ; deux-roues motorisés : 726 ; véhicule de tourisme : 1 535.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Hauts-de-France (2024)</p><p class="nom">Au niveau régional</p><span class="plus">+</span><div class="detail">2 711 accidents corporels (+2 %), 224 personnes décédées (-16 %) et 3 492 blessés.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Repère monde et Europe (2015)</p><p class="nom">Mise en perspective</p><span class="plus">+</span><div class="detail">Environ 1,4 million de tués dans le monde, 25 200 en Europe ; en France environ 3 398, dont 308 en Hauts-de-France.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Bilan 2025 — France</p><p class="nom">Données ONISR les plus récentes</p><span class="plus">+</span><div class="detail">En 2025, 3 263 personnes sont décédées sur les routes de France métropolitaine (+2,2 % par rapport à 2024) et 3 515 en comptant l'outre-mer. 77 % des personnes tuées sont des hommes.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Répartition par mode (2025)</p><p class="nom">Qui sont les victimes ?</p><span class="plus">+</span><div class="detail">Parmi les 3 263 tués en métropole : 1 543 occupants de véhicule de tourisme, 697 usagers de deux-roues motorisés, 503 piétons, 235 cyclistes et 79 utilisateurs d'EDPM. Les occupants de voiture représentent 47 % des tués.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Bilan 2024 — France</p><p class="nom">Année précédente</p><span class="plus">+</span><div class="detail">En 2024, environ 3 193 tués en France métropolitaine et 3 433 en comptant l'outre-mer. Les chiffres 2024 servent de point de comparaison pour l'évolution 2025.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Hauts-de-France (2024)</p><p class="nom">Au niveau régional</p><span class="plus">+</span><div class="detail">2 711 accidents corporels (+2 %), 224 personnes décédées (-16 %) et 3 492 blessés (chiffres de la formation IDSR Hauts-de-France).</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Le réseau le plus meurtrier</p><p class="nom">Hors agglomération</p><span class="plus">+</span><div class="detail">En 2025, les routes hors agglomération concentrent 60 % des décès (1 973 tués), contre 1 031 en agglomération et 259 sur autoroute.</div></button>
           </div>
+        </div>
+
+        <figure class="schema">
+          <h4>Évolution de la mortalité routière en France métropolitaine</h4>
+          <svg viewBox="0 0 720 320" role="img" aria-labelledby="m3g1t m3g1d">
+            <title id="m3g1t">Nombre de personnes tuées par an en France métropolitaine</title>
+            <desc id="m3g1d">2019 : 3 244 ; 2023 : 3 167 ; 2024 : 3 193 ; 2025 : 3 263. Objectif 2030 : 1 622.</desc>
+            <line x1="60" y1="270" x2="700" y2="270" stroke="#ccc" stroke-width="1"/>
+            <!-- objectif 2030 -->
+            <line x1="60" y1="175" x2="700" y2="175" stroke="#c0392b" stroke-width="2" stroke-dasharray="6 5"/>
+            <text x="700" y="169" text-anchor="end" font-family="Marianne,Segoe UI,Arial,sans-serif" font-size="13" fill="#c0392b" font-weight="700">Objectif 2030 : 1 622</text>
+            <!-- barres : échelle 0..3400 -> hauteur 200px (y de 270 à 70) ; y = 270 - val/3400*200 -->
+            <g font-family="Marianne,Segoe UI,Arial,sans-serif">
+              <rect x="95" y="79" width="90" height="191" rx="3" fill="#FECF41"/>
+              <text x="140" y="72" text-anchor="middle" font-size="15" font-weight="800">3 244</text>
+              <text x="140" y="290" text-anchor="middle" font-size="13">2019</text>
+
+              <rect x="240" y="84" width="90" height="186" rx="3" fill="#FECF41"/>
+              <text x="285" y="77" text-anchor="middle" font-size="15" font-weight="800">3 167</text>
+              <text x="285" y="290" text-anchor="middle" font-size="13">2023</text>
+
+              <rect x="385" y="82" width="90" height="188" rx="3" fill="#FECF41"/>
+              <text x="430" y="75" text-anchor="middle" font-size="15" font-weight="800">3 193</text>
+              <text x="430" y="290" text-anchor="middle" font-size="13">2024</text>
+
+              <rect x="530" y="78" width="90" height="192" rx="3" fill="#000"/>
+              <text x="575" y="71" text-anchor="middle" font-size="15" font-weight="800">3 263</text>
+              <text x="575" y="290" text-anchor="middle" font-size="13" font-weight="700">2025</text>
+            </g>
+          </svg>
+          <p class="src">Source : ONISR, Bilan 2025 (données définitives, publié le 29/05/2026). Année de référence de la décennie 2020-2030 : 2019.</p>
+        </figure>
+
+        <figure class="schema">
+          <h4>Répartition des personnes tuées par mode de déplacement (métropole, 2025)</h4>
+          <svg viewBox="0 0 720 300" role="img" aria-labelledby="m3g2t m3g2d">
+            <title id="m3g2t">Nombre de tués par mode de déplacement en 2025</title>
+            <desc id="m3g2d">Véhicule de tourisme : 1 543 ; deux-roues motorisés : 697 ; piétons : 503 ; cyclistes : 235 ; EDPM : 79.</desc>
+            <!-- barres horizontales : échelle 0..1600 -> largeur 480px ; x départ 200 -->
+            <g font-family="Marianne,Segoe UI,Arial,sans-serif" font-size="13">
+              <text x="190" y="35" text-anchor="end" font-weight="700">Véhicule de tourisme</text>
+              <rect x="200" y="22" width="463" height="22" rx="3" fill="#FECF41"/>
+              <text x="670" y="39" font-size="14" font-weight="800">1 543</text>
+
+              <text x="190" y="83" text-anchor="end" font-weight="700">2-roues motorisés</text>
+              <rect x="200" y="70" width="209" height="22" rx="3" fill="#FECF41"/>
+              <text x="416" y="87" font-size="14" font-weight="800">697</text>
+
+              <text x="190" y="131" text-anchor="end" font-weight="700">Piétons</text>
+              <rect x="200" y="118" width="151" height="22" rx="3" fill="#FECF41"/>
+              <text x="358" y="135" font-size="14" font-weight="800">503</text>
+
+              <text x="190" y="179" text-anchor="end" font-weight="700">Cyclistes</text>
+              <rect x="200" y="166" width="71" height="22" rx="3" fill="#FECF41"/>
+              <text x="278" y="183" font-size="14" font-weight="800">235</text>
+
+              <text x="190" y="227" text-anchor="end" font-weight="700">EDPM</text>
+              <rect x="200" y="214" width="24" height="22" rx="3" fill="#FECF41"/>
+              <text x="231" y="231" font-size="14" font-weight="800">79</text>
+            </g>
+          </svg>
+          <p class="src">Source : ONISR, Bilan 2025. Les occupants de voiture représentent 47 % des tués ; les deux-roues motorisés 21 %.</p>
+        </figure>
+
+        <div class="stat-cards">
+          <div class="sc"><b>2 711</b><span>accidents corporels en Hauts-de-France (2024)</span></div>
+          <div class="sc"><b>224</b><span>personnes décédées en Hauts-de-France (2024)</span></div>
+          <div class="sc"><b>3 492</b><span>blessés en Hauts-de-France (2024)</span></div>
         </div>
         <div class="verrou" data-quiz="1">
           <span class="v-tag">🔒 Question de déverrouillage</span>

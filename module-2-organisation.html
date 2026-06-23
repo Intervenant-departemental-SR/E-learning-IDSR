@@ -148,6 +148,11 @@
   footer.site{background:var(--blanc);border-top:6px solid var(--jaune);padding:1.6rem 0;font-size:.88rem;color:var(--gris-2);}
   footer.site a{color:var(--noir);font-weight:700;}
 
+  .schema{margin:1.7rem 0;border:1px solid var(--bordure);border-radius:12px;padding:1.3rem;background:#fff;}
+  .schema h4{margin:0 0 1rem;font-size:1.05rem;border-left:6px solid var(--jaune);padding-left:.55rem;}
+  .schema svg{width:100%;height:auto;display:block;overflow:visible;}
+  .schema .src{font-size:.78rem;color:var(--gris-2);margin-top:.45rem;font-style:italic;}
+
   @media (max-width:880px){
     .layout{grid-template-columns:1fr;}
     .stepper{position:static;}
@@ -207,6 +212,32 @@
           <div class="o"><strong>Objectif 3</strong><span>Situer l'IDSR dans le réseau départemental de sécurité routière.</span></div>
         </div>
         <p class="hint-explore">Comment ça marche : 3 niveaux à parcourir. Sur chaque niveau, cliquez sur les cartes pour découvrir le rôle de chaque acteur, puis répondez à la question pour déverrouiller la suite.</p>
+        <figure class="schema">
+  <h4>Une organisation à trois niveaux</h4>
+  <svg viewBox="0 0 720 320" role="img" aria-labelledby="m2t m2d">
+    <title id="m2t">Les trois niveaux de l'organisation de la sécurité routière</title>
+    <desc id="m2d">Niveau national, régional puis départemental ; les orientations descendent, les besoins et données remontent.</desc>
+    <g font-family="Marianne,Segoe UI,Arial,sans-serif">
+      <rect x="230" y="18" width="260" height="76" rx="8" fill="#000"/>
+      <text x="360" y="48" text-anchor="middle" fill="#FECF41" font-size="15" font-weight="800">NATIONAL</text>
+      <text x="360" y="72" text-anchor="middle" fill="#fff" font-size="12.5">DSR · CISR · CNSR · ONISR</text>
+      <rect x="150" y="112" width="420" height="76" rx="8" fill="#FECF41" stroke="#000" stroke-width="1.5"/>
+      <text x="360" y="142" text-anchor="middle" font-size="15" font-weight="800">RÉGIONAL</text>
+      <text x="360" y="166" text-anchor="middle" font-size="12.5">Préfet de région · DREAL · pôle d'appui</text>
+      <rect x="70" y="206" width="580" height="86" rx="8" fill="#FFF3CC" stroke="#000" stroke-width="1.5"/>
+      <text x="360" y="236" text-anchor="middle" font-size="15" font-weight="800">DÉPARTEMENTAL</text>
+      <text x="360" y="260" text-anchor="middle" font-size="12.5">Préfet · chef de projet · coordinateur · IDSR · partenaires</text>
+      <text x="360" y="280" text-anchor="middle" font-size="11.5" font-style="italic" fill="#3a3a3a">le terrain de l'IDSR</text>
+      <line x1="30" y1="70" x2="30" y2="276" stroke="#6b6b6b" stroke-width="2"/>
+      <polygon points="24,268 36,268 30,282" fill="#6b6b6b"/>
+      <text x="46" y="60" font-size="11" fill="#6b6b6b">Orientations</text>
+      <line x1="690" y1="70" x2="690" y2="276" stroke="#6b6b6b" stroke-width="2"/>
+      <polygon points="684,78 696,78 690,64" fill="#6b6b6b"/>
+      <text x="674" y="60" font-size="11" fill="#6b6b6b" text-anchor="end">Données / besoins</text>
+    </g>
+  </svg>
+  <p class="src">Les orientations nationales descendent vers le terrain ; les données et besoins locaux remontent.</p>
+</figure>
         <div class="nav-etape">
           <span></span>
           <button class="btn btn-primary" data-next>Commencer le parcours →</button>
