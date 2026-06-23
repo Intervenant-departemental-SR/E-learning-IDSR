@@ -153,6 +153,38 @@
   .schema svg{width:100%;height:auto;display:block;overflow:visible;}
   .schema .src{font-size:.78rem;color:var(--gris-2);margin-top:.45rem;font-style:italic;}
 
+  /* Vidéo & photo */
+  .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;margin:1.4rem 0;border:1px solid var(--bordure);background:#000;}
+  .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+  .video-cap{font-size:.8rem;color:var(--gris-2);margin:.3rem 0 0;font-style:italic;}
+  .photo{margin:1.2rem 0;}
+  .photo img{width:100%;border-radius:12px;border:1px solid var(--bordure);}
+  .photo figcaption{font-size:.8rem;color:var(--gris-2);margin-top:.4rem;font-style:italic;}
+  /* Exercice pyramide */
+  .pyramide-exo{margin:1.7rem 0;border:1px solid var(--bordure);border-radius:14px;padding:1.4rem;background:linear-gradient(180deg,#ffffff,#fffdf3);}
+  .pyramide-exo h4{margin:0 0 .4rem;font-size:1.12rem;border-left:6px solid var(--jaune);padding-left:.55rem;}
+  .pyr-consigne{font-size:.92rem;color:var(--gris);margin:0 0 1rem;}
+  .pyramide{display:flex;flex-direction:column;align-items:center;gap:8px;margin:1rem 0 1.3rem;min-height:230px;justify-content:flex-end;}
+  .tier{display:flex;align-items:center;justify-content:center;text-align:center;height:66px;border-radius:10px;opacity:0;transform:translateY(20px) scale(.85);transition:opacity .5s,transform .5s;}
+  .tier.filled{opacity:1;transform:none;animation:pop .55s cubic-bezier(.34,1.56,.64,1);box-shadow:0 6px 20px rgba(233,180,0,.35);}
+  @keyframes pop{0%{transform:translateY(20px) scale(.6);}60%{transform:translateY(-4px) scale(1.04);}100%{transform:none;}}
+  .tier-1{width:46%;background:var(--noir);color:var(--jaune);}
+  .tier-2{width:70%;background:var(--jaune);color:var(--noir);border:2px solid var(--noir);}
+  .tier-3{width:100%;background:var(--jaune-clair);color:var(--noir);border:2px solid var(--noir);}
+  .tier b{display:block;font-size:.95rem;letter-spacing:.03em;}
+  .tier small{font-size:.74rem;opacity:.85;}
+  .pyramide.complete .tier{animation:glow 1.4s ease-in-out infinite alternate;}
+  @keyframes glow{from{box-shadow:0 0 0 rgba(233,180,0,0);}to{box-shadow:0 0 22px rgba(233,180,0,.6);}}
+  .pyr-choix{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;}
+  .pyr-btn{border:2px solid var(--noir);background:#fff;border-radius:999px;padding:.6rem 1.2rem;font:inherit;font-weight:700;cursor:pointer;transition:background .2s,opacity .2s;}
+  .pyr-btn:hover:not(:disabled){background:var(--jaune);}
+  .pyr-btn:disabled{opacity:.35;cursor:default;border-color:var(--bordure);}
+  .pyr-btn.shake{animation:shk .4s;}
+  @keyframes shk{25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}
+  .pyr-msg{text-align:center;font-weight:700;margin-top:1rem;min-height:1.4em;}
+  .pyr-msg.ok{color:var(--vert);}
+  .pyr-msg.ko{color:var(--rouge);}
+  .pyr-reset{display:block;margin:.7rem auto 0;background:none;border:none;color:var(--gris-2);text-decoration:underline;cursor:pointer;font:inherit;font-size:.85rem;}
   @media (max-width:880px){
     .layout{grid-template-columns:1fr;}
     .stepper{position:static;}
@@ -212,32 +244,27 @@
           <div class="o"><strong>Objectif 3</strong><span>Situer l'IDSR dans le réseau départemental de sécurité routière.</span></div>
         </div>
         <p class="hint-explore">Comment ça marche : 3 niveaux à parcourir. Sur chaque niveau, cliquez sur les cartes pour découvrir le rôle de chaque acteur, puis répondez à la question pour déverrouiller la suite.</p>
-        <figure class="schema">
-  <h4>Une organisation à trois niveaux</h4>
-  <svg viewBox="0 0 720 320" role="img" aria-labelledby="m2t m2d">
-    <title id="m2t">Les trois niveaux de l'organisation de la sécurité routière</title>
-    <desc id="m2d">Niveau national, régional puis départemental ; les orientations descendent, les besoins et données remontent.</desc>
-    <g font-family="Marianne,Segoe UI,Arial,sans-serif">
-      <rect x="230" y="18" width="260" height="76" rx="8" fill="#000"/>
-      <text x="360" y="48" text-anchor="middle" fill="#FECF41" font-size="15" font-weight="800">NATIONAL</text>
-      <text x="360" y="72" text-anchor="middle" fill="#fff" font-size="12.5">DSR · CISR · CNSR · ONISR</text>
-      <rect x="150" y="112" width="420" height="76" rx="8" fill="#FECF41" stroke="#000" stroke-width="1.5"/>
-      <text x="360" y="142" text-anchor="middle" font-size="15" font-weight="800">RÉGIONAL</text>
-      <text x="360" y="166" text-anchor="middle" font-size="12.5">Préfet de région · DREAL · pôle d'appui</text>
-      <rect x="70" y="206" width="580" height="86" rx="8" fill="#FFF3CC" stroke="#000" stroke-width="1.5"/>
-      <text x="360" y="236" text-anchor="middle" font-size="15" font-weight="800">DÉPARTEMENTAL</text>
-      <text x="360" y="260" text-anchor="middle" font-size="12.5">Préfet · chef de projet · coordinateur · IDSR · partenaires</text>
-      <text x="360" y="280" text-anchor="middle" font-size="11.5" font-style="italic" fill="#3a3a3a">le terrain de l'IDSR</text>
-      <line x1="30" y1="70" x2="30" y2="276" stroke="#6b6b6b" stroke-width="2"/>
-      <polygon points="24,268 36,268 30,282" fill="#6b6b6b"/>
-      <text x="46" y="60" font-size="11" fill="#6b6b6b">Orientations</text>
-      <line x1="690" y1="70" x2="690" y2="276" stroke="#6b6b6b" stroke-width="2"/>
-      <polygon points="684,78 696,78 690,64" fill="#6b6b6b"/>
-      <text x="674" y="60" font-size="11" fill="#6b6b6b" text-anchor="end">Données / besoins</text>
-    </g>
-  </svg>
-  <p class="src">Les orientations nationales descendent vers le terrain ; les données et besoins locaux remontent.</p>
-</figure>
+        <div class="pyramide-exo">
+          <h4>Exercice — Reconstituez la pyramide de la sécurité routière</h4>
+          <p class="pyr-consigne">La sécurité routière s'organise sur <strong>3 niveaux</strong> qui se complètent. Cliquez sur les niveaux dans le bon ordre, du <strong>sommet</strong> (national) vers la <strong>base</strong> (le terrain) : chaque étage se construit sous vos yeux.</p>
+          <div class="pyramide" id="pyramide">
+            <div class="tier tier-1" data-niv="national"><span><b>NATIONAL</b><small>DSR · CISR · ONISR</small></span></div>
+            <div class="tier tier-2" data-niv="regional"><span><b>RÉGIONAL</b><small>Préfet de région · DREAL · pôle d'appui</small></span></div>
+            <div class="tier tier-3" data-niv="departemental"><span><b>DÉPARTEMENTAL</b><small>Préfet · coordinateur · IDSR · partenaires</small></span></div>
+          </div>
+          <div class="pyr-choix" id="pyrChoix">
+            <button type="button" class="pyr-btn" data-niv="regional">Régional</button>
+            <button type="button" class="pyr-btn" data-niv="national">National</button>
+            <button type="button" class="pyr-btn" data-niv="departemental">Départemental</button>
+          </div>
+          <p class="pyr-msg" id="pyrMsg" role="status"></p>
+          <button type="button" class="pyr-reset" id="pyrReset" hidden>↺ Recommencer</button>
+        </div>
+
+        <div class="video">
+          <iframe src="https://www.youtube-nocookie.com/embed/c5_xMgXz96I" title="Aperçu d'une vidéo de sensibilisation intégrable au module" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <p class="video-cap">Aperçu : une vidéo de sensibilisation peut être intégrée directement dans un module, avec quiz interactif en option (séquence pause → question → reprise).</p>
         <div class="nav-etape">
           <span></span>
           <button class="btn btn-primary" data-next>Commencer le parcours →</button>
@@ -352,6 +379,10 @@
       <section class="etape" data-etape="3" aria-labelledby="t3">
         <h2 id="t3">Niveau départemental — le terrain de l'IDSR</h2>
         <p class="lead">C'est l'échelle de l'action concrète. Le département décline la politique locale et réunit un réseau d'acteurs dont fait partie l'IDSR.</p>
+        <figure class="photo">
+          <img src="assets/photos/rrp-animation.jpg" alt="Intervenants de sécurité routière lors d'une action de sensibilisation." />
+          <figcaption>Sur le terrain : les IDSR animent des actions de prévention auprès des publics du département.</figcaption>
+        </figure>
         <p class="hint-explore">Cliquez sur chaque carte pour lire le rôle de l'acteur.</p>
         <div class="org" data-explore="3">
           <div class="cartes">
@@ -638,6 +669,44 @@
   buildBanque();
   unlock(unlocked); // applique état repris
   show(0);
+})();
+</script>
+<script>
+(function(){
+  "use strict";
+  var order=["national","regional","departemental"];
+  var step=0;
+  var pyr=document.getElementById("pyramide");
+  if(!pyr) return;
+  var msg=document.getElementById("pyrMsg");
+  var reset=document.getElementById("pyrReset");
+  var btns=[].slice.call(document.querySelectorAll("#pyrChoix .pyr-btn"));
+  function fill(niv){var t=pyr.querySelector('.tier[data-niv="'+niv+'"]');if(t)t.classList.add("filled");}
+  btns.forEach(function(b){
+    b.addEventListener("click",function(){
+      if(b.disabled)return;
+      if(b.dataset.niv===order[step]){
+        fill(b.dataset.niv); b.disabled=true; step++;
+        if(step===order.length){
+          pyr.classList.add("complete");
+          msg.textContent="Bravo ! La pyramide est complète : du niveau national jusqu'au terrain de l'IDSR.";
+          msg.className="pyr-msg ok"; reset.hidden=false;
+        }else{
+          msg.textContent="Bien joué ! Continuez avec le niveau suivant…"; msg.className="pyr-msg ok";
+        }
+      }else{
+        b.classList.add("shake"); setTimeout(function(){b.classList.remove("shake");},400);
+        var hint = step===0 ? "On commence par le sommet : le niveau national."
+          : (order[step]==="regional" ? "Ensuite vient le niveau régional." : "On termine par le niveau départemental, le terrain.");
+        msg.textContent="Pas tout à fait. "+hint; msg.className="pyr-msg ko";
+      }
+    });
+  });
+  reset.addEventListener("click",function(){
+    step=0; pyr.classList.remove("complete"); msg.textContent=""; msg.className="pyr-msg"; reset.hidden=true;
+    [].slice.call(pyr.querySelectorAll(".tier")).forEach(function(t){t.classList.remove("filled");});
+    btns.forEach(function(b){b.disabled=false;});
+  });
 })();
 </script>
 </body>
