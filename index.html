@@ -47,6 +47,10 @@
     .carte p{margin:0 0 1rem;color:var(--gris);font-size:.96rem;flex:1;}
     .carte .lien{font-weight:700;font-size:.95rem;display:inline-flex;align-items:center;gap:.4rem;color:var(--noir);}
     .carte .lien::after{content:"→";}
+    .carte.standby{cursor:default;opacity:.92;}
+    .carte.standby:hover{transform:none;box-shadow:none;border-color:var(--bordure);}
+    .carte.standby .bandeau{background:repeating-linear-gradient(45deg,var(--jaune),var(--jaune) 10px,#fce9a8 10px,#fce9a8 20px);}
+    .badge{display:inline-block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;background:var(--gris-clair);color:var(--gris-2);border:1px solid var(--bordure);border-radius:999px;padding:.2rem .65rem;align-self:flex-start;}
 
     footer.site{background:var(--gris-clair);border-top:6px solid var(--jaune);padding:2rem 0;font-size:.9rem;color:var(--gris);}
     footer.site a{font-weight:700;color:var(--noir);}
@@ -152,6 +156,16 @@
             <span class="lien">Commencer le module</span>
           </span>
         </a>
+
+        <div class="carte standby" aria-disabled="true">
+          <span class="bandeau"></span>
+          <span class="contenu">
+            <span class="num">Ressources</span>
+            <h3>Boîte à outils de l'IDSR</h3>
+            <p>Un espace dédié regroupant le matériel de prévention (valise alcool, tapis de circulation, stands…) et les ressources à télécharger. Contenus ajoutés progressivement.</p>
+            <span class="badge">Bientôt disponible</span>
+          </span>
+        </div>
 
       </div>
     </div>
