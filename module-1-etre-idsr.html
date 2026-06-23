@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Module 1 — Être IDSR : rôle, missions et engagement | E-learning IDSR</title>
+<meta name="description" content="Module e-learning interactif : qui est l'Intervenant Départemental de Sécurité Routière, son cadre d'intervention, ses missions, son engagement et sa formation." />
+<style>
+  :root{
+    --jaune:#FECF41; --jaune-fonce:#E9B400; --jaune-clair:#FFF3CC;
+    --noir:#000; --gris:#3a3a3a; --gris-2:#6b6b6b;
+    --gris-clair:#f4f4f4; --bordure:#e2e2e2; --blanc:#fff;
+    --vert:#1f8a4c; --rouge:#c0392b;
+    --rayon:12px; --ombre:0 4px 18px rgba(0,0,0,.12);
+    --max:1080px; --t:.25s cubic-bezier(.4,0,.2,1);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:"Marianne","Segoe UI",Arial,Helvetica,sans-serif;color:var(--noir);background:var(--gris-clair);line-height:1.55;}
+  img{max-width:100%;display:block;}
+  :focus-visible{outline:3px solid var(--noir);outline-offset:2px;border-radius:4px;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 1.25rem;}
+  .skip{position:absolute;left:-9999px;background:var(--noir);color:var(--jaune);padding:.6rem 1rem;z-index:200;font-weight:700;}
+  .skip:focus{left:0;top:0;}
+  header.site{background:var(--blanc);border-bottom:6px solid var(--jaune);position:sticky;top:0;z-index:50;}
+  .topbar{display:flex;align-items:center;gap:1rem;padding:.7rem 1.25rem;max-width:var(--max);margin:0 auto;flex-wrap:wrap;}
+  .topbar img{width:150px;}
+  .topbar .fil{font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--gris-2);font-weight:700;}
+  .topbar .fil a{color:var(--gris-2);text-decoration:none;}
+  .topbar .fil a:hover{text-decoration:underline;}
+  .progress{height:8px;background:var(--gris-clair);}
+  .progress > span{display:block;height:100%;width:0;background:var(--jaune);transition:width .5s ease;}
+  .module-hero{background:var(--noir);color:var(--blanc);padding:2.2rem 0 2.4rem;}
+  .module-hero .eyebrow{color:var(--jaune);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.8rem;margin:0 0 .5rem;}
+  .module-hero h1{font-size:2rem;line-height:1.15;margin:0 0 .8rem;max-width:780px;}
+  .module-hero p{margin:0;color:#e9e9e9;max-width:720px;}
+  main{padding:2rem 0 4rem;}
+  .layout{display:grid;grid-template-columns:260px 1fr;gap:2rem;align-items:start;}
+  .stepper{position:sticky;top:96px;background:var(--blanc);border:1px solid var(--bordure);border-radius:var(--rayon);padding:.6rem;}
+  .stepper ol{list-style:none;margin:0;padding:0;}
+  .step-item{display:flex;align-items:center;gap:.7rem;width:100%;text-align:left;border:none;background:none;font:inherit;padding:.7rem .6rem;border-radius:8px;cursor:pointer;color:var(--gris);transition:background var(--t);}
+  .step-item:hover:not(:disabled){background:var(--jaune-clair);}
+  .step-item:disabled{cursor:not-allowed;color:var(--gris-2);opacity:.7;}
+  .step-item[aria-current="true"]{background:var(--noir);color:var(--blanc);}
+  .step-item[aria-current="true"] .pastille{background:var(--jaune);color:var(--noir);border-color:var(--jaune);}
+  .pastille{flex:0 0 auto;width:30px;height:30px;border-radius:50%;border:2px solid var(--bordure);display:grid;place-items:center;font-weight:700;font-size:.85rem;background:var(--blanc);color:var(--gris);}
+  .step-item.done .pastille{background:var(--vert);border-color:var(--vert);color:#fff;}
+  .step-lbl{font-size:.92rem;font-weight:600;line-height:1.2;}
+  .step-sub{display:block;font-size:.72rem;font-weight:500;opacity:.8;}
+  .etape{display:none;background:var(--blanc);border:1px solid var(--bordure);border-radius:var(--rayon);box-shadow:var(--ombre);padding:1.8rem;animation:fade .35s ease;}
+  .etape.active{display:block;}
+  @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+  .etape h2{font-size:1.5rem;margin:0 0 .3rem;border-left:8px solid var(--jaune);padding-left:.6rem;}
+  .etape .lead{color:var(--gris);margin:.2rem 0 1.6rem;}
+  .obj{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem;margin:1.5rem 0;}
+  .obj .o{background:var(--gris-clair);border-radius:10px;padding:1.1rem;border-top:4px solid var(--jaune);}
+  .obj .o strong{display:block;margin-bottom:.3rem;}
+  .obj .o span{font-size:.92rem;color:var(--gris);}
+  .org{display:flex;flex-direction:column;gap:.7rem;margin:1.4rem 0;}
+  .cartes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.9rem;}
+  .role{position:relative;text-align:left;border:1px solid var(--bordure);border-left:5px solid var(--jaune);background:var(--blanc);border-radius:10px;padding:1rem;cursor:pointer;transition:transform var(--t),box-shadow var(--t),border-color var(--t);font:inherit;width:100%;}
+  .role:hover{transform:translateY(-3px);box-shadow:var(--ombre);}
+  .role .sigle{font-weight:800;font-size:1.02rem;margin:0 0 .15rem;}
+  .role .nom{font-size:.85rem;color:var(--gris-2);margin:0;}
+  .role .detail{max-height:0;overflow:hidden;transition:max-height var(--t);font-size:.9rem;color:var(--gris);}
+  .role[aria-expanded="true"]{border-left-color:var(--noir);background:var(--jaune-clair);}
+  .role[aria-expanded="true"] .detail{max-height:420px;margin-top:.6rem;}
+  .role .plus{position:absolute;top:.8rem;right:.9rem;font-weight:800;color:var(--jaune-fonce);transition:transform var(--t);}
+  .role[aria-expanded="true"] .plus{transform:rotate(45deg);color:var(--noir);}
+  .hint-explore{font-size:.86rem;color:var(--gris-2);background:var(--jaune-clair);border-radius:8px;padding:.6rem .8rem;margin:0 0 1rem;}
+  .docs{background:var(--noir);color:var(--blanc);border-radius:10px;padding:1.1rem 1.3rem;margin:1.4rem 0;}
+  .docs h3{margin:0 0 .6rem;color:var(--jaune);font-size:1rem;}
+  .docs dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem;font-size:.92rem;}
+  .docs dt{font-weight:800;color:var(--jaune);}
+  .docs dd{margin:0;color:#eaeaea;}
+  .verrou{margin-top:1.6rem;border:2px dashed var(--jaune-fonce);border-radius:12px;padding:1.2rem 1.3rem;background:var(--jaune-clair);}
+  .verrou .v-tag{display:inline-flex;align-items:center;gap:.4rem;font-weight:800;text-transform:uppercase;font-size:.78rem;letter-spacing:.05em;color:var(--gris);margin-bottom:.5rem;}
+  .verrou .q{font-weight:700;margin:.2rem 0 .9rem;font-size:1.05rem;}
+  .opts{display:grid;gap:.55rem;}
+  .opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;background:var(--blanc);border:2px solid var(--bordure);border-radius:9px;padding:.75rem .9rem;cursor:pointer;font:inherit;transition:border-color var(--t),background var(--t);}
+  .opt:hover:not(:disabled){border-color:var(--jaune-fonce);}
+  .opt .mark{flex:0 0 auto;width:22px;height:22px;border-radius:50%;border:2px solid var(--gris-2);display:grid;place-items:center;font-size:.8rem;font-weight:800;}
+  .opt.correct{border-color:var(--vert);background:#eafaf0;}
+  .opt.correct .mark{background:var(--vert);border-color:var(--vert);color:#fff;}
+  .opt.wrong{border-color:var(--rouge);background:#fdeeec;}
+  .opt.wrong .mark{background:var(--rouge);border-color:var(--rouge);color:#fff;}
+  .opt:disabled{cursor:default;}
+  .feedback{margin-top:.8rem;font-weight:600;font-size:.94rem;display:none;}
+  .feedback.show{display:block;}
+  .feedback.ok{color:var(--vert);}
+  .feedback.ko{color:var(--rouge);}
+  .nav-etape{display:flex;justify-content:space-between;gap:1rem;margin-top:1.8rem;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;border:none;border-radius:999px;padding:.8rem 1.5rem;font:inherit;font-weight:700;cursor:pointer;text-decoration:none;transition:transform var(--t),background var(--t),opacity var(--t);}
+  .btn-primary{background:var(--jaune);color:var(--noir);}
+  .btn-primary:hover:not(:disabled){background:var(--jaune-fonce);}
+  .btn-primary:disabled{opacity:.45;cursor:not-allowed;}
+  .btn-ghost{background:transparent;color:var(--gris);border:2px solid var(--bordure);}
+  .btn-ghost:hover{border-color:var(--noir);color:var(--noir);}
+  .fini{text-align:center;padding:1rem 0;}
+  .badge-fin{display:inline-grid;place-items:center;width:96px;height:96px;border-radius:50%;background:var(--jaune);margin:0 auto 1rem;font-size:2.6rem;}
+  .source{font-size:.82rem;color:var(--gris-2);border-top:1px solid var(--bordure);margin-top:2rem;padding-top:1rem;}
+  footer.site{background:var(--blanc);border-top:6px solid var(--jaune);padding:1.6rem 0;font-size:.88rem;color:var(--gris-2);}
+  footer.site a{color:var(--noir);font-weight:700;}
+  @media (max-width:880px){
+    .layout{grid-template-columns:1fr;}
+    .stepper{position:static;}
+    .stepper ol{display:flex;overflow-x:auto;gap:.3rem;}
+    .step-item{flex-direction:column;min-width:92px;text-align:center;gap:.35rem;}
+    .step-sub{display:none;}
+    .module-hero h1{font-size:1.55rem;}
+  }
+</style>
+</head>
+<body data-module="m1">
+<a class="skip" href="#contenu">Aller au contenu principal</a>
+
+<header class="site">
+  <div class="topbar">
+    <img src="assets/logo-securite-routiere.png" alt="Sécurité routière — Vivre, Ensemble" />
+    <span class="fil"><a href="index.html">Accueil e-learning</a> › Module 1</span>
+  </div>
+  <div class="progress" role="progressbar" aria-label="Progression du module" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="barre"></span></div>
+</header>
+
+<section class="module-hero">
+  <div class="wrap">
+    <p class="eyebrow">Module 1 · Formation initiale IDSR</p>
+    <h1>Être IDSR : rôle, missions et engagement</h1>
+    <p>Un parcours guidé en plusieurs étapes. Chaque étape se déverrouille lorsque vous avez exploré son contenu et validé la question de contrôle.</p>
+  </div>
+</section>
+
+<main id="contenu">
+  <div class="wrap layout">
+    <nav class="stepper" aria-label="Étapes du module">
+      <ol>
+        <li><button class="step-item" data-go="0"><span class="pastille">1</span><span class="step-lbl">Introduction<span class="step-sub">Objectifs</span></span></button></li>
+        <li><button class="step-item" data-go="1" disabled><span class="pastille">2</span><span class="step-lbl">Qui est l'IDSR ?<span class="step-sub">Un acteur du programme</span></span></button></li>
+        <li><button class="step-item" data-go="2" disabled><span class="pastille">3</span><span class="step-lbl">Cadre & missions<span class="step-sub">Sur le terrain</span></span></button></li>
+        <li><button class="step-item" data-go="3" disabled><span class="pastille">4</span><span class="step-lbl">Engagement & formation<span class="step-sub">Conditions</span></span></button></li>
+        <li><button class="step-item" data-go="4" disabled><span class="pastille">5</span><span class="step-lbl">Synthèse<span class="step-sub">Quiz récap</span></span></button></li>
+      </ol>
+    </nav>
+
+    <div>
+      <!-- ETAPE 0 -->
+      <section class="etape active" data-etape="0" aria-labelledby="t0">
+        <h2 id="t0">Introduction</h2>
+        <p class="lead">L'Intervenant Départemental de Sécurité Routière (IDSR) est un acteur de terrain du programme de sécurité routière de l'État. Ce module précise qui il est, ce qu'il fait, et le cadre de son engagement.</p>
+        <div class="obj">
+          <div class="o"><strong>Objectif 1</strong><span>Comprendre la fonction d'IDSR et son cadre d'intervention.</span></div>
+          <div class="o"><strong>Objectif 2</strong><span>Connaître les missions et le savoir-être attendus.</span></div>
+          <div class="o"><strong>Objectif 3</strong><span>Identifier les conditions d'engagement et de formation.</span></div>
+        </div>
+        <p class="hint-explore">Comment ça marche : cliquez sur les cartes pour découvrir leur contenu, puis répondez à la question pour déverrouiller l'étape suivante.</p>
+        <div class="nav-etape"><span></span><button class="btn btn-primary" data-next>Commencer le parcours →</button></div>
+      </section>
+
+      <!-- ETAPE 1 -->
+      <section class="etape" data-etape="1" aria-labelledby="t1">
+        <h2 id="t1">Qui est l'IDSR ?</h2>
+        <p class="lead">Un bénévole engagé au service d'une cause d'intérêt général : la lutte contre l'insécurité routière.</p>
+        <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
+        <div class="org" data-explore="1">
+          <div class="cartes">
+            <button class="role" aria-expanded="false"><p class="sigle">Un acteur du programme</p><p class="nom">Sa raison d'être</p><span class="plus">+</span><div class="detail">L'IDSR participe à la mise en œuvre du programme départemental de sécurité routière, aux côtés des services de l'État et de leurs partenaires.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Des origines diverses</p><p class="nom">D'où viennent les IDSR ?</p><span class="plus">+</span><div class="detail">Fonctionnaires de l'État ou des collectivités territoriales (parfois mis à disposition par convention), salariés d'organismes socio-professionnels, membres d'associations, ou bénévoles sur engagement personnel.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Une motivation commune</p><p class="nom">Le point commun</p><span class="plus">+</span><div class="detail">Au-delà de la diversité des profils, les IDSR partagent une même volonté : agir concrètement pour réduire l'insécurité routière dans leur département.</div></button>
+          </div>
+        </div>
+        <div class="verrou" data-quiz="1">
+          <span class="v-tag">🔒 Question de déverrouillage</span>
+          <p class="q">Qui peut devenir IDSR ?</p>
+          <div class="opts">
+            <button class="opt" data-ok="0"><span class="mark"></span> Uniquement des fonctionnaires de l'État</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> Des personnes d'origines diverses partageant une même motivation</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> Uniquement des professionnels du transport</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+        <div class="nav-etape"><button class="btn btn-ghost" data-prev>← Précédent</button><button class="btn btn-primary" data-next disabled>Étape suivante →</button></div>
+      </section>
+
+      <!-- ETAPE 2 -->
+      <section class="etape" data-etape="2" aria-labelledby="t2">
+        <h2 id="t2">Cadre d'intervention et missions</h2>
+        <p class="lead">L'IDSR intervient dans un cadre précis, à la demande du coordinateur sécurité routière.</p>
+        <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
+        <div class="org" data-explore="1">
+          <div class="cartes">
+            <button class="role" aria-expanded="false"><p class="sigle">Cadre d'intervention</p><p class="nom">À la demande du coordinateur</p><span class="plus">+</span><div class="detail">L'IDSR intervient à la demande du coordinateur sécurité routière, dans le cadre du programme, sur les enjeux et les publics cibles de l'accidentalité du département.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Actions de prévention</p><p class="nom">Sur le terrain</p><span class="plus">+</span><div class="detail">Réalisation d'actions de prévention : stands, exposés, participation à des manifestations publiques.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Diffusion de l'information</p><p class="nom">Relais de la politique locale</p><span class="plus">+</span><div class="detail">Diffusion de l'information sur la politique locale de sécurité routière auprès des publics rencontrés.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Contribution & accompagnement</p><p class="nom">Faire vivre le réseau</p><span class="plus">+</span><div class="detail">Contribution au développement et à la gestion d'actions de sécurité routière. Les IDSR expérimentés peuvent accompagner et assister les nouveaux IDSR.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Savoir-être</p><p class="nom">Les qualités attendues</p><span class="plus">+</span><div class="detail">Savoir écouter, transmettre, diffuser et s'adapter à son public : ce sont les qualités au cœur de la fonction d'IDSR.</div></button>
+          </div>
+        </div>
+        <div class="verrou" data-quiz="1">
+          <span class="v-tag">🔒 Question de déverrouillage</span>
+          <p class="q">À la demande de qui l'IDSR intervient-il ?</p>
+          <div class="opts">
+            <button class="opt" data-ok="0"><span class="mark"></span> Du préfet de région</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> Du coordinateur sécurité routière</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> De sa propre initiative, sans cadre</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+        <div class="nav-etape"><button class="btn btn-ghost" data-prev>← Précédent</button><button class="btn btn-primary" data-next disabled>Étape suivante →</button></div>
+      </section>
+
+      <!-- ETAPE 3 -->
+      <section class="etape" data-etape="3" aria-labelledby="t3">
+        <h2 id="t3">Engagement, conditions et formation</h2>
+        <p class="lead">Être IDSR repose sur un engagement formel et s'accompagne de droits et d'une formation.</p>
+        <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
+        <div class="org" data-explore="1">
+          <div class="cartes">
+            <button class="role" aria-expanded="false"><p class="sigle">L'engagement</p><p class="nom">Acte d'engagement & nomination</p><span class="plus">+</span><div class="detail">L'IDSR remplit un acte d'engagement auprès de la préfecture portant sur son comportement personnel vis-à-vis des règles de circulation et son adhésion aux grands principes de lutte contre l'insécurité routière. Il est nommé par le préfet de département par un arrêté de nomination (un an au minimum). Le nombre de jours minimum à réaliser dans l'année est défini avec le coordinateur.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Les conditions</p><p class="nom">Bénévolat encadré</p><span class="plus">+</span><div class="detail">Il n'y a pas de rémunération ni de vacation. Les frais de déplacement et de restauration sont remboursés selon les règles et tarifs en vigueur dans les services de l'État. L'IDSR est assuré par l'État lorsqu'il effectue une mission ou participe à une réunion. Il dispose du soutien logistique adapté (tenue, matériel, documentation).</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">La formation</p><p class="nom">Initiale et continue</p><span class="plus">+</span><div class="detail">Tous les intervenants suivent une formation initiale obligatoire de sensibilisation (une journée) apportant une culture de base en sécurité routière. Des formations complémentaires et thématiques peuvent être proposées, et des réunions d'information tiennent les IDSR au courant de l'actualité.</div></button>
+          </div>
+        </div>
+        <div class="docs">
+          <h3>À retenir</h3>
+          <dl>
+            <dt>Bénévolat</dt><dd>Pas de rémunération ; frais remboursés selon les règles de l'État.</dd>
+            <dt>Nomination</dt><dd>Par arrêté du préfet de département, pour un an au minimum.</dd>
+            <dt>Formation</dt><dd>Formation initiale obligatoire d'une journée, puis formations et réunions thématiques.</dd>
+          </dl>
+        </div>
+        <div class="verrou" data-quiz="1">
+          <span class="v-tag">🔒 Question de déverrouillage</span>
+          <p class="q">L'IDSR est-il rémunéré pour ses missions ?</p>
+          <div class="opts">
+            <button class="opt" data-ok="0"><span class="mark"></span> Oui, il perçoit un salaire</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> Oui, une vacation par intervention</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> Non : c'est du bénévolat, seuls les frais sont remboursés</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+        <div class="nav-etape"><button class="btn btn-ghost" data-prev>← Précédent</button><button class="btn btn-primary" data-next disabled>Étape suivante →</button></div>
+      </section>
+
+      <!-- ETAPE 4 : SYNTHESE -->
+      <section class="etape" data-etape="4" data-last="1" aria-labelledby="t4">
+        <h2 id="t4">Synthèse — vérifiez vos acquis</h2>
+        <p class="lead">Répondez aux deux questions pour valider le module.</p>
+        <div class="verrou" data-quiz="1">
+          <span class="v-tag">🔒 Question 1</span>
+          <p class="q">Comment l'IDSR est-il nommé ?</p>
+          <div class="opts">
+            <button class="opt" data-ok="0"><span class="mark"></span> Par la DREAL, pour six mois</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> Par arrêté du préfet de département, pour un an au minimum</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> Par le maire de sa commune</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+        <div class="verrou" data-quiz="2">
+          <span class="v-tag">🔒 Question 2</span>
+          <p class="q">Quelles sont les qualités attendues d'un IDSR ?</p>
+          <div class="opts">
+            <button class="opt" data-ok="0"><span class="mark"></span> Verbaliser et contrôler les usagers</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> Savoir écouter, transmettre, diffuser et s'adapter</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> Rédiger la réglementation nationale</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+        <div id="bloc-fin" style="display:none;">
+          <div class="fini">
+            <div class="badge-fin" aria-hidden="true">✓</div>
+            <h3>Module terminé</h3>
+            <p>Vous savez désormais qui est l'IDSR, ce qu'il fait et dans quel cadre il s'engage. Prochaine étape conseillée : le module sur l'organisation de la sécurité routière.</p>
+            <p style="margin-top:1rem;"><a class="btn btn-primary" href="module-2-organisation.html">Module suivant →</a></p>
+          </div>
+        </div>
+        <div class="nav-etape"><button class="btn btn-ghost" data-prev>← Précédent</button><a class="btn btn-ghost" href="index.html">Retour à l'accueil ↩</a></div>
+      </section>
+
+      <p class="source">Source des contenus : documentation du programme IDSR (présentation de la fonction d'IDSR et formation initiale, Pôle d'appui régional de la sécurité routière — DREAL Hauts-de-France) et <a href="https://www.securite-routiere.gouv.fr/" target="_blank" rel="noopener">securite-routiere.gouv.fr</a>.</p>
+    </div>
+  </div>
+</main>
+
+<footer class="site"><div class="wrap">Espace e-learning des Intervenants Départementaux de Sécurité Routière — Préfecture des Hauts-de-France. <a href="index.html">Retour à l'accueil</a></div></footer>
+
+<script>
+(function(){
+  "use strict";
+  var etapes=[].slice.call(document.querySelectorAll(".etape"));
+  var TOTAL=etapes.length;
+  var stepBtns=[].slice.call(document.querySelectorAll(".step-item"));
+  var barre=document.getElementById("barre");
+  var STORE="elearning_idsr_"+((document.body.dataset.module)||"x");
+  var state={unlocked:0,explored:{},quiz:{}};
+  try{var s=JSON.parse(localStorage.getItem(STORE)||"{}");if(typeof s.unlocked==="number"){state=s;state.explored=state.explored||{};state.quiz=state.quiz||{};}}catch(e){}
+  function save(){try{localStorage.setItem(STORE,JSON.stringify(state));}catch(e){}}
+  var current=0;
+  function show(i){
+    if(i>state.unlocked)return; current=i;
+    etapes.forEach(function(el){el.classList.toggle("active",+el.dataset.etape===i);});
+    stepBtns.forEach(function(b){var idx=+b.dataset.go;b.setAttribute("aria-current",idx===i?"true":"false");b.disabled=idx>state.unlocked;b.classList.toggle("done",idx<state.unlocked);});
+    updateBar(); window.scrollTo({top:0,behavior:"smooth"});
+  }
+  function updateBar(){var pct=TOTAL>1?Math.round((state.unlocked/(TOTAL-1))*100):100;if(pct>100)pct=100;barre.style.width=pct+"%";barre.parentElement.setAttribute("aria-valuenow",pct);}
+  function unlock(i){if(i>state.unlocked)state.unlocked=i;save();}
+
+  etapes.forEach(function(et){
+    [].slice.call(et.querySelectorAll(".org")).forEach(function(org){
+      var key=et.dataset.etape+"_"+(org.dataset.explore||"g");
+      var roles=[].slice.call(org.querySelectorAll(".role"));
+      roles.forEach(function(r){
+        r.addEventListener("click",function(){
+          var open=r.getAttribute("aria-expanded")==="true";
+          r.setAttribute("aria-expanded",open?"false":"true");
+          if(!open){r.dataset.seen="1";if(roles.every(function(x){return x.dataset.seen==="1";})){state.explored[key]=true;save();refresh(et);}}
+        });
+      });
+      if(state.explored[key])roles.forEach(function(r){r.dataset.seen="1";});
+    });
+    [].slice.call(et.querySelectorAll(".verrou")).forEach(function(v){
+      var key=et.dataset.etape+"_q"+(v.dataset.quiz||"1");
+      var fb=v.querySelector(".feedback");
+      var opts=[].slice.call(v.querySelectorAll(".opt"));
+      if(state.quiz[key]){opts.forEach(function(o){o.disabled=true;if(o.dataset.ok==="1"){o.classList.add("correct");o.querySelector(".mark").textContent="✓";}});if(fb){fb.textContent="Bonne réponse.";fb.className="feedback show ok";}}
+      opts.forEach(function(opt){
+        opt.addEventListener("click",function(){
+          if(state.quiz[key])return;
+          if(opt.dataset.ok==="1"){
+            opt.classList.add("correct");opt.querySelector(".mark").textContent="✓";
+            opts.forEach(function(o){o.disabled=true;});
+            if(fb){fb.textContent="Bonne réponse.";fb.className="feedback show ok";}
+            state.quiz[key]=true;save();refresh(et);
+          }else{
+            opt.classList.add("wrong");opt.querySelector(".mark").textContent="✗";
+            if(fb){fb.textContent="Ce n'est pas la bonne réponse. Relisez le contenu ci-dessus et réessayez.";fb.className="feedback show ko";}
+            setTimeout(function(){opt.classList.remove("wrong");opt.querySelector(".mark").textContent="";},1400);
+          }
+        });
+      });
+    });
+  });
+
+  function etapeComplete(et){
+    var okExp=[].slice.call(et.querySelectorAll(".org")).every(function(org){return state.explored[et.dataset.etape+"_"+(org.dataset.explore||"g")]===true;});
+    var okQ=[].slice.call(et.querySelectorAll(".verrou")).every(function(v){return state.quiz[et.dataset.etape+"_q"+(v.dataset.quiz||"1")]===true;});
+    return okExp&&okQ;
+  }
+  function refresh(et){
+    if(!etapeComplete(et))return;
+    var nb=et.querySelector("[data-next]");if(nb)nb.disabled=false;
+    if(et.dataset.last==="1"){
+      var fin=document.getElementById("bloc-fin");
+      if(fin&&fin.style.display==="none"){fin.style.display="block";state.unlocked=TOTAL;updateBar();stepBtns.forEach(function(b){b.classList.add("done");});save();fin.scrollIntoView({behavior:"smooth"});}
+    }
+  }
+
+  stepBtns.forEach(function(b){b.addEventListener("click",function(){show(+b.dataset.go);});});
+  document.querySelectorAll("[data-next]").forEach(function(b){b.addEventListener("click",function(){var n=current+1;if(n<TOTAL){unlock(n);show(n);}});});
+  document.querySelectorAll("[data-prev]").forEach(function(b){b.addEventListener("click",function(){if(current>0)show(current-1);});});
+
+  etapes.forEach(function(et){refresh(et);});
+  show(Math.min(state.unlocked, current));
+})();
+</script>
+</body>
+</html>
