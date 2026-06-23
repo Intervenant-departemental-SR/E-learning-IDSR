@@ -165,9 +165,16 @@
   .pyramide-intro h4{margin:0 0 .35rem;font-size:1.12rem;border-left:6px solid var(--jaune);padding-left:.55rem;}
   .pyr-consigne{font-size:.92rem;color:var(--gris);margin:0 0 1.1rem;}
   .pyramide{display:flex;flex-direction:column;align-items:center;gap:10px;margin:1rem 0 1.2rem;}
-  .tier{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:70px;border-radius:10px;font:inherit;cursor:pointer;border:2px solid var(--noir);transition:transform .2s,box-shadow .2s;}
-  .tier:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.15);}
+  .pyr-cue{text-align:center;font-weight:700;color:var(--jaune-fonce);margin:.2rem 0 .9rem;animation:cuebob 1.4s ease-in-out infinite;}
+  .pyr-cue.hidden{display:none;}
+  @keyframes cuebob{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+  .tier{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:70px;border-radius:10px;font:inherit;cursor:pointer;border:2px solid var(--noir);opacity:.4;transition:opacity .55s ease,transform .2s,box-shadow .2s;animation:tierpulse 1.9s ease-in-out infinite;}
+  .tier:hover{animation-play-state:paused;opacity:.88;transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.15);}
+  .tier.revealed{opacity:1;animation:none;}
   .tier.active{box-shadow:0 0 0 3px var(--jaune-fonce),0 8px 22px rgba(233,180,0,.4);}
+  @keyframes tierpulse{0%,100%{opacity:.36;}50%{opacity:.62;}}
+  .tier::after{content:"Cliquez";position:absolute;right:10px;font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;opacity:.7;}
+  .tier.revealed::after{display:none;}
   .tier-1{width:48%;background:var(--noir);color:var(--jaune);}
   .tier-2{width:72%;background:var(--jaune);color:var(--noir);}
   .tier-3{width:100%;background:var(--jaune-clair);color:var(--noir);}
@@ -239,7 +246,8 @@
         <p class="hint-explore">Comment ça marche : 3 niveaux à parcourir. Sur chaque niveau, cliquez sur les cartes pour découvrir le rôle de chaque acteur, puis répondez à la question pour déverrouiller la suite.</p>
         <div class="pyramide-intro">
           <h4>Les trois niveaux de la sécurité routière</h4>
-          <p class="pyr-consigne">La sécurité routière s'organise sur <strong>3 niveaux</strong> qui se complètent. Cliquez sur un niveau de la pyramide pour découvrir ses acteurs.</p>
+          <p class="pyr-consigne">La sécurité routière s'organise sur <strong>3 niveaux</strong> qui se complètent.</p>
+          <p class="pyr-cue" id="pyrCue">👆 Cliquez sur chaque niveau pour le révéler</p>
           <div class="pyramide" id="pyramide">
             <button type="button" class="tier tier-1" data-niv="national"><b>NATIONAL</b><small>Interministériel</small></button>
             <button type="button" class="tier tier-2" data-niv="regional"><b>RÉGIONAL</b><small>DREAL · pôle d'appui</small></button>
@@ -668,15 +676,18 @@
     departemental:{t:"Niveau départemental — le terrain de l'IDSR",p:"Préfet de département, chef de projet sécurité routière, coordinateur, observatoire départemental (ODSR), IDSR et partenaires (collectivités, associations, procureur, médias…).",c:"L'échelle de l'action concrète, où intervient l'IDSR."}
   };
   var tiers=[].slice.call(pyr.querySelectorAll(".tier"));
+  var cue=document.getElementById("pyrCue");
   tiers.forEach(function(t){
     t.addEventListener("click",function(){
       tiers.forEach(function(x){x.classList.remove("active");});
       t.classList.add("active");
+      t.classList.add("revealed");
       var d=data[t.dataset.niv];
       detail.innerHTML='<h5></h5><p class="txt"></p><p class="ccl"></p>';
       detail.querySelector("h5").textContent=d.t;
       detail.querySelector(".txt").textContent=d.p;
       detail.querySelector(".ccl").textContent="→ "+d.c;
+      if(cue && tiers.every(function(x){return x.classList.contains("revealed");})) cue.classList.add("hidden");
     });
   });
 })();
