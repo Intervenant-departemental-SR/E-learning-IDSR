@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Module 8 — Le risque routier professionnel | E-learning IDSR</title>
+<meta name="description" content="Module e-learning interactif sur le risque routier professionnel : accidentologie 2023, cadre juridique, documents obligatoires, charte des 7 engagements et rôle de l'IDSR." />
+<style>
+  :root{
+    --jaune:#FECF41; --jaune-fonce:#E9B400; --jaune-clair:#FFF3CC;
+    --noir:#000; --gris:#3a3a3a; --gris-2:#6b6b6b;
+    --gris-clair:#f4f4f4; --bordure:#e2e2e2; --blanc:#fff;
+    --vert:#1f8a4c; --rouge:#c0392b;
+    --rayon:12px; --ombre:0 4px 18px rgba(0,0,0,.12);
+    --max:1080px; --t:.25s cubic-bezier(.4,0,.2,1);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:"Marianne","Segoe UI",Arial,Helvetica,sans-serif;color:var(--noir);background:var(--gris-clair);line-height:1.55;}
+  img{max-width:100%;display:block;}
+  :focus-visible{outline:3px solid var(--noir);outline-offset:2px;border-radius:4px;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 1.25rem;}
+  .skip{position:absolute;left:-9999px;background:var(--noir);color:var(--jaune);padding:.6rem 1rem;z-index:200;font-weight:700;}
+  .skip:focus{left:0;top:0;}
+  header.site{background:var(--blanc);border-bottom:6px solid var(--jaune);position:sticky;top:0;z-index:50;}
+  .topbar{display:flex;align-items:center;gap:1rem;padding:.7rem 1.25rem;max-width:var(--max);margin:0 auto;flex-wrap:wrap;}
+  .topbar img{width:150px;}
+  .topbar .fil{font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--gris-2);font-weight:700;}
+  .topbar .fil a{color:var(--gris-2);text-decoration:none;}
+  .topbar .fil a:hover{text-decoration:underline;}
+  .progress{height:8px;background:var(--gris-clair);}
+  .progress > span{display:block;height:100%;width:0;background:var(--jaune);transition:width .5s ease;}
+  .module-hero{background:var(--noir);color:var(--blanc);padding:2.2rem 0 2.4rem;}
+  .module-hero .eyebrow{color:var(--jaune);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.8rem;margin:0 0 .5rem;}
+  .module-hero h1{font-size:2rem;line-height:1.15;margin:0 0 .8rem;max-width:780px;}
+  .module-hero p{margin:0;color:#e9e9e9;max-width:720px;}
+  main{padding:2rem 0 4rem;}
+  .layout{display:grid;grid-template-columns:260px 1fr;gap:2rem;align-items:start;}
+  .stepper{position:sticky;top:96px;background:var(--blanc);border:1px solid var(--bordure);border-radius:var(--rayon);padding:.6rem;}
+  .stepper ol{list-style:none;margin:0;padding:0;}
+  .step-item{display:flex;align-items:center;gap:.7rem;width:100%;text-align:left;border:none;background:none;font:inherit;padding:.7rem .6rem;border-radius:8px;cursor:pointer;color:var(--gris);transition:background var(--t);}
+  .step-item:hover:not(:disabled){background:var(--jaune-clair);}
+  .step-item:disabled{cursor:not-allowed;color:var(--gris-2);opacity:.7;}
+  .step-item[aria-current="true"]{background:var(--noir);color:var(--blanc);}
+  .step-item[aria-current="true"] .pastille{background:var(--jaune);color:var(--noir);border-color:var(--jaune);}
+  .pastille{flex:0 0 auto;width:30px;height:30px;border-radius:50%;border:2px solid var(--bordure);display:grid;place-items:center;font-weight:700;font-size:.85rem;background:var(--blanc);color:var(--gris);}
+  .step-item.done .pastille{background:var(--vert);border-color:var(--vert);color:#fff;}
+  .step-lbl{font-size:.92rem;font-weight:600;line-height:1.2;}
+  .step-sub{display:block;font-size:.72rem;font-weight:500;opacity:.8;}
+  .etape{display:none;background:var(--blanc);border:1px solid var(--bordure);border-radius:var(--rayon);box-shadow:var(--ombre);padding:1.8rem;animation:fade .35s ease;}
+  .etape.active{display:block;}
+  @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+  .etape h2{font-size:1.5rem;margin:0 0 .3rem;border-left:8px solid var(--jaune);padding-left:.6rem;}
+  .etape .lead{color:var(--gris);margin:.2rem 0 1.6rem;}
+  .obj{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem;margin:1.5rem 0;}
+  .obj .o{background:var(--gris-clair);border-radius:10px;padding:1.1rem;border-top:4px solid var(--jaune);}
+  .obj .o strong{display:block;margin-bottom:.3rem;}
+  .obj .o span{font-size:.92rem;color:var(--gris);}
+  .org{display:flex;flex-direction:column;gap:.7rem;margin:1.4rem 0;}
+  .cartes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.9rem;}
+  .role{position:relative;text-align:left;border:1px solid var(--bordure);border-left:5px solid var(--jaune);background:var(--blanc);border-radius:10px;padding:1rem;cursor:pointer;transition:transform var(--t),box-shadow var(--t),border-color var(--t);font:inherit;width:100%;}
+  .role:hover{transform:translateY(-3px);box-shadow:var(--ombre);}
+  .role .sigle{font-weight:800;font-size:1.02rem;margin:0 0 .15rem;}
+  .role .nom{font-size:.85rem;color:var(--gris-2);margin:0;}
+  .role .detail{max-height:0;overflow:hidden;transition:max-height var(--t);font-size:.9rem;color:var(--gris);}
+  .role[aria-expanded="true"]{border-left-color:var(--noir);background:var(--jaune-clair);}
+  .role[aria-expanded="true"] .detail{max-height:480px;margin-top:.6rem;}
+  .role .plus{position:absolute;top:.8rem;right:.9rem;font-weight:800;color:var(--jaune-fonce);transition:transform var(--t);}
+  .role[aria-expanded="true"] .plus{transform:rotate(45deg);color:var(--noir);}
+  .hint-explore{font-size:.86rem;color:var(--gris-2);background:var(--jaune-clair);border-radius:8px;padding:.6rem .8rem;margin:0 0 1rem;}
+  .docs{background:var(--noir);color:var(--blanc);border-radius:10px;padding:1.1rem 1.3rem;margin:1.4rem 0;}
+  .docs h3{margin:0 0 .6rem;color:var(--jaune);font-size:1rem;}
+  .docs dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem;font-size:.92rem;}
+  .docs dt{font-weight:800;color:var(--jaune);}
+  .docs dd{margin:0;color:#eaeaea;}
+  .verrou{margin-top:1.6rem;border:2px dashed var(--jaune-fonce);border-radius:12px;padding:1.2rem 1.3rem;background:var(--jaune-clair);}
+  .verrou .v-tag{display:inline-flex;align-items:center;gap:.4rem;font-weight:800;text-transform:uppercase;font-size:.78rem;letter-spacing:.05em;color:var(--gris);margin-bottom:.5rem;}
+  .verrou .q{font-weight:700;margin:.2rem 0 .9rem;font-size:1.05rem;}
+  .opts{display:grid;gap:.55rem;}
+  .opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;background:var(--blanc);border:2px solid var(--bordure);border-radius:9px;padding:.75rem .9rem;cursor:pointer;font:inherit;transition:border-color var(--t),background var(--t);}
+  .opt:hover:not(:disabled){border-color:var(--jaune-fonce);}
+  .opt .mark{flex:0 0 auto;width:22px;height:22px;border-radius:50%;border:2px solid var(--gris-2);display:grid;place-items:center;font-size:.8rem;font-weight:800;}
+  .opt.correct{border-color:var(--vert);background:#eafaf0;}
+  .opt.correct .mark{background:var(--vert);border-color:var(--vert);color:#fff;}
+  .opt.wrong{border-color:var(--rouge);background:#fdeeec;}
+  .opt.wrong .mark{background:var(--rouge);border-color:var(--rouge);color:#fff;}
+  .opt:disabled{cursor:default;}
+  .feedback{margin-top:.8rem;font-weight:600;font-size:.94rem;display:none;}
+  .feedback.show{display:block;}
+  .feedback.ok{color:var(--vert);}
+  .feedback.ko{color:var(--rouge);}
+  .nav-etape{display:flex;justify-content:space-between;gap:1rem;margin-top:1.8rem;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;border:none;border-radius:999px;padding:.8rem 1.5rem;font:inherit;font-weight:700;cursor:pointer;text-decoration:none;transition:transform var(--t),background var(--t),opacity var(--t);}
+  .btn-primary{background:var(--jaune);color:var(--noir);}
+  .btn-primary:hover:not(:disabled){background:var(--jaune-fonce);}
+  .btn-primary:disabled{opacity:.45;cursor:not-allowed;}
+  .btn-ghost{background:transparent;color:var(--gris);border:2px solid var(--bordure);}
+  .btn-ghost:hover{border-color:var(--noir);color:var(--noir);}
+  .fini{text-align:center;padding:1rem 0;}
+  .badge-fin{display:inline-grid;place-items:center;width:96px;height:96px;border-radius:50%;background:var(--jaune);margin:0 auto 1rem;font-size:2.6rem;}
+  .source{font-size:.82rem;color:var(--gris-2);border-top:1px solid var(--bordure);margin-top:2rem;padding-top:1rem;}
+  footer.site{background:var(--blanc);border-top:6px solid var(--jaune);padding:1.6rem 0;font-size:.88rem;color:var(--gris-2);}
+  footer.site a{color:var(--noir);font-weight:700;}
+  /* éléments enrichis */
+  .schema{margin:1.7rem 0;border:1px solid var(--bordure);border-radius:12px;padding:1.3rem;background:#fff;}
+  .schema h4{margin:0 0 1rem;font-size:1.05rem;border-left:6px solid var(--jaune);padding-left:.55rem;}
+  .schema svg{width:100%;height:auto;display:block;overflow:visible;}
+  .schema .src{font-size:.78rem;color:var(--gris-2);margin-top:.45rem;font-style:italic;}
+  .photo{margin:1.4rem 0;}
+  .photo img{width:100%;border-radius:12px;border:1px solid var(--bordure);}
+  .photo figcaption{font-size:.8rem;color:var(--gris-2);margin-top:.5rem;font-style:italic;}
+  .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;margin:1.6rem 0;border:1px solid var(--bordure);background:#000;}
+  .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+  .video-cap{font-size:.8rem;color:var(--gris-2);margin:.4rem 0 0;font-style:italic;}
+  .stat-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem;margin:1.3rem 0;}
+  .stat-cards .sc{background:var(--gris-clair);border-radius:10px;padding:1rem;text-align:center;border-bottom:4px solid var(--jaune);}
+  .stat-cards .sc b{display:block;font-size:1.6rem;line-height:1.1;}
+  .stat-cards .sc span{font-size:.8rem;color:var(--gris);}
+  .engage{list-style:none;margin:1.3rem 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:.8rem;counter-reset:eng;}
+  .engage li{display:flex;gap:.8rem;align-items:flex-start;background:var(--gris-clair);border-radius:10px;padding:.9rem 1rem;border-left:5px solid var(--jaune);}
+  .engage li::before{counter-increment:eng;content:counter(eng);flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--noir);color:var(--jaune);font-weight:800;display:grid;place-items:center;}
+  .engage li span{font-size:.95rem;font-weight:600;}
+  @media (max-width:880px){
+    .layout{grid-template-columns:1fr;}
+    .stepper{position:static;}
+    .stepper ol{display:flex;overflow-x:auto;gap:.3rem;}
+    .step-item{flex-direction:column;min-width:96px;text-align:center;gap:.35rem;}
+    .step-sub{display:none;}
+    .module-hero h1{font-size:1.55rem;}
+  }
+</style>
+</head>
+<body data-module="m8">
+<a class="skip" href="#contenu">Aller au contenu principal</a>
+
+<header class="site">
+  <div class="topbar">
+    <img src="assets/logo-securite-routiere.png" alt="Sécurité routière — Vivre, Ensemble" />
+    <span class="fil"><a href="index.html">Accueil e-learning</a> › Module 8</span>
+  </div>
+  <div class="progress" role="progressbar" aria-label="Progression du module" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="barre"></span></div>
+</header>
+
+<section class="module-hero">
+  <div class="wrap">
+    <p class="eyebrow">Module 8 · Enjeu prioritaire</p>
+    <h1>Le risque routier professionnel</h1>
+    <p>La route est l'une des premières causes de décès au travail. Ce module présente l'accidentologie, le cadre juridique, la charte des 7 engagements et le rôle de l'IDSR auprès des employeurs et des salariés.</p>
+  </div>
+</section>
+
+<main id="contenu">
+  <div class="wrap layout">
+    <nav class="stepper" aria-label="Étapes du module">
+      <ol>
+        <li><button class="step-item" data-go="0"><span class="pastille">1</span><span class="step-lbl">Introduction<span class="step-sub">Objectifs & vidéo</span></span></button></li>
+        <li><button class="step-item" data-go="1" disabled><span class="pastille">2</span><span class="step-lbl">L'accidentologie<span class="step-sub">Chiffres 2023</span></span></button></li>
+        <li><button class="step-item" data-go="2" disabled><span class="pastille">3</span><span class="step-lbl">Cadre juridique<span class="step-sub">Obligations & documents</span></span></button></li>
+        <li><button class="step-item" data-go="3" disabled><span class="pastille">4</span><span class="step-lbl">Les 7 engagements<span class="step-sub">Employeurs engagés</span></span></button></li>
+        <li><button class="step-item" data-go="4" disabled><span class="pastille">5</span><span class="step-lbl">Le rôle de l'IDSR<span class="step-sub">Alcool, drogue, démarche</span></span></button></li>
+        <li><button class="step-item" data-go="5" disabled><span class="pastille">6</span><span class="step-lbl">Synthèse<span class="step-sub">Quiz récap</span></span></button></li>
+      </ol>
+    </nav>
+
+    <div>
+      <!-- ETAPE 0 -->
+      <section class="etape active" data-etape="0" aria-labelledby="t0">
+        <h2 id="t0">Introduction</h2>
+        <p class="lead">Se déplacer fait partie de très nombreux métiers. Or le risque routier est la première cause d'accident mortel au travail. L'employeur a un rôle central à jouer, et l'IDSR peut l'accompagner.</p>
+        <figure class="photo">
+          <img src="assets/photos/rrp-triangle.jpg" alt="Triangle de présignalisation posé sur une route après un accident." />
+          <figcaption>Le risque routier concerne aussi bien les trajets domicile-travail que les déplacements en mission.</figcaption>
+        </figure>
+        <div class="video">
+          <iframe src="https://www.youtube-nocookie.com/embed/c5_xMgXz96I" title="Vidéo de sensibilisation au risque routier professionnel" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <p class="video-cap">Vidéo de sensibilisation (Sécurité routière).</p>
+        <div class="obj">
+          <div class="o"><strong>Objectif 1</strong><span>Mesurer l'ampleur du risque routier professionnel.</span></div>
+          <div class="o"><strong>Objectif 2</strong><span>Connaître les obligations de l'employeur et les documents associés.</span></div>
+          <div class="o"><strong>Objectif 3</strong><span>Comprendre la charte des 7 engagements et le rôle de l'IDSR.</span></div>
+        </div>
+        <p class="hint-explore">Comment ça marche : cliquez sur les cartes pour découvrir leur contenu, puis répondez à la question pour déverrouiller l'étape suivante.</p>
+        <div class="nav-etape"><span></span><button class="btn btn-primary" data-next>Commencer le parcours →</button></div>
+      </section>
+
+      <!-- ETAPE 1 : ACCIDENTOLOGIE -->
+      <section class="etape" data-etape="1" aria-labelledby="t1">
+        <h2 id="t1">L'accidentologie (chiffres 2023)</h2>
+        <p class="lead">Le risque routier professionnel recouvre deux situations : les trajets domicile-travail et les déplacements en mission (sous l'autorité de l'employeur).</p>
+        <div class="stat-cards">
+          <div class="sc"><b>~28 M</b><span>de travailleurs concernés par le risque routier</span></div>
+          <div class="sc"><b>37 %</b><span>des accidents corporels impliquent un usager en déplacement lié au travail</span></div>
+          <div class="sc"><b>1,4</b><span>décès par jour dans un déplacement lié au travail</span></div>
+          <div class="sc"><b>440</b><span>personnes tuées en 2023 (296 trajet + 144 mission)</span></div>
+          <div class="sc"><b>30 %</b><span>des accidents du travail mortels sont des accidents de la route</span></div>
+          <div class="sc"><b>~5 M</b><span>de journées de travail perdues par an</span></div>
+        </div>
+        <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
+        <div class="org" data-explore="1">
+          <div class="cartes">
+            <button class="role" aria-expanded="false"><p class="sigle">Trajet vs mission</p><p class="nom">Deux situations</p><span class="plus">+</span><div class="detail">En 2023, sur 440 personnes tuées : 296 lors d'un trajet domicile-travail et 144 lors d'une mission. Les accidents de mission représentent 30 % de l'ensemble des accidents mortels liés au travail.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Qui est concerné ?</p><p class="nom">Genre</p><span class="plus">+</span><div class="detail">Les hommes sont très majoritairement concernés : 81 % des tués en trajet domicile-travail et 95 % en mission. Sur les trajets domicile-travail, les moins de 35 ans représentent la part la plus élevée (45 %).</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Les deux-roues surexposés</p><p class="nom">Mode de déplacement</p><span class="plus">+</span><div class="detail">En trajet domicile-travail, les deux-roues motorisés représentent 38 % des tués (112 personnes) alors qu'ils ne sont utilisés que pour 2 % des trajets. Les modes doux (marche, vélo, EDPM) représentent 11 % des tués en trajet et 7 % en mission.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Les causes</p><p class="nom">Facteurs d'accident</p><span class="plus">+</span><div class="detail">Pour les accidents mortels en trajet domicile-travail, les premières causes attribuées aux personnes présumées responsables sont la vitesse excessive ou inadaptée (28 %) et l'inattention (27 %).</div></button>
+          </div>
+        </div>
+
+        <figure class="schema">
+          <h4>Mortalité liée au travail selon le type de trajet (2023)</h4>
+          <svg viewBox="0 0 720 210" role="img" aria-labelledby="m8g1t m8g1d">
+            <title id="m8g1t">Personnes tuées en 2023 selon le type de déplacement</title>
+            <desc id="m8g1d">Trajet domicile-travail : 296 ; mission : 144 ; total 440.</desc>
+            <g font-family="Marianne,Segoe UI,Arial,sans-serif" font-size="13">
+              <text x="220" y="55" text-anchor="end" font-weight="700">Trajet domicile-travail</text>
+              <rect x="230" y="40" width="430" height="30" rx="4" fill="#FECF41"/><text x="668" y="62" font-weight="800">296</text>
+              <text x="220" y="115" text-anchor="end" font-weight="700">Mission</text>
+              <rect x="230" y="100" width="209" height="30" rx="4" fill="#000"/><text x="447" y="122" font-weight="800">144</text>
+              <text x="230" y="170" font-size="14" font-weight="800">Total : 440 personnes tuées en 2023</text>
+            </g>
+          </svg>
+          <p class="src">Source : ONISR / CNAM-MSA, « L'essentiel du risque routier professionnel », chiffres 2023.</p>
+        </figure>
+
+        <figure class="schema">
+          <h4>Mode de déplacement des personnes tuées en trajet domicile-travail (2023)</h4>
+          <svg viewBox="0 0 720 230" role="img" aria-labelledby="m8g2t m8g2d">
+            <title id="m8g2t">Répartition par mode, trajet domicile-travail 2023</title>
+            <desc id="m8g2d">Véhicule de tourisme 45 %, deux-roues motorisés 38 %, modes doux 11 %, véhicules utilitaires 4 %.</desc>
+            <g font-family="Marianne,Segoe UI,Arial,sans-serif" font-size="13">
+              <text x="200" y="38" text-anchor="end" font-weight="700">Véhicule de tourisme</text>
+              <rect x="210" y="24" width="450" height="24" rx="3" fill="#FECF41"/><text x="667" y="42" font-weight="800">45 %</text>
+              <text x="200" y="84" text-anchor="end" font-weight="700">2-roues motorisés</text>
+              <rect x="210" y="70" width="380" height="24" rx="3" fill="#000"/><text x="597" y="88" font-weight="800">38 %</text>
+              <text x="200" y="130" text-anchor="end" font-weight="700">Modes doux</text>
+              <rect x="210" y="116" width="110" height="24" rx="3" fill="#FECF41"/><text x="327" y="134" font-weight="800">11 %</text>
+              <text x="200" y="176" text-anchor="end" font-weight="700">Véhicules utilitaires</text>
+              <rect x="210" y="162" width="40" height="24" rx="3" fill="#FECF41"/><text x="257" y="180" font-weight="800">4 %</text>
+            </g>
+          </svg>
+          <p class="src">Les deux-roues motorisés sont fortement surexposés : 38 % des tués pour seulement 2 % des trajets. Source : ONISR, chiffres 2023.</p>
+        </figure>
+
+        <div class="verrou" data-quiz="1">
+          <span class="v-tag">🔒 Question de déverrouillage</span>
+          <p class="q">En 2023, combien de personnes sont mortes dans un déplacement lié au travail ?</p>
+          <div class="opts">
+            <button class="opt" data-ok="0"><span class="mark"></span> 37</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> 440</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> 12 300</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+        <div class="nav-etape"><button class="btn btn-ghost" data-prev>← Précédent</button><button class="btn btn-primary" data-next disabled>Étape suivante →</button></div>
+      </section>
+
+      <!-- ETAPE 2 : CADRE JURIDIQUE -->
+      <section class="etape" data-etape="2" aria-labelledby="t2">
+        <h2 id="t2">Cadre juridique et documents obligatoires</h2>
+        <p class="lead">L'employeur a une obligation de sécurité envers ses salariés. Le risque routier doit être traité comme un risque professionnel à part entière.</p>
+        <figure class="photo">
+          <img src="assets/photos/rrp-juridique.jpg" alt="Ouvrages juridiques et marteau de justice." />
+          <figcaption>La sécurité des salariés sur la route engage la responsabilité de l'employeur.</figcaption>
+        </figure>
+        <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
+        <div class="org" data-explore="1">
+          <div class="cartes">
+            <button class="role" aria-expanded="false"><p class="sigle">Responsabilité</p><p class="nom">Pénale et civile</p><span class="plus">+</span><div class="detail">La responsabilité pénale consiste à répondre en justice du dommage causé (amende, voire prison). La responsabilité civile est l'obligation de réparer le préjudice causé à autrui (dommages et intérêts).</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Obligation de sécurité</p><p class="nom">Article L4121-1</p><span class="plus">+</span><div class="detail">L'employeur prend les mesures nécessaires pour assurer la sécurité et protéger la santé des travailleurs : actions de prévention, actions d'information et de formation, et mise en place d'une organisation et de moyens adaptés.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Moyens / résultat</p><p class="nom">La jurisprudence</p><span class="plus">+</span><div class="detail">L'obligation de moyens impose de tout mettre en œuvre pour atteindre un objectif ; l'obligation de résultat impose d'atteindre un résultat déterminé. La jurisprudence a fait évoluer l'obligation de l'employeur vers une obligation de moyens renforcés.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">DUERP</p><p class="nom">Identifier le risque</p><span class="plus">+</span><div class="detail">Le Document Unique d'Évaluation des Risques Professionnels (art. L4121-3-1) est obligatoire dès le 1er salarié. Il retranscrit l'évaluation des risques professionnels, dont le risque routier.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">PAPRIPACT</p><p class="nom">Programmer les actions</p><span class="plus">+</span><div class="detail">Le Programme Annuel de Prévention transforme l'évaluation en actions concrètes : hiérarchiser les priorités, planifier, affecter des responsables, allouer un budget et assurer un suivi.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Règlement intérieur</p><p class="nom">Créer des règles</p><span class="plus">+</span><div class="detail">Le règlement intérieur rend les règles opposables, encadre les comportements et permet la sanction disciplinaire.</div></button>
+          </div>
+        </div>
+        <div class="docs">
+          <h3>Les 3 documents indispensables</h3>
+          <dl>
+            <dt>DUERP</dt><dd>Identifier et évaluer les risques (obligatoire dès le 1er salarié).</dd>
+            <dt>PAPRIPACT</dt><dd>Programmer les actions de prévention dans le temps.</dd>
+            <dt>R. intérieur</dt><dd>Créer des règles opposables et permettre la sanction.</dd>
+          </dl>
+        </div>
+        <div class="verrou" data-quiz="1">
+          <span class="v-tag">🔒 Question de déverrouillage</span>
+          <p class="q">Quel document identifie et évalue les risques, et est obligatoire dès le 1er salarié ?</p>
+          <div class="opts">
+            <button class="opt" data-ok="1"><span class="mark"></span> Le DUERP</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> Le PAPRIPACT</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> Le règlement intérieur</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+        <div class="nav-etape"><button class="btn btn-ghost" data-prev>← Précédent</button><button class="btn btn-primary" data-next disabled>Étape suivante →</button></div>
+      </section>
+
+      <!-- ETAPE 3 : 7 ENGAGEMENTS -->
+      <section class="etape" data-etape="3" aria-labelledby="t3">
+        <h2 id="t3">La charte des 7 engagements</h2>
+        <p class="lead">La Sécurité routière propose aux employeurs de signer un appel autour de 7 engagements concrets pour la sécurité des déplacements professionnels de leurs collaborateurs.</p>
+        <ul class="engage">
+          <li><span>Limiter aux cas d'urgence les conversations téléphoniques au volant.</span></li>
+          <li><span>Prescrire la sobriété sur la route.</span></li>
+          <li><span>Exiger le port de la ceinture de sécurité.</span></li>
+          <li><span>Ne pas accepter le dépassement des vitesses autorisées.</span></li>
+          <li><span>Intégrer des moments de repos dans le calcul des temps de trajet.</span></li>
+          <li><span>Favoriser la formation à la sécurité routière.</span></li>
+          <li><span>Encourager les conducteurs de deux-roues motorisés et les cyclistes à mieux s'équiper.</span></li>
+        </ul>
+        <div class="stat-cards">
+          <div class="sc"><b>7</b><span>engagements concrets et opérationnels</span></div>
+          <div class="sc"><b>+ 4 000</b><span>employeurs déjà engagés</span></div>
+          <div class="sc"><b>+ 5,5 M</b><span>de collaborateurs concernés</span></div>
+        </div>
+        <p class="hint-explore">Cliquez sur les cartes pour comprendre comment agir.</p>
+        <div class="org" data-explore="1">
+          <div class="cartes">
+            <button class="role" aria-expanded="false"><p class="sigle">Organiser les déplacements</p><p class="nom">Axe de management</p><span class="plus">+</span><div class="detail">Adapter l'organisation du travail, prévoir le temps nécessaire, définir le mode de transport le plus adapté et privilégier les communications hors temps de conduite.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Entretenir les véhicules</p><p class="nom">Axe de management</p><span class="plus">+</span><div class="detail">Adapter le véhicule au travail à réaliser et l'aménager pour le transport de charges et d'outils.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Développer les compétences</p><p class="nom">Axe de management</p><span class="plus">+</span><div class="detail">Former les chefs d'entreprise, les managers, les membres du CSE, les responsables du parc automobile et les salariés aux bonnes pratiques de prévention du risque routier.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Signer l'appel</p><p class="nom">S'engager</p><span class="plus">+</span><div class="detail">Tout employeur peut rejoindre la démarche sur securite-routiere.gouv.fr/employeurs-engages et afficher publiquement son engagement.</div></button>
+          </div>
+        </div>
+        <div class="verrou" data-quiz="1">
+          <span class="v-tag">🔒 Question de déverrouillage</span>
+          <p class="q">Lequel de ces points fait partie des 7 engagements ?</p>
+          <div class="opts">
+            <button class="opt" data-ok="0"><span class="mark"></span> Interdire tout déplacement professionnel</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> Exiger le port de la ceinture de sécurité</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> Supprimer les véhicules de fonction</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+        <div class="nav-etape"><button class="btn btn-ghost" data-prev>← Précédent</button><button class="btn btn-primary" data-next disabled>Étape suivante →</button></div>
+      </section>
+
+      <!-- ETAPE 4 : ROLE IDSR -->
+      <section class="etape" data-etape="4" aria-labelledby="t4">
+        <h2 id="t4">Le rôle de l'IDSR</h2>
+        <p class="lead">Auprès des entreprises, l'IDSR sensibilise et oriente. Il ne contrôle pas et ne sanctionne pas : il fait passer du message ponctuel à une véritable culture de sécurité.</p>
+        <figure class="photo">
+          <img src="assets/photos/rrp-animation.jpg" alt="Séance de sensibilisation à la sécurité routière en milieu professionnel." />
+          <figcaption>De l'atelier de sensibilisation (parcours alcool, dose-bar) à une culture de sécurité partagée.</figcaption>
+        </figure>
+        <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
+        <div class="org" data-explore="1">
+          <div class="cartes">
+            <button class="role" aria-expanded="false"><p class="sigle">Focus alcool & drogues</p><p class="nom">Cadre réglementaire</p><span class="plus">+</span><div class="detail">Une « drogue » est toute substance psychoactive qui perturbe le système nerveux central. L'article L235-1 du code de la route punit la conduite après usage de stupéfiants de 3 ans d'emprisonnement et de 9 000 € d'amende.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Lever les idées reçues</p><p class="nom">Salariés & employeurs</p><span class="plus">+</span><div class="detail">Côté salarié : « je consomme chez moi, ça ne concerne que moi », « les médicaments, ce n'est pas de la drogue ». Côté employeur : « je ne peux rien imposer hors temps de travail », « une procédure, c'est trop lourd ». L'IDSR aide à dépasser ces idées reçues.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Sensibiliser et orienter</p><p class="nom">Les bons relais</p><span class="plus">+</span><div class="detail">L'IDSR oriente les salariés vers les services de prévention et de santé au travail (SPST), le médecin, les associations et les managers ; et les employeurs vers les SPST, la CARSAT, la DREETS et l'INRS.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">La démarche en 4 étapes</p><p class="nom">Conduites addictives</p><span class="plus">+</span><div class="detail">Adapter le règlement intérieur ; informer et associer les acteurs (CSE, inspection du travail) ; organiser les contrôles de façon progressive (tests volontaires, puis prévus, puis inopinés, avec matériel étalonné et confidentialité) ; prévoir l'accompagnement.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Gérer un cas positif</p><p class="nom">Sécuriser, accompagner</p><span class="plus">+</span><div class="detail">Retrait immédiat du poste, ne jamais laisser la personne repartir seule, contre-expertise possible, rendez-vous avec le SPST et procédure claire. Ne jamais banaliser.</div></button>
+          </div>
+        </div>
+        <div class="verrou" data-quiz="1">
+          <span class="v-tag">🔒 Question de déverrouillage</span>
+          <p class="q">Face à un salarié contrôlé positif (alcool ou stupéfiants), que faut-il faire ?</p>
+          <div class="opts">
+            <button class="opt" data-ok="0"><span class="mark"></span> Le laisser rentrer chez lui en voiture</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> Le retirer de son poste et ne jamais le laisser repartir seul</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> Ne rien dire pour éviter le conflit</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+        <div class="nav-etape"><button class="btn btn-ghost" data-prev>← Précédent</button><button class="btn btn-primary" data-next disabled>Étape suivante →</button></div>
+      </section>
+
+      <!-- ETAPE 5 : SYNTHESE -->
+      <section class="etape" data-etape="5" data-last="1" aria-labelledby="t5">
+        <h2 id="t5">Synthèse — vérifiez vos acquis</h2>
+        <p class="lead">Répondez aux deux questions pour valider le module.</p>
+        <div class="verrou" data-quiz="1">
+          <span class="v-tag">🔒 Question 1</span>
+          <p class="q">Quelle part des accidents du travail mortels est liée à la route ?</p>
+          <div class="opts">
+            <button class="opt" data-ok="0"><span class="mark"></span> 1,4 %</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> Environ 30 %</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> 95 %</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+        <div class="verrou" data-quiz="2">
+          <span class="v-tag">🔒 Question 2</span>
+          <p class="q">Conduire après usage de stupéfiants (art. L235-1 du code de la route) est puni de :</p>
+          <div class="opts">
+            <button class="opt" data-ok="0"><span class="mark"></span> Une amende forfaitaire de 135 €</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> 3 ans d'emprisonnement et 9 000 € d'amende</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> Un simple avertissement</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+        <div id="bloc-fin" style="display:none;">
+          <div class="fini">
+            <div class="badge-fin" aria-hidden="true">✓</div>
+            <h3>Module terminé</h3>
+            <p>Vous connaissez l'ampleur du risque routier professionnel, le cadre juridique, la charte des 7 engagements et le rôle de l'IDSR auprès des entreprises.</p>
+            <p style="margin-top:1rem;"><a class="btn btn-primary" href="index.html">Retour à l'accueil ↩</a></p>
+          </div>
+        </div>
+        <div class="nav-etape"><button class="btn btn-ghost" data-prev>← Précédent</button><a class="btn btn-ghost" href="index.html">Retour à l'accueil ↩</a></div>
+      </section>
+
+      <p class="source">Sources : « L'essentiel du risque routier professionnel », chiffres 2023 (ONISR, CNAM-MSA, ministère du Travail) ; documentation IDSR « Le risque routier professionnel » ; <a href="https://www.securite-routiere.gouv.fr/employeurs-engages" target="_blank" rel="noopener">securite-routiere.gouv.fr/employeurs-engages</a> (les 7 engagements). Cadre : articles L4121-1 et L4121-3-1 du code du travail, L235-1 du code de la route.</p>
+    </div>
+  </div>
+</main>
+
+<footer class="site"><div class="wrap">Espace e-learning des Intervenants Départementaux de Sécurité Routière — Préfecture des Hauts-de-France. <a href="index.html">Retour à l'accueil</a></div></footer>
+
+<script>
+(function(){
+  "use strict";
+  var etapes=[].slice.call(document.querySelectorAll(".etape"));
+  var TOTAL=etapes.length;
+  var stepBtns=[].slice.call(document.querySelectorAll(".step-item"));
+  var barre=document.getElementById("barre");
+  var STORE="elearning_idsr_"+((document.body.dataset.module)||"x");
+  var state={unlocked:0,explored:{},quiz:{}};
+  try{var s=JSON.parse(localStorage.getItem(STORE)||"{}");if(typeof s.unlocked==="number"){state=s;state.explored=state.explored||{};state.quiz=state.quiz||{};}}catch(e){}
+  function save(){try{localStorage.setItem(STORE,JSON.stringify(state));}catch(e){}}
+  var current=0;
+  function show(i){
+    if(i>state.unlocked)return; current=i;
+    etapes.forEach(function(el){el.classList.toggle("active",+el.dataset.etape===i);});
+    stepBtns.forEach(function(b){var idx=+b.dataset.go;b.setAttribute("aria-current",idx===i?"true":"false");b.disabled=idx>state.unlocked;b.classList.toggle("done",idx<state.unlocked);});
+    updateBar(); window.scrollTo({top:0,behavior:"smooth"});
+  }
+  function updateBar(){var pct=TOTAL>1?Math.round((state.unlocked/(TOTAL-1))*100):100;if(pct>100)pct=100;barre.style.width=pct+"%";barre.parentElement.setAttribute("aria-valuenow",pct);}
+  function unlock(i){if(i>state.unlocked)state.unlocked=i;save();}
+  etapes.forEach(function(et){
+    [].slice.call(et.querySelectorAll(".org")).forEach(function(org){
+      var key=et.dataset.etape+"_"+(org.dataset.explore||"g");
+      var roles=[].slice.call(org.querySelectorAll(".role"));
+      roles.forEach(function(r){
+        r.addEventListener("click",function(){
+          var open=r.getAttribute("aria-expanded")==="true";
+          r.setAttribute("aria-expanded",open?"false":"true");
+          if(!open){r.dataset.seen="1";if(roles.every(function(x){return x.dataset.seen==="1";})){state.explored[key]=true;save();refresh(et);}}
+        });
+      });
+      if(state.explored[key])roles.forEach(function(r){r.dataset.seen="1";});
+    });
+    [].slice.call(et.querySelectorAll(".verrou")).forEach(function(v){
+      var key=et.dataset.etape+"_q"+(v.dataset.quiz||"1");
+      var fb=v.querySelector(".feedback");
+      var opts=[].slice.call(v.querySelectorAll(".opt"));
+      if(state.quiz[key]){opts.forEach(function(o){o.disabled=true;if(o.dataset.ok==="1"){o.classList.add("correct");o.querySelector(".mark").textContent="✓";}});if(fb){fb.textContent="Bonne réponse.";fb.className="feedback show ok";}}
+      opts.forEach(function(opt){
+        opt.addEventListener("click",function(){
+          if(state.quiz[key])return;
+          if(opt.dataset.ok==="1"){
+            opt.classList.add("correct");opt.querySelector(".mark").textContent="✓";
+            opts.forEach(function(o){o.disabled=true;});
+            if(fb){fb.textContent="Bonne réponse.";fb.className="feedback show ok";}
+            state.quiz[key]=true;save();refresh(et);
+          }else{
+            opt.classList.add("wrong");opt.querySelector(".mark").textContent="✗";
+            if(fb){fb.textContent="Ce n'est pas la bonne réponse. Relisez le contenu ci-dessus et réessayez.";fb.className="feedback show ko";}
+            setTimeout(function(){opt.classList.remove("wrong");opt.querySelector(".mark").textContent="";},1400);
+          }
+        });
+      });
+    });
+  });
+  function etapeComplete(et){
+    var okExp=[].slice.call(et.querySelectorAll(".org")).every(function(org){return state.explored[et.dataset.etape+"_"+(org.dataset.explore||"g")]===true;});
+    var okQ=[].slice.call(et.querySelectorAll(".verrou")).every(function(v){return state.quiz[et.dataset.etape+"_q"+(v.dataset.quiz||"1")]===true;});
+    return okExp&&okQ;
+  }
+  function refresh(et){
+    if(!etapeComplete(et))return;
+    var nb=et.querySelector("[data-next]");if(nb)nb.disabled=false;
+    if(et.dataset.last==="1"){
+      var fin=document.getElementById("bloc-fin");
+      if(fin&&fin.style.display==="none"){fin.style.display="block";state.unlocked=TOTAL;updateBar();stepBtns.forEach(function(b){b.classList.add("done");});save();fin.scrollIntoView({behavior:"smooth"});}
+    }
+  }
+  stepBtns.forEach(function(b){b.addEventListener("click",function(){show(+b.dataset.go);});});
+  document.querySelectorAll("[data-next]").forEach(function(b){b.addEventListener("click",function(){var n=current+1;if(n<TOTAL){unlock(n);show(n);}});});
+  document.querySelectorAll("[data-prev]").forEach(function(b){b.addEventListener("click",function(){if(current>0)show(current-1);});});
+  etapes.forEach(function(et){refresh(et);});
+  show(0);
+})();
+</script>
+</body>
+</html>
