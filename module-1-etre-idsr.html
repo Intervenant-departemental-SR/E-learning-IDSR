@@ -167,9 +167,9 @@
         <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
         <div class="org" data-explore="1">
           <div class="cartes">
-            <button class="role" aria-expanded="false"><p class="sigle">Un acteur du programme</p><p class="nom">Sa raison d'être</p><span class="plus">+</span><div class="detail">L'IDSR participe à la mise en œuvre du programme départemental de sécurité routière, aux côtés des services de l'État et de leurs partenaires.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Des origines diverses</p><p class="nom">D'où viennent les IDSR ?</p><span class="plus">+</span><div class="detail">Fonctionnaires de l'État ou des collectivités territoriales (parfois mis à disposition par convention), salariés d'organismes socio-professionnels, membres d'associations, ou bénévoles sur engagement personnel.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Une motivation commune</p><p class="nom">Le point commun</p><span class="plus">+</span><div class="detail">Au-delà de la diversité des profils, les IDSR partagent une même volonté : agir concrètement pour réduire l'insécurité routière dans leur département.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Un acteur du programme</p><p class="nom">Sa raison d'être</p><span class="plus">+</span><div class="detail">L'IDSR est la cheville ouvrière du programme « Agir pour la sécurité routière », dont l'objectif est de mobiliser les acteurs locaux contre l'insécurité routière. Ses actions ne sont jamais improvisées : elles sont concentrées sur des objectifs précis, cohérentes avec l'étude des enjeux locaux (DGO) et ciblées sur les publics les plus exposés du département — jeunes, seniors, salariés, deux-roues.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Des origines diverses</p><p class="nom">D'où viennent les IDSR ?</p><span class="plus">+</span><div class="detail">Quatre viviers : fonctionnaires de l'État ou des collectivités territoriales, salariés d'organismes socio-professionnels (les deux pouvant être mis à disposition par une convention signée entre l'employeur et la préfecture), membres d'associations, et bénévoles sur engagement personnel — la voie la plus fréquente. Cette mixité donne au réseau des compétences très variées : enseignants, soignants, gendarmes retraités, professionnels de la route…</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Une motivation commune</p><p class="nom">Le point commun</p><span class="plus">+</span><div class="detail">L'engagement est souvent ancré dans un vécu : un accident, un proche touché, un métier de la route, un engagement associatif. Cette diversité est une force — chaque IDSR sait parler à des publics différents. Le point commun non négociable : l'exemplarité personnelle au volant, formalisée par l'acte d'engagement signé en préfecture. Un IDSR verbalisé perd sa crédibilité… et peut perdre sa nomination.</div></button>
           </div>
         </div>
         <figure class="schema">
@@ -221,7 +221,7 @@
             <button class="role" aria-expanded="false"><p class="sigle">Actions de prévention</p><p class="nom">Sur le terrain</p><span class="plus">+</span><div class="detail">Réalisation d'actions de prévention : stands, exposés, participation à des manifestations publiques.</div></button>
             <button class="role" aria-expanded="false"><p class="sigle">Diffusion de l'information</p><p class="nom">Relais de la politique locale</p><span class="plus">+</span><div class="detail">Diffusion de l'information sur la politique locale de sécurité routière auprès des publics rencontrés.</div></button>
             <button class="role" aria-expanded="false"><p class="sigle">Contribution & accompagnement</p><p class="nom">Faire vivre le réseau</p><span class="plus">+</span><div class="detail">Contribution au développement et à la gestion d'actions de sécurité routière. Les IDSR expérimentés peuvent accompagner et assister les nouveaux IDSR.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Savoir-être</p><p class="nom">Les qualités attendues</p><span class="plus">+</span><div class="detail">Savoir écouter, transmettre, diffuser et s'adapter à son public : ce sont les qualités au cœur de la fonction d'IDSR.</div></button>
+            <button class="role" aria-expanded="false"><p class="sigle">Savoir-être</p><p class="nom">Les qualités attendues</p><span class="plus">+</span><div class="detail">Savoir écouter (accueillir les objections sans juger), transmettre (des messages simples et sourcés), diffuser (relayer la politique locale) et s'adapter (un stand d'entreprise ne s'anime pas comme une classe de 3e). Ces qualités comptent plus que l'expertise technique : elles font l'objet du module 9 « Posture de l'IDSR ».</div></button>
           </div>
         </div>
         <figure class="schema"><img src="assets/photos/stock-animation-salle.jpg" alt="Un intervenant anime une séance de sensibilisation devant un public en salle" loading="lazy" style="border-radius:8px;width:100%;height:auto;" /><figcaption>L'essentiel des missions : stands, exposés et animations devant tous les publics, à la demande du coordinateur sécurité routière.</figcaption><p class="src">Image Adobe Stock — licence standard.</p></figure>
@@ -266,6 +266,54 @@
   <div style="background:var(--gris-clair);border-radius:10px;padding:1rem;text-align:center;border-bottom:4px solid var(--jaune);"><b style="display:block;font-size:1.35rem;">Assuré</b><span style="font-size:.82rem;color:var(--gris);">par l'État en mission et en réunion, avec soutien logistique (tenue, matériel, documentation)</span></div>
 </div>
 <p class="src" style="font-size:.78rem;color:var(--gris-2);font-style:italic;">Source : présentation « Être IDSR » — programme Agir pour la sécurité routière.</p>
+        
+<div class="schema" id="jeu-parcours">
+  <h4>🎮 À vous de jouer : remettez le parcours du nouvel IDSR dans l'ordre</h4>
+  <p style="font-size:.9rem;color:var(--gris);margin:.2rem 0 1rem;">Cliquez sur les étapes dans l'ordre chronologique, de la candidature à la première action.</p>
+  <div id="jp-cartes" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.7rem;"></div>
+  <p id="jp-msg" role="status" style="font-weight:700;margin:.9rem 0 0;"></p>
+  <button type="button" class="btn btn-ghost" id="jp-reset" style="margin-top:.8rem;">↺ Recommencer</button>
+</div>
+<script>
+(function(){
+  "use strict";
+  var ETAPES=[
+    "Candidature auprès de la coordination sécurité routière",
+    "Signature de l'acte d'engagement en préfecture",
+    "Arrêté préfectoral de nomination (1 an minimum)",
+    "Formation initiale obligatoire d'une journée",
+    "Ordre de mission et premières actions de terrain"
+  ];
+  var box=document.getElementById("jp-cartes"),msg=document.getElementById("jp-msg");
+  function lancer(){
+    box.innerHTML="";msg.textContent="";
+    var attendu=0;
+    var melange=ETAPES.map(function(t,i){return {t:t,i:i};}).sort(function(){return Math.random()-0.5;});
+    melange.forEach(function(e){
+      var b=document.createElement("button");
+      b.type="button";
+      b.style.cssText="font:inherit;font-size:.9rem;font-weight:600;padding:.9rem;border:2px solid var(--bordure);border-radius:10px;background:#fff;cursor:pointer;text-align:left;transition:all .2s;";
+      b.textContent=e.t;
+      b.addEventListener("click",function(){
+        if(b.disabled)return;
+        if(e.i===attendu){
+          attendu++;b.disabled=true;
+          b.style.borderColor="var(--vert)";b.style.background="#eafaf0";
+          b.textContent=attendu+". "+e.t;
+          if(attendu===ETAPES.length){msg.textContent="🏆 Parfait ! C'est exactement le parcours du nouvel IDSR.";msg.style.color="var(--vert)";}
+        }else{
+          b.style.borderColor="var(--rouge)";b.style.background="#fdeeec";
+          msg.textContent="✘ Pas encore — quelle est l'étape n° "+(attendu+1)+" ?";msg.style.color="var(--rouge)";
+          setTimeout(function(){b.style.borderColor="var(--bordure)";b.style.background="#fff";},700);
+        }
+      });
+      box.appendChild(b);
+    });
+  }
+  document.getElementById("jp-reset").addEventListener("click",lancer);
+  lancer();
+})();
+</script>
         <div class="verrou" data-quiz="1">
           <span class="v-tag">🔒 Question de déverrouillage</span>
           <p class="q">L'IDSR est-il rémunéré pour ses missions ?</p>
