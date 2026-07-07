@@ -8,8 +8,8 @@
   "use strict";
 
   /* ---- CONFIGURATION ---- */
-  // TODO : remplacer par l'adresse réelle de la coordination sécurité routière
-  var MAIL_COORDINATION = "coordination-sr@exemple.fr";
+  // Coordination sécurité routière Hauts-de-France (Mme Adeline Rubben)
+  var MAIL_COORDINATION = "ser-hdf@developpement-durable.gouv.fr";
 
   /* ---- Infos du module courant ---- */
   function infosModule(){
@@ -175,7 +175,7 @@
     bloc.querySelector("[data-mail]").addEventListener("click", function(){
       var n = nomValide(); if(!n) return;
       var sujet = "Attestation de suivi — " + mod.numero + " (" + n + ")";
-      var corps = "Bonjour,\n\nJe vous transmets mon attestation de suivi du " + mod.numero +
+      var corps = "Bonjour Madame Rubben,\n\nJe vous transmets mon attestation de suivi du " + mod.numero +
         " « " + mod.titre + " » de l’espace e-learning IDSR, validé le " + dateFr() + ".\n\n" +
         "(Attestation PDF jointe — pensez à joindre le fichier téléchargé.)\n\n" +
         "Cordialement,\n" + n;
