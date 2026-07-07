@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Simulateur de distance d'arrêt — Outil d'animation | E-learning IDSR</title>
+<meta name="description" content="Simulateur pédagogique : visualisez la distance d'arrêt selon la vitesse, l'état de la chaussée et l'attention du conducteur — et la vitesse d'impact si un piéton surgit." />
+<style>
+  :root{
+    --jaune:#FECF41; --jaune-fonce:#E9B400; --jaune-clair:#FFF3CC;
+    --noir:#000; --gris:#3a3a3a; --gris-2:#6b6b6b;
+    --gris-clair:#f4f4f4; --bordure:#e2e2e2; --blanc:#fff;
+    --vert:#1f8a4c; --orange:#e67e22; --rouge:#c0392b;
+    --rayon:12px; --ombre:0 4px 18px rgba(0,0,0,.12);
+    --max:1080px; --t:.25s cubic-bezier(.4,0,.2,1);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Marianne","Segoe UI",Arial,Helvetica,sans-serif;color:var(--noir);background:var(--gris-clair);line-height:1.55;}
+  :focus-visible{outline:3px solid var(--noir);outline-offset:2px;border-radius:4px;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 1.25rem;}
+  .skip{position:absolute;left:-9999px;background:var(--noir);color:var(--jaune);padding:.6rem 1rem;z-index:200;font-weight:700;}
+  .skip:focus{left:0;top:0;}
+  header.site{background:var(--blanc);border-bottom:6px solid var(--jaune);}
+  .topbar{display:flex;align-items:center;gap:1rem;padding:.7rem 1.25rem;max-width:var(--max);margin:0 auto;flex-wrap:wrap;}
+  .topbar img{width:150px;max-width:100%;height:auto;display:block;}
+  .topbar .fil{font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--gris-2);font-weight:700;}
+  .topbar .fil a{color:var(--gris-2);text-decoration:none;}
+  .module-hero{background:var(--noir);color:var(--blanc);padding:2.2rem 0 2.4rem;}
+  .module-hero .eyebrow{color:var(--jaune);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.8rem;margin:0 0 .5rem;}
+  .module-hero h1{font-size:2rem;line-height:1.15;margin:0 0 .8rem;max-width:780px;}
+  .module-hero p{margin:0;color:#e9e9e9;max-width:720px;}
+  main{padding:2rem 0 4rem;}
+  .panneau{background:var(--blanc);border:1px solid var(--bordure);border-radius:var(--rayon);box-shadow:var(--ombre);padding:1.6rem;margin-bottom:1.6rem;}
+  .panneau h2{font-size:1.35rem;margin:0 0 .3rem;border-left:8px solid var(--jaune);padding-left:.6rem;}
+  .panneau .lead{color:var(--gris);margin:.2rem 0 1.3rem;}
+
+  .reglages{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.2rem;}
+  .champ{background:var(--gris-clair);border-radius:10px;padding:1rem;}
+  .champ .lbl{font-weight:700;display:block;margin-bottom:.6rem;}
+  .seg{display:flex;border:2px solid var(--bordure);border-radius:999px;overflow:hidden;background:var(--blanc);}
+  .seg button{flex:1;border:none;background:none;font:inherit;font-weight:700;padding:.6rem .3rem;cursor:pointer;color:var(--gris-2);font-size:.88rem;transition:background var(--t),color var(--t);}
+  .seg button[aria-pressed="true"]{background:var(--noir);color:var(--jaune);}
+  input[type=range]{width:100%;accent-color:var(--jaune-fonce);}
+  .val-vitesse{font-weight:800;font-size:1.5rem;}
+
+  .scene-box{position:relative;margin-top:.6rem;}
+  #scene{width:100%;height:auto;display:block;border-radius:10px;background:#dfe9ef;}
+  .actions{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;margin-top:1rem;}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;border:none;border-radius:999px;padding:.8rem 1.5rem;font:inherit;font-weight:700;cursor:pointer;transition:transform var(--t),background var(--t),opacity var(--t);}
+  .btn-primary{background:var(--jaune);color:var(--noir);}
+  .btn-primary:hover:not(:disabled){background:var(--jaune-fonce);}
+  .btn-primary:disabled{opacity:.5;cursor:wait;}
+
+  .resultats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.9rem;margin-top:1.3rem;}
+  .res{border-radius:10px;padding:1rem;text-align:center;border-bottom:5px solid var(--bordure);background:var(--gris-clair);}
+  .res b{display:block;font-size:1.5rem;line-height:1.15;}
+  .res span{font-size:.83rem;color:var(--gris);}
+  .res.vert{border-color:var(--vert);background:#eafaf0;}
+  .res.rouge{border-color:var(--rouge);background:#fdeeec;}
+  .verdict{margin-top:1.2rem;padding:1rem 1.2rem;border-radius:10px;font-weight:600;display:none;}
+  .verdict.show{display:block;}
+  .verdict.vert{background:#eafaf0;border-left:6px solid var(--vert);}
+  .verdict.rouge{background:#fdeeec;border-left:6px solid var(--rouge);}
+
+  #compare{width:100%;height:auto;display:block;}
+  .stat-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.9rem;}
+  .sc{background:var(--gris-clair);border-radius:10px;padding:1.1rem;text-align:center;border-bottom:4px solid var(--jaune);}
+  .sc b{display:block;font-size:1.7rem;line-height:1.1;}
+  .sc span{font-size:.84rem;color:var(--gris);}
+  .source{font-size:.82rem;color:var(--gris-2);border-top:1px solid var(--bordure);margin-top:2rem;padding-top:1rem;}
+  footer.site{background:var(--blanc);border-top:6px solid var(--jaune);padding:1.6rem 0;font-size:.88rem;color:var(--gris-2);}
+  footer.site a{color:var(--noir);font-weight:700;}
+  @media (max-width:640px){ .module-hero h1{font-size:1.55rem;} .panneau{padding:1.1rem;} }
+  @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+</style>
+</head>
+<body data-module="m10">
+<a class="skip" href="#contenu">Aller au contenu principal</a>
+
+<header class="site">
+  <div class="topbar">
+    <img src="assets/logo-securite-routiere.png" alt="Sécurité routière — Vivre, Ensemble" />
+    <span class="fil"><a href="index.html">Accueil e-learning</a> › Simulateur de distance d'arrêt</span>
+  </div>
+</header>
+
+<section class="module-hero">
+  <div class="wrap">
+    <p class="eyebrow">Outil d'animation · Grand public</p>
+    <h1>Un enfant surgit à 27 mètres. Vous arrêtez-vous à temps ?</h1>
+    <p>À 50 km/h sur route sèche, un conducteur attentif s'arrête juste avant l'obstacle. Changez la vitesse, la météo ou l'attention… et regardez ce qui se passe.</p>
+  </div>
+</section>
+
+<main id="contenu">
+  <div class="wrap">
+
+    <!-- RÉGLAGES -->
+    <section class="panneau" aria-labelledby="tr">
+      <h2 id="tr">1 · Les conditions</h2>
+      <p class="lead">La distance d'arrêt = distance parcourue pendant le temps de réaction + distance de freinage.</p>
+      <div class="reglages">
+        <div class="champ">
+          <label class="lbl" for="vitesse">Vitesse : <span class="val-vitesse" id="v-val">50 km/h</span></label>
+          <input type="range" id="vitesse" min="30" max="130" step="5" value="50" />
+        </div>
+        <div class="champ">
+          <span class="lbl" id="lbl-route">Chaussée</span>
+          <div class="seg" role="group" aria-labelledby="lbl-route">
+            <button type="button" data-route="seche" aria-pressed="true">☀️ Sèche</button>
+            <button type="button" data-route="mouillee" aria-pressed="false">🌧 Mouillée</button>
+          </div>
+        </div>
+        <div class="champ">
+          <span class="lbl" id="lbl-att">Conducteur</span>
+          <div class="seg" role="group" aria-labelledby="lbl-att">
+            <button type="button" data-att="1" aria-pressed="true">Attentif (1 s)</button>
+            <button type="button" data-att="2" aria-pressed="false">📱 Distrait (2 s)</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCÈNE -->
+    <section class="panneau" aria-labelledby="ts">
+      <h2 id="ts">2 · La simulation</h2>
+      <p class="lead">L'enfant surgit à <strong>27 m</strong> — la distance qui suffit tout juste à 50 km/h, route sèche, conducteur attentif.</p>
+      <div class="scene-box">
+        <svg id="scene" viewBox="0 0 760 190" role="img" aria-label="Animation d'une voiture qui freine devant un piéton"></svg>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-primary" id="lancer">▶ Lancer la simulation</button>
+        <span id="etat-anim" role="status" style="font-weight:700;"></span>
+      </div>
+      <div class="resultats" id="resultats"></div>
+      <p class="verdict" id="verdict" role="status"></p>
+    </section>
+
+    <!-- COMPARATIF -->
+    <section class="panneau" aria-labelledby="tc2">
+      <h2 id="tc2">3 · Réaction + freinage : le comparatif</h2>
+      <p class="lead">Pendant le temps de réaction, la voiture ne ralentit pas d'un seul km/h. Distances pour un conducteur attentif (1 s) selon la chaussée choisie ci-dessus.</p>
+      <svg id="compare" viewBox="0 0 760 300" role="img" aria-label="Comparaison des distances d'arrêt selon la vitesse"></svg>
+    </section>
+
+    <!-- CHIFFRES -->
+    <section class="panneau" aria-labelledby="tc">
+      <h2 id="tc">Ce qu'il faut retenir</h2>
+      <div class="stat-cards">
+        <div class="sc"><b>≈ 30 %</b><span>des accidents mortels ont la vitesse pour facteur principal</span></div>
+        <div class="sc"><b>+ 10 km/h</b><span>en ville, c'est souvent la différence entre s'arrêter… et percuter</span></div>
+        <div class="sc"><b>× 2</b><span>sur route mouillée, la distance de freinage double presque</span></div>
+        <div class="sc"><b>2 s</b><span>l'intervalle de sécurité minimal avec le véhicule qui précède</span></div>
+      </div>
+    </section>
+
+    <p class="source">Modèle physique : distance de réaction (v × temps de réaction) + distance de freinage (v²/2µg ; adhérence 0,8 sur sec, 0,4 sur mouillé). Repères : <a href="https://www.securite-routiere.gouv.fr/dangers-de-la-route/la-vitesse-au-volant" target="_blank" rel="noopener">securite-routiere.gouv.fr — La vitesse</a> et <a href="https://www.onisr.securite-routiere.gouv.fr/" target="_blank" rel="noopener">ONISR</a>.</p>
+  </div>
+</main>
+
+<footer class="site"><div class="wrap">Espace e-learning des Intervenants Départementaux de Sécurité Routière — Préfecture des Hauts-de-France. <a href="index.html">Retour à l'accueil</a></div></footer>
+
+<script>
+(function(){
+  "use strict";
+  var G = 9.81;
+  var OBSTACLE = 27;                 /* m — arrêt limite à 50 km/h, sec, 1 s */
+  var etat = {v:50, mu:0.8, tr:1};
+
+  function ms(kmh){ return kmh/3.6; }
+  function dReaction(){ return ms(etat.v)*etat.tr; }
+  function dFreinage(v0){ return (v0*v0)/(2*etat.mu*G); }   /* v0 en m/s */
+  function dArret(){ return dReaction()+dFreinage(ms(etat.v)); }
+  /* vitesse résiduelle (km/h) au niveau de l'obstacle ; 0 si arrêt avant */
+  function vImpact(){
+    var v0 = ms(etat.v), dr = dReaction();
+    if(OBSTACLE <= dr) return etat.v;                        /* pas encore freiné */
+    var v2 = v0*v0 - 2*etat.mu*G*(OBSTACLE-dr);
+    return v2 <= 0 ? 0 : Math.sqrt(v2)*3.6;
+  }
+
+  /* ---------- réglages ---------- */
+  var elV = document.getElementById("vitesse");
+  elV.addEventListener("input", function(){
+    etat.v = +elV.value;
+    document.getElementById("v-val").textContent = etat.v+" km/h";
+    maj();
+  });
+  document.querySelectorAll("[data-route]").forEach(function(b){
+    b.addEventListener("click", function(){
+      document.querySelectorAll("[data-route]").forEach(function(x){x.setAttribute("aria-pressed","false");});
+      b.setAttribute("aria-pressed","true");
+      etat.mu = b.dataset.route==="seche" ? 0.8 : 0.4;
+      maj();
+    });
+  });
+  document.querySelectorAll("[data-att]").forEach(function(b){
+    b.addEventListener("click", function(){
+      document.querySelectorAll("[data-att]").forEach(function(x){x.setAttribute("aria-pressed","false");});
+      b.setAttribute("aria-pressed","true");
+      etat.tr = +b.dataset.att;
+      maj();
+    });
+  });
+
+  /* ---------- scène ---------- */
+  var svg = document.getElementById("scene");
+  var NS = "http://www.w3.org/2000/svg";
+  function el(n,a){ var e=document.createElementNS(NS,n); for(var k in a)e.setAttribute(k,a[k]); return e; }
+
+  /* échelle : la scène couvre 0 → 80 m ; la voiture démarre à x=0 m,
+     l'obstacle est à 26 m + marge d'élan de 30 m => piéton à 56 m du départ. */
+  var ELAN = 30, PORTEE = 95;
+  function X(m_){ return 20 + (m_/PORTEE)*720; }
+  var voiture, ombreFrein;
+
+  function scene(){
+    svg.innerHTML = "";
+    svg.appendChild(el("rect",{x:0,y:0,width:760,height:190,fill:"#eaf1f5"}));
+    svg.appendChild(el("rect",{x:0,y:100,width:760,height:60,fill:"#4a4a4a"}));
+    for(var x=10;x<760;x+=60) svg.appendChild(el("rect",{x:x,y:127,width:30,height:5,fill:"#fff",opacity:.85}));
+    /* trottoir */
+    svg.appendChild(el("rect",{x:0,y:160,width:760,height:30,fill:"#cfd8dc"}));
+    svg.appendChild(el("rect",{x:0,y:92,width:760,height:8,fill:"#cfd8dc"}));
+    /* marquage surgissement */
+    var xO = X(ELAN+OBSTACLE);
+    /* piéton (enfant) */
+    var p = el("g",{id:"pieton",transform:"translate("+xO+",118)"});
+    p.appendChild(el("circle",{cx:0,cy:-16,r:7,fill:"#8d5524"}));
+    p.appendChild(el("rect",{x:-5,y:-9,width:10,height:20,rx:4,fill:"#c0392b"}));
+    p.appendChild(el("rect",{x:-5,y:11,width:4,height:12,fill:"#22313f"}));
+    p.appendChild(el("rect",{x:1,y:11,width:4,height:12,fill:"#22313f"}));
+    svg.appendChild(p);
+    var lbl = el("text",{x:xO,y:82,"text-anchor":"middle","font-size":13,"font-weight":700,"font-family":"Marianne,Segoe UI,Arial,sans-serif"});
+    lbl.textContent = "surgit ici (27 m)";
+    svg.appendChild(lbl);
+    svg.appendChild(el("line",{x1:xO,y1:86,x2:xO,y2:112,stroke:"#c0392b","stroke-width":2,"stroke-dasharray":"4 3"}));
+    /* point de surgissement = position de détection de la voiture */
+    var xD = X(ELAN);
+    svg.appendChild(el("line",{x1:xD,y1:100,x2:xD,y2:160,stroke:"#e67e22","stroke-width":2,"stroke-dasharray":"5 4"}));
+    var lb2 = el("text",{x:xD,y:176,"text-anchor":"middle","font-size":12,fill:"#3a3a3a","font-family":"Marianne,Segoe UI,Arial,sans-serif"});
+    lb2.textContent = "le conducteur voit l'enfant";
+    svg.appendChild(lb2);
+    /* traces de freinage (dessinées à l'anim) */
+    ombreFrein = el("g",{});
+    svg.appendChild(ombreFrein);
+    /* voiture */
+    voiture = el("g",{id:"voiture"});
+    var car = el("g",{transform:"translate(-52,0)"});
+    car.appendChild(el("rect",{x:0,y:112,width:52,height:18,rx:6,fill:"#FECF41",stroke:"#000","stroke-width":1.5}));
+    car.appendChild(el("path",{d:"M10,112 L16,102 L38,102 L46,112 Z",fill:"#FECF41",stroke:"#000","stroke-width":1.5}));
+    car.appendChild(el("rect",{x:18,y:104,width:16,height:8,rx:2,fill:"#bcd6e8"}));
+    car.appendChild(el("circle",{cx:12,cy:131,r:6,fill:"#111"}));
+    car.appendChild(el("circle",{cx:40,cy:131,r:6,fill:"#111"}));
+    voiture.appendChild(car);
+    voiture.setAttribute("transform","translate("+X(0)+",0)");
+    svg.appendChild(voiture);
+  }
+
+  /* ---------- animation ---------- */
+  var enCours = false;
+  document.getElementById("lancer").addEventListener("click", function(){
+    if(enCours) return;
+    scene(); maj(false);
+    enCours = true;
+    this.disabled = true;
+    var btn = this;
+    var etatTxt = document.getElementById("etat-anim");
+    var v0 = ms(etat.v), dr = dReaction(), a = etat.mu*G;
+    var t = 0, dt = 1/60, pos = 0, v = v0, phase = "elan";
+    etatTxt.textContent = "🚗 " + etat.v + " km/h…";
+    function step(){
+      t += dt;
+      if(phase==="elan"){
+        pos += v*dt;
+        if(pos >= ELAN){ phase="reaction"; etatTxt.textContent="👀 Réaction… ("+etat.tr+" s)"; var tR=0;
+          voiture._tR = 0; }
+      } else if(phase==="reaction"){
+        voiture._tR = (voiture._tR||0) + dt;
+        pos += v*dt;
+        if(voiture._tR >= etat.tr){ phase="freinage"; etatTxt.textContent="🛑 Freinage !"; }
+      } else if(phase==="freinage"){
+        v = Math.max(0, v - a*dt);
+        pos += v*dt;
+        /* traces de pneus */
+        if(Math.random()<0.5) ombreFrein.appendChild(el("rect",{x:X(pos)-46,y:129,width:6,height:3,fill:"#222",opacity:.5}));
+        if(v===0){ fin(false); return; }
+      }
+      if(pos >= ELAN+OBSTACLE && phase!=="stop"){ fin(true); return; }
+      voiture.setAttribute("transform","translate("+X(pos)+",0)");
+      requestAnimationFrame(step);
+    }
+    function fin(impact){
+      voiture.setAttribute("transform","translate("+X(Math.min(pos,ELAN+OBSTACLE))+",0)");
+      var verdict = document.getElementById("verdict");
+      if(impact){
+        var vi = Math.round(vImpact());
+        var chute = Math.round((ms(vi)*ms(vi))/(2*G));
+        etatTxt.textContent = "💥 Impact à "+vi+" km/h";
+        svg.appendChild(el("circle",{cx:X(ELAN+OBSTACLE),cy:120,r:16,fill:"#c0392b",opacity:.7}));
+        verdict.innerHTML = "💥 <strong>Choc à "+vi+" km/h.</strong> Pour le piéton, c'est l'équivalent d'une chute "+(chute>0?("de "+chute+" mètre"+(chute>1?"s":"")+" — environ "+Math.max(1,Math.round(chute/3))+" étage"+(chute>5?"s":"")):"brutale")+". À 50 km/h dans les mêmes conditions, la voiture se serait arrêtée à temps.";
+        verdict.className = "verdict show rouge";
+      } else {
+        var marge = (ELAN+OBSTACLE) - pos;
+        etatTxt.textContent = "✅ Arrêté à temps";
+        verdict.innerHTML = "✅ <strong>La voiture s'arrête "+marge.toFixed(1).replace(".",",")+" m avant l'enfant.</strong> À vitesse plus élevée, distrait ou sur route mouillée, relancez la simulation pour voir la différence…";
+        verdict.className = "verdict show vert";
+      }
+      enCours = false; btn.disabled = false;
+    }
+    requestAnimationFrame(step);
+  });
+
+  /* ---------- résultats chiffrés + comparatif ---------- */
+  function maj(redessiner){
+    var dr = dReaction(), df = dFreinage(ms(etat.v)), da = dr+df;
+    var vi = vImpact();
+    var elR = document.getElementById("resultats");
+    elR.innerHTML =
+      '<div class="res"><b>'+dr.toFixed(1).replace(".",",")+' m</b><span>parcourus pendant la réaction ('+etat.tr+' s)</span></div>' +
+      '<div class="res"><b>'+df.toFixed(1).replace(".",",")+' m</b><span>de freinage ('+(etat.mu===0.8?"route sèche":"route mouillée")+')</span></div>' +
+      '<div class="res"><b>'+da.toFixed(1).replace(".",",")+' m</b><span>distance d\'arrêt totale</span></div>' +
+      (vi>0
+        ? '<div class="res rouge"><b>💥 '+Math.round(vi)+' km/h</b><span>vitesse d\'impact sur l\'enfant à 26 m</span></div>'
+        : '<div class="res vert"><b>✅ Arrêt</b><span>'+((OBSTACLE-da)>=0?(OBSTACLE-da).toFixed(1).replace(".",","):"0")+' m de marge avant l\'enfant</span></div>');
+    if(redessiner!==false){ scene(); document.getElementById("verdict").className="verdict"; document.getElementById("etat-anim").textContent=""; }
+    comparer();
+  }
+
+  var cmp = document.getElementById("compare");
+  function comparer(){
+    cmp.innerHTML = "";
+    var vitesses = [30,50,80,110,130];
+    var maxD = ms(130)*1 + dFreinage(ms(130));   /* échelle sur pire cas sec */
+    if(etat.mu<0.8) maxD = ms(130)*1 + (ms(130)*ms(130))/(2*etat.mu*G);
+    var y = 26;
+    vitesses.forEach(function(v){
+      var dr = ms(v)*1, df = (ms(v)*ms(v))/(2*etat.mu*G);
+      var xr = 90 + dr/maxD*600, x0 = 90;
+      var t1 = el("text",{x:82,y:y+15,"text-anchor":"end","font-size":13,"font-weight":700,"font-family":"Marianne,Segoe UI,Arial,sans-serif"});
+      t1.textContent = v+" km/h";
+      cmp.appendChild(t1);
+      cmp.appendChild(el("rect",{x:x0,y:y,width:dr/maxD*600,height:22,rx:3,fill:"#000"}));
+      cmp.appendChild(el("rect",{x:xr,y:y,width:df/maxD*600,height:22,rx:3,fill:"#FECF41",stroke:"#E9B400"}));
+      var t2 = el("text",{x:xr+df/maxD*600+8,y:y+16,"font-size":13,"font-weight":800,"font-family":"Marianne,Segoe UI,Arial,sans-serif"});
+      t2.textContent = Math.round(dr+df)+" m";
+      cmp.appendChild(t2);
+      y += 48;
+    });
+    var lg = el("text",{x:90,y:y+8,"font-size":12,fill:"#6b6b6b","font-family":"Marianne,Segoe UI,Arial,sans-serif"});
+    lg.textContent = "■ noir : distance de réaction (1 s)   ■ jaune : distance de freinage ("+(etat.mu===0.8?"sec":"mouillé")+")";
+    cmp.appendChild(lg);
+  }
+  function el2(n,a){return el(n,a);}
+
+  scene(); maj(false);
+  document.getElementById("verdict").className="verdict";
+})();
+</script>
+</body>
+</html>

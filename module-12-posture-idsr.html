@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Module 9 — La posture de l'IDSR : parler au nom de l'État | E-learning IDSR</title>
+<meta name="description" content="Module interactif sur la posture de l'IDSR : mandat préfectoral, neutralité, objectivité, factualité et pédagogie de la règle. Jeux de mise en situation et score de posture." />
+<style>
+  :root{
+    --jaune:#FECF41; --jaune-fonce:#E9B400; --jaune-clair:#FFF3CC;
+    --noir:#000; --gris:#3a3a3a; --gris-2:#6b6b6b;
+    --gris-clair:#f4f4f4; --bordure:#e2e2e2; --blanc:#fff;
+    --vert:#1f8a4c; --orange:#e67e22; --rouge:#c0392b; --bleu:#1d3f8f;
+    --rayon:12px; --ombre:0 4px 18px rgba(0,0,0,.12);
+    --max:1080px; --t:.25s cubic-bezier(.4,0,.2,1);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:"Marianne","Segoe UI",Arial,Helvetica,sans-serif;color:var(--noir);background:var(--gris-clair);line-height:1.55;}
+  img{max-width:100%;display:block;}
+  :focus-visible{outline:3px solid var(--noir);outline-offset:2px;border-radius:4px;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 1.25rem;}
+  .skip{position:absolute;left:-9999px;background:var(--noir);color:var(--jaune);padding:.6rem 1rem;z-index:200;font-weight:700;}
+  .skip:focus{left:0;top:0;}
+  header.site{background:var(--blanc);border-bottom:6px solid var(--jaune);position:sticky;top:0;z-index:50;}
+  .topbar{display:flex;align-items:center;gap:1rem;padding:.7rem 1.25rem;max-width:var(--max);margin:0 auto;flex-wrap:wrap;}
+  .topbar img{width:150px;}
+  .topbar .fil{font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--gris-2);font-weight:700;}
+  .topbar .fil a{color:var(--gris-2);text-decoration:none;}
+  .topbar .fil a:hover{text-decoration:underline;}
+  .progress{height:8px;background:var(--gris-clair);}
+  .progress > span{display:block;height:100%;width:0;background:var(--jaune);transition:width .5s ease;}
+  .module-hero{background:var(--noir);color:var(--blanc);padding:2.2rem 0 2.4rem;}
+  .module-hero .eyebrow{color:var(--jaune);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.8rem;margin:0 0 .5rem;}
+  .module-hero h1{font-size:2rem;line-height:1.15;margin:0 0 .8rem;max-width:820px;}
+  .module-hero p{margin:0;color:#e9e9e9;max-width:760px;}
+  main{padding:2rem 0 4rem;}
+  .layout{display:grid;grid-template-columns:260px 1fr;gap:2rem;align-items:start;}
+  .stepper{position:sticky;top:96px;background:var(--blanc);border:1px solid var(--bordure);border-radius:var(--rayon);padding:.6rem;}
+  .stepper ol{list-style:none;margin:0;padding:0;}
+  .step-item{display:flex;align-items:center;gap:.7rem;width:100%;text-align:left;border:none;background:none;font:inherit;padding:.7rem .6rem;border-radius:8px;cursor:pointer;color:var(--gris);transition:background var(--t);}
+  .step-item:hover:not(:disabled){background:var(--jaune-clair);}
+  .step-item:disabled{cursor:not-allowed;color:var(--gris-2);opacity:.7;}
+  .step-item[aria-current="true"]{background:var(--noir);color:var(--blanc);}
+  .step-item[aria-current="true"] .pastille{background:var(--jaune);color:var(--noir);border-color:var(--jaune);}
+  .pastille{flex:0 0 auto;width:30px;height:30px;border-radius:50%;border:2px solid var(--bordure);display:grid;place-items:center;font-weight:700;font-size:.85rem;background:var(--blanc);color:var(--gris);}
+  .step-item.done .pastille{background:var(--vert);border-color:var(--vert);color:#fff;}
+  .step-lbl{font-size:.92rem;font-weight:600;line-height:1.2;}
+  .step-sub{display:block;font-size:.72rem;font-weight:500;opacity:.8;}
+  .score-mini{margin-top:.8rem;background:var(--noir);color:var(--blanc);border-radius:10px;padding:.7rem .9rem;text-align:center;}
+  .score-mini b{color:var(--jaune);font-size:1.3rem;}
+  .score-mini span{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;}
+  .etape{display:none;background:var(--blanc);border:1px solid var(--bordure);border-radius:var(--rayon);box-shadow:var(--ombre);padding:1.8rem;animation:fade .35s ease;}
+  .etape.active{display:block;}
+  @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+  .etape h2{font-size:1.5rem;margin:0 0 .3rem;border-left:8px solid var(--jaune);padding-left:.6rem;}
+  .etape .lead{color:var(--gris);margin:.2rem 0 1.6rem;}
+  .obj{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem;margin:1.5rem 0;}
+  .obj .o{background:var(--gris-clair);border-radius:10px;padding:1.1rem;border-top:4px solid var(--jaune);}
+  .obj .o strong{display:block;margin-bottom:.3rem;}
+  .obj .o span{font-size:.92rem;color:var(--gris);}
+  .hint-explore{font-size:.86rem;color:var(--gris-2);background:var(--jaune-clair);border-radius:8px;padding:.6rem .8rem;margin:0 0 1rem;}
+  .cartes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.9rem;margin:1.4rem 0;}
+  .role{position:relative;text-align:left;border:1px solid var(--bordure);border-left:5px solid var(--jaune);background:var(--blanc);border-radius:10px;padding:1rem;cursor:pointer;transition:transform var(--t),box-shadow var(--t);font:inherit;width:100%;}
+  .role:hover{transform:translateY(-3px);box-shadow:var(--ombre);}
+  .role .sigle{font-weight:800;font-size:1.02rem;margin:0 0 .15rem;}
+  .role .nom{font-size:.85rem;color:var(--gris-2);margin:0;}
+  .role .detail{max-height:0;overflow:hidden;transition:max-height var(--t);font-size:.9rem;color:var(--gris);}
+  .role[aria-expanded="true"]{border-left-color:var(--noir);background:var(--jaune-clair);}
+  .role[aria-expanded="true"] .detail{max-height:460px;margin-top:.6rem;}
+  .role .plus{position:absolute;top:.8rem;right:.9rem;font-weight:800;color:var(--jaune-fonce);transition:transform var(--t);}
+  .role[aria-expanded="true"] .plus{transform:rotate(45deg);color:var(--noir);}
+  .verrou{margin-top:1.6rem;border:2px dashed var(--jaune-fonce);border-radius:12px;padding:1.2rem 1.3rem;background:var(--jaune-clair);}
+  .verrou .v-tag{display:inline-flex;align-items:center;gap:.4rem;font-weight:800;text-transform:uppercase;font-size:.78rem;letter-spacing:.05em;color:var(--gris);margin-bottom:.5rem;}
+  .verrou .q{font-weight:700;margin:.2rem 0 .9rem;font-size:1.05rem;}
+  .opts{display:grid;gap:.55rem;}
+  .opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;background:var(--blanc);border:2px solid var(--bordure);border-radius:9px;padding:.75rem .9rem;cursor:pointer;font:inherit;transition:border-color var(--t),background var(--t);}
+  .opt:hover:not(:disabled){border-color:var(--jaune-fonce);}
+  .opt .mark{flex:0 0 auto;width:22px;height:22px;border-radius:50%;border:2px solid var(--gris-2);display:grid;place-items:center;font-size:.8rem;font-weight:800;}
+  .opt.correct{border-color:var(--vert);background:#eafaf0;}
+  .opt.correct .mark{background:var(--vert);border-color:var(--vert);color:#fff;}
+  .opt.wrong{border-color:var(--rouge);background:#fdeeec;}
+  .opt.wrong .mark{background:var(--rouge);border-color:var(--rouge);color:#fff;}
+  .opt:disabled{cursor:default;}
+  .feedback{margin-top:.8rem;font-weight:600;font-size:.94rem;display:none;}
+  .feedback.show{display:block;}
+  .feedback.ok{color:var(--vert);}
+  .feedback.ko{color:var(--rouge);}
+  .nav-etape{display:flex;justify-content:space-between;gap:1rem;margin-top:1.8rem;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;border:none;border-radius:999px;padding:.8rem 1.5rem;font:inherit;font-weight:700;cursor:pointer;text-decoration:none;transition:transform var(--t),background var(--t),opacity var(--t);}
+  .btn-primary{background:var(--jaune);color:var(--noir);}
+  .btn-primary:hover:not(:disabled){background:var(--jaune-fonce);}
+  .btn-primary:disabled{opacity:.45;cursor:not-allowed;}
+  .btn-ghost{background:transparent;color:var(--gris);border:2px solid var(--bordure);}
+  .btn-ghost:hover{border-color:var(--noir);color:var(--noir);}
+  .source{font-size:.82rem;color:var(--gris-2);border-top:1px solid var(--bordure);margin-top:2rem;padding-top:1rem;}
+  footer.site{background:var(--blanc);border-top:6px solid var(--jaune);padding:1.6rem 0;font-size:.88rem;color:var(--gris-2);}
+  footer.site a{color:var(--noir);font-weight:700;}
+
+  /* --- arrêté préfectoral animé --- */
+  .arrete-scene{display:flex;justify-content:center;margin:1.6rem 0;}
+  .arrete{position:relative;background:#fdfcf7;border:1px solid #d8d4c3;border-radius:6px;box-shadow:0 10px 30px rgba(0,0,0,.15);max-width:430px;width:100%;padding:1.6rem 1.7rem 1.9rem;font-size:.85rem;color:#333;cursor:pointer;}
+  .arrete .rf{text-align:center;font-weight:800;letter-spacing:.08em;font-size:.8rem;}
+  .arrete .devise{text-align:center;font-size:.68rem;color:#666;letter-spacing:.05em;margin-bottom:1rem;}
+  .arrete h3{text-align:center;font-size:1rem;margin:.6rem 0 1rem;text-decoration:underline;}
+  .arrete p{margin:.4rem 0;}
+  .arrete .sig{text-align:right;margin-top:1.2rem;font-style:italic;}
+  .tampon{position:absolute;right:22px;bottom:16px;width:110px;height:110px;border:4px double var(--bleu);border-radius:50%;display:grid;place-items:center;text-align:center;color:var(--bleu);font-weight:800;font-size:.6rem;letter-spacing:.06em;transform:rotate(-14deg) scale(3);opacity:0;transition:transform .35s cubic-bezier(.2,1.6,.4,1),opacity .3s;pointer-events:none;}
+  .tampon.pose{opacity:.85;transform:rotate(-14deg) scale(1);}
+  .arrete .invite{position:absolute;left:0;right:0;bottom:-2.4rem;text-align:center;font-weight:700;font-size:.9rem;color:var(--gris);}
+
+  /* --- chaîne de distorsion --- */
+  .chaine{display:flex;flex-direction:column;gap:.3rem;margin:1.4rem 0;}
+  .chaine .maillon{display:flex;align-items:center;gap:.7rem;}
+  .chaine .maillon .barre{height:26px;background:var(--jaune);border-radius:6px;transition:width .8s ease;display:flex;align-items:center;padding:0 .6rem;font-size:.82rem;font-weight:700;white-space:nowrap;overflow:visible;}
+  .chaine .maillon:nth-child(n+6) .barre{background:#d9d9d9;}
+
+  /* --- jeu 1 : tri --- */
+  .tri-phrase{background:var(--gris-clair);border-radius:14px;padding:1.3rem 1.4rem;margin:1.2rem 0;border-left:6px solid var(--jaune);}
+  .tri-phrase .bulle{font-size:1.12rem;font-weight:600;margin:0 0 1rem;}
+  .tri-actions{display:flex;gap:.8rem;flex-wrap:wrap;}
+  .tri-btn{flex:1;min-width:180px;border:2px solid var(--bordure);border-radius:12px;background:var(--blanc);font:inherit;font-weight:700;padding:.9rem;cursor:pointer;transition:border-color var(--t),background var(--t),transform var(--t);}
+  .tri-btn:hover:not(:disabled){transform:translateY(-2px);}
+  .tri-btn.dire:hover:not(:disabled){border-color:var(--vert);}
+  .tri-btn.abst:hover:not(:disabled){border-color:var(--rouge);}
+  .tri-btn.juste{border-color:var(--vert);background:#eafaf0;}
+  .tri-btn.faux{border-color:var(--rouge);background:#fdeeec;}
+  .tri-btn:disabled{cursor:default;opacity:.85;}
+  .tri-fb{margin-top:.9rem;font-size:.93rem;font-weight:600;display:none;padding:.8rem 1rem;border-radius:9px;}
+  .tri-fb.show{display:block;}
+  .tri-fb.ok{background:#eafaf0;color:#14532d;}
+  .tri-fb.ko{background:#fdeeec;color:#7f1d1d;}
+  .compteur{font-size:.85rem;font-weight:700;color:var(--gris-2);text-transform:uppercase;letter-spacing:.05em;}
+
+  /* --- jeu 2 : dialogues --- */
+  .dialogue{margin:1.2rem 0;}
+  .bulle-public{display:flex;gap:.8rem;align-items:flex-start;margin-bottom:1rem;}
+  .bulle-public .avatar{flex:0 0 44px;width:44px;height:44px;border-radius:50%;background:var(--noir);color:var(--jaune);display:grid;place-items:center;font-size:1.4rem;}
+  .bulle-public .txt{background:var(--gris-clair);border-radius:4px 16px 16px 16px;padding:.9rem 1.1rem;font-weight:600;font-style:italic;}
+  .reponses{display:grid;gap:.6rem;margin-left:52px;}
+  .rep{text-align:left;border:2px solid var(--bordure);border-radius:16px 4px 16px 16px;background:var(--blanc);font:inherit;padding:.85rem 1rem;cursor:pointer;transition:border-color var(--t),background var(--t);}
+  .rep:hover:not(:disabled){border-color:var(--jaune-fonce);}
+  .rep.best{border-color:var(--vert);background:#eafaf0;}
+  .rep.moyen{border-color:var(--orange);background:#fdf3e7;}
+  .rep.mauvais{border-color:var(--rouge);background:#fdeeec;}
+  .rep:disabled{cursor:default;}
+  .rep .pts{float:right;font-weight:800;font-size:.85rem;margin-left:.6rem;}
+  .dial-fb{margin:.8rem 0 0 52px;font-size:.93rem;font-weight:600;display:none;padding:.8rem 1rem;border-radius:9px;background:var(--jaune-clair);}
+  .dial-fb.show{display:block;}
+
+  /* --- jeu 3 : associations --- */
+  .assoc{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:1.4rem 0;}
+  .as{border:2px solid var(--bordure);border-radius:10px;background:var(--blanc);font:inherit;padding:.8rem .9rem;cursor:pointer;text-align:left;font-size:.92rem;transition:border-color var(--t),background var(--t),opacity var(--t);}
+  .as .cat{display:block;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--gris-2);margin-bottom:.2rem;}
+  .as:hover:not(:disabled){border-color:var(--jaune-fonce);}
+  .as.sel{border-color:var(--noir);background:var(--jaune-clair);}
+  .as.lock{border-color:var(--vert);background:#eafaf0;opacity:.9;cursor:default;}
+  .as.err{border-color:var(--rouge);background:#fdeeec;}
+  @media (max-width:640px){ .assoc{grid-template-columns:1fr;} }
+
+  /* --- résultat --- */
+  .jauge-box{display:flex;flex-wrap:wrap;gap:2rem;align-items:center;justify-content:center;margin:1.6rem 0;}
+  .jauge{width:210px;height:210px;}
+  .jauge .fond{fill:none;stroke:var(--gris-clair);stroke-width:16;}
+  .jauge .val{fill:none;stroke:var(--jaune);stroke-width:16;stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dashoffset 1.4s ease;}
+  .jauge text{font-family:inherit;}
+  .profil-carte{max-width:380px;background:var(--gris-clair);border-radius:12px;padding:1.2rem 1.4rem;border-top:6px solid var(--jaune);}
+  .profil-carte h3{margin:0 0 .4rem;}
+  .profil-carte p{margin:0;font-size:.94rem;color:var(--gris);}
+  .detail-scores{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.9rem;margin:1.4rem 0;}
+  .ds{background:var(--gris-clair);border-radius:10px;padding:1rem;text-align:center;border-bottom:4px solid var(--jaune);}
+  .ds b{display:block;font-size:1.4rem;}
+  .ds span{font-size:.82rem;color:var(--gris);}
+  .conseils{background:var(--jaune-clair);border-radius:12px;padding:1.1rem 1.3rem;margin:1.2rem 0;}
+  .conseils h4{margin:0 0 .5rem;}
+  .conseils ul{margin:0;padding-left:1.2rem;font-size:.94rem;}
+  .conseils li{margin:.3rem 0;}
+  .fini{text-align:center;padding:1rem 0;}
+  .badge-fin{display:inline-grid;place-items:center;width:96px;height:96px;border-radius:50%;background:var(--jaune);margin:0 auto 1rem;font-size:2.6rem;}
+  .confetti{position:fixed;top:-20px;width:10px;height:14px;background:var(--jaune);z-index:300;animation:tombe 2.8s linear forwards;pointer-events:none;}
+  @keyframes tombe{to{transform:translateY(110vh) rotate(720deg);opacity:.2;}}
+
+  @media (max-width:880px){
+    .layout{grid-template-columns:1fr;}
+    .stepper{position:static;}
+    .stepper ol{display:flex;overflow-x:auto;gap:.3rem;}
+    .step-item{flex-direction:column;min-width:92px;text-align:center;gap:.35rem;}
+    .step-sub{display:none;}
+    .module-hero h1{font-size:1.55rem;}
+    .reponses,.dial-fb{margin-left:0;}
+  }
+  @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+</style>
+</head>
+<body data-module="m12">
+<a class="skip" href="#contenu">Aller au contenu principal</a>
+
+<header class="site">
+  <div class="topbar">
+    <img src="assets/logo-securite-routiere.png" alt="Sécurité routière — Vivre, Ensemble" />
+    <span class="fil"><a href="index.html">Accueil e-learning</a> › Module 9</span>
+  </div>
+  <div class="progress" role="progressbar" aria-label="Progression du module" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="barre"></span></div>
+</header>
+
+<section class="module-hero">
+  <div class="wrap">
+    <p class="eyebrow">Module 9 · Posture &amp; déontologie</p>
+    <h1>La posture de l'IDSR : parler au nom de l'État</h1>
+    <p>Nommé par arrêté préfectoral, l'IDSR ne s'exprime pas en son nom : il porte la parole de l'État. Objectivité, factualité, neutralité — ce module entraîne la posture par le jeu et se conclut par votre score de posture.</p>
+  </div>
+</section>
+
+<main id="contenu">
+  <div class="wrap layout">
+    <nav class="stepper" aria-label="Étapes du module">
+      <ol>
+        <li><button class="step-item" data-go="0"><span class="pastille">1</span><span class="step-lbl">Introduction<span class="step-sub">Objectifs</span></span></button></li>
+        <li><button class="step-item" data-go="1" disabled><span class="pastille">2</span><span class="step-lbl">Le mandat<span class="step-sub">L'arrêté préfectoral</span></span></button></li>
+        <li><button class="step-item" data-go="2" disabled><span class="pastille">3</span><span class="step-lbl">Les 4 piliers<span class="step-sub">La posture</span></span></button></li>
+        <li><button class="step-item" data-go="3" disabled><span class="pastille">4</span><span class="step-lbl">Dire ou s'abstenir<span class="step-sub">Jeu · 40 pts</span></span></button></li>
+        <li><button class="step-item" data-go="4" disabled><span class="pastille">5</span><span class="step-lbl">Face au public<span class="step-sub">Jeu · 40 pts</span></span></button></li>
+        <li><button class="step-item" data-go="5" disabled><span class="pastille">6</span><span class="step-lbl">Pourquoi la loi ?<span class="step-sub">Jeu · 20 pts</span></span></button></li>
+        <li><button class="step-item" data-go="6" disabled><span class="pastille">7</span><span class="step-lbl">Votre score<span class="step-sub">Profil de posture</span></span></button></li>
+      </ol>
+      <div class="score-mini" aria-live="polite"><b id="score-live">0</b> / 100<span>score de posture</span></div>
+    </nav>
+
+    <div>
+      <!-- ETAPE 0 : INTRO -->
+      <section class="etape active" data-etape="0" aria-labelledby="t0">
+        <h2 id="t0">Introduction</h2>
+        <p class="lead">Sur un stand, dans une classe ou en entreprise, l'IDSR n'est pas un citoyen qui donne son avis : il est la voix locale de la Sécurité routière. Ce module entraîne cette posture — la compétence la plus délicate du métier.</p>
+        <div class="obj">
+          <div class="o"><strong>Objectif 1</strong><span>Comprendre le mandat : ce que l'arrêté préfectoral autorise… et exige.</span></div>
+          <div class="o"><strong>Objectif 2</strong><span>Maîtriser les 4 piliers : objectivité, factualité, neutralité, pédagogie de la règle.</span></div>
+          <div class="o"><strong>Objectif 3</strong><span>S'entraîner sur des situations réelles et mesurer sa posture par un score.</span></div>
+        </div>
+        <p class="hint-explore">Ce module se termine par un <strong>score de posture sur 100</strong>, calculé sur les trois jeux. Répondez du premier coup : chaque réponse compte !</p>
+        <div class="nav-etape"><span></span><button class="btn btn-primary" data-next>Commencer le parcours →</button></div>
+      </section>
+
+      <!-- ETAPE 1 : LE MANDAT -->
+      <section class="etape" data-etape="1" aria-labelledby="t1">
+        <h2 id="t1">Le mandat : un arrêté du préfet</h2>
+        <p class="lead">L'IDSR est un bénévole <strong>nommé par le préfet de département</strong> par un arrêté de nomination (un an minimum). Ce document change tout : il fait de vous un collaborateur du service public.</p>
+
+        <figure class="arrete-scene">
+          <div class="arrete" id="arrete" role="button" tabindex="0" aria-label="Cliquez pour apposer le sceau du préfet sur l'arrêté de nomination">
+            <p class="rf">RÉPUBLIQUE FRANÇAISE</p>
+            <p class="devise">Liberté · Égalité · Fraternité — Préfecture du département</p>
+            <h3>Arrêté portant nomination d'un Intervenant Départemental de Sécurité Routière</h3>
+            <p><strong>Article 1</strong> — M./Mme ……… est nommé(e) Intervenant Départemental de Sécurité Routière au titre du programme « Agir pour la sécurité routière ».</p>
+            <p><strong>Article 2</strong> — L'intéressé(e) exerce ses missions sous l'autorité du préfet, à la demande du coordinateur sécurité routière, et porte à ce titre les messages officiels de la Sécurité routière.</p>
+            <p class="sig">Le Préfet</p>
+            <div class="tampon" id="tampon"><span>PRÉFECTURE<br/>★<br/>RÉPUBLIQUE<br/>FRANÇAISE</span></div>
+            <p class="invite" id="invite-tampon">👆 Cliquez sur l'arrêté pour apposer le sceau</p>
+          </div>
+        </figure>
+
+        <p class="hint-explore">Cliquez sur chaque carte pour découvrir ce que ce mandat implique.</p>
+        <div class="cartes" data-explore="1">
+          <button class="role" aria-expanded="false"><p class="sigle">Un acte d'engagement</p><p class="nom">Signé auprès de la préfecture</p><span class="plus">+</span><div class="detail">L'IDSR s'engage sur son comportement personnel vis-à-vis des règles de circulation et sur son adhésion aux principes de lutte contre l'insécurité routière. Un IDSR verbalisé pour alcool ou grande vitesse perd toute crédibilité — et peut perdre sa nomination.</div></button>
+          <button class="role" aria-expanded="false"><p class="sigle">Sous l'autorité du préfet</p><p class="nom">Un ordre de mission par action</p><span class="plus">+</span><div class="detail">L'IDSR intervient à la demande du coordinateur sécurité routière, avec un ordre de mission. Il est assuré par l'État pendant ses missions. Hors mission, il ne parle plus au nom de l'État.</div></button>
+          <button class="role" aria-expanded="false"><p class="sigle">La parole de l'État</p><p class="nom">Messages officiels uniquement</p><span class="plus">+</span><div class="detail">En intervention, l'IDSR porte les messages officiels de la Sécurité routière. Il ne donne pas d'opinion personnelle sur les lois, les radars, les politiques ou les polémiques : il les explique.</div></button>
+          <button class="role" aria-expanded="false"><p class="sigle">Les mêmes devoirs qu'un agent public</p><p class="nom">Déontologie</p><span class="plus">+</span><div class="detail">Collaborateur occasionnel du service public, l'IDSR est tenu aux mêmes exigences que les agents de l'État : neutralité, réserve, intégrité, discrétion. Le bénévolat n'exonère d'aucun de ces devoirs.</div></button>
+        </div>
+
+        <div class="verrou" data-quiz="1">
+          <span class="v-tag">🔒 Question de déverrouillage</span>
+          <p class="q">Qui nomme l'IDSR, et que porte-t-il en intervention ?</p>
+          <div class="opts">
+            <button class="opt" data-ok="0"><span class="mark"></span> Le maire — et il donne son avis de citoyen engagé</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> Le préfet de département — et il porte les messages officiels de l'État</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> L'association de son choix — et il parle librement</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+        <div class="nav-etape"><button class="btn btn-ghost" data-prev>← Précédent</button><button class="btn btn-primary" data-next disabled>Étape suivante →</button></div>
+      </section>
+
+      <!-- ETAPE 2 : LES 4 PILIERS -->
+      <section class="etape" data-etape="2" aria-labelledby="t2">
+        <h2 id="t2">Les 4 piliers de la posture</h2>
+        <p class="lead">Quatre réflexes professionnels, à mobiliser ensemble, dans chaque échange.</p>
+        <p class="hint-explore">Cliquez sur chaque pilier pour l'explorer.</p>
+        <div class="cartes" data-explore="1">
+          <button class="role" aria-expanded="false"><p class="sigle">⚖️ Objectivité</p><p class="nom">Ni pour, ni contre : à côté des faits</p><span class="plus">+</span><div class="detail">L'IDSR ne prend jamais parti — ni pour un groupe d'usagers, ni contre un autre, ni dans les polémiques. Il présente la situation telle que les données la décrivent, même quand son interlocuteur cherche l'affrontement.</div></button>
+          <button class="role" aria-expanded="false"><p class="sigle">🔍 Factualité</p><p class="nom">Des chiffres sourcés, jamais d'à-peu-près</p><span class="plus">+</span><div class="detail">Chaque affirmation s'appuie sur une source vérifiable : ONISR, Sécurité routière, études publiques. En cas de doute : « Je vérifie et je reviens vers vous » vaut mieux qu'un chiffre inventé. Un seul chiffre faux décrédibilise toute l'intervention.</div></button>
+          <button class="role" aria-expanded="false"><p class="sigle">🤝 Neutralité</p><p class="nom">Pas d'opinion personnelle en mission</p><span class="plus">+</span><div class="detail">Sur les lois, les radars, les décisions politiques : l'avis personnel de l'IDSR n'existe pas en intervention. Ni approbation, ni critique. C'est la condition pour que le message soit reçu par tous les publics, quelles que soient leurs sensibilités.</div></button>
+          <button class="role" aria-expanded="false"><p class="sigle">💡 Pédagogie de la règle</p><p class="nom">Toujours expliquer pourquoi la loi existe</p><span class="plus">+</span><div class="detail">Une règle assénée est rejetée ; une règle expliquée est comprise. Derrière chaque obligation du code de la route, il y a des morts évitables et des données d'accidentalité. Le travail de l'IDSR : rendre ce lien visible.</div></button>
+        </div>
+
+        <h3 style="margin:1.8rem 0 .4rem;">Pourquoi tant de rigueur ? Parce que le message se déforme</h3>
+        <p style="color:var(--gris);font-size:.95rem;margin:0 0 .6rem;">De ce que vous voulez dire à ce que le public répétera, chaque étape perd de l'information. D'où l'exigence de messages simples, factuels et sans ambiguïté <em>(support de formation Agir — SMDC Hauts-de-France)</em> :</p>
+        <div class="chaine" id="chaine">
+          <div class="maillon"><span class="barre" style="width:100%">Ce que j'ai à dire</span></div>
+          <div class="maillon"><span class="barre" style="width:88%">Ce que je pense dire</span></div>
+          <div class="maillon"><span class="barre" style="width:76%">Ce que je sais dire</span></div>
+          <div class="maillon"><span class="barre" style="width:64%">Ce que je dis effectivement</span></div>
+          <div class="maillon"><span class="barre" style="width:54%">Ce qu'il entend</span></div>
+          <div class="maillon"><span class="barre" style="width:44%">Ce qu'il écoute</span></div>
+          <div class="maillon"><span class="barre" style="width:34%">Ce qu'il comprend</span></div>
+          <div class="maillon"><span class="barre" style="width:26%">Ce qu'il admet</span></div>
+          <div class="maillon"><span class="barre" style="width:18%">Ce qu'il retient</span></div>
+          <div class="maillon"><span class="barre" style="width:12%">Ce qu'il répétera</span></div>
+        </div>
+
+        <div class="verrou" data-quiz="1">
+          <span class="v-tag">🔒 Question de déverrouillage</span>
+          <p class="q">Un participant vous demande votre avis personnel sur une loi. Quel pilier mobilisez-vous en premier ?</p>
+          <div class="opts">
+            <button class="opt" data-ok="0"><span class="mark"></span> La factualité : je donne mon avis, mais avec des chiffres</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> La neutralité : mon avis n'a pas sa place, j'explique pourquoi la règle existe</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> L'objectivité : je donne les deux camps et je dis lequel a raison</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+        <div class="nav-etape"><button class="btn btn-ghost" data-prev>← Précédent</button><button class="btn btn-primary" data-next disabled>Étape suivante →</button></div>
+      </section>
+
+      <!-- ETAPE 3 : JEU 1 -->
+      <section class="etape" data-etape="3" aria-labelledby="t3">
+        <h2 id="t3">Jeu 1 — Je peux le dire… ou je m'abstiens</h2>
+        <p class="lead">En mission, chaque phrase engage l'État. Pour chacune des 10 phrases suivantes, décidez : un IDSR peut-il la prononcer ? <strong>4 points par bonne réponse — du premier coup.</strong></p>
+        <p class="compteur" id="tri-compteur"></p>
+        <div id="tri-zone"></div>
+        <div class="nav-etape"><button class="btn btn-ghost" data-prev>← Précédent</button><button class="btn btn-primary" data-next disabled>Étape suivante →</button></div>
+      </section>
+
+      <!-- ETAPE 4 : JEU 2 -->
+      <section class="etape" data-etape="4" aria-labelledby="t4">
+        <h2 id="t4">Jeu 2 — Face au public</h2>
+        <p class="lead">Cinq situations vécues sur le terrain. Choisissez la réponse qui tient la posture : <strong>8 points</strong> pour la meilleure, <strong>4</strong> pour une réponse acceptable, <strong>0</strong> pour une sortie de route.</p>
+        <p class="compteur" id="dial-compteur"></p>
+        <div id="dial-zone"></div>
+        <div class="nav-etape"><button class="btn btn-ghost" data-prev>← Précédent</button><button class="btn btn-primary" data-next disabled>Étape suivante →</button></div>
+      </section>
+
+      <!-- ETAPE 5 : JEU 3 -->
+      <section class="etape" data-etape="5" aria-labelledby="t5">
+        <h2 id="t5">Jeu 3 — Pourquoi la loi ?</h2>
+        <p class="lead">« Expliquer pourquoi la loi existe » : le cœur de la pédagogie IDSR. Associez chaque règle à sa raison d'être — cliquez une règle, puis sa justification. <strong>4 points par paire réussie du premier coup, 2 au second.</strong></p>
+        <p class="compteur" id="assoc-compteur"></p>
+        <div class="assoc" id="assoc-zone"></div>
+        <p class="feedback" id="assoc-fb" role="status"></p>
+        <div class="nav-etape"><button class="btn btn-ghost" data-prev>← Précédent</button><button class="btn btn-primary" data-next disabled>Voir mon score →</button></div>
+      </section>
+
+      <!-- ETAPE 6 : SCORE -->
+      <section class="etape" data-etape="6" data-last="1" aria-labelledby="t6">
+        <h2 id="t6">Votre score de posture</h2>
+        <p class="lead">Le score reflète vos réponses du premier coup sur les trois jeux.</p>
+        <div class="jauge-box">
+          <svg class="jauge" viewBox="0 0 200 200" role="img" aria-labelledby="jt">
+            <title id="jt">Jauge du score de posture</title>
+            <circle class="fond" cx="100" cy="100" r="84"/>
+            <circle class="val" id="jauge-val" cx="100" cy="100" r="84"/>
+            <text x="100" y="96" text-anchor="middle" font-size="44" font-weight="800" id="jauge-num">0</text>
+            <text x="100" y="124" text-anchor="middle" font-size="14" fill="#6b6b6b">/ 100</text>
+          </svg>
+          <div class="profil-carte">
+            <h3 id="profil-titre">—</h3>
+            <p id="profil-txt"></p>
+          </div>
+        </div>
+        <div class="detail-scores" id="detail-scores"></div>
+        <div class="conseils" id="conseils" style="display:none;">
+          <h4>Vos axes de progrès</h4>
+          <ul id="conseils-liste"></ul>
+        </div>
+        <p style="text-align:center;"><button class="btn btn-ghost" id="rejouer">↺ Rejouer les jeux pour améliorer mon score</button></p>
+        <div id="bloc-fin" style="display:none;">
+          <div class="fini">
+            <div class="badge-fin" aria-hidden="true">✓</div>
+            <h3>Module terminé</h3>
+            <p>Vous savez ce que le mandat préfectoral exige : des faits, de la neutralité, et le « pourquoi » de chaque règle.</p>
+            <p style="margin-top:1rem;"><a class="btn btn-ghost" href="index.html">Retour à l'accueil ↩</a></p>
+          </div>
+        </div>
+        <div class="nav-etape"><button class="btn btn-ghost" data-prev>← Précédent</button><span></span></div>
+      </section>
+
+      <p class="source">Sources : présentation « Être IDSR » et support de formation Agir (SMDC / Pôle d'appui sécurité routière Hauts-de-France) ; pages IDSR des préfectures (services de l'État — engagement, neutralité et parole officielle : <a href="https://www.loire-atlantique.gouv.fr/Politiques-publiques/Securite-routiere-transports/Les-actions-de-prevention-et-de-sensibilisation/Devenir-intervenant-departemental-de-securite-routiere-IDSR" target="_blank" rel="noopener">exemple Loire-Atlantique</a>, <a href="https://www.isere.gouv.fr/Actions-de-l-Etat/Securites/Securite-routiere/Les-intervenants-departementaux-de-securite-routiere-IDSR" target="_blank" rel="noopener">Isère</a>) ; chiffres : <a href="https://www.onisr.securite-routiere.gouv.fr/" target="_blank" rel="noopener">ONISR</a> et <a href="https://www.securite-routiere.gouv.fr/" target="_blank" rel="noopener">securite-routiere.gouv.fr</a>.</p>
+    </div>
+  </div>
+</main>
+
+<footer class="site"><div class="wrap">Espace e-learning des Intervenants Départementaux de Sécurité Routière — Préfecture des Hauts-de-France. <a href="index.html">Retour à l'accueil</a></div></footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ================= données des jeux ================= */
+  var PHRASES = [
+    {t:"« À 50 km/h, un piéton percuté a environ une chance sur deux de survivre. À 30 km/h, il survit neuf fois sur dix. »", ok:true,
+     fb:"Oui : un fait chiffré, sourcé, qui explique la règle sans juger personne."},
+    {t:"« Entre nous, ce radar-là, il est surtout placé pour faire du chiffre. »", ok:false,
+     fb:"Non : opinion polémique qui décrédibilise l'État que vous représentez. On explique le critère réel d'implantation : l'accidentalité."},
+    {t:"« La loi fixe 0,5 g/L parce que dès ce niveau, le temps de réaction s'allonge et le champ visuel se rétrécit. »", ok:true,
+     fb:"Oui : c'est exactement la pédagogie de la règle — le « pourquoi » derrière le seuil."},
+    {t:"« Moi le premier, il m'arrive de rouler un peu au-dessus des limites, comme tout le monde. »", ok:false,
+     fb:"Non : contraire à l'acte d'engagement signé en préfecture — et le message devient : « même l'IDSR ne respecte pas la règle »."},
+    {t:"« Je ne connais pas ce chiffre précis. Je le vérifie et je reviens vers vous. »", ok:true,
+     fb:"Oui : la factualité inclut le droit de ne pas savoir. Un chiffre inventé coûte bien plus cher qu'un « je vérifie »."},
+    {t:"« Les jeunes, de toute façon, ils conduisent tous n'importe comment. »", ok:false,
+     fb:"Non : stigmatisation d'un groupe. Les données se présentent sans juger : les 18-24 ans ont un risque plus élevé — et on explique pourquoi."},
+    {t:"« Cette mesure fait polémique, je le sais. Mon rôle n'est pas de la commenter, mais je peux vous expliquer les données qui l'ont motivée. »", ok:true,
+     fb:"Oui : neutralité assumée + recentrage sur les faits. La posture exacte."},
+    {t:"« Franchement, avec de l'expérience, deux verres ça passe sans problème. »", ok:false,
+     fb:"Non : contraire au message officiel et faux — l'alcool altère les réflexes dès le premier verre, quelle que soit l'expérience."},
+    {t:"« Je comprends votre agacement. Regardons ensemble ce que disent les chiffres de l'ONISR. »", ok:true,
+     fb:"Oui : l'écoute n'est pas l'approbation. Accueillir l'émotion, puis revenir aux faits."},
+    {t:"« Ce gouvernement fait n'importe quoi, mais bon, je suis obligé de vous présenter la mesure. »", ok:false,
+     fb:"Non : double faute — prise de position politique ET dévalorisation du message qu'on porte. La nomination préfectorale ne survit pas à ce genre de phrase."}
+  ];
+
+  var SITUATIONS = [
+    {q:"« Les radars, c'est juste une pompe à fric pour l'État ! »", avatar:"😠",
+     reps:[
+       {t:"« Je comprends que ce soit votre ressenti. Les emplacements sont choisis sur les zones d'accidents — et depuis le contrôle automatisé, la mortalité a fortement baissé. Regardons les chiffres ensemble. »", pts:8,
+        fb:"Écoute, pas de polémique, recentrage factuel : posture idéale."},
+       {t:"« Ce n'est pas le sujet de ce stand, parlons plutôt de la distance de freinage. »", pts:4,
+        fb:"Éviter l'affrontement est prudent, mais esquiver la question laisse l'objection intacte. Mieux : y répondre par les faits."},
+       {t:"« Là-dessus je suis d'accord avec vous, il y en a certains qui sont mal placés. »", pts:0,
+        fb:"Vous venez de valider la thèse contre l'État… au nom de l'État. Sortie de route complète."}
+     ]},
+    {q:"« Moi, avec deux verres, je conduis même mieux : ça me détend. »", avatar:"🍷",
+     reps:[
+       {t:"« C'est une sensation fréquente — et c'est justement l'effet de l'alcool : il désinhibe et masque la baisse des réflexes. Dès 0,2 g/L, le temps de réaction s'allonge. Voulez-vous essayer notre simulateur ? »", pts:8,
+        fb:"Sans juger la personne, vous démontez le mécanisme avec la physiologie. Et vous enchaînez sur un outil : parfait."},
+       {t:"« La loi c'est la loi : 0,5 g/L maximum, sinon c'est 135 € et 6 points. »", pts:4,
+        fb:"Exact mais brut : la sanction sans le « pourquoi » braque plus qu'elle ne convainc."},
+       {t:"« Dire ça, c'est vraiment inconscient. »", pts:0,
+        fb:"Jugement de la personne : elle n'écoutera plus rien. On qualifie les faits, jamais les gens."}
+     ]},
+    {q:"« Et vous, personnellement, vous en pensez quoi de la limitation à 80 km/h ? »", avatar:"🎤",
+     reps:[
+       {t:"« En mission, je représente l'État : mon avis personnel n'a pas sa place. Ce que je peux vous expliquer, c'est pourquoi la mesure existe : les routes bidirectionnelles sans séparateur concentrent la mortalité la plus élevée. »", pts:8,
+        fb:"Neutralité annoncée sans détour, puis pédagogie de la règle. C'est LA réponse du module."},
+       {t:"« Je n'ai pas le droit de vous répondre. »", pts:4,
+        fb:"La neutralité est tenue, mais la réponse frustre et n'apprend rien. Ajoutez toujours le « pourquoi » de la règle."},
+       {t:"« Entre nous, je trouve qu'on est allés trop loin, mais chut. »", pts:0,
+        fb:"Opinion personnelle contre une mesure publique, en mission : rupture du devoir de neutralité."}
+     ]},
+    {q:"Sur votre stand, un élu local lance devant le public : « De toute façon, la préfecture ne fait rien pour nos routes ! »", avatar:"🎗️",
+     reps:[
+       {t:"« Je suis intervenant de sécurité routière, pas porte-parole sur ces questions : je vous invite à en parler avec la coordination. Ici, je peux vous montrer les actions de prévention menées dans le département. »", pts:8,
+        fb:"Vous ne polémiquez pas, vous ne validez pas, vous redirigez vers le bon interlocuteur et revenez à votre mission."},
+       {t:"Ne rien répondre et continuer l'animation comme si de rien n'était.", pts:4,
+        fb:"Pas de faute… mais le silence devant le public peut passer pour un acquiescement. Une redirection polie est plus solide."},
+       {t:"« Vous avez raison, on manque cruellement de moyens, c'est déplorable. »", pts:0,
+        fb:"Critique publique de l'administration que vous représentez : c'est précisément ce que l'engagement interdit."}
+     ]},
+    {q:"« Vous êtes payé combien pour venir nous répéter la propagande officielle ? »", avatar:"🤨",
+     reps:[
+       {t:"« Rien du tout : je suis bénévole, nommé par le préfet. Si je suis là, c'est par engagement — et ce que je vous présente, ce sont les données publiques de l'ONISR, que vous pouvez vérifier. »", pts:8,
+        fb:"Transparence sur le statut, réaffirmation de la source des données : l'attaque se dégonfle d'elle-même."},
+       {t:"« Ma situation personnelle n'est pas le sujet. Revenons à la présentation. »", pts:4,
+        fb:"Défendable, mais l'occasion était belle : le bénévolat est votre meilleur argument de crédibilité."},
+       {t:"« Si vous êtes venu pour provoquer, passez votre chemin. »", pts:0,
+        fb:"Le ton conflictuel devant un public détruit l'image de l'intervention. On ne gagne jamais un bras de fer en stand."}
+     ]}
+  ];
+
+  var PAIRES = [
+    {regle:"0,5 g/L d'alcool maximum (0,2 g/L en probatoire)", raison:"Dès ce niveau : réflexes ralentis, champ visuel rétréci, risque d'accident mortel en forte hausse"},
+    {regle:"Téléphone tenu en main interdit (art. R.412-6-1)", raison:"Écrire un message = 5 secondes sans regarder la route et un risque d'accident multiplié par 23"},
+    {regle:"Intervalle de sécurité de 2 secondes minimum", raison:"Le temps de percevoir un danger, réagir (≈ 1 s) et commencer à freiner avant l'obstacle"},
+    {regle:"Casque obligatoire à moto et cyclomoteur", raison:"Les deux-roues motorisés représentent environ 1 tué sur 5, pour une part infime du trafic"},
+    {regle:"50 km/h en agglomération", raison:"À cette vitesse un piéton percuté a ≈ 1 chance sur 2 de survivre ; chaque km/h de plus réduit ses chances"}
+  ];
+
+  /* ================= moteur du module ================= */
+  var etapes=[].slice.call(document.querySelectorAll(".etape"));
+  var TOTAL=etapes.length;
+  var stepBtns=[].slice.call(document.querySelectorAll(".step-item"));
+  var barre=document.getElementById("barre");
+  var STORE="elearning_idsr_m12";
+  var state={unlocked:0,explored:{},quiz:{},scores:{tri:null,dial:null,assoc:null}};
+  try{var s=JSON.parse(localStorage.getItem(STORE)||"{}");if(typeof s.unlocked==="number"){state=s;state.explored=state.explored||{};state.quiz=state.quiz||{};state.scores=state.scores||{tri:null,dial:null,assoc:null};}}catch(e){}
+  function save(){try{localStorage.setItem(STORE,JSON.stringify(state));}catch(e){}}
+  var current=0;
+  function show(i){
+    if(i>state.unlocked)return; current=i;
+    etapes.forEach(function(el){el.classList.toggle("active",+el.dataset.etape===i);});
+    stepBtns.forEach(function(b){var idx=+b.dataset.go;b.setAttribute("aria-current",idx===i?"true":"false");b.disabled=idx>state.unlocked;b.classList.toggle("done",idx<state.unlocked);});
+    updateBar(); window.scrollTo({top:0,behavior:"smooth"});
+    if(i===6) afficherScore();
+  }
+  function updateBar(){var pct=TOTAL>1?Math.round((state.unlocked/(TOTAL-1))*100):100;if(pct>100)pct=100;barre.style.width=pct+"%";barre.parentElement.setAttribute("aria-valuenow",pct);}
+  function unlock(i){if(i>state.unlocked)state.unlocked=i;save();}
+  function scoreTotal(){
+    return (state.scores.tri||0)+(state.scores.dial||0)+(state.scores.assoc||0);
+  }
+  function majScoreLive(){document.getElementById("score-live").textContent=scoreTotal();}
+
+  /* cartes explorables + questions de déverrouillage (étapes 1-2) */
+  etapes.forEach(function(et){
+    [].slice.call(et.querySelectorAll("[data-explore]")).forEach(function(org){
+      var key=et.dataset.etape+"_e";
+      var roles=[].slice.call(org.querySelectorAll(".role"));
+      roles.forEach(function(r){
+        r.addEventListener("click",function(){
+          var open=r.getAttribute("aria-expanded")==="true";
+          r.setAttribute("aria-expanded",open?"false":"true");
+          if(!open){r.dataset.seen="1";if(roles.every(function(x){return x.dataset.seen==="1";})){state.explored[key]=true;save();refresh(et);}}
+        });
+      });
+      if(state.explored[key])roles.forEach(function(r){r.dataset.seen="1";});
+    });
+    [].slice.call(et.querySelectorAll(".verrou")).forEach(function(v){
+      var key=et.dataset.etape+"_q"+(v.dataset.quiz||"1");
+      var fb=v.querySelector(".feedback");
+      fb.setAttribute("role","status");fb.setAttribute("aria-live","polite");
+      var box=v.querySelector(".opts");
+      var opts=[].slice.call(box.children);
+      for(var i=opts.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));box.insertBefore(opts[j],opts[i].nextSibling);var t=opts[i];opts[i]=opts[j];opts[j]=t;}
+      opts=[].slice.call(box.children);
+      if(state.quiz[key]){opts.forEach(function(o){o.disabled=true;if(o.dataset.ok==="1"){o.classList.add("correct");o.querySelector(".mark").textContent="✓";}});fb.textContent="Bonne réponse.";fb.className="feedback show ok";}
+      opts.forEach(function(opt){
+        opt.addEventListener("click",function(){
+          if(state.quiz[key])return;
+          if(opt.dataset.ok==="1"){
+            opt.classList.add("correct");opt.querySelector(".mark").textContent="✓";
+            opts.forEach(function(o){o.disabled=true;});
+            fb.textContent="Bonne réponse.";fb.className="feedback show ok";
+            state.quiz[key]=true;save();refresh(et);
+          }else{
+            opt.classList.add("wrong");opt.querySelector(".mark").textContent="✗";
+            fb.textContent="Ce n'est pas la bonne réponse. Relisez le contenu ci-dessus et réessayez.";fb.className="feedback show ko";
+            setTimeout(function(){opt.classList.remove("wrong");opt.querySelector(".mark").textContent="";},1400);
+          }
+        });
+      });
+    });
+  });
+
+  function etapeComplete(et){
+    var n=+et.dataset.etape;
+    if(n===3) return state.scores.tri!==null;
+    if(n===4) return state.scores.dial!==null;
+    if(n===5) return state.scores.assoc!==null;
+    var okExp=[].slice.call(et.querySelectorAll("[data-explore]")).every(function(){return state.explored[et.dataset.etape+"_e"]===true;});
+    var okQ=[].slice.call(et.querySelectorAll(".verrou")).every(function(v){return state.quiz[et.dataset.etape+"_q"+(v.dataset.quiz||"1")]===true;});
+    return okExp&&okQ;
+  }
+  function refresh(et){
+    if(!etapeComplete(et))return;
+    var nb=et.querySelector("[data-next]");if(nb)nb.disabled=false;
+  }
+
+  stepBtns.forEach(function(b){b.addEventListener("click",function(){show(+b.dataset.go);});});
+  document.querySelectorAll("[data-next]").forEach(function(b){b.addEventListener("click",function(){var n=current+1;if(n<TOTAL){unlock(n);show(n);}});});
+  document.querySelectorAll("[data-prev]").forEach(function(b){b.addEventListener("click",function(){if(current>0)show(current-1);});});
+
+  /* ================= tampon préfectoral ================= */
+  var arrete=document.getElementById("arrete");
+  function tamponner(){
+    document.getElementById("tampon").classList.add("pose");
+    document.getElementById("invite-tampon").textContent="Vous parlez désormais au nom de l'État.";
+  }
+  arrete.addEventListener("click",tamponner);
+  arrete.addEventListener("keydown",function(e){if(e.code==="Enter"||e.code==="Space"){e.preventDefault();tamponner();}});
+
+  /* ================= JEU 1 : tri ================= */
+  var triZone=document.getElementById("tri-zone");
+  var triCompteur=document.getElementById("tri-compteur");
+  function lancerTri(){
+    triZone.innerHTML="";
+    var idx=0, pts=0;
+    var ordre=PHRASES.slice().sort(function(){return Math.random()-0.5;});
+    function afficher(){
+      if(idx>=ordre.length){
+        state.scores.tri=pts;save();majScoreLive();
+        triCompteur.textContent="Jeu terminé — "+pts+" / 40 points";
+        triZone.innerHTML='<div class="tri-fb show '+(pts>=28?"ok":"ko")+'" role="status">'+
+          (pts>=32?"💪 Excellente maîtrise du « dire / s'abstenir »."
+           :pts>=24?"👍 Bonne base — relisez les explications des phrases manquées."
+           :"📖 Retournez à l'étape « Les 4 piliers » puis rejouez depuis la page de score.")+'</div>';
+        refresh(etapes[3]);
+        return;
+      }
+      var p=ordre[idx];
+      triCompteur.textContent="Phrase "+(idx+1)+" / "+ordre.length+" · "+pts+" pts";
+      var d=document.createElement("div");
+      d.className="tri-phrase";
+      d.innerHTML='<p class="bulle">🗨️ '+p.t+'</p>'+
+        '<div class="tri-actions">'+
+        '<button type="button" class="tri-btn dire">✔️ Je peux le dire</button>'+
+        '<button type="button" class="tri-btn abst">🤐 Je m\'abstiens</button>'+
+        '</div><p class="tri-fb" role="status"></p>';
+      triZone.innerHTML="";triZone.appendChild(d);
+      var bD=d.querySelector(".dire"), bA=d.querySelector(".abst"), fb=d.querySelector(".tri-fb");
+      function rep(choixDire){
+        bD.disabled=true;bA.disabled=true;
+        var juste=(choixDire===p.ok);
+        (choixDire?bD:bA).classList.add(juste?"juste":"faux");
+        if(juste)pts+=4;
+        fb.textContent=(juste?"✔ ":"✘ ")+p.fb;
+        fb.className="tri-fb show "+(juste?"ok":"ko");
+        var nxt=document.createElement("button");
+        nxt.type="button";nxt.className="btn btn-primary";nxt.style.marginTop=".9rem";
+        nxt.textContent=(idx<ordre.length-1)?"Phrase suivante →":"Voir mon résultat →";
+        nxt.addEventListener("click",function(){idx++;afficher();});
+        d.appendChild(nxt);nxt.focus();
+      }
+      bD.addEventListener("click",function(){rep(true);});
+      bA.addEventListener("click",function(){rep(false);});
+    }
+    afficher();
+  }
+
+  /* ================= JEU 2 : dialogues ================= */
+  var dialZone=document.getElementById("dial-zone");
+  var dialCompteur=document.getElementById("dial-compteur");
+  function lancerDial(){
+    dialZone.innerHTML="";
+    var idx=0, pts=0;
+    function afficher(){
+      if(idx>=SITUATIONS.length){
+        state.scores.dial=pts;save();majScoreLive();
+        dialCompteur.textContent="Jeu terminé — "+pts+" / 40 points";
+        dialZone.innerHTML='<div class="tri-fb show '+(pts>=28?"ok":"ko")+'" role="status">'+
+          (pts>=32?"🎯 Vous tenez la posture même sous pression."
+           :pts>=24?"👍 Solide — visez systématiquement l'écoute + les faits + le « pourquoi »."
+           :"📖 Le trio gagnant : accueillir sans approuver, recentrer sur les faits, expliquer la règle.")+'</div>';
+        refresh(etapes[4]);
+        return;
+      }
+      var s=SITUATIONS[idx];
+      dialCompteur.textContent="Situation "+(idx+1)+" / "+SITUATIONS.length+" · "+pts+" pts";
+      var d=document.createElement("div");
+      d.className="dialogue";
+      d.innerHTML='<div class="bulle-public"><span class="avatar" aria-hidden="true">'+s.avatar+'</span><p class="txt">'+s.q+'</p></div>'+
+                  '<div class="reponses"></div><p class="dial-fb" role="status"></p>';
+      dialZone.innerHTML="";dialZone.appendChild(d);
+      var box=d.querySelector(".reponses"), fb=d.querySelector(".dial-fb");
+      var reps=s.reps.slice().sort(function(){return Math.random()-0.5;});
+      reps.forEach(function(r){
+        var b=document.createElement("button");
+        b.type="button";b.className="rep";b.textContent=r.t;
+        b.addEventListener("click",function(){
+          box.querySelectorAll(".rep").forEach(function(x){x.disabled=true;});
+          reps.forEach(function(rr,i2){
+            var el=box.children[i2];
+            el.classList.add(rr.pts===8?"best":rr.pts===4?"moyen":"mauvais");
+            var sp=document.createElement("span");sp.className="pts";sp.textContent="+"+rr.pts;
+            el.appendChild(sp);
+          });
+          pts+=r.pts;
+          fb.innerHTML="<strong>+"+r.pts+" pts.</strong> "+r.fb;
+          fb.className="dial-fb show";
+          var nxt=document.createElement("button");
+          nxt.type="button";nxt.className="btn btn-primary";nxt.style.margin=".9rem 0 0 52px";
+          nxt.textContent=(idx<SITUATIONS.length-1)?"Situation suivante →":"Voir mon résultat →";
+          nxt.addEventListener("click",function(){idx++;afficher();});
+          d.appendChild(nxt);nxt.focus();
+        });
+        box.appendChild(b);
+      });
+    }
+    afficher();
+  }
+
+  /* ================= JEU 3 : associations ================= */
+  var assocZone=document.getElementById("assoc-zone");
+  var assocFb=document.getElementById("assoc-fb");
+  var assocCompteur=document.getElementById("assoc-compteur");
+  function lancerAssoc(){
+    assocZone.innerHTML="";assocFb.className="feedback";
+    var pts=0, faites=0, sel=null;
+    var essais={};
+    var items=[];
+    PAIRES.forEach(function(p,i){
+      items.push({type:"regle",pair:i,txt:p.regle});
+      items.push({type:"raison",pair:i,txt:p.raison});
+    });
+    items.sort(function(){return Math.random()-0.5;});
+    assocCompteur.textContent="0 / "+PAIRES.length+" paires · 0 pts";
+    items.forEach(function(it){
+      var b=document.createElement("button");
+      b.type="button";b.className="as";
+      b.innerHTML='<span class="cat">'+(it.type==="regle"?"📜 La règle":"💡 La raison")+'</span>'+it.txt;
+      b._it=it;
+      b.addEventListener("click",function(){
+        if(b.classList.contains("lock"))return;
+        if(sel===b){b.classList.remove("sel");sel=null;return;}
+        if(!sel){sel=b;b.classList.add("sel");return;}
+        var a=sel._it, c=b._it;
+        if(a.type===c.type){sel.classList.remove("sel");sel=b;b.classList.add("sel");return;}
+        var pairId=a.pair;
+        essais[pairId]=(essais[pairId]||0)+1;
+        if(a.pair===c.pair){
+          sel.classList.remove("sel");sel.classList.add("lock");b.classList.add("lock");
+          var gain=essais[pairId]===1?4:essais[pairId]===2?2:0;
+          pts+=gain;faites++;
+          assocFb.textContent="✔ Bonne association ! +"+gain+" pts";
+          assocFb.className="feedback show ok";
+          assocCompteur.textContent=faites+" / "+PAIRES.length+" paires · "+pts+" pts";
+          sel=null;
+          if(faites===PAIRES.length){
+            state.scores.assoc=pts;save();majScoreLive();
+            assocFb.textContent="🏁 Jeu terminé : "+pts+" / 20 points. "+(pts>=16?"Le « pourquoi » des règles n'a plus de secret pour vous.":"Relisez les paires : chaque règle a sa raison chiffrée.");
+            refresh(etapes[5]);
+          }
+        } else {
+          sel.classList.add("err");b.classList.add("err");
+          assocFb.textContent="✘ Ces deux cartes ne vont pas ensemble. Réessayez.";
+          assocFb.className="feedback show ko";
+          var s1=sel, s2=b;
+          setTimeout(function(){s1.classList.remove("err","sel");s2.classList.remove("err");},900);
+          sel=null;
+        }
+      });
+      assocZone.appendChild(b);
+    });
+  }
+
+  /* ================= score final ================= */
+  var PROFILS=[
+    {min:85,titre:"🏅 Ambassadeur de l'État",txt:"Posture exemplaire : neutralité tenue, faits sourcés, pédagogie systématique. Vous êtes prêt pour les publics les plus difficiles."},
+    {min:65,titre:"👍 Posture solide",txt:"Les fondamentaux sont là. Sous pression, gardez le triptyque : accueillir sans approuver, recentrer sur les faits, expliquer la règle."},
+    {min:40,titre:"🧭 Posture à consolider",txt:"Vous connaissez le cadre, mais l'opinion personnelle affleure encore. Rejouez les jeux : la posture est un entraînement, pas un don."},
+    {min:0,titre:"📖 Reprendre les bases",txt:"Revenez aux étapes « Le mandat » et « Les 4 piliers », puis rejouez. En mission, chaque phrase engage l'État : ça se travaille."}
+  ];
+  function afficherScore(){
+    var total=scoreTotal();
+    var circ=2*Math.PI*84;
+    var jv=document.getElementById("jauge-val");
+    jv.style.strokeDasharray=circ;
+    jv.style.strokeDashoffset=circ;
+    jv.getBoundingClientRect();
+    jv.style.strokeDashoffset=circ*(1-total/100);
+    jv.style.stroke= total>=85?"#1f8a4c": total>=65?"#FECF41": total>=40?"#e67e22":"#c0392b";
+    var num=document.getElementById("jauge-num");
+    var v=0;var int=setInterval(function(){v+=2;if(v>=total){v=total;clearInterval(int);}num.textContent=v;},22);
+    var prof=PROFILS.find(function(p){return total>=p.min;});
+    document.getElementById("profil-titre").textContent=prof.titre;
+    document.getElementById("profil-txt").textContent=prof.txt;
+    var ds=document.getElementById("detail-scores");
+    ds.innerHTML=
+      '<div class="ds"><b>'+(state.scores.tri===null?"—":state.scores.tri+" / 40")+'</b><span>Dire ou s\'abstenir</span></div>'+
+      '<div class="ds"><b>'+(state.scores.dial===null?"—":state.scores.dial+" / 40")+'</b><span>Face au public</span></div>'+
+      '<div class="ds"><b>'+(state.scores.assoc===null?"—":state.scores.assoc+" / 20")+'</b><span>Pourquoi la loi ?</span></div>';
+    var conseils=[];
+    if((state.scores.tri||0)<28)conseils.push("Relisez les 10 phrases du jeu 1 : la frontière passe toujours entre le fait sourcé et l'opinion personnelle.");
+    if((state.scores.dial||0)<28)conseils.push("Face à la provocation : accueillir l'émotion (« je comprends »), puis recentrer sur les données, sans juger la personne.");
+    if((state.scores.assoc||0)<14)conseils.push("Apprenez la raison chiffrée de chaque grande règle : c'est votre meilleure réponse à « cette loi ne sert à rien ».");
+    var cbox=document.getElementById("conseils");
+    if(conseils.length){cbox.style.display="block";document.getElementById("conseils-liste").innerHTML=conseils.map(function(c){return "<li>"+c+"</li>";}).join("");}
+    else cbox.style.display="none";
+    var fin=document.getElementById("bloc-fin");
+    if(fin.style.display==="none"){
+      fin.style.display="block";
+      state.unlocked=TOTAL;updateBar();stepBtns.forEach(function(b){b.classList.add("done");});save();
+    }
+    if(total>=85)confettis();
+  }
+  function confettis(){
+    if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+    var couleurs=["#FECF41","#000","#E9B400","#fff"];
+    for(var i=0;i<60;i++){
+      var c=document.createElement("span");
+      c.className="confetti";
+      c.style.left=Math.random()*100+"vw";
+      c.style.background=couleurs[i%couleurs.length];
+      c.style.animationDelay=(Math.random()*1.2)+"s";
+      c.style.transform="rotate("+Math.random()*360+"deg)";
+      document.body.appendChild(c);
+      setTimeout(function(el){return function(){el.remove();};}(c),4200);
+    }
+  }
+  document.getElementById("rejouer").addEventListener("click",function(){
+    state.scores={tri:null,dial:null,assoc:null};save();majScoreLive();
+    document.getElementById("bloc-fin").style.display="none";
+    lancerTri();lancerDial();lancerAssoc();
+    etapes.forEach(function(et){if(+et.dataset.etape>=3&&+et.dataset.etape<=5){var nb=et.querySelector("[data-next]");if(nb)nb.disabled=true;}});
+    show(3);
+  });
+
+  /* ================= init ================= */
+  if(state.scores.tri!==null){triCompteur.textContent="Déjà joué : "+state.scores.tri+" / 40 pts (rejouable depuis la page de score)";refresh(etapes[3]);}else lancerTri();
+  if(state.scores.dial!==null){dialCompteur.textContent="Déjà joué : "+state.scores.dial+" / 40 pts";refresh(etapes[4]);}else lancerDial();
+  if(state.scores.assoc!==null){assocCompteur.textContent="Déjà joué : "+state.scores.assoc+" / 20 pts";refresh(etapes[5]);}else lancerAssoc();
+  majScoreLive();
+  etapes.forEach(function(et){refresh(et);});
+  show(Math.min(state.unlocked,TOTAL-1)===TOTAL-1&&state.unlocked>=TOTAL?TOTAL-1:Math.min(state.unlocked,current));
+})();
+</script>
+<script src="assets/js/attestation.js" defer></script>
+</body>
+</html>

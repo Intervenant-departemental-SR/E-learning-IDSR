@@ -167,6 +167,16 @@
           </span>
         </a>
 
+        <a class="carte" href="module-12-posture-idsr.html">
+          <span class="bandeau"></span>
+          <span class="contenu">
+            <span class="num">Module 9</span>
+            <h3>La posture de l'IDSR : parler au nom de l'État</h3>
+            <p>Nommé par arrêté préfectoral, l'IDSR porte la parole de l'État : objectivité, factualité, neutralité. Trois jeux de mise en situation et un score de posture.</p>
+            <span class="lien">Commencer le module</span>
+          </span>
+        </a>
+
         <div class="carte standby" aria-disabled="true">
           <span class="bandeau"></span>
           <span class="contenu">
@@ -176,6 +186,43 @@
             <span class="badge">Bientôt disponible</span>
           </span>
         </div>
+
+      </div>
+
+      <h2 class="section-titre" style="margin-top:3rem;">Outils d'animation grand public</h2>
+      <p class="section-intro">Des simulateurs interactifs à utiliser en stand, en animation ou en formation : le public manipule, le message s'imprime.</p>
+
+      <div class="grille">
+
+        <a class="carte" href="module-9-simulateur-alcool.html">
+          <span class="bandeau"></span>
+          <span class="contenu">
+            <span class="num">Simulateur · Alcool</span>
+            <h3>Simulateur d'alcoolémie</h3>
+            <p>Sexe, poids, verres et heures de consommation : la courbe d'alcoolémie s'affiche en direct, avec l'heure estimée de retour sous les seuils légaux.</p>
+            <span class="lien">Lancer le simulateur</span>
+          </span>
+        </a>
+
+        <a class="carte" href="module-10-distance-arret.html">
+          <span class="bandeau"></span>
+          <span class="contenu">
+            <span class="num">Simulateur · Vitesse</span>
+            <h3>Distance d'arrêt</h3>
+            <p>Un enfant surgit à 26 mètres : selon la vitesse, la météo et l'attention du conducteur, la voiture s'arrête… ou pas. Animation à l'appui.</p>
+            <span class="lien">Lancer le simulateur</span>
+          </span>
+        </a>
+
+        <a class="carte" href="module-11-reflexes.html">
+          <span class="bandeau"></span>
+          <span class="contenu">
+            <span class="num">Test · Distracteurs</span>
+            <h3>Testez vos réflexes</h3>
+            <p>Mesurez votre temps de réaction réel, puis refaites le test en étant distrait : l'effet du téléphone au volant, démontré sur soi-même.</p>
+            <span class="lien">Lancer le test</span>
+          </span>
+        </a>
 
       </div>
     </div>
@@ -191,5 +238,41 @@
       <p>Source des contenus : Sécurité routière (securite-routiere.gouv.fr) et documentation du programme IDSR.</p>
     </div>
   </footer>
+
+  <script>
+  /* Badges de progression sur les cartes (lecture du localStorage des modules) */
+  (function(){
+    "use strict";
+    var TOTAUX = {m1:5, m2:5, m3:5, m4:5, m5:5, m6:6, m7:4, m8:6, m12:7};
+    var LIENS = {
+      "module-1-etre-idsr.html":"m1", "module-2-organisation.html":"m2",
+      "module-3-enjeux-chiffres.html":"m3", "module-4-politiques.html":"m4",
+      "module-5-accident.html":"m5", "module-6-apports-techniques.html":"m6",
+      "module-7-valise-communication.html":"m7", "module-8-risque-routier-professionnel.html":"m8",
+      "module-12-posture-idsr.html":"m12"
+    };
+    var css = document.createElement("style");
+    css.textContent = ".badge-prog{display:inline-block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:.2rem .65rem;margin-bottom:.5rem;align-self:flex-start;}" +
+      ".badge-prog.fini{background:#eafaf0;color:#1f8a4c;border:1px solid #1f8a4c;}" +
+      ".badge-prog.encours{background:var(--jaune-clair);color:#8a6d00;border:1px solid var(--jaune-fonce,#E9B400);}";
+    document.head.appendChild(css);
+    document.querySelectorAll(".carte[href]").forEach(function(carte){
+      var id = LIENS[carte.getAttribute("href")];
+      if(!id) return;
+      try{
+        var s = JSON.parse(localStorage.getItem("elearning_idsr_"+id) || "null");
+        if(!s || typeof s.unlocked !== "number" || s.unlocked <= 0) return;
+        var b = document.createElement("span");
+        if(s.unlocked >= TOTAUX[id]){
+          b.className = "badge-prog fini"; b.textContent = "✓ Terminé";
+        } else {
+          b.className = "badge-prog encours"; b.textContent = "En cours";
+        }
+        var contenu = carte.querySelector(".contenu");
+        contenu.insertBefore(b, contenu.firstChild);
+      }catch(e){}
+    });
+  })();
+  </script>
 </body>
 </html>
