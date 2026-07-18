@@ -21,8 +21,8 @@ var S = {
   acces_interdit:{t:"Non-respect d'une interdiction de circuler — art. R411-8 / arrêté de police",d:"Amende de 4e classe, 135 € (minorée 90 €). Immobilisation du véhicule possible."},
   manoeuvre:{t:"Manœuvre interdite (tourner / demi-tour) — art. R412-28 et s.",d:"Amende de 4e classe, 135 €."},
   depassement:{t:"Dépassement interdit — art. R414-4 et s.",d:"Amende forfaitaire 135 €, retrait de 3 points. Suspension possible en cas de dépassement dangereux."},
-  vitesse:{t:"Excès de vitesse — art. R413-14",d:"Excès < 20 km/h : 68 € (135 € si limite ≤ 50 km/h) et 1 point. De 20 à 29 km/h : 135 €, 2 points. De 30 à 39 km/h : 135 €, 3 points. De 40 à 49 km/h : 135 €, 4 points + suspension possible. ≥ 50 km/h : 1 500 € (5e classe), 6 points, suspension 3 ans ; récidive = délit."},
-  vitesse_min:{t:"Vitesse minimale non respectée — art. R413-19",d:"Amende de 4e classe, 135 €."},
+  vitesse:{t:"Excès de vitesse — art. R413-14 et L413-1",d:"Excès < 20 km/h : 68 € (135 € si limite ≤ 50 km/h) et 1 point. De 20 à 29 km/h : 135 €, 2 points. De 30 à 39 km/h : 135 €, 3 points. De 40 à 49 km/h : 135 €, 4 points + suspension possible. ≥ 50 km/h : DÉLIT depuis le 31/12/2025 (loi n° 2025-622, art. L413-1) : 3 mois d'emprisonnement et 3 750 € d'amende (amende forfaitaire délictuelle 300 €), retrait de la moitié des points (6 points), suspension jusqu'à 3 ans, confiscation du véhicule possible — obligatoire en récidive."},
+  vitesse_min:{t:"Vitesse minimale non respectée — art. R413-19",d:"Amende de 2e classe, 35 € (ex. : circuler à moins de 80 km/h sur la voie la plus à gauche d'une autoroute fluide)."},
   vitesse_conseillee:{t:"Vitesse conseillée",d:"Aucune sanction propre : c'est une recommandation. En revanche, une vitesse inadaptée aux circonstances reste sanctionnable (art. R413-17, 135 €)."},
   stationnement:{t:"Stationnement interdit — art. R417-6 et s.",d:"Stationnement gênant : 35 €. Très gênant (trottoirs, passages piétons, places PMR…) : 135 €. Dangereux (visibilité masquée) : 135 € + 3 points. Mise en fourrière possible dans tous les cas."},
   arret_stat:{t:"Arrêt et stationnement interdits — art. R417-10 et s.",d:"Arrêt ou stationnement gênant : 35 € ; très gênant : 135 € ; dangereux : 135 € + 3 points. Mise en fourrière possible."},
@@ -31,9 +31,10 @@ var S = {
   gabarit:{t:"Non-respect d'une limite de gabarit — art. R411-8 / R312-*",d:"Amende de 4e classe, 135 €. Immobilisation du véhicule possible."},
   poids:{t:"Non-respect d'une limite de poids — art. R312-2 et s.",d:"Amende de 4e classe, 135 € ; 5e classe (1 500 €) en cas de dépassement important. Immobilisation possible."},
   mat_dang:{t:"Transport de marchandises dangereuses sur voie interdite",d:"Amende de 4e classe, 135 € (réglementation ADR : sanctions administratives supplémentaires possibles). Immobilisation possible."},
-  obligation:{t:"Non-respect d'une obligation — art. R412-26 et s.",d:"Amende de 4e classe, 135 €."},
+  obligation:{t:"Non-respect d'une obligation signalée",d:"Direction imposée non respectée (art. R412-26) : amende de 2e classe, 35 €. Les autres obligations signalées relèvent de leur texte propre, le plus souvent une contravention de 4e classe (135 €)."},
   voie_reservee:{t:"Circulation sur voie réservée — art. R412-7",d:"Amende forfaitaire 135 € pour l'usager non autorisé circulant sur la voie réservée."},
-  chaines:{t:"Défaut d'équipements hivernaux — art. R314-1 et s.",d:"Amende de 4e classe, 135 €. Immobilisation possible du véhicule non équipé."},
+  chaines:{t:"Chaînes obligatoires (B26) non respectées",d:"Non-respect de l'obligation signalée : amende de 4e classe, 135 € ; l'usage de chaînes hors route enneigée est lui aussi sanctionné (art. R314-3, 4e classe). Immobilisation du véhicule possible."},
+  zone_hiver:{t:"Zone d'équipements hivernaux (loi Montagne II)",d:"Point de vigilance : l'obligation d'équipement (1er novembre – 31 mars, décret n° 2020-1264) est réelle, mais AUCUNE amende n'est applicable à ce jour — le décret de verbalisation (135 € annoncés) n'a jamais été publié. Les forces de l'ordre font de la pédagogie. Argument assurantiel : en cas d'accident sur neige sans équipement, la responsabilité peut être discutée."},
   pn:{t:"Franchissement irrégulier d'un passage à niveau — art. R422-3 / R412-30",d:"Franchissement du feu rouge clignotant R24 : 135 €, 4 points, suspension possible 3 ans. S'engager sans pouvoir dégager : mêmes peines."},
   priorite_pieton:{t:"Refus de priorité à un piéton — art. R415-11",d:"Amende forfaitaire 135 €, retrait de 6 points, suspension possible 3 ans."},
   pieton:{t:"Infraction piéton — art. R412-34 et s.",d:"Contravention de 1re classe pour le piéton (amende forfaitaire de 4 €)."},
@@ -41,9 +42,9 @@ var S = {
   arret_bande:{t:"Arrêt d'urgence uniquement",d:"S'arrêter hors cas d'urgence sur ces emplacements ou la bande d'arrêt d'urgence : amende de 2e à 4e classe selon le cas (35 à 135 €)."},
   tunnel:{t:"Règles en tunnel — art. R412-12 / R416-*",d:"Feux de croisement obligatoires, interdistances renforcées (135 €, 3 points en cas de non-respect), demi-tour et arrêt interdits (135 €)."},
   douane:{t:"Refus de s'arrêter — art. R411-8 / code des douanes",d:"Amende de 4e classe, 135 € ; le refus d'obtempérer à une sommation est un délit (L233-1 : jusqu'à 2 ans d'emprisonnement, 15 000 €)."},
-  peage:{t:"Défaut de paiement du péage — art. R421-9",d:"Amende de 2e classe (35 €) et indemnité forfaitaire due au concessionnaire."},
+  peage:{t:"Défaut de paiement du péage — art. R419-1 et R419-2",d:"Refus d'acquitter ou soustraction au paiement : amende de 4e classe, 135 € (transaction possible avec l'exploitant). Se soustraire de manière habituelle (plus de 5 contraventions en 12 mois) est un délit : 7 500 € d'amende (art. L419-1)."},
   zfe:{t:"Circulation en ZFE sans vignette autorisée — art. R411-19-1",d:"Amende de 3e classe (68 €) pour les véhicules légers, 4e classe (135 €) pour les poids lourds, bus et cars."},
-  bus_arret:{t:"Redémarrage d'un bus — art. R415-13",d:"Faciliter la réinsertion du bus quittant son arrêt en agglomération ; refus de priorité : 35 €."},
+  bus_arret:{t:"Redémarrage d'un bus — art. R412-11",d:"En agglomération, ralentir et au besoin s'arrêter pour laisser le bus quitter son arrêt signalé ; non-respect : amende de 2e classe, 35 €."},
   sas_velo:{t:"Occupation du sas vélo — art. R415-2 / R412-30",d:"S'arrêter dans le sas réservé aux cyclistes équivaut à un non-respect du feu : 135 €, 4 points."}
 };
 
@@ -124,12 +125,12 @@ P("B1j","Rappel de sens interdit (bretelle)","interdiction","Panneau répété s
 P("B2a","Interdiction de tourner à gauche","interdiction","Interdit de tourner à gauche à la prochaine intersection. Se justifie souvent par la dangerosité du cisaillement du flux opposé.","R412-28","manoeuvre","tourner gauche interdit");
 P("B2b","Interdiction de tourner à droite","interdiction","Interdit de tourner à droite à la prochaine intersection.","R412-28","manoeuvre","tourner droite interdit");
 P("B2c","Interdiction de demi-tour","interdiction","Demi-tour interdit sur la route suivie jusqu'à la prochaine intersection.","R412-28","manoeuvre","demi-tour interdit");
-P("B3","Interdiction de dépasser","interdiction","Dépassement interdit de tout véhicule à moteur, sauf deux-roues sans side-car. Vaut jusqu'au panneau de fin B34 ou la prochaine intersection.","R414-16","depassement","depasser interdit voiture rouge noire");
-P("B3a","Interdiction de dépasser (+3,5 t)","interdiction","Les véhicules de transport de marchandises de plus de 3,5 t ne doivent pas dépasser.","R414-16","depassement","depasser interdit camion poids lourd");
+P("B3","Interdiction de dépasser","interdiction","Dépassement interdit de tout véhicule à moteur, sauf deux-roues sans side-car. Vaut jusqu'au panneau de fin B34 ou la prochaine intersection.","R414-4 et s.","depassement","depasser interdit voiture rouge noire");
+P("B3a","Interdiction de dépasser (+3,5 t)","interdiction","Les véhicules de transport de marchandises de plus de 3,5 t ne doivent pas dépasser.","R414-4 et s.","depassement","depasser interdit camion poids lourd");
 P("B4","Arrêt au poste de douane","interdiction","Arrêt obligatoire au poste de douane.","R411-8","douane","douane arret frontiere");
 P("B5a","Arrêt au poste de gendarmerie","interdiction","Arrêt obligatoire au poste de gendarmerie.","R411-8","douane","gendarmerie arret controle");
 P("B5b","Arrêt au poste de police","interdiction","Arrêt obligatoire au poste de police.","R411-8","douane","police arret controle");
-P("B5c","Arrêt au poste de péage","interdiction","Arrêt obligatoire au poste de péage.","R421-9","peage","peage arret barriere");
+P("B5c","Arrêt au poste de péage","interdiction","Arrêt obligatoire au poste de péage.","R419-1","peage","peage arret barriere");
 P("B6a1","Stationnement interdit","interdiction","Stationnement interdit du côté du panneau, de ce point à la prochaine intersection. L'arrêt (conducteur au volant, bref) reste autorisé.","R417-6","stationnement","stationnement interdit cercle bleu barre");
 P("B6a2","Stationnement interdit du 1er au 15","interdiction","Stationnement unilatéral alterné : interdit du 1er au 15 du mois du côté du panneau.","R417-6","stationnement","stationnement quinzaine alterne 1 15");
 P("B6a3","Stationnement interdit du 16 à la fin du mois","interdiction","Stationnement interdit du 16 au dernier jour du mois du côté du panneau.","R417-6","stationnement","stationnement quinzaine alterne 16 31");
@@ -214,7 +215,7 @@ P("B54","Aire piétonne","zones","Zone réservée aux piétons. Cyclistes admis 
 P("B55","Sortie d'aire piétonne","zones","Fin de l'aire piétonne.","R110-2","info","sortie aire pietonne");
 P("B56","Zone à circulation restreinte (ZFE)","zones","Entrée d'une zone à faibles émissions : seuls les véhicules munis de la vignette Crit'Air autorisée par l'arrêté peuvent circuler. Le panonceau M11d précise les restrictions.","R411-19-1 ; L2213-4-1 CGCT","zfe","zfe crit'air zone faibles emissions circulation restreinte");
 P("B57","Sortie de zone à circulation restreinte","zones","Fin de la ZFE.","R411-19-1","info","sortie zfe");
-P("B58","Zone d'équipements hivernaux obligatoires","zones","Entrée de zone montagneuse (loi Montagne II) : du 1er novembre au 31 mars, pneus hiver ou chaînes/chaussettes à bord obligatoires.","R314-1 et s.","chaines","loi montagne pneus hiver chaines novembre mars");
+P("B58","Zone d'équipements hivernaux obligatoires","zones","Entrée de zone montagneuse (loi Montagne II) : du 1er novembre au 31 mars, pneus hiver 3PMSF ou chaînes/chaussettes à bord obligatoires.","Décret n° 2020-1264","zone_hiver","loi montagne pneus hiver chaines novembre mars");
 P("B59","Sortie de zone d'équipements hivernaux","zones","Fin de la zone d'obligation d'équipements hivernaux.","R314-1","info","sortie zone hivernale");
 
 /* ===== C — Indications ===== */
@@ -256,14 +257,14 @@ P("C50","Indications diverses","indication","Panneau d'indications diverses (tex
 P("C51a","Début de section à vitesse régulée","vitesse","Section où la vitesse est régulée dynamiquement (panneaux à messages variables).","R413-14","vitesse","vitesse regulee dynamique");
 P("C51b","Fin de section à vitesse régulée","vitesse","Fin de la régulation dynamique de vitesse.","IISR art. 70","info","fin vitesse regulee");
 P("C62","Annonce de borne de ticket de péage","indication","Présignalisation d'une borne de retrait de ticket.","IISR art. 70","info","peage ticket borne");
-P("C64a","Paiement auprès d'un péagiste","indication","Voie de péage tenue par un agent.","R421-9","peage","peage agent voie");
-P("C64b","Paiement par carte bancaire","indication","Voie de paiement automatique par carte.","R421-9","peage","peage carte bancaire");
-P("C64c1","Paiement en pièces","indication","Voie de paiement automatique en pièces.","R421-9","peage","peage pieces monnaie");
-P("C64c2","Paiement en pièces et billets","indication","Voie de paiement automatique acceptant pièces et billets.","R421-9","peage","peage billets pieces");
-P("C64d","Télépéage","indication","Voie réservée aux abonnés télépéage (badge). Vitesse limitée à 30 km/h dans les voies « t » ouvertes.","R421-9","peage","telepeage badge t");
-P("C65a","Péage en flux libre","indication","Section à péage sans barrière : portiques de détection, paiement en ligne ou en point de vente.","R421-9 ; L421-* ","peage","flux libre free flow peage");
-P("C65b","Modalités du péage en flux libre","indication","Indique le délai (72 h) et les moyens de paiement pour les non-abonnés.","R421-9","peage","flux libre delai paiement");
-P("C65c","Rappel de paiement flux libre","indication","Rappel en sortie de zone : penser à payer son péage.","R421-9","peage","flux libre rappel");
+P("C64a","Paiement auprès d'un péagiste","indication","Voie de péage tenue par un agent.","R419-1","peage","peage agent voie");
+P("C64b","Paiement par carte bancaire","indication","Voie de paiement automatique par carte.","R419-1","peage","peage carte bancaire");
+P("C64c1","Paiement en pièces","indication","Voie de paiement automatique en pièces.","R419-1","peage","peage pieces monnaie");
+P("C64c2","Paiement en pièces et billets","indication","Voie de paiement automatique acceptant pièces et billets.","R419-1","peage","peage billets pieces");
+P("C64d","Télépéage","indication","Voie réservée aux abonnés télépéage (badge). Vitesse limitée à 30 km/h dans les voies « t » ouvertes.","R419-1","peage","telepeage badge t");
+P("C65a","Péage en flux libre","indication","Section à péage sans barrière : portiques de détection, paiement en ligne ou en point de vente.","R419-1 ; L419-1","peage","flux libre free flow peage");
+P("C65b","Modalités du péage en flux libre","indication","Indique le délai (72 h) et les moyens de paiement pour les non-abonnés.","R419-1","peage","flux libre delai paiement");
+P("C65c","Rappel de paiement flux libre","indication","Rappel en sortie de zone : penser à payer son péage.","R419-1","peage","flux libre rappel");
 P("C107","Route à accès réglementé","indication","Voie express : réservée aux véhicules à moteur rapides ; piétons, cycles, cyclomoteurs, tracteurs interdits. Arrêt, stationnement, demi-tour et marche arrière interdits.","R421-1 et s.; R432-*","acces_interdit","voie express acces reglemente route");
 P("C108","Fin de route à accès réglementé","indication","Fin du statut de voie express.","IISR art. 70","info","fin voie express");
 P("C111","Entrée de tunnel","indication","Malgré sa couleur bleue, il emporte des règles : feux de croisement allumés, interdistances renforcées, demi-tour et arrêt interdits hors urgence.","R412-12 ; R416-6","tunnel","tunnel entree feux interdistance");
