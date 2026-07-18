@@ -1,0 +1,131 @@
+{
+ "IMG": {
+  "K5a": "K5a.jpg",
+  "K8": "K8.jpg",
+  "KR11": "KR11.jpg",
+  "KR43": "KR43.jpg",
+  "R11j": "R11j.jpg",
+  "R11v": "R11v.jpg",
+  "R12": "R12.jpg",
+  "R13c": "R13c.jpg",
+  "R17": "R17.jpg",
+  "R25": "R25.jpg",
+  "X-bande-cyclable": "X-bande-cyclable.jpg",
+  "X-fleches-rabattement": "X-fleches-rabattement.jpg",
+  "X-jaune-continu": "X-jaune-continu.jpg",
+  "X-ligne-annonce": "X-ligne-annonce.jpg",
+  "X-ligne-continue": "X-ligne-continue.jpg",
+  "X-passage-pieton": "X-passage-pieton.jpg",
+  "X-sas-velo": "X-sas-velo.jpg",
+  "X-stop": "X-stop.jpg",
+  "A9a": "A9a.png",
+  "M11d": "M11d.png"
+ },
+ "CREDITS": {
+  "R11v": {
+   "auteur": "User:Wazouille",
+   "licence": "Public domain",
+   "fichier": "Feuvert2.jpg"
+  },
+  "R11j": {
+   "auteur": "User:Wazouille",
+   "licence": "Public domain",
+   "fichier": "Feu orange.jpg"
+  },
+  "R12": {
+   "auteur": "Sebleouf",
+   "licence": "CC BY-SA 4.0",
+   "fichier": "Signal R12 vert (Lyon 3e).jpg"
+  },
+  "R13c": {
+   "auteur": "Chabe01",
+   "licence": "CC BY-SA 4.0",
+   "fichier": "Feux Tricolores Cyclistes Rue Paris - Joinville-le-Pont (FR94) - 2025-12-18 - 1.jpg"
+  },
+  "R17": {
+   "auteur": "Clicsouris",
+   "licence": "CC BY-SA 3.0",
+   "fichier": "Signalisation T4 - Signal R17 - Arret.jpg"
+  },
+  "R25": {
+   "auteur": "Gonioul",
+   "licence": "CC BY-SA 3.0",
+   "fichier": "Paris T3 signal pietons.jpg"
+  },
+  "KR11": {
+   "auteur": "Sebleouf",
+   "licence": "CC BY-SA 4.0",
+   "fichier": "Feu tricolore KR11j Kiloutou (face).jpg"
+  },
+  "KR43": {
+   "auteur": "Marc Mongenet",
+   "licence": "CC BY-SA 4.0",
+   "fichier": "A49 flèche lumineuse de rabattement, balise J14a.jpg"
+  },
+  "K5a": {
+   "auteur": "KiwiNeko14",
+   "licence": "CC BY-SA 4.0",
+   "fichier": "FR 86 - Autoroute A10 - Cône K5a et fanion K1.jpg"
+  },
+  "K8": {
+   "auteur": "Chabe01",
+   "licence": "CC BY-SA 4.0",
+   "fichier": "Barrière Chantier Route Teppe Nayet St Cyr Menthon 2.jpg"
+  },
+  "X-passage-pieton": {
+   "auteur": "Tabl-trai",
+   "licence": "CC BY-SA 4.0",
+   "fichier": "Passages piétons en deux temps (route de Charmeil, Bellerive-sur-Allier) côté ouest 2025-08-24.JPG"
+  },
+  "X-sas-velo": {
+   "auteur": "Tabl-trai",
+   "licence": "CC BY-SA 4.0",
+   "fichier": "Sas vélo rue Maréchal-Foch (Vichy) 2025-04-21.JPG"
+  },
+  "X-fleches-rabattement": {
+   "auteur": "Roulex 45",
+   "licence": "CC BY-SA 3.0",
+   "fichier": "Flèche de rabattement.JPG"
+  },
+  "X-stop": {
+   "auteur": "Marc Mongenet",
+   "licence": "CC BY-SA 4.0",
+   "fichier": "Gaillard panneau AB4 marquage sol.jpg"
+  },
+  "X-bande-cyclable": {
+   "auteur": "Triton (Wikimedia Commons)",
+   "licence": "CC BY-SA 4.0",
+   "fichier": "Avenue Gilbert-Roux (Cusset) - Début de bande cyclable (2026)"
+  },
+  "X-ligne-continue": {
+   "auteur": "Marc Mongenet",
+   "licence": "CC BY-SA 4.0",
+   "fichier": "Triple lignes continues blanche jaune blanche sur la RCEA.jpg"
+  },
+  "X-ligne-annonce": {
+   "auteur": "Roulex 45",
+   "licence": "CC BY-SA 4.0",
+   "fichier": "Ligne d'annonce non rectiligne.JPG"
+  },
+  "X-jaune-continu": {
+   "auteur": "Tabl-trai",
+   "licence": "CC BY-SA 3.0",
+   "fichier": "Marquage stationnement et arrêt interdits 2013-11-17.JPG"
+  },
+  "X-ligne-discontinue": {
+   "auteur": "Roulex_45",
+   "licence": "CC BY-SA 3.0",
+   "fichier": "Marques-T1.svg"
+  },
+  "X-effet-feux": {
+   "auteur": "Roulex 45",
+   "licence": "CC BY-SA 4.0",
+   "fichier": "Ligne-d'effet-de-feux.svg"
+  },
+  "X-fleches-direction": {
+   "auteur": "Roulex 45",
+   "licence": "CC BY-SA 4.0",
+   "fichier": "Flèches-directionnelles.svg"
+  }
+ }
+}

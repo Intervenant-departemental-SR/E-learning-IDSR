@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Testez vos réflexes — Outil d'animation | E-learning IDSR</title>
+<meta name="description" content="Test pédagogique de temps de réaction, avec et sans distraction : mesurez l'effet du téléphone sur vos réflexes et la distance parcourue avant de réagir." />
+<style>
+  :root{
+    --jaune:#FECF41; --jaune-fonce:#E9B400; --jaune-clair:#FFF3CC;
+    --noir:#000; --gris:#3a3a3a; --gris-2:#6b6b6b;
+    --gris-clair:#f4f4f4; --bordure:#e2e2e2; --blanc:#fff;
+    --vert:#1f8a4c; --orange:#e67e22; --rouge:#c0392b;
+    --rayon:12px; --ombre:0 4px 18px rgba(0,0,0,.12);
+    --max:1080px; --t:.25s cubic-bezier(.4,0,.2,1);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Marianne","Segoe UI",Arial,Helvetica,sans-serif;color:var(--noir);background:var(--gris-clair);line-height:1.55;}
+  :focus-visible{outline:3px solid var(--noir);outline-offset:2px;border-radius:4px;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 1.25rem;}
+  .skip{position:absolute;left:-9999px;background:var(--noir);color:var(--jaune);padding:.6rem 1rem;z-index:200;font-weight:700;}
+  .skip:focus{left:0;top:0;}
+  header.site{background:var(--blanc);border-bottom:6px solid var(--jaune);}
+  .topbar{display:flex;align-items:center;gap:1rem;padding:.7rem 1.25rem;max-width:var(--max);margin:0 auto;flex-wrap:wrap;}
+  .topbar img{width:150px;max-width:100%;height:auto;display:block;}
+  .topbar .fil{font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--gris-2);font-weight:700;}
+  .topbar .fil a{color:var(--gris-2);text-decoration:none;}
+  .module-hero{background:var(--noir);color:var(--blanc);padding:2.2rem 0 2.4rem;}
+  .module-hero .eyebrow{color:var(--jaune);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.8rem;margin:0 0 .5rem;}
+  .module-hero h1{font-size:2rem;line-height:1.15;margin:0 0 .8rem;max-width:780px;}
+  .module-hero p{margin:0;color:#e9e9e9;max-width:720px;}
+  main{padding:2rem 0 4rem;}
+  .panneau{background:var(--blanc);border:1px solid var(--bordure);border-radius:var(--rayon);box-shadow:var(--ombre);padding:1.6rem;margin-bottom:1.6rem;}
+  .panneau h2{font-size:1.35rem;margin:0 0 .3rem;border-left:8px solid var(--jaune);padding-left:.6rem;}
+  .panneau .lead{color:var(--gris);margin:.2rem 0 1.3rem;}
+
+  .zone{position:relative;border-radius:12px;background:var(--noir);color:var(--blanc);min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;text-align:center;padding:1.5rem;cursor:pointer;user-select:none;-webkit-user-select:none;transition:background .06s linear;}
+  .zone.pret{background:#1c1c1c;}
+  .zone.go{background:var(--jaune);color:var(--noir);}
+  .zone.fail{background:var(--rouge);}
+  .zone .gros{font-size:1.6rem;font-weight:800;line-height:1.25;}
+  .zone .sous{font-size:.95rem;opacity:.85;max-width:460px;}
+  .zone .chrono{font-size:3rem;font-weight:800;}
+  .distraction{margin-top:.9rem;background:var(--jaune-clair);border:2px solid var(--jaune);border-radius:12px;padding:1rem 1.2rem;display:none;}
+  .distraction.show{display:block;}
+  .distraction .calc{font-size:1.5rem;font-weight:800;text-align:center;margin:.2rem 0 .8rem;}
+  .distraction .vf{display:flex;gap:.8rem;justify-content:center;}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;border:none;border-radius:999px;padding:.75rem 1.4rem;font:inherit;font-weight:700;cursor:pointer;transition:transform var(--t),background var(--t),opacity var(--t);}
+  .btn-primary{background:var(--jaune);color:var(--noir);}
+  .btn-primary:hover:not(:disabled){background:var(--jaune-fonce);}
+  .btn-noir{background:var(--noir);color:var(--jaune);}
+  .btn-ghost{background:transparent;color:var(--gris);border:2px solid var(--bordure);}
+  .btn:disabled{opacity:.45;cursor:not-allowed;}
+  .essais{display:flex;gap:.5rem;margin-top:1rem;flex-wrap:wrap;}
+  .essai{min-width:74px;text-align:center;background:var(--gris-clair);border-radius:9px;padding:.5rem .6rem;font-weight:800;border-bottom:4px solid var(--bordure);}
+  .essai small{display:block;font-weight:600;color:var(--gris-2);}
+  .essai.fait{border-color:var(--jaune);}
+
+  .resultats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.9rem;margin-top:1.2rem;}
+  .res{border-radius:10px;padding:1rem;text-align:center;border-bottom:5px solid var(--bordure);background:var(--gris-clair);}
+  .res b{display:block;font-size:1.55rem;line-height:1.15;}
+  .res span{font-size:.83rem;color:var(--gris);}
+  .res.jaune{border-color:var(--jaune);}
+  .res.rouge{border-color:var(--rouge);background:#fdeeec;}
+  #compare{width:100%;height:auto;display:block;margin-top:1rem;}
+  .verdict{margin-top:1.2rem;padding:1rem 1.2rem;border-radius:10px;font-weight:600;display:none;background:var(--jaune-clair);border-left:6px solid var(--jaune-fonce);}
+  .verdict.show{display:block;}
+
+  .stat-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.9rem;}
+  .sc{background:var(--gris-clair);border-radius:10px;padding:1.1rem;text-align:center;border-bottom:4px solid var(--jaune);}
+  .sc b{display:block;font-size:1.7rem;line-height:1.1;}
+  .sc span{font-size:.84rem;color:var(--gris);}
+  .source{font-size:.82rem;color:var(--gris-2);border-top:1px solid var(--bordure);margin-top:2rem;padding-top:1rem;}
+  footer.site{background:var(--blanc);border-top:6px solid var(--jaune);padding:1.6rem 0;font-size:.88rem;color:var(--gris-2);}
+  footer.site a{color:var(--noir);font-weight:700;}
+  @media (max-width:640px){ .module-hero h1{font-size:1.55rem;} .panneau{padding:1.1rem;} .zone{min-height:240px;} }
+  @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+</style>
+</head>
+<body data-module="m11">
+<a class="skip" href="#contenu">Aller au contenu principal</a>
+
+<header class="site">
+  <div class="topbar">
+    <img src="assets/logo-prefet-hdf.png" alt="Préfet de la région Hauts-de-France" class="logo-prefet" style="width:auto;height:96px" />
+    <img src="assets/logo-securite-routiere.png" alt="Sécurité routière — Vivre, Ensemble" />
+    <span class="fil"><a href="index.html">Accueil e-learning</a> › Testez vos réflexes</span>
+  </div>
+</header>
+
+<section class="module-hero">
+  <div class="wrap">
+    <p class="eyebrow">Outil d'animation · Grand public</p>
+    <h1>Vos réflexes au volant… avec et sans téléphone</h1>
+    <p>Mesurez votre vrai temps de réaction. Puis refaites le test en étant « occupé » — comme quand on lit un message au volant. Le résultat parle de lui-même.</p>
+  </div>
+</section>
+
+<main id="contenu">
+  <div class="wrap">
+
+    <!-- TEST -->
+    <section class="panneau" aria-labelledby="tt">
+      <h2 id="tt">Le test (2 manches de 5 essais)</h2>
+      <p class="lead"><strong>Manche 1 :</strong> cliquez sur la zone dès qu'elle devient jaune. <strong>Manche 2 :</strong> même chose… tout en répondant aux petits calculs qui s'affichent (la « distraction »).</p>
+
+      <div class="zone" id="zone" tabindex="0" role="button" aria-label="Zone de test : cliquez ou appuyez sur Espace dès qu'elle devient jaune">
+        <span class="gros" id="z-titre">Prêt à tester vos réflexes ?</span>
+        <span class="sous" id="z-sous">Cliquez sur « Démarrer la manche 1 ». La zone passera au jaune après un délai imprévisible : cliquez le plus vite possible !</span>
+      </div>
+
+      <div class="distraction" id="distraction" aria-live="polite">
+        <div class="calc" id="calc"></div>
+        <div class="vf">
+          <button type="button" class="btn btn-noir" data-rep="1">Vrai</button>
+          <button type="button" class="btn btn-noir" data-rep="0">Faux</button>
+        </div>
+      </div>
+
+      <div class="essais" id="essais" aria-live="polite"></div>
+      <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem;">
+        <button type="button" class="btn btn-primary" id="demarrer">▶ Démarrer la manche 1</button>
+        <button type="button" class="btn btn-ghost" id="rejouer" hidden>↺ Recommencer le test</button>
+      </div>
+    </section>
+
+    <!-- RESULTATS -->
+    <section class="panneau" aria-labelledby="tr2" id="panneau-res" hidden>
+      <h2 id="tr2">Vos résultats</h2>
+      <p class="lead">Temps de réaction moyen, et distance parcourue pendant ce temps <em>avant même de commencer à freiner</em>.</p>
+      <div class="resultats" id="resultats"></div>
+      <svg id="compare" viewBox="0 0 760 240" role="img" aria-label="Distance parcourue pendant le temps de réaction selon la vitesse"></svg>
+      <p class="verdict" id="verdict" role="status"></p>
+    </section>
+
+    <!-- CHIFFRES -->
+    <section class="panneau" aria-labelledby="tc">
+      <h2 id="tc">Ce qu'il faut retenir</h2>
+      <figure style="margin:1.4rem 0;border:1px solid var(--bordure);border-radius:12px;padding:1rem;background:#fff;"><img src="assets/photos/stock-telephone-volant.jpg" alt="Conducteur tapant un message au volant" loading="lazy" style="border-radius:8px;width:100%;height:auto;display:block;" /><figcaption style="font-size:.82rem;color:var(--gris-2);margin-top:.6rem;">Le test que vous venez de faire était un jeu. Au volant, la même distraction se paie en mètres parcourus à l'aveugle. <em>Image Adobe Stock — licence standard.</em></figcaption></figure>
+      <div class="stat-cards">
+        <div class="sc"><b>× 23</b><span>risque d'accident en écrivant un message au volant</span></div>
+        <div class="sc"><b>5 s</b><span>les yeux hors de la route pour lire un message — 70 m à 50 km/h</span></div>
+        <div class="sc"><b>1 / 10</b><span>environ un accident corporel sur dix est lié au téléphone</span></div>
+        <div class="sc"><b>× 3</b><span>risque d'accident en téléphonant, même en kit mains-libres</span></div>
+      </div>
+    </section>
+
+    <p class="source">Repères : <a href="https://www.securite-routiere.gouv.fr/dangers-de-la-route/le-telephone-et-ses-usages-au-volant" target="_blank" rel="noopener">securite-routiere.gouv.fr — Le téléphone au volant</a> et <a href="https://www.onisr.securite-routiere.gouv.fr/" target="_blank" rel="noopener">ONISR</a>. Le test mesure une réaction à un signal visuel attendu : en situation réelle de conduite, les temps sont plus longs (1 à 2 s).</p>
+  </div>
+</main>
+
+<footer class="site"><div class="wrap">Espace e-learning des Intervenants Départementaux de Sécurité Routière — Préfecture des Hauts-de-France. <a href="index.html">Retour à l'accueil</a></div></footer>
+
+<script>
+(function(){
+  "use strict";
+  var N = 5;
+  var zone = document.getElementById("zone");
+  var zT = document.getElementById("z-titre"), zS = document.getElementById("z-sous");
+  var elEssais = document.getElementById("essais");
+  var btnStart = document.getElementById("demarrer");
+  var btnRejouer = document.getElementById("rejouer");
+  var distraction = document.getElementById("distraction");
+  var elCalc = document.getElementById("calc");
+
+  var manche = 0;              /* 1 = attentif, 2 = distrait */
+  var temps = {1:[], 2:[]};
+  var attente = false, goTime = 0, timer = null, enTest = false;
+
+  /* ---------- distraction : petits calculs vrai/faux ---------- */
+  var calcOK = true;
+  function nouveauCalc(){
+    var a = 2+Math.floor(Math.random()*8), b = 2+Math.floor(Math.random()*8);
+    var vrai = Math.random() < 0.5;
+    var res = a+b + (vrai?0:(Math.random()<0.5?-1:1)*(1+Math.floor(Math.random()*2)));
+    calcOK = (res === a+b);
+    elCalc.textContent = a+" + "+b+" = "+res+" ?";
+  }
+  document.querySelectorAll("[data-rep]").forEach(function(b){
+    b.addEventListener("click", function(e){
+      e.stopPropagation();
+      if(manche===2 && enTest) nouveauCalc();
+    });
+  });
+
+  /* ---------- affichage essais ---------- */
+  function majEssais(){
+    elEssais.innerHTML = "";
+    [1,2].forEach(function(m){
+      if(manche < m && !temps[m].length) return;
+      for(var i=0;i<N;i++){
+        var d = document.createElement("span");
+        d.className = "essai"+(temps[m][i]!==undefined?" fait":"");
+        d.innerHTML = (temps[m][i]!==undefined?Math.round(temps[m][i])+"&nbsp;ms":"—") +
+          "<small>"+(m===1?"attentif":"distrait")+" "+(i+1)+"</small>";
+        elEssais.appendChild(d);
+      }
+    });
+  }
+
+  /* ---------- déroulé d'un essai ---------- */
+  function lancerEssai(){
+    enTest = true; attente = true;
+    zone.className = "zone pret";
+    zT.textContent = manche===1 ? "Attendez le jaune…" : "Répondez aux calculs… et guettez le jaune !";
+    zS.textContent = "Essai "+(temps[manche].length+1)+" / "+N;
+    if(manche===2) nouveauCalc();
+    var delai = 1500 + Math.random()*3000;
+    timer = setTimeout(function(){
+      attente = false;
+      zone.className = "zone go";
+      zT.textContent = "CLIQUEZ !";
+      zS.textContent = "";
+      goTime = performance.now();
+    }, delai);
+  }
+
+  function clicZone(){
+    if(!enTest) return;
+    if(attente){
+      /* trop tôt */
+      clearTimeout(timer);
+      zone.className = "zone fail";
+      zT.textContent = "Trop tôt !";
+      zS.textContent = "Vous avez anticipé — comme un freinage au hasard. On recommence cet essai.";
+      setTimeout(lancerEssai, 1200);
+      return;
+    }
+    var rt = performance.now() - goTime;
+    temps[manche].push(rt);
+    majEssais();
+    if(temps[manche].length >= N){
+      enTest = false;
+      distraction.className = "distraction";
+      if(manche===1){
+        zone.className = "zone";
+        zT.textContent = "Manche 1 terminée ✔";
+        zS.textContent = "Moyenne : "+Math.round(moyenne(1))+" ms. Maintenant, la même chose… en étant occupé par les calculs.";
+        btnStart.textContent = "▶ Démarrer la manche 2 (avec distraction)";
+        btnStart.hidden = false;
+      } else {
+        zone.className = "zone";
+        zT.textContent = "Test terminé ✔";
+        zS.textContent = "Découvrez vos résultats ci-dessous.";
+        btnRejouer.hidden = false;
+        resultats();
+      }
+      return;
+    }
+    zone.className = "zone pret";
+    zT.textContent = "Bien ! " + Math.round(rt) + " ms";
+    zS.textContent = "Essai suivant…";
+    setTimeout(lancerEssai, 900);
+  }
+  zone.addEventListener("click", clicZone);
+  zone.addEventListener("keydown", function(e){
+    if(e.code==="Space" || e.code==="Enter"){ e.preventDefault(); clicZone(); }
+  });
+
+  btnStart.addEventListener("click", function(){
+    manche = (manche===0||temps[1].length<N) ? 1 : 2;
+    btnStart.hidden = true;
+    if(manche===2) distraction.className = "distraction show";
+    majEssais();
+    lancerEssai();
+  });
+  btnRejouer.addEventListener("click", function(){
+    temps = {1:[],2:[]}; manche = 0;
+    document.getElementById("panneau-res").hidden = true;
+    btnRejouer.hidden = true;
+    btnStart.textContent = "▶ Démarrer la manche 1";
+    btnStart.hidden = false;
+    zone.className = "zone";
+    zT.textContent = "Prêt à retester vos réflexes ?";
+    zS.textContent = "Cliquez sur « Démarrer la manche 1 ».";
+    elEssais.innerHTML = "";
+  });
+
+  function moyenne(m){
+    var t = temps[m];
+    if(!t.length) return 0;
+    return t.reduce(function(s,v){return s+v;},0)/t.length;
+  }
+
+  /* ---------- résultats ---------- */
+  var NS = "http://www.w3.org/2000/svg";
+  function el(n,a){ var e=document.createElementNS(NS,n); for(var k in a)e.setAttribute(k,a[k]); return e; }
+
+  function resultats(){
+    var m1 = moyenne(1), m2 = moyenne(2);
+    var panneau = document.getElementById("panneau-res");
+    panneau.hidden = false;
+    var elR = document.getElementById("resultats");
+    var ecart = m2>m1 ? Math.round((m2-m1)/m1*100) : 0;
+    function dist(ms_, kmh){ return (kmh/3.6)*(ms_/1000); }
+    elR.innerHTML =
+      '<div class="res jaune"><b>'+Math.round(m1)+' ms</b><span>réaction moyenne — attentif</span></div>' +
+      '<div class="res rouge"><b>'+Math.round(m2)+' ms</b><span>réaction moyenne — distrait</span></div>' +
+      '<div class="res'+(ecart>0?" rouge":"")+'"><b>'+(ecart>0?"+ "+ecart+" %":"—")+'</b><span>de temps de réaction en plus une fois distrait</span></div>' +
+      '<div class="res"><b>'+dist(m2-m1,90).toFixed(1).replace(".",",")+' m</b><span>parcourus « en plus » à 90 km/h à cause de la distraction</span></div>';
+
+    /* graphique distances */
+    var cmp = document.getElementById("compare");
+    cmp.innerHTML = "";
+    var vitesses = [50,90,130], y = 26;
+    var maxD = dist(Math.max(m2, 600), 130);
+    vitesses.forEach(function(v){
+      var d1 = dist(m1,v), d2 = dist(m2,v);
+      var t1 = el("text",{x:82,y:y+15,"text-anchor":"end","font-size":13,"font-weight":700,"font-family":"Marianne,Segoe UI,Arial,sans-serif"});
+      t1.textContent = v+" km/h";
+      cmp.appendChild(t1);
+      cmp.appendChild(el("rect",{x:90,y:y,width:Math.max(2,d1/maxD*580),height:16,rx:3,fill:"#FECF41",stroke:"#E9B400"}));
+      var l1 = el("text",{x:96+d1/maxD*580,y:y+13,"font-size":12,"font-weight":800,"font-family":"Marianne,Segoe UI,Arial,sans-serif"});
+      l1.textContent = d1.toFixed(1).replace(".",",")+" m";
+      cmp.appendChild(l1);
+      cmp.appendChild(el("rect",{x:90,y:y+20,width:Math.max(2,d2/maxD*580),height:16,rx:3,fill:"#c0392b"}));
+      var l2 = el("text",{x:96+d2/maxD*580,y:y+33,"font-size":12,"font-weight":800,fill:"#c0392b","font-family":"Marianne,Segoe UI,Arial,sans-serif"});
+      l2.textContent = d2.toFixed(1).replace(".",",")+" m";
+      cmp.appendChild(l2);
+      y += 64;
+    });
+    var lg = el("text",{x:90,y:y+4,"font-size":12,fill:"#6b6b6b","font-family":"Marianne,Segoe UI,Arial,sans-serif"});
+    lg.textContent = "■ jaune : attentif   ■ rouge : distrait — mètres parcourus avant même de freiner";
+    cmp.appendChild(lg);
+
+    var verdict = document.getElementById("verdict");
+    if(m2 > m1){
+      verdict.innerHTML = "📱 Distrait, vous avez mis <strong>"+Math.round(m2-m1)+" ms de plus</strong> à réagir — et encore, ici la distraction était minime et vous <em>attendiez</em> le signal. Au volant, lire un vrai message détourne les yeux de la route pendant 5 secondes : à 90 km/h, c'est 125 m parcourus à l'aveugle.";
+    } else {
+      verdict.innerHTML = "💪 Étonnant : votre moyenne distraite n'est pas plus lente. C'est rare — et trompeur : dans une vraie voiture, la lecture d'un message détourne les yeux 5 secondes de la route. Personne n'y échappe, pas même les meilleurs réflexes.";
+    }
+    verdict.className = "verdict show";
+    panneau.scrollIntoView({behavior:"smooth"});
+  }
+})();
+</script>
+</body>
+</html>

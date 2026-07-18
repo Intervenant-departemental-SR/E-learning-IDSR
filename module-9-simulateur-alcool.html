@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Simulateur d'alcoolémie — Outil d'animation | E-learning IDSR</title>
+<meta name="description" content="Simulateur pédagogique d'alcoolémie : indiquez les verres consommés, l'heure, le sexe et le poids pour visualiser la courbe d'alcoolémie estimée et l'heure de retour sous les seuils légaux." />
+<style>
+  :root{
+    --jaune:#FECF41; --jaune-fonce:#E9B400; --jaune-clair:#FFF3CC;
+    --noir:#000; --gris:#3a3a3a; --gris-2:#6b6b6b;
+    --gris-clair:#f4f4f4; --bordure:#e2e2e2; --blanc:#fff;
+    --vert:#1f8a4c; --orange:#e67e22; --rouge:#c0392b;
+    --rayon:12px; --ombre:0 4px 18px rgba(0,0,0,.12);
+    --max:1080px; --t:.25s cubic-bezier(.4,0,.2,1);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Marianne","Segoe UI",Arial,Helvetica,sans-serif;color:var(--noir);background:var(--gris-clair);line-height:1.55;}
+  :focus-visible{outline:3px solid var(--noir);outline-offset:2px;border-radius:4px;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 1.25rem;}
+  .skip{position:absolute;left:-9999px;background:var(--noir);color:var(--jaune);padding:.6rem 1rem;z-index:200;font-weight:700;}
+  .skip:focus{left:0;top:0;}
+  header.site{background:var(--blanc);border-bottom:6px solid var(--jaune);}
+  .topbar{display:flex;align-items:center;gap:1rem;padding:.7rem 1.25rem;max-width:var(--max);margin:0 auto;flex-wrap:wrap;}
+  .topbar img{width:150px;max-width:100%;height:auto;display:block;}
+  .topbar .fil{font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--gris-2);font-weight:700;}
+  .topbar .fil a{color:var(--gris-2);text-decoration:none;}
+  .topbar .fil a:hover{text-decoration:underline;}
+  .module-hero{background:var(--noir);color:var(--blanc);padding:2.2rem 0 2.4rem;}
+  .module-hero .eyebrow{color:var(--jaune);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.8rem;margin:0 0 .5rem;}
+  .module-hero h1{font-size:2rem;line-height:1.15;margin:0 0 .8rem;max-width:780px;}
+  .module-hero p{margin:0;color:#e9e9e9;max-width:720px;}
+  main{padding:2rem 0 4rem;}
+  .panneau{background:var(--blanc);border:1px solid var(--bordure);border-radius:var(--rayon);box-shadow:var(--ombre);padding:1.6rem;margin-bottom:1.6rem;}
+  .panneau h2{font-size:1.35rem;margin:0 0 .3rem;border-left:8px solid var(--jaune);padding-left:.6rem;}
+  .panneau .lead{color:var(--gris);margin:.2rem 0 1.3rem;}
+  .avert{background:var(--jaune-clair);border:2px dashed var(--jaune-fonce);border-radius:12px;padding:1rem 1.2rem;margin:0 0 1.6rem;font-size:.95rem;}
+  .avert strong{display:block;margin-bottom:.2rem;}
+
+  /* profil */
+  .profil{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;}
+  .champ{background:var(--gris-clair);border-radius:10px;padding:1rem;}
+  .champ .lbl{font-weight:700;display:block;margin-bottom:.6rem;}
+  .seg{display:flex;border:2px solid var(--bordure);border-radius:999px;overflow:hidden;background:var(--blanc);}
+  .seg button{flex:1;border:none;background:none;font:inherit;font-weight:700;padding:.6rem .4rem;cursor:pointer;color:var(--gris-2);transition:background var(--t),color var(--t);}
+  .seg button[aria-pressed="true"]{background:var(--noir);color:var(--jaune);}
+  input[type=range]{width:100%;accent-color:var(--jaune-fonce);}
+  .val-poids{font-weight:800;font-size:1.3rem;}
+  input[type=time]{font:inherit;font-weight:700;padding:.45rem .6rem;border:2px solid var(--bordure);border-radius:9px;background:var(--blanc);}
+
+  /* verres */
+  .verres{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:.8rem;margin-top:.4rem;}
+  .verre{border:2px solid var(--bordure);border-radius:12px;background:var(--blanc);padding:.9rem .5rem .8rem;text-align:center;cursor:pointer;font:inherit;transition:transform var(--t),border-color var(--t),box-shadow var(--t);}
+  .verre:hover{transform:translateY(-3px);border-color:var(--jaune-fonce);box-shadow:var(--ombre);}
+  .verre:active{transform:scale(.95);}
+  .verre .emo{font-size:2rem;display:block;line-height:1.2;}
+  .verre .nm{font-weight:700;font-size:.86rem;display:block;margin:.3rem 0 .1rem;}
+  .verre .dose{font-size:.75rem;color:var(--gris-2);display:block;}
+  .heure-conso{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-bottom:1rem;background:var(--jaune-clair);padding:.7rem .9rem;border-radius:10px;}
+  .heure-conso label{font-weight:700;font-size:.95rem;}
+
+  /* liste consommations */
+  .conso-liste{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.1rem;min-height:2.4rem;}
+  .chip{display:inline-flex;align-items:center;gap:.5rem;background:var(--noir);color:var(--blanc);border-radius:999px;padding:.35rem .5rem .35rem .8rem;font-size:.9rem;animation:pop .25s ease;}
+  @keyframes pop{from{transform:scale(.6);opacity:0;}to{transform:scale(1);opacity:1;}}
+  .chip .h{color:var(--jaune);font-weight:700;}
+  .chip button{border:none;background:var(--jaune);color:var(--noir);border-radius:50%;width:22px;height:22px;font-weight:800;cursor:pointer;line-height:1;font-size:.85rem;}
+  .chip button:hover{background:var(--blanc);}
+  .conso-vide{color:var(--gris-2);font-size:.92rem;font-style:italic;}
+  .total-doses{margin-top:.7rem;font-size:.95rem;}
+  .total-doses b{font-size:1.15rem;}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;border:none;border-radius:999px;padding:.7rem 1.3rem;font:inherit;font-weight:700;cursor:pointer;text-decoration:none;transition:transform var(--t),background var(--t);}
+  .btn-ghost{background:transparent;color:var(--gris);border:2px solid var(--bordure);}
+  .btn-ghost:hover{border-color:var(--noir);color:var(--noir);}
+
+  /* résultats */
+  .resultats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.9rem;margin-bottom:1.3rem;}
+  .res{border-radius:10px;padding:1rem;text-align:center;border-bottom:5px solid var(--bordure);background:var(--gris-clair);}
+  .res b{display:block;font-size:1.55rem;line-height:1.15;}
+  .res span{font-size:.83rem;color:var(--gris);}
+  .res.vert{border-color:var(--vert);}
+  .res.orange{border-color:var(--orange);}
+  .res.rouge{border-color:var(--rouge);background:#fdeeec;}
+  #graphe{width:100%;height:auto;display:block;}
+  .legende{display:flex;gap:1.2rem;flex-wrap:wrap;font-size:.82rem;color:var(--gris);margin-top:.6rem;}
+  .legende span{display:inline-flex;align-items:center;gap:.4rem;}
+  .legende i{width:22px;height:0;border-top:3px solid;display:inline-block;}
+  .msg-pedago{margin-top:1.2rem;padding:1rem 1.2rem;border-radius:10px;font-weight:600;display:none;}
+  .msg-pedago.show{display:block;}
+  .msg-pedago.rouge{background:#fdeeec;border-left:6px solid var(--rouge);}
+  .msg-pedago.orange{background:#fdf3e7;border-left:6px solid var(--orange);}
+  .msg-pedago.vert{background:#eafaf0;border-left:6px solid var(--vert);}
+
+  /* chiffres clés */
+  .stat-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.9rem;}
+  .sc{background:var(--gris-clair);border-radius:10px;padding:1.1rem;text-align:center;border-bottom:4px solid var(--jaune);}
+  .sc b{display:block;font-size:1.7rem;line-height:1.1;}
+  .sc span{font-size:.84rem;color:var(--gris);}
+  .source{font-size:.82rem;color:var(--gris-2);border-top:1px solid var(--bordure);margin-top:2rem;padding-top:1rem;}
+  footer.site{background:var(--blanc);border-top:6px solid var(--jaune);padding:1.6rem 0;font-size:.88rem;color:var(--gris-2);}
+  footer.site a{color:var(--noir);font-weight:700;}
+  @media (max-width:640px){
+    .module-hero h1{font-size:1.55rem;}
+    .panneau{padding:1.1rem;}
+  }
+  @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+</style>
+</head>
+<body data-module="m9">
+<a class="skip" href="#contenu">Aller au contenu principal</a>
+
+<header class="site">
+  <div class="topbar">
+    <img src="assets/logo-prefet-hdf.png" alt="Préfet de la région Hauts-de-France" class="logo-prefet" style="width:auto;height:96px" />
+    <img src="assets/logo-securite-routiere.png" alt="Sécurité routière — Vivre, Ensemble" />
+    <span class="fil"><a href="index.html">Accueil e-learning</a> › Simulateur d'alcoolémie</span>
+  </div>
+</header>
+
+<section class="module-hero">
+  <div class="wrap">
+    <p class="eyebrow">Outil d'animation · Grand public</p>
+    <h1>Simulateur d'alcoolémie : combien de temps avant de reprendre le volant ?</h1>
+    <p>Ajoutez les verres consommés au fil de la soirée : la courbe montre l'évolution estimée de l'alcoolémie et l'heure probable de retour sous les seuils légaux.</p>
+  </div>
+</section>
+
+<main id="contenu">
+  <div class="wrap">
+
+    <div class="avert" role="note">
+      <strong>⚠️ Outil pédagogique — jamais une autorisation de conduire.</strong>
+      L'alcoolémie réelle varie fortement d'une personne à l'autre (fatigue, santé, médicaments…).
+      Seul un éthylotest ou un éthylomètre fait foi. En cas de doute : on ne conduit pas.
+    </div>
+
+    <!-- PROFIL -->
+    <section class="panneau" aria-labelledby="tp">
+      <h2 id="tp">1 · Le profil</h2>
+      <p class="lead">L'alcool ne fait pas le même effet à tout le monde : le sexe et le poids changent la courbe.</p>
+      <div class="profil">
+        <div class="champ">
+          <span class="lbl" id="lbl-sexe">Sexe</span>
+          <div class="seg" role="group" aria-labelledby="lbl-sexe">
+            <button type="button" id="sexe-h" aria-pressed="true">Homme</button>
+            <button type="button" id="sexe-f" aria-pressed="false">Femme</button>
+          </div>
+        </div>
+        <div class="champ">
+          <label class="lbl" for="poids">Poids : <span class="val-poids" id="poids-val">75 kg</span></label>
+          <input type="range" id="poids" min="40" max="150" step="1" value="75" />
+        </div>
+        <div class="champ">
+          <span class="lbl" id="lbl-estomac">Consommation</span>
+          <div class="seg" role="group" aria-labelledby="lbl-estomac">
+            <button type="button" id="est-jeun" aria-pressed="true">À jeun</button>
+            <button type="button" id="est-repas" aria-pressed="false">Au cours d'un repas</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VERRES -->
+    <section class="panneau" aria-labelledby="tv">
+      <h2 id="tv">2 · Les verres de la soirée</h2>
+      <p class="lead">Cliquez sur un verre pour l'ajouter. Un « verre standard » servi dans un bar contient environ <strong>10 g d'alcool pur</strong>, quelle que soit la boisson… mais tout dépend du contenant !</p>
+      <div class="heure-conso">
+        <label for="heure">Heure de consommation :</label>
+        <input type="time" id="heure" />
+        <span style="font-size:.85rem;color:var(--gris-2);">réglez l'heure puis cliquez sur les verres</span>
+      </div>
+      <div class="verres" id="verres"></div>
+      <div class="conso-liste" id="conso" aria-live="polite"></div>
+      <p class="total-doses" id="total"></p>
+      <button type="button" class="btn btn-ghost" id="reset">🗑 Tout effacer</button>
+    </section>
+
+    <!-- COURBE -->
+    <section class="panneau" aria-labelledby="tg">
+      <h2 id="tg">3 · La courbe d'alcoolémie estimée</h2>
+      <p class="lead">La zone jaune représente l'incertitude d'élimination (de 0,10 à 0,15 g/L éliminés par heure selon les personnes).</p>
+      <div class="resultats" id="resultats" aria-live="polite"></div>
+      <svg id="graphe" viewBox="0 0 760 380" role="img" aria-label="Courbe de l'alcoolémie estimée en fonction de l'heure"></svg>
+      <div class="legende">
+        <span><i style="border-color:#c0392b;"></i> Seuil légal 0,5 g/L</span>
+        <span><i style="border-color:#e67e22;"></i> Permis probatoire 0,2 g/L</span>
+        <span><i style="border-color:#000;border-top-style:dashed;"></i> Délit à partir de 0,8 g/L</span>
+      </div>
+      <p class="msg-pedago" id="msg"></p>
+    </section>
+
+    <!-- CHIFFRES -->
+    <section class="panneau" aria-labelledby="tc">
+      <h2 id="tc">Ce qu'il faut retenir</h2>
+      <p class="lead">Les repères à partager lors des animations.</p>
+      <figure style="margin:1.4rem 0;border:1px solid var(--bordure);border-radius:12px;padding:1rem;background:#fff;"><img src="assets/photos/stock-alcool-bar.jpg" alt="Verres de bière sur une table en bois vus de dessus" loading="lazy" style="border-radius:8px;width:100%;height:auto;display:block;" /><figcaption style="font-size:.82rem;color:var(--gris-2);margin-top:.6rem;">En stand, faites estimer au public le nombre de verres… avant de montrer la courbe : l'écart entre ressenti et réalité est le meilleur déclencheur de prise de conscience. <em>Image Adobe Stock — licence standard.</em></figcaption></figure>
+      <div class="stat-cards">
+        <div class="sc"><b>≈ 30 %</b><span>des accidents mortels impliquent l'alcool</span></div>
+        <div class="sc"><b>10 g</b><span>d'alcool pur dans chaque verre standard servi au bar</span></div>
+        <div class="sc"><b>0,10 à 0,15 g/L</b><span>éliminés par heure — café, douche ou sport n'y changent rien</span></div>
+        <div class="sc"><b>× 8</b><span>le risque d'accident mortel à 0,8 g/L</span></div>
+      </div>
+    </section>
+
+    <p class="source">Modèle d'estimation : formule de Widmark (usage pédagogique). Sources des repères : <a href="https://www.securite-routiere.gouv.fr/dangers-de-la-route/lalcool-et-la-conduite" target="_blank" rel="noopener">securite-routiere.gouv.fr — L'alcool et la conduite</a> et <a href="https://www.onisr.securite-routiere.gouv.fr/" target="_blank" rel="noopener">ONISR</a>.</p>
+  </div>
+</main>
+
+<footer class="site"><div class="wrap">Espace e-learning des Intervenants Départementaux de Sécurité Routière — Préfecture des Hauts-de-France. <a href="index.html">Retour à l'accueil</a></div></footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- catalogue des verres (grammes d'alcool pur) ---------- */
+  var CATALOGUE = [
+    {id:"demi",   emo:"🍺", nom:"Demi de bière",      det:"25 cl · 5°",    g:10},
+    {id:"pinte",  emo:"🍻", nom:"Pinte de bière",     det:"50 cl · 5°",    g:20},
+    {id:"forte",  emo:"🍺", nom:"Bière forte",        det:"50 cl · 8,6°",  g:34},
+    {id:"vin",    emo:"🍷", nom:"Verre de vin",       det:"12 cl · 12°",   g:11.5},
+    {id:"champ",  emo:"🥂", nom:"Coupe de champagne", det:"10 cl · 12°",   g:9.5},
+    {id:"pastis", emo:"🥃", nom:"Pastis / apéritif",  det:"2,5 cl · 45°",  g:9},
+    {id:"whisky", emo:"🥃", nom:"Whisky",             det:"4 cl · 40°",    g:12.8},
+    {id:"shot",   emo:"🍸", nom:"Shooter",            det:"3 cl · 40°",    g:9.6},
+    {id:"cocktail",emo:"🍹",nom:"Cocktail",           det:"± 2 doses",     g:20}
+  ];
+
+  var etat = {
+    sexe:"h",        /* h -> r=0.68 ; f -> r=0.55 */
+    poids:75,
+    repas:false,     /* à jeun: pic à ~30 min ; repas: ~60 min */
+    conso:[]         /* {g, nom, emo, min} min = minutes absolues (peut être négatif = veille) */
+  };
+
+  /* ---------- helpers temps ---------- */
+  function nowMin(){ var d=new Date(); return d.getHours()*60+d.getMinutes(); }
+  function fmt(min){
+    min = ((Math.round(min)%1440)+1440)%1440;
+    var h = Math.floor(min/60), m = min%60;
+    return h+"h"+(m<10?"0":"")+m;
+  }
+  /* une heure saisie est interprétée comme "récente" : si elle est à plus
+     d'1 h dans le futur, on considère qu'il s'agit de la veille. */
+  function versAbsolu(minJour){
+    var n = nowMin();
+    if(minJour > n + 60) return minJour - 1440;
+    return minJour;
+  }
+
+  /* ---------- construction UI verres ---------- */
+  var elVerres = document.getElementById("verres");
+  CATALOGUE.forEach(function(v){
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "verre";
+    b.innerHTML = '<span class="emo" aria-hidden="true">'+v.emo+'</span><span class="nm">'+v.nom+'</span><span class="dose">'+v.det+' · '+(v.g/10).toLocaleString("fr-FR",{maximumFractionDigits:1})+' dose'+(v.g>15?'s':'')+'</span>';
+    b.setAttribute("aria-label","Ajouter : "+v.nom+", "+v.det);
+    b.addEventListener("click", function(){
+      var t = document.getElementById("heure").value.split(":");
+      var minJour = (+t[0])*60 + (+t[1]);
+      etat.conso.push({g:v.g, nom:v.nom, emo:v.emo, min:versAbsolu(minJour)});
+      rendre();
+    });
+    elVerres.appendChild(b);
+  });
+
+  /* heure par défaut = maintenant (arrondie à 5 min) */
+  (function(){
+    var n = new Date(); n.setMinutes(Math.floor(n.getMinutes()/5)*5);
+    document.getElementById("heure").value =
+      ("0"+n.getHours()).slice(-2)+":"+("0"+n.getMinutes()).slice(-2);
+  })();
+
+  /* ---------- toggles ---------- */
+  function seg(idA, idB, cb){
+    var a=document.getElementById(idA), b=document.getElementById(idB);
+    function set(on){
+      a.setAttribute("aria-pressed", on?"true":"false");
+      b.setAttribute("aria-pressed", on?"false":"true");
+      cb(on); rendre();
+    }
+    a.addEventListener("click", function(){set(true);});
+    b.addEventListener("click", function(){set(false);});
+  }
+  seg("sexe-h","sexe-f", function(on){ etat.sexe = on?"h":"f"; });
+  seg("est-jeun","est-repas", function(on){ etat.repas = !on; });
+
+  var elPoids = document.getElementById("poids");
+  elPoids.addEventListener("input", function(){
+    etat.poids = +elPoids.value;
+    document.getElementById("poids-val").textContent = etat.poids+" kg";
+    rendre();
+  });
+  document.getElementById("reset").addEventListener("click", function(){
+    etat.conso = []; rendre();
+  });
+
+  /* ---------- modèle de Widmark ---------- */
+  /* Retourne {t:[], lo:[], hi:[]} : alcoolémie (g/L) minute par minute.
+     lo = élimination rapide (0,15 g/L/h), hi = lente (0,10 g/L/h).      */
+  function simuler(){
+    if(!etat.conso.length) return null;
+    var r = etat.sexe==="h" ? 0.68 : 0.55;
+    var absorption = etat.repas ? 60 : 30;              /* minutes jusqu'au pic */
+    var debut = Math.min.apply(null, etat.conso.map(function(c){return c.min;})) - 20;
+    var fin = Math.max(nowMin(), debut) + 18*60;
+    var doses = etat.conso.map(function(c){
+      return {min:c.min, c:c.g/(r*etat.poids)};        /* contribution max en g/L */
+    });
+    function courbe(beta){
+      var out = [], bac = 0, absorbe = 0;
+      for(var t=debut; t<=fin; t++){
+        var cible = 0;
+        doses.forEach(function(d){
+          if(t >= d.min) cible += d.c * Math.min(1, (t-d.min)/absorption);
+        });
+        var apport = cible - absorbe;
+        if(apport > 0){ bac += apport; absorbe = cible; }
+        if(bac > 0) bac = Math.max(0, bac - beta/60);
+        out.push(bac);
+      }
+      return out;
+    }
+    var lo = courbe(0.15), hi = courbe(0.10), t = [];
+    for(var m=debut; m<=fin; m++) t.push(m);
+    /* tronque quand tout est éliminé (courbe lente à 0) */
+    var cut = hi.length-1;
+    while(cut>0 && hi[cut]===0 && hi[cut-1]===0) cut--;
+    cut = Math.min(hi.length-1, cut + 60);
+    return {t:t.slice(0,cut+1), lo:lo.slice(0,cut+1), hi:hi.slice(0,cut+1), debut:debut};
+  }
+
+  function seuilRetour(sim, seuil){
+    /* dernier instant où la courbe PRUDENTE (hi) repasse sous le seuil */
+    var pic = 0, iPic = 0;
+    sim.hi.forEach(function(v,i){ if(v>pic){pic=v;iPic=i;} });
+    if(pic <= seuil) return null;
+    for(var i=iPic;i<sim.hi.length;i++){
+      if(sim.hi[i] <= seuil) return sim.t[i];
+    }
+    return sim.t[sim.t.length-1];
+  }
+
+  /* ---------- rendu ---------- */
+  var svg = document.getElementById("graphe");
+  var NS = "http://www.w3.org/2000/svg";
+
+  function rendre(){
+    /* liste des consommations */
+    var elC = document.getElementById("conso");
+    elC.innerHTML = "";
+    if(!etat.conso.length){
+      elC.innerHTML = '<span class="conso-vide">Aucun verre ajouté pour l\'instant.</span>';
+    } else {
+      etat.conso
+        .slice().sort(function(a,b){return a.min-b.min;})
+        .forEach(function(c){
+          var chip = document.createElement("span");
+          chip.className = "chip";
+          chip.innerHTML = c.emo+" "+c.nom+' <span class="h">'+fmt(c.min)+'</span>';
+          var del = document.createElement("button");
+          del.textContent = "×";
+          del.setAttribute("aria-label","Retirer "+c.nom+" de "+fmt(c.min));
+          del.addEventListener("click", function(){
+            etat.conso.splice(etat.conso.indexOf(c),1); rendre();
+          });
+          chip.appendChild(del);
+          elC.appendChild(chip);
+        });
+    }
+    var totalG = etat.conso.reduce(function(s,c){return s+c.g;},0);
+    document.getElementById("total").innerHTML = etat.conso.length
+      ? 'Total : <b>'+(totalG/10).toLocaleString("fr-FR",{maximumFractionDigits:1})+' doses</b> ('+Math.round(totalG)+' g d\'alcool pur)'
+      : "";
+
+    var sim = simuler();
+    dessiner(sim);
+    resultats(sim);
+  }
+
+  function resultats(sim){
+    var elR = document.getElementById("resultats");
+    var msg = document.getElementById("msg");
+    if(!sim){
+      elR.innerHTML = '<div class="res"><b>—</b><span>Ajoutez des verres pour lancer la simulation</span></div>';
+      msg.className = "msg-pedago"; return;
+    }
+    var pic = 0, iPic = 0;
+    sim.hi.forEach(function(v,i){ if(v>pic){pic=v;iPic=i;} });
+    var n = nowMin();
+    var iNow = Math.min(Math.max(0, n - sim.debut), sim.hi.length-1);
+    var actuel = sim.hi[iNow];
+    var r05 = seuilRetour(sim, 0.5), r02 = seuilRetour(sim, 0.2);
+    function g(v){ return v.toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2}); }
+    var clActuel = actuel >= 0.5 ? "rouge" : (actuel >= 0.2 ? "orange" : "vert");
+    elR.innerHTML =
+      '<div class="res '+clActuel+'"><b>'+g(actuel)+' g/L</b><span>estimation maintenant ('+fmt(n)+')</span></div>' +
+      '<div class="res '+(pic>=0.5?"rouge":(pic>=0.2?"orange":"vert"))+'"><b>'+g(pic)+' g/L</b><span>pic estimé vers '+fmt(sim.t[iPic])+'</span></div>' +
+      '<div class="res"><b>'+(r05?("≈ "+fmt(r05)):"—")+'</b><span>retour sous 0,5 g/L (seuil légal)</span></div>' +
+      '<div class="res"><b>'+(r02?("≈ "+fmt(r02)):"—")+'</b><span>retour sous 0,2 g/L (permis probatoire)</span></div>';
+
+    if(pic >= 0.8){
+      msg.textContent = "🚨 Au pic, cette consommation dépasse 0,8 g/L : conduire serait un délit (jusqu'à 4 500 € d'amende, retrait de permis, prison possible). La seule solution : ne pas prendre le volant et laisser le temps faire.";
+      msg.className = "msg-pedago show rouge";
+    } else if(pic >= 0.5){
+      msg.textContent = "⛔ Cette consommation dépasse le seuil légal de 0,5 g/L : conduire est interdit (135 €, 6 points). Attendez l'heure estimée de retour sous le seuil — et vérifiez avec un éthylotest.";
+      msg.className = "msg-pedago show rouge";
+    } else if(pic >= 0.2){
+      msg.textContent = "⚠️ En permis probatoire (ou en conduite accompagnée), le seuil est de 0,2 g/L — soit zéro verre. Cette consommation le dépasse.";
+      msg.className = "msg-pedago show orange";
+    } else {
+      msg.textContent = "✅ Consommation sous les seuils légaux d'après l'estimation. Rappel : dès le premier verre, vigilance et réflexes diminuent.";
+      msg.className = "msg-pedago show vert";
+    }
+  }
+
+  function el(nom, attrs){
+    var e = document.createElementNS(NS, nom);
+    for(var k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+
+  function dessiner(sim){
+    svg.innerHTML = "";
+    var W=760, H=380, m={t:20, r:16, b:44, l:52};
+    var iw = W-m.l-m.r, ih = H-m.t-m.b;
+
+    var yMax = 1.0, tMin, tMax;
+    if(sim){
+      yMax = Math.max(1.0, Math.ceil((Math.max.apply(null,sim.hi)+0.15)*10)/10);
+      tMin = sim.t[0]; tMax = sim.t[sim.t.length-1];
+    } else {
+      var n = nowMin(); tMin = n-30; tMax = n+8*60;
+    }
+    function X(t){ return m.l + (t-tMin)/(tMax-tMin)*iw; }
+    function Y(v){ return m.t + ih - (v/yMax)*ih; }
+
+    /* grille horizontale + axe Y */
+    for(var v=0; v<=yMax+0.001; v+=0.2){
+      var y = Y(v);
+      svg.appendChild(el("line",{x1:m.l,y1:y,x2:W-m.r,y2:y,stroke:"#eee","stroke-width":1}));
+      var txt = el("text",{x:m.l-8,y:y+4,"text-anchor":"end","font-size":12,fill:"#6b6b6b","font-family":"Marianne,Segoe UI,Arial,sans-serif"});
+      txt.textContent = v.toLocaleString("fr-FR",{minimumFractionDigits:1,maximumFractionDigits:1});
+      svg.appendChild(txt);
+    }
+    /* axe X : un repère par heure (ou 2 h si large) */
+    var pasH = (tMax-tMin) > 12*60 ? 120 : 60;
+    for(var t=Math.ceil(tMin/pasH)*pasH; t<=tMax; t+=pasH){
+      var x = X(t);
+      svg.appendChild(el("line",{x1:x,y1:m.t+ih,x2:x,y2:m.t+ih+5,stroke:"#999"}));
+      var tx = el("text",{x:x,y:m.t+ih+22,"text-anchor":"middle","font-size":12,fill:"#6b6b6b","font-family":"Marianne,Segoe UI,Arial,sans-serif"});
+      tx.textContent = fmt(t);
+      svg.appendChild(tx);
+    }
+
+    /* zone délit >= 0,8 */
+    if(yMax >= 0.8){
+      svg.appendChild(el("rect",{x:m.l,y:Y(yMax),width:iw,height:Y(0.8)-Y(yMax),fill:"#c0392b",opacity:.06}));
+      svg.appendChild(el("line",{x1:m.l,y1:Y(0.8),x2:W-m.r,y2:Y(0.8),stroke:"#000","stroke-width":1.5,"stroke-dasharray":"7 5"}));
+      var td = el("text",{x:W-m.r-4,y:Y(0.8)-6,"text-anchor":"end","font-size":12,"font-weight":700,"font-family":"Marianne,Segoe UI,Arial,sans-serif"});
+      td.textContent = "Délit ≥ 0,8 g/L";
+      svg.appendChild(td);
+    }
+    /* seuils */
+    svg.appendChild(el("line",{x1:m.l,y1:Y(0.5),x2:W-m.r,y2:Y(0.5),stroke:"#c0392b","stroke-width":2}));
+    var t5 = el("text",{x:W-m.r-4,y:Y(0.5)-6,"text-anchor":"end","font-size":12,fill:"#c0392b","font-weight":700,"font-family":"Marianne,Segoe UI,Arial,sans-serif"});
+    t5.textContent = "0,5 g/L";
+    svg.appendChild(t5);
+    svg.appendChild(el("line",{x1:m.l,y1:Y(0.2),x2:W-m.r,y2:Y(0.2),stroke:"#e67e22","stroke-width":2}));
+    var t2 = el("text",{x:W-m.r-4,y:Y(0.2)-6,"text-anchor":"end","font-size":12,fill:"#e67e22","font-weight":700,"font-family":"Marianne,Segoe UI,Arial,sans-serif"});
+    t2.textContent = "0,2 g/L";
+    svg.appendChild(t2);
+
+    /* axes */
+    svg.appendChild(el("line",{x1:m.l,y1:m.t,x2:m.l,y2:m.t+ih,stroke:"#999"}));
+    svg.appendChild(el("line",{x1:m.l,y1:m.t+ih,x2:W-m.r,y2:m.t+ih,stroke:"#999"}));
+    var yl = el("text",{x:14,y:m.t+10,"font-size":12,fill:"#3a3a3a","font-weight":700,"font-family":"Marianne,Segoe UI,Arial,sans-serif"});
+    yl.textContent = "g/L";
+    svg.appendChild(yl);
+
+    if(!sim) return;
+
+    /* zone d'incertitude entre lo et hi */
+    var dArea = "M";
+    sim.t.forEach(function(t,i){ dArea += X(t)+","+Y(sim.hi[i])+" L"; });
+    for(var i=sim.t.length-1;i>=0;i--){ dArea += X(sim.t[i])+","+Y(sim.lo[i])+" L"; }
+    dArea = dArea.slice(0,-2)+" Z";
+    svg.appendChild(el("path",{d:dArea,fill:"#FECF41",opacity:.35}));
+
+    /* courbe principale (prudente) */
+    var d = "";
+    sim.t.forEach(function(t,i){ d += (i?"L":"M")+X(t)+","+Y(sim.hi[i]); });
+    var path = el("path",{d:d,fill:"none",stroke:"#000","stroke-width":3,"stroke-linejoin":"round"});
+    var lg = path.getTotalLength ? null : null;
+    svg.appendChild(path);
+    try{
+      var L = path.getTotalLength();
+      path.style.strokeDasharray = L;
+      path.style.strokeDashoffset = L;
+      path.getBoundingClientRect();
+      path.style.transition = "stroke-dashoffset 1.2s ease";
+      path.style.strokeDashoffset = "0";
+    }catch(e){}
+
+    /* verres sur l'axe */
+    etat.conso.forEach(function(c){
+      if(c.min < tMin || c.min > tMax) return;
+      var g = el("text",{x:X(c.min),y:m.t+ih-6,"text-anchor":"middle","font-size":16});
+      g.textContent = c.emo;
+      svg.appendChild(g);
+    });
+
+    /* repère "maintenant" */
+    var n = nowMin();
+    if(n >= tMin && n <= tMax){
+      svg.appendChild(el("line",{x1:X(n),y1:m.t,x2:X(n),y2:m.t+ih,stroke:"#1f8a4c","stroke-width":2,"stroke-dasharray":"4 4"}));
+      var tn = el("text",{x:X(n),y:m.t-4,"text-anchor":"middle","font-size":12,fill:"#1f8a4c","font-weight":700,"font-family":"Marianne,Segoe UI,Arial,sans-serif"});
+      tn.textContent = "maintenant";
+      svg.appendChild(tn);
+    }
+  }
+
+  rendre();
+})();
+</script>
+</body>
+</html>

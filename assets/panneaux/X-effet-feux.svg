@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 13.0.0, SVG Export Plug-In  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+	<!ENTITY ns_flows "http://ns.adobe.com/Flows/1.0/">
+]>
+<svg version="1.1"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+	 x="0px" y="0px" width="803px" height="608px" viewBox="-0.606 -0.075 803 608" enable-background="new -0.606 -0.075 803 608"
+	 xml:space="preserve">
+<defs>
+</defs>
+<path fill="#8F8F8F" d="M799.215,1.074c-10.611-2.395-24.173-0.039-34.883-0.039c-15.465,0-30.931,0-46.396,0
+	c-30.931,0-61.861,0-92.792,0c-64.428,0-128.856,0-193.285,0c-127.453,0-254.905,0-382.357,0c-15.5,0-31,0-46.499,0
+	c-2.585,0-2.177,12.056-2.2,13.39C0.609,25.786,1.656,37.132,1.215,48.483c-0.553,14.221-2.75,30.411,0.619,44.39
+	c1.921,7.971,57.702,3.162,66.981,3.162c32.059,0,66.85-5.059,96.723,8.52c11.312,5.142,16.077,11.059,24.189,20.073
+	c7.147,7.941,7.488,15.38,11.667,25.411c0,73.678,0,147.355,0,221.033c0,57.657,0,115.313,0,172.97
+	c0,6.144-2.783,62.993,2.256,62.993c101.9,0,203.801,0,305.701,0c39.703,0,79.405,0,119.108,0c6.604,0,2.935-59.973,2.935-67.242
+	c0-115.182,0-230.363,0-345.544c0-15.4-2.794-34.936,1.519-50.029c4.434-15.517,13.284-26.044,26.388-35.404
+	c4.782-3.416,12.128-7.807,19.68-10.672l19.414-2.109c12.084,0,101.486,4.665,102.416-3.754
+	C801.949,81.963,803.012,1.931,799.215,1.074z"/>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="665.1182" y1="391.7246" x2="672.1182" y2="391.7246">
+	<stop  offset="0" style="stop-color:#FFFFFF"/>
+	<stop  offset="1" style="stop-color:#000000"/>
+</linearGradient>
+<rect x="665.118" y="376.725" fill="url(#SVGID_1_)" stroke="#000000" width="7" height="30"/>
+<path fill="#C2C2C2" stroke="#000000" d="M677.868,369.727c0,5.246-4.142,9.498-9.25,9.498l0,0c-5.108,0-9.25-4.252-9.25-9.498
+	v-31.504c0-5.246,4.142-9.498,9.25-9.498l0,0c5.108,0,9.25,4.252,9.25,9.498V369.727z"/>
+<ellipse fill="#EA302E" stroke="#000000" cx="668.643" cy="337.696" rx="7.042" ry="6.338"/>
+<ellipse fill="#F5C461" stroke="#000000" cx="668.643" cy="354.196" rx="7.042" ry="6.339"/>
+<ellipse fill="#81C891" stroke="#000000" cx="668.393" cy="370.696" rx="7.042" ry="6.339"/>
+<polyline fill="none" points="631.394,158.036 631.394,96.035 698.394,96.035 "/>
+<line fill="none" stroke="#FFFFFF" stroke-width="160" stroke-dasharray="30,30" x1="220.394" y1="249.035" x2="639.394" y2="249.035"/>
+<line fill="#FFFFFF" stroke="#FFFFFF" stroke-width="8" x1="418.394" y1="403.035" x2="418.394" y2="599.035"/>
+<line fill="#FFFFFF" stroke="#FFFFFF" stroke-width="7" stroke-dasharray="12" x1="614.394" y1="405.035" x2="418.394" y2="405.035"/>
+</svg>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Panneaupédia — Tous les panneaux de signalisation | E-learning IDSR</title>
+<meta name="description" content="Encyclopédie des panneaux de signalisation routière française : visuel, définition du code de la route et sanctions associées, classés par thème. Outil d'animation pour les IDSR." />
+<style>
+  :root{
+    --jaune:#FECF41; --jaune-fonce:#E9B400; --jaune-clair:#FFF3CC;
+    --noir:#000; --gris:#3a3a3a; --gris-2:#6b6b6b;
+    --gris-clair:#f4f4f4; --bordure:#e2e2e2; --blanc:#fff;
+    --rouge:#c0392b; --vert:#1f8a4c;
+    --rayon:12px; --ombre:0 4px 18px rgba(0,0,0,.12);
+    --max:1180px; --t:.2s ease;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Marianne","Segoe UI",Arial,Helvetica,sans-serif;color:var(--noir);background:var(--gris-clair);line-height:1.55;}
+  :focus-visible{outline:3px solid var(--noir);outline-offset:2px;border-radius:4px;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 1.25rem;}
+  .skip{position:absolute;left:-9999px;background:var(--noir);color:var(--jaune);padding:.6rem 1rem;z-index:200;font-weight:700;}
+  .skip:focus{left:0;top:0;}
+  header.site{background:var(--blanc);border-bottom:6px solid var(--jaune);}
+  .topbar{display:flex;align-items:center;gap:1rem;padding:.7rem 1.25rem;max-width:var(--max);margin:0 auto;flex-wrap:wrap;}
+  .topbar img{width:150px;max-width:100%;height:auto;display:block;}
+  .topbar .fil{font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--gris-2);font-weight:700;}
+  .topbar .fil a{color:var(--gris-2);text-decoration:none;}
+  .module-hero{background:var(--noir);color:var(--blanc);padding:2.2rem 0 2.4rem;}
+  .module-hero .eyebrow{color:var(--jaune);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.8rem;margin:0 0 .5rem;}
+  .module-hero h1{font-size:2rem;line-height:1.15;margin:0 0 .8rem;max-width:820px;}
+  .module-hero p{margin:0;color:#e9e9e9;max-width:760px;}
+  main{padding:1.6rem 0 4rem;}
+
+  .barre{position:sticky;top:0;z-index:50;background:var(--gris-clair);padding:.9rem 0 .6rem;box-shadow:0 6px 12px -8px rgba(0,0,0,.18);}
+  .recherche{display:flex;gap:.6rem;align-items:center;background:var(--blanc);border:2px solid var(--bordure);border-radius:999px;padding:.55rem 1.1rem;transition:border-color var(--t);}
+  .recherche:focus-within{border-color:var(--jaune-fonce);}
+  .recherche svg{flex:none;}
+  .recherche input{flex:1;border:none;font:inherit;font-size:1.05rem;outline:none;background:transparent;min-width:0;}
+  .recherche button{border:none;background:var(--gris-clair);border-radius:999px;width:28px;height:28px;cursor:pointer;font-weight:700;display:none;}
+  .themes{display:flex;gap:.45rem;overflow-x:auto;padding:.7rem 2px .35rem;scrollbar-width:thin;}
+  .chip{flex:none;border:2px solid var(--bordure);background:var(--blanc);border-radius:999px;padding:.34rem .9rem;font:inherit;font-size:.88rem;font-weight:700;cursor:pointer;transition:all var(--t);color:var(--gris);}
+  .chip:hover{border-color:var(--jaune-fonce);}
+  .chip.actif{background:var(--noir);border-color:var(--noir);color:var(--jaune);}
+  .compteur{font-size:.85rem;color:var(--gris-2);margin:.45rem 2px 0;}
+
+  .grille{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:.85rem;margin-top:1rem;}
+  .pcard{background:var(--blanc);border:1px solid var(--bordure);border-radius:var(--rayon);padding:.9rem .7rem .8rem;text-align:center;cursor:pointer;transition:transform var(--t),box-shadow var(--t),border-color var(--t);display:flex;flex-direction:column;gap:.55rem;font:inherit;}
+  .pcard:hover,.pcard:focus-visible{transform:translateY(-3px);box-shadow:var(--ombre);border-color:var(--jaune);}
+  .pcard .visu{height:96px;display:flex;align-items:center;justify-content:center;}
+  .pcard .visu img{max-height:96px;max-width:100%;width:auto;}
+  .pcard .visu img[src$=".jpg"]{object-fit:cover;width:100%;height:96px;border-radius:8px;}
+  .pcard .code{font-size:.72rem;font-weight:800;letter-spacing:.05em;color:var(--gris-2);background:var(--gris-clair);border-radius:999px;padding:.12rem .6rem;align-self:center;}
+  .pcard .nom{font-size:.88rem;font-weight:700;line-height:1.3;}
+  .placeholder{width:88px;height:88px;border-radius:10px;background:var(--gris-clair);border:2px dashed var(--bordure);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--gris-2);font-size:.9rem;}
+  .titre-theme{grid-column:1/-1;margin:1.1rem 0 .1rem;font-size:1.15rem;border-left:8px solid var(--jaune);padding-left:.6rem;}
+  .titre-theme small{display:block;font-size:.82rem;font-weight:400;color:var(--gris-2);}
+  .vide{text-align:center;color:var(--gris-2);padding:3rem 1rem;}
+
+  dialog{border:none;border-radius:var(--rayon);box-shadow:0 20px 60px rgba(0,0,0,.35);padding:0;max-width:640px;width:calc(100vw - 2rem);max-height:90vh;}
+  dialog::backdrop{background:rgba(0,0,0,.55);}
+  .fiche{padding:1.6rem 1.6rem 1.8rem;overflow-y:auto;max-height:88vh;}
+  .fiche .entete{display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap;}
+  .fiche .entete img{max-height:130px;max-width:150px;}
+  .fiche .entete img[src$=".jpg"]{max-width:230px;border-radius:8px;}
+  .fiche h2{margin:.2rem 0 .1rem;font-size:1.35rem;line-height:1.25;}
+  .fiche .meta{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:.5rem;}
+  .badge{font-size:.72rem;font-weight:800;letter-spacing:.04em;background:var(--gris-clair);border:1px solid var(--bordure);border-radius:999px;padding:.18rem .65rem;color:var(--gris);}
+  .badge.jaune{background:var(--jaune-clair);border-color:var(--jaune);}
+  .fiche h3{font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;color:var(--gris-2);margin:1.3rem 0 .35rem;}
+  .fiche .def{margin:0;}
+  .sanction{background:var(--jaune-clair);border:2px solid var(--jaune);border-radius:10px;padding:.9rem 1rem;margin-top:.35rem;}
+  .sanction strong{display:block;margin-bottom:.25rem;}
+  .sanction p{margin:0;font-size:.95rem;}
+  .fermer{position:sticky;top:0;float:right;border:none;background:var(--noir);color:var(--jaune);width:38px;height:38px;border-radius:999px;font-size:1.15rem;font-weight:800;cursor:pointer;margin:-0.4rem -0.4rem 0 0;}
+  .nav-fiche{display:flex;justify-content:space-between;margin-top:1.4rem;gap:.6rem;}
+  .btn{display:inline-flex;align-items:center;gap:.4rem;border:none;border-radius:999px;padding:.55rem 1.1rem;font:inherit;font-weight:700;cursor:pointer;background:var(--gris-clair);transition:background var(--t);}
+  .btn:hover{background:var(--jaune);}
+
+  .avert{background:var(--blanc);border:1px solid var(--bordure);border-radius:var(--rayon);padding:1rem 1.2rem;margin-top:2rem;font-size:.85rem;color:var(--gris-2);}
+  footer.site{background:var(--blanc);border-top:6px solid var(--jaune);padding:1.6rem 0;font-size:.88rem;color:var(--gris-2);}
+  footer.site a{color:var(--noir);font-weight:700;}
+  @media (max-width:640px){ .module-hero h1{font-size:1.5rem;} .grille{grid-template-columns:repeat(auto-fill,minmax(136px,1fr));} }
+  @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu principal</a>
+
+<header class="site">
+  <div class="topbar">
+    <img src="assets/logo-prefet-hdf.png" alt="Préfet de la région Hauts-de-France" style="width:auto;height:72px" />
+    <img src="assets/logo-securite-routiere.png" alt="Sécurité routière — Vivre, Ensemble" />
+    <span class="fil"><a href="index.html">Accueil</a> › Outil d'animation</span>
+  </div>
+</header>
+
+<section class="module-hero">
+  <div class="wrap">
+    <p class="eyebrow">Outil d'animation · Mémo terrain</p>
+    <h1>Panneaupédia : tous les panneaux, leur règle et leur sanction</h1>
+    <p>L'encyclopédie de la signalisation française pour argumenter en animation : le visuel, ce que dit le code de la route et ce que risque l'usager. Recherchez un panneau par son nom, son code (B14, AB4…) ou un mot-clé, ou parcourez par thème.</p>
+  </div>
+</section>
+
+<main id="contenu">
+  <div class="wrap">
+    <div class="barre">
+      <div class="recherche">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+        <input id="q" type="search" placeholder="Rechercher : stop, zone 30, B14, dépassement, fourrière…" aria-label="Rechercher un panneau" autocomplete="off" />
+        <button id="efface" aria-label="Effacer la recherche">×</button>
+      </div>
+      <div class="themes" id="themes" role="tablist" aria-label="Filtrer par thème"></div>
+      <p class="compteur" id="compteur" aria-live="polite"></p>
+    </div>
+
+    <div class="grille" id="grille"></div>
+    <p class="vide" id="vide" hidden>Aucun panneau ne correspond à cette recherche.<br/>Essayez un code (ex. « B1 ») ou un mot plus général (« vitesse », « piéton »).</p>
+
+    <div class="avert">
+      <strong>Sources et limites.</strong> Désignations issues de l'arrêté du 24 novembre 1967 modifié (IISR) ; règles et sanctions issues du code de la route. Montants d'amendes forfaitaires indicatifs à jour de juillet 2026 : en cas de doute ou d'évolution réglementaire, vérifier sur <a href="https://www.legifrance.gouv.fr" target="_blank" rel="noopener">legifrance.gouv.fr</a>. Visuels : modèles officiels des panneaux (domaine public) ; feux et marquages illustrés par des photos réelles ou schémas cotés issus de Wikimedia Commons (crédit et licence indiqués sur chaque fiche).
+    </div>
+  </div>
+</main>
+
+<dialog id="fiche" aria-labelledby="fiche-titre">
+  <div class="fiche" id="fiche-contenu"></div>
+</dialog>
+
+<footer class="site"><div class="wrap">Espace e-learning des Intervenants Départementaux de Sécurité Routière — Préfecture des Hauts-de-France. <a href="index.html">Retour à l'accueil</a></div></footer>
+
+<script src="assets/js/panneaux-data.js"></script>
+<script>
+(function(){
+"use strict";
+var DATA = window.PANNEAUX;
+var grille = document.getElementById("grille");
+var vide = document.getElementById("vide");
+var compteur = document.getElementById("compteur");
+var champs = document.getElementById("q");
+var efface = document.getElementById("efface");
+var chipsBox = document.getElementById("themes");
+var dlg = document.getElementById("fiche");
+var dlgBox = document.getElementById("fiche-contenu");
+
+var themeActif = "tous";
+var requete = "";
+var listeCourante = [];
+
+function norm(s){
+  return (s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[''–—-]/g," ");
+}
+DATA.ITEMS.forEach(function(it){ it._idx = norm(it.c+" "+it.n+" "+it.d+" "+it.a); });
+
+var nomTheme = {};
+DATA.THEMES.forEach(function(t){ nomTheme[t.id] = t; });
+
+function imgSrc(it){ return "assets/panneaux/" + ((DATA.IMG && DATA.IMG[it.c]) || (it.c + ".svg")); }
+function estPhoto(it){ return DATA.IMG && DATA.IMG[it.c] && DATA.IMG[it.c].slice(-4)===".jpg"; }
+
+/* ----- chips de thèmes ----- */
+function chip(id, label){
+  var b = document.createElement("button");
+  b.className = "chip" + (id===themeActif ? " actif" : "");
+  b.textContent = label;
+  b.setAttribute("role","tab");
+  b.dataset.t = id;
+  b.addEventListener("click", function(){
+    themeActif = id;
+    chipsBox.querySelectorAll(".chip").forEach(function(c){ c.classList.toggle("actif", c.dataset.t===id); });
+    rendre();
+  });
+  return b;
+}
+chipsBox.appendChild(chip("tous","Tous"));
+DATA.THEMES.forEach(function(t){ chipsBox.appendChild(chip(t.id, t.nom)); });
+
+/* ----- rendu ----- */
+function carte(it, pos){
+  var b = document.createElement("button");
+  b.className = "pcard";
+  b.dataset.pos = pos;
+  b.innerHTML = '<span class="visu"><img loading="lazy" src="'+imgSrc(it)+'" alt="" onerror="this.outerHTML=\'<span class=placeholder>'+it.c+'</span>\'"/></span>' +
+    '<span class="code">'+it.c+'</span><span class="nom">'+it.n+'</span>';
+  b.addEventListener("click", function(){ ouvrir(pos); });
+  return b;
+}
+
+function rendre(){
+  var q = norm(requete).trim();
+  var mots = q.split(/\s+/).filter(Boolean);
+  listeCourante = DATA.ITEMS.filter(function(it){
+    if(themeActif!=="tous" && it.t!==themeActif) return false;
+    return mots.every(function(m){ return it._idx.indexOf(m)!==-1; });
+  });
+  grille.innerHTML = "";
+  var frag = document.createDocumentFragment();
+  if(themeActif==="tous" && !q){
+    DATA.THEMES.forEach(function(t){
+      var sous = listeCourante.map(function(it,i){return [it,i];}).filter(function(p){ return p[0].t===t.id; });
+      if(!sous.length) return;
+      var h = document.createElement("h2");
+      h.className = "titre-theme";
+      h.innerHTML = t.nom + " <small>" + t.desc + "</small>";
+      frag.appendChild(h);
+      sous.forEach(function(p){ frag.appendChild(carte(p[0], p[1])); });
+    });
+  } else {
+    listeCourante.forEach(function(it,i){ frag.appendChild(carte(it,i)); });
+  }
+  grille.appendChild(frag);
+  vide.hidden = listeCourante.length>0;
+  compteur.textContent = (listeCourante.length>1 ? listeCourante.length+" signaux affichés" : listeCourante.length+" signal affiché") + " sur " + DATA.ITEMS.length;
+  efface.style.display = requete ? "block" : "none";
+}
+
+/* ----- fiche détaillée ----- */
+var posCourante = -1;
+function ouvrir(pos){
+  posCourante = pos;
+  var it = listeCourante[pos];
+  if(!it) return;
+  var s = DATA.S[it.s];
+  var t = nomTheme[it.t];
+  dlgBox.innerHTML =
+    '<button class="fermer" id="fermer" aria-label="Fermer la fiche">×</button>' +
+    '<div class="entete">' +
+      '<img src="'+imgSrc(it)+'" alt="Panneau '+it.c+'" onerror="this.outerHTML=\'<span class=placeholder>'+it.c+'</span>\'"/>' +
+      '<div><h2 id="fiche-titre">'+it.n+'</h2>' +
+      '<div class="meta"><span class="badge jaune">'+it.c+'</span><span class="badge">'+(t?t.nom:it.t)+'</span><span class="badge">'+it.r+'</span></div></div>' +
+    '</div>' +
+    '<h3>Ce que dit le code</h3><p class="def">'+it.d+'</p>' +
+    '<h3>Sanctions</h3><div class="sanction"><strong>'+s.t+'</strong><p>'+s.d+'</p></div>' +
+    (function(){var cr=DATA.CREDITS && DATA.CREDITS[it.c]; return cr ? '<p style="font-size:.72rem;color:var(--gris-2);margin:.9rem 0 0;">Photo : '+cr.auteur+' — '+cr.licence+' (Wikimedia Commons)</p>' : "";})() +
+    '<div class="nav-fiche">' +
+      '<button class="btn" id="prec" '+(pos<=0?"disabled":"")+'>← Précédent</button>' +
+      '<button class="btn" id="suiv" '+(pos>=listeCourante.length-1?"disabled":"")+'>Suivant →</button>' +
+    '</div>';
+  if(!dlg.open) dlg.showModal();
+  document.getElementById("fermer").addEventListener("click", function(){ dlg.close(); });
+  document.getElementById("prec").addEventListener("click", function(){ ouvrir(posCourante-1); });
+  document.getElementById("suiv").addEventListener("click", function(){ ouvrir(posCourante+1); });
+  dlgBox.scrollTop = 0;
+}
+dlg.addEventListener("click", function(e){ if(e.target===dlg) dlg.close(); });
+document.addEventListener("keydown", function(e){
+  if(!dlg.open) return;
+  if(e.key==="ArrowLeft" && posCourante>0) ouvrir(posCourante-1);
+  if(e.key==="ArrowRight" && posCourante<listeCourante.length-1) ouvrir(posCourante+1);
+});
+
+/* ----- recherche ----- */
+var timer;
+champs.addEventListener("input", function(){
+  clearTimeout(timer);
+  timer = setTimeout(function(){ requete = champs.value; rendre(); }, 120);
+});
+efface.addEventListener("click", function(){ champs.value=""; requete=""; rendre(); champs.focus(); });
+
+rendre();
+})();
+</script>
+</body>
+</html>
