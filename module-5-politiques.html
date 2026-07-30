@@ -113,6 +113,87 @@
     .step-sub{display:none;}
     .module-hero h1{font-size:1.55rem;}
   }
+
+  /* ============================================================
+     CORRECTIFS TRANSVERSES — audit design du 30 juillet 2026
+     Bloc identique sur toutes les pages, placé en fin de feuille
+     pour surcharger les règles ci-dessus. Il constituera le point
+     de départ du futur socle.css : toute modification doit être
+     reportée sur les autres pages tant que le socle n'existe pas.
+     ============================================================ */
+  :root{
+    --h-header:132px;
+    --jaune-trait:#8A6D00;
+    --gris-400:#8c8c8c;
+    --vert-fort:#14532D;
+  }
+  html{scroll-padding-top:calc(var(--h-header) + 16px);}
+
+  /* B2 · la barre de progression devient lisible (jaune sur gris foncé) */
+  .progress{background:#3a3a3a;}
+  .progress > span{background:var(--jaune,#FECF41);}
+
+  /* B3 · le menu d'étapes ne passe plus sous l'en-tête collant */
+  .stepper{top:calc(var(--h-header) + 12px);z-index:1;}
+  .etape-compteur{margin:.2rem .3rem .5rem;font-size:.78rem;font-weight:700;
+    text-transform:uppercase;letter-spacing:.05em;color:#3a3a3a;}
+
+  /* B6 · le bouton verrouillé est lisible et sa condition est écrite */
+  .btn:disabled,.btn-primary:disabled,.btn-ghost:disabled{
+    opacity:1;background:#f4f4f4;color:#6b6b6b;
+    box-shadow:inset 0 0 0 2px #cfcfcf;cursor:not-allowed;}
+  .lock-note{margin:1.2rem 0 -.6rem;font-size:.88rem;color:#3a3a3a;font-weight:600;}
+  .step-item:disabled{opacity:1;color:#6b6b6b;}
+  .step-item:disabled .pastille{border-color:var(--gris-400);color:#6b6b6b;}
+
+  /* contraste des bordures de contrôles interactifs */
+  .opt{border-color:var(--gris-400);}
+  .role{border-color:#cfcfcf;}
+  .role .plus{color:#000;background:var(--jaune,#FECF41);width:26px;height:26px;
+    border-radius:50%;display:grid;place-items:center;top:.7rem;right:.7rem;
+    font-size:1rem;line-height:1;}
+  .feedback.ok{color:var(--vert-fort);}
+
+  /* B8 · le panneau déplié ne tronque plus le texte */
+  .role .sigle,.role .nom{display:block;margin:0 0 .15rem;}
+  .role .nom{margin-bottom:0;}
+  .role .detail{max-height:none;display:grid;grid-template-rows:0fr;
+    overflow:hidden;transition:grid-template-rows var(--t,.25s ease);}
+  .role .detail > *{min-height:0;}
+  .role[aria-expanded="true"] .detail{max-height:none;grid-template-rows:1fr;}
+
+  /* lisibilité des barres jaunes sur fond blanc, sans toucher aux schémas
+     dont le contour est déjà défini dans le SVG */
+  .schema svg rect[fill="#FECF41"]:not([stroke]){stroke:var(--jaune-trait);stroke-width:.8;}
+
+  /* B10 · les nombres et les unités ne se coupent plus en fin de ligne */
+  .sc b,.chiffre{white-space:nowrap;}
+
+  @media (max-width:640px){
+    /* B5 · l'en-tête mobile n'occupe plus le quart de l'écran */
+    :root{--h-header:92px;}
+    .topbar{padding:.5rem 1rem;gap:.7rem;}
+    .topbar .logo-prefet{height:52px!important;}
+    .topbar img{width:104px;}
+
+    /* B1 · les graphiques redeviennent consultables */
+    .etape{padding:1.1rem;}
+    .schema{padding:.8rem;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .schema svg{min-width:560px;}
+    .schema::after{content:"↔ Faites défiler le graphique horizontalement";
+      display:block;font-size:.8rem;color:#3a3a3a;margin-top:.5rem;font-style:normal;}
+
+    /* menu d'étapes : accrochage au défilement */
+    .stepper ol{scroll-snap-type:x mandatory;}
+    .step-item{scroll-snap-align:start;}
+  }
+
+  /* B4 · mouvement réduit traité en CSS, et non par un script différé */
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;
+      animation-iteration-count:1!important;transition-duration:.01ms!important;
+      scroll-behavior:auto!important;}
+  }
 </style>
 </head>
 <body data-module="m4">
@@ -168,10 +249,10 @@
         <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
         <div class="org" data-explore="1">
           <div class="cartes">
-            <button class="role" aria-expanded="false"><p class="sigle">Le fondement</p><p class="nom">Respecter la règle</p><span class="plus">+</span><div class="detail">La règle n'est pas arbitraire : derrière chaque article du code de la route, il y a un mécanisme d'accident documenté par les données. La politique nationale poursuit donc un double objectif : faire comprendre la règle (éducation, communication) et la faire respecter (contrôle, sanction). L'ambition : passer de la « peur du gendarme » à une culture partagée de la sécurité routière.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Deux axes</p><p class="nom">Comprendre et respecter</p><span class="plus">+</span><div class="detail">Faire comprendre (continuum éducatif, campagnes nationales) et faire respecter (contrôle automatisé, sanctions) sont indissociables : le contrôle sans pédagogie braque les usagers, la pédagogie sans contrôle reste un vœu pieux. Ce tandem a divisé la mortalité routière par cinq depuis 1972 : 18 034 tués en équivalent 30 jours cette année-là, contre 3 263 en 2025.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Formation et information</p><p class="nom">Agir en amont</p><span class="plus">+</span><div class="detail">Le continuum éducatif accompagne l'usager de la maternelle au permis (APER, ASSR, permis AM, AAC, conduite supervisée), l'encadrement des conducteurs se renforce (permis probatoire, permis à points), et la communication nationale martèle les priorités : alcool, vitesse, ceinture, stupéfiants, distracteurs.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Contrôler et sanctionner</p><p class="nom">Faire respecter</p><span class="plus">+</span><div class="detail">Le contrôle automatisé, déployé depuis 2003 (radars fixes, mobiles, de feux, de tronçon), a marqué la plus forte baisse de mortalité de l'histoire récente. S'y ajoutent les plans départementaux de contrôle routier — ciblés sur les lieux et horaires accidentogènes —, la lutte contre la conduite après usage de stupéfiants (dépistage salivaire) et une meilleure sanction des conducteurs étrangers.</div></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Le fondement</span><span class="nom">Respecter la règle</span><span class="plus">+</span><span class="detail"><span>La règle n'est pas arbitraire : derrière chaque article du code de la route, il y a un mécanisme d'accident documenté par les données. La politique nationale poursuit donc un double objectif : faire comprendre la règle (éducation, communication) et la faire respecter (contrôle, sanction). L'ambition : passer de la « peur du gendarme » à une culture partagée de la sécurité routière.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Deux axes</span><span class="nom">Comprendre et respecter</span><span class="plus">+</span><span class="detail"><span>Faire comprendre (continuum éducatif, campagnes nationales) et faire respecter (contrôle automatisé, sanctions) sont indissociables : le contrôle sans pédagogie braque les usagers, la pédagogie sans contrôle reste un vœu pieux. Ce tandem a divisé la mortalité routière par cinq depuis 1972 : 18 034 tués en équivalent 30 jours cette année-là, contre 3 263 en 2025.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Formation et information</span><span class="nom">Agir en amont</span><span class="plus">+</span><span class="detail"><span>Le continuum éducatif accompagne l'usager de la maternelle au permis (APER, ASSR, permis AM, AAC, conduite supervisée), l'encadrement des conducteurs se renforce (permis probatoire, permis à points), et la communication nationale martèle les priorités : alcool, vitesse, ceinture, stupéfiants, distracteurs.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Contrôler et sanctionner</span><span class="nom">Faire respecter</span><span class="plus">+</span><span class="detail"><span>Le contrôle automatisé, déployé depuis 2003 (radars fixes, mobiles, de feux, de tronçon), a marqué la plus forte baisse de mortalité de l'histoire récente. S'y ajoutent les plans départementaux de contrôle routier — ciblés sur les lieux et horaires accidentogènes —, la lutte contre la conduite après usage de stupéfiants (dépistage salivaire) et une meilleure sanction des conducteurs étrangers.</span></span></button>
           </div>
         </div>
         <div class="verrou" data-quiz="1">
@@ -194,11 +275,11 @@
         <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
         <div class="org" data-explore="1">
           <div class="cartes">
-            <button class="role" aria-expanded="false"><p class="sigle">APER</p><p class="nom">École primaire</p><span class="plus">+</span><div class="detail">Attestation de première éducation à la route, délivrée à l'école primaire. Premier maillon du continuum : l'enfant y apprend à se déplacer en sécurité comme piéton, passager et « rouleur » (vélo, trottinette).</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">ASSR</p><p class="nom">Au collège</p><span class="plus">+</span><div class="detail">Attestations scolaires de sécurité routière : ASSR 1 en classe de 5e, ASSR 2 en 3e. Loin d'être des formalités, elles conditionnent la suite : l'ASSR 1 est requise pour le permis AM (ex-BSR) dès 14 ans, l'ASSR 2 pour s'inscrire à l'examen du permis de conduire.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">AAC</p><p class="nom">Conduite accompagnée</p><span class="plus">+</span><div class="detail">Apprentissage anticipé de la conduite, accessible dès 15 ans : après la formation initiale en auto-école, le jeune conduit avec un accompagnateur (3 000 km minimum recommandés avant l'examen). Résultats mesurés : meilleur taux de réussite à l'examen et période probatoire réduite à 2 ans au lieu de 3.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Conduite supervisée</p><p class="nom">Après l'examen théorique</p><span class="plus">+</span><div class="detail">Réservée aux 18 ans et plus : après la formation initiale ou après un échec à l'examen, elle permet de consolider son expérience avec un accompagnateur, à moindre coût, avant de (re)passer l'épreuve. Un filet de sécurité contre l'apprentissage bâclé.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Permis probatoire &amp; permis à points</p><p class="nom">Encadrer les conducteurs</p><span class="plus">+</span><div class="detail">Le permis probatoire démarre avec 6 points (12 au bout de 3 ans sans infraction, 2 ans après une AAC) et impose 0,2 g/L d'alcool maximum — zéro verre. Le permis à points responsabilise tous les conducteurs : retrait selon la gravité, stage de sensibilisation permettant de récupérer jusqu'à 4 points. Un dispositif pédagogique avant d'être répressif : il laisse une seconde chance.</div></button>
+            <button class="role" aria-expanded="false"><span class="sigle">APER</span><span class="nom">École primaire</span><span class="plus">+</span><span class="detail"><span>Attestation de première éducation à la route, délivrée à l'école primaire. Premier maillon du continuum : l'enfant y apprend à se déplacer en sécurité comme piéton, passager et « rouleur » (vélo, trottinette).</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">ASSR</span><span class="nom">Au collège</span><span class="plus">+</span><span class="detail"><span>Attestations scolaires de sécurité routière : ASSR 1 en classe de 5e, ASSR 2 en 3e. Loin d'être des formalités, elles conditionnent la suite : l'ASSR 1 est requise pour le permis AM (ex-BSR) dès 14 ans, l'ASSR 2 pour s'inscrire à l'examen du permis de conduire.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">AAC</span><span class="nom">Conduite accompagnée</span><span class="plus">+</span><span class="detail"><span>Apprentissage anticipé de la conduite, accessible dès 15 ans : après la formation initiale en auto-école, le jeune conduit avec un accompagnateur (3 000 km minimum recommandés avant l'examen). Résultats mesurés : meilleur taux de réussite à l'examen et période probatoire réduite à 2 ans au lieu de 3.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Conduite supervisée</span><span class="nom">Après l'examen théorique</span><span class="plus">+</span><span class="detail"><span>Réservée aux 18 ans et plus : après la formation initiale ou après un échec à l'examen, elle permet de consolider son expérience avec un accompagnateur, à moindre coût, avant de (re)passer l'épreuve. Un filet de sécurité contre l'apprentissage bâclé.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Permis probatoire &amp; permis à points</span><span class="nom">Encadrer les conducteurs</span><span class="plus">+</span><span class="detail"><span>Le permis probatoire démarre avec 6 points (12 au bout de 3 ans sans infraction, 2 ans après une AAC) et impose 0,2 g/L d'alcool maximum — zéro verre. Le permis à points responsabilise tous les conducteurs : retrait selon la gravité, stage de sensibilisation permettant de récupérer jusqu'à 4 points. Un dispositif pédagogique avant d'être répressif : il laisse une seconde chance.</span></span></button>
           </div>
         </div>
         <figure class="schema">
@@ -245,11 +326,11 @@
         <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
         <div class="org" data-explore="1">
           <div class="cartes">
-            <button class="role" aria-expanded="false"><p class="sigle">DGO</p><p class="nom">Document Général d'Orientations</p><span class="plus">+</span><div class="detail">Définit une politique pluriannuelle fondée sur la connaissance fine des enjeux du département.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">PDASR</p><p class="nom">Plan annuel d'actions</p><span class="plus">+</span><div class="detail">Plan Départemental d'Actions de Sécurité Routière : déclinaison annuelle du DGO qui garantit la cohérence entre enjeux et actions.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Objectifs du PDASR</p><p class="nom">Ce qu'il organise</p><span class="plus">+</span><div class="detail">Organiser la concertation et la coordination des acteurs, afficher l'ensemble des actions (infrastructure, communication, prévention, contrôle-sanction) et mobiliser les acteurs locaux.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Le programme « agir »</p><p class="nom">Mobiliser localement</p><span class="plus">+</span><div class="detail">Les actions proposées aux IDSR sont concentrées sur des objectifs précis et cohérentes avec l'étude des enjeux locaux.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Les cibles</p><p class="nom">Qui et quoi ?</p><span class="plus">+</span><div class="detail">Les moyens de déplacement (piéton, vélo, EDPM, 2RM, véhicule de tourisme...), les classes d'âge et les structures (commune, entreprise, éducation nationale).</div></button>
+            <button class="role" aria-expanded="false"><span class="sigle">DGO</span><span class="nom">Document Général d'Orientations</span><span class="plus">+</span><span class="detail"><span>Définit une politique pluriannuelle fondée sur la connaissance fine des enjeux du département.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">PDASR</span><span class="nom">Plan annuel d'actions</span><span class="plus">+</span><span class="detail"><span>Plan Départemental d'Actions de Sécurité Routière : déclinaison annuelle du DGO qui garantit la cohérence entre enjeux et actions.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Objectifs du PDASR</span><span class="nom">Ce qu'il organise</span><span class="plus">+</span><span class="detail"><span>Organiser la concertation et la coordination des acteurs, afficher l'ensemble des actions (infrastructure, communication, prévention, contrôle-sanction) et mobiliser les acteurs locaux.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Le programme « agir »</span><span class="nom">Mobiliser localement</span><span class="plus">+</span><span class="detail"><span>Les actions proposées aux IDSR sont concentrées sur des objectifs précis et cohérentes avec l'étude des enjeux locaux.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Les cibles</span><span class="nom">Qui et quoi ?</span><span class="plus">+</span><span class="detail"><span>Les moyens de déplacement (piéton, vélo, EDPM, 2RM, véhicule de tourisme...), les classes d'âge et les structures (commune, entreprise, éducation nationale).</span></span></button>
           </div>
         </div>
         <div class="docs">
@@ -506,6 +587,7 @@
 })();
 </script>
 <script src="assets/js/quiz-extras.js" defer></script>
+<script src="assets/js/ui-parcours.js" defer></script>
 <script src="assets/js/attestation.js" defer></script>
 </body>
 </html>

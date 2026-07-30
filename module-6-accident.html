@@ -113,6 +113,87 @@
     .step-sub{display:none;}
     .module-hero h1{font-size:1.55rem;}
   }
+
+  /* ============================================================
+     CORRECTIFS TRANSVERSES — audit design du 30 juillet 2026
+     Bloc identique sur toutes les pages, placé en fin de feuille
+     pour surcharger les règles ci-dessus. Il constituera le point
+     de départ du futur socle.css : toute modification doit être
+     reportée sur les autres pages tant que le socle n'existe pas.
+     ============================================================ */
+  :root{
+    --h-header:132px;
+    --jaune-trait:#8A6D00;
+    --gris-400:#8c8c8c;
+    --vert-fort:#14532D;
+  }
+  html{scroll-padding-top:calc(var(--h-header) + 16px);}
+
+  /* B2 · la barre de progression devient lisible (jaune sur gris foncé) */
+  .progress{background:#3a3a3a;}
+  .progress > span{background:var(--jaune,#FECF41);}
+
+  /* B3 · le menu d'étapes ne passe plus sous l'en-tête collant */
+  .stepper{top:calc(var(--h-header) + 12px);z-index:1;}
+  .etape-compteur{margin:.2rem .3rem .5rem;font-size:.78rem;font-weight:700;
+    text-transform:uppercase;letter-spacing:.05em;color:#3a3a3a;}
+
+  /* B6 · le bouton verrouillé est lisible et sa condition est écrite */
+  .btn:disabled,.btn-primary:disabled,.btn-ghost:disabled{
+    opacity:1;background:#f4f4f4;color:#6b6b6b;
+    box-shadow:inset 0 0 0 2px #cfcfcf;cursor:not-allowed;}
+  .lock-note{margin:1.2rem 0 -.6rem;font-size:.88rem;color:#3a3a3a;font-weight:600;}
+  .step-item:disabled{opacity:1;color:#6b6b6b;}
+  .step-item:disabled .pastille{border-color:var(--gris-400);color:#6b6b6b;}
+
+  /* contraste des bordures de contrôles interactifs */
+  .opt{border-color:var(--gris-400);}
+  .role{border-color:#cfcfcf;}
+  .role .plus{color:#000;background:var(--jaune,#FECF41);width:26px;height:26px;
+    border-radius:50%;display:grid;place-items:center;top:.7rem;right:.7rem;
+    font-size:1rem;line-height:1;}
+  .feedback.ok{color:var(--vert-fort);}
+
+  /* B8 · le panneau déplié ne tronque plus le texte */
+  .role .sigle,.role .nom{display:block;margin:0 0 .15rem;}
+  .role .nom{margin-bottom:0;}
+  .role .detail{max-height:none;display:grid;grid-template-rows:0fr;
+    overflow:hidden;transition:grid-template-rows var(--t,.25s ease);}
+  .role .detail > *{min-height:0;}
+  .role[aria-expanded="true"] .detail{max-height:none;grid-template-rows:1fr;}
+
+  /* lisibilité des barres jaunes sur fond blanc, sans toucher aux schémas
+     dont le contour est déjà défini dans le SVG */
+  .schema svg rect[fill="#FECF41"]:not([stroke]){stroke:var(--jaune-trait);stroke-width:.8;}
+
+  /* B10 · les nombres et les unités ne se coupent plus en fin de ligne */
+  .sc b,.chiffre{white-space:nowrap;}
+
+  @media (max-width:640px){
+    /* B5 · l'en-tête mobile n'occupe plus le quart de l'écran */
+    :root{--h-header:92px;}
+    .topbar{padding:.5rem 1rem;gap:.7rem;}
+    .topbar .logo-prefet{height:52px!important;}
+    .topbar img{width:104px;}
+
+    /* B1 · les graphiques redeviennent consultables */
+    .etape{padding:1.1rem;}
+    .schema{padding:.8rem;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .schema svg{min-width:560px;}
+    .schema::after{content:"↔ Faites défiler le graphique horizontalement";
+      display:block;font-size:.8rem;color:#3a3a3a;margin-top:.5rem;font-style:normal;}
+
+    /* menu d'étapes : accrochage au défilement */
+    .stepper ol{scroll-snap-type:x mandatory;}
+    .step-item{scroll-snap-align:start;}
+  }
+
+  /* B4 · mouvement réduit traité en CSS, et non par un script différé */
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;
+      animation-iteration-count:1!important;transition-duration:.01ms!important;
+      scroll-behavior:auto!important;}
+  }
 </style>
 </head>
 <body data-module="m5">
@@ -168,12 +249,12 @@
         <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
         <div class="org" data-explore="1">
           <div class="cartes">
-            <button class="role" aria-expanded="false"><p class="sigle">Accident corporel</p><p class="nom">Définition</p><span class="plus">+</span><div class="detail">Accident qui implique au moins un véhicule, fait au moins une victime et survient sur une voie ouverte à la circulation publique.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">BAAC</p><p class="nom">Le recueil des données</p><span class="plus">+</span><div class="detail">Bulletin d'Analyse des Accidents Corporels : support de recueil des données sur chaque accident.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Tué</p><p class="nom">Une définition précise</p><span class="plus">+</span><div class="detail">Personne décédée sur le coup ou dans les 30 jours qui suivent l'accident.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Blessé grave</p><p class="nom">Gravité</p><span class="plus">+</span><div class="detail">Une victime dont les blessures atteignent le niveau 3 ou plus de l'échelle internationale MAIS. Le chiffre est estimé, car les forces de l'ordre ne renseignent pas le degré de gravité des blessures : l'ONISR l'obtient par modélisation avec l'Université Gustave Eiffel, à partir du registre du Rhône. En 2025, on estime à 16 751 le nombre de blessés graves en France métropolitaine, sur 247 000 blessés au total.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Indice de gravité</p><p class="nom">Mesurer</p><span class="plus">+</span><div class="detail">Nombre de tués pour 100 accidents corporels. En 2025, la France métropolitaine a enregistré 51 837 accidents corporels pour 3 263 tués.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Tués par million d'habitants</p><p class="nom">Comparer</p><span class="plus">+</span><div class="detail">L'indicateur qui permet de comparer des territoires de tailles différentes. En 2025, la France métropolitaine se situe à 49 tués par million d'habitants, la moyenne de l'Union européenne à 43 (donnée provisoire pour les 27 pays). Attention en animation : ce taux monte à 96 tués par million d'habitants chez les 18-24 ans, soit deux fois la moyenne, et il descend à 43 en Hauts-de-France en moyenne sur 2021-2025.</div></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Accident corporel</span><span class="nom">Définition</span><span class="plus">+</span><span class="detail"><span>Accident qui implique au moins un véhicule, fait au moins une victime et survient sur une voie ouverte à la circulation publique.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">BAAC</span><span class="nom">Le recueil des données</span><span class="plus">+</span><span class="detail"><span>Bulletin d'Analyse des Accidents Corporels : support de recueil des données sur chaque accident.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Tué</span><span class="nom">Une définition précise</span><span class="plus">+</span><span class="detail"><span>Personne décédée sur le coup ou dans les 30 jours qui suivent l'accident.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Blessé grave</span><span class="nom">Gravité</span><span class="plus">+</span><span class="detail"><span>Une victime dont les blessures atteignent le niveau 3 ou plus de l'échelle internationale MAIS. Le chiffre est estimé, car les forces de l'ordre ne renseignent pas le degré de gravité des blessures : l'ONISR l'obtient par modélisation avec l'Université Gustave Eiffel, à partir du registre du Rhône. En 2025, on estime à 16 751 le nombre de blessés graves en France métropolitaine, sur 247 000 blessés au total.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Indice de gravité</span><span class="nom">Mesurer</span><span class="plus">+</span><span class="detail"><span>Nombre de tués pour 100 accidents corporels. En 2025, la France métropolitaine a enregistré 51 837 accidents corporels pour 3 263 tués.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Tués par million d'habitants</span><span class="nom">Comparer</span><span class="plus">+</span><span class="detail"><span>L'indicateur qui permet de comparer des territoires de tailles différentes. En 2025, la France métropolitaine se situe à 49 tués par million d'habitants, la moyenne de l'Union européenne à 43 (donnée provisoire pour les 27 pays). Attention en animation : ce taux monte à 96 tués par million d'habitants chez les 18-24 ans, soit deux fois la moyenne, et il descend à 43 en Hauts-de-France en moyenne sur 2021-2025.</span></span></button>
           </div>
         </div>
         <div class="verrou" data-quiz="1">
@@ -196,11 +277,11 @@
         <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
         <div class="org" data-explore="1">
           <div class="cartes">
-            <button class="role" aria-expanded="false"><p class="sigle">Le véhicule</p><p class="nom">1<sup>er</sup> élément</p><span class="plus">+</span><div class="detail">État général et entretien : pneumatiques, freins, éclairage, amortisseurs, pare-brise. Charge et répartition du chargement. Équipements de sécurité présents et en état de fonctionnement. Adaptation du véhicule à l'usage qui en est fait.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">L'environnement</p><p class="nom">2<sup>e</sup> élément</p><span class="plus">+</span><div class="detail">Tracé et aménagement de la route, état de la chaussée, signalisation, visibilité, obstacles latéraux. Conditions météorologiques, luminosité, densité et nature du trafic. Un même comportement n'a pas les mêmes conséquences selon l'environnement.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Le conducteur</p><p class="nom">3<sup>e</sup> élément</p><span class="plus">+</span><div class="detail">Vigilance et fatigue, état de santé, alcool, stupéfiants et médicaments, expérience et formation, connaissance des règles, prise d'information, analyse de la situation, décision et maîtrise du véhicule. C'est l'élément le plus souvent cité, mais il n'est jamais seul en cause.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">L'organisation</p><p class="nom">4<sup>e</sup> élément</p><span class="plus">+</span><div class="detail">Tout ce qui a décidé du déplacement et de ses conditions : horaires, délais imposés, kilométrage à couvrir, planification des tournées, choix du véhicule mis à disposition, obligation de répondre au téléphone pendant le service, pression du résultat. C'est l'élément le plus souvent oublié et pourtant l'un des plus faciles à corriger, en particulier dans le cadre professionnel.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">La combinaison</p><p class="nom">Le principe à retenir</p><span class="plus">+</span><div class="detail">Un accident n'a jamais une cause unique : il naît de la dégradation simultanée de ces quatre éléments. Un conducteur fatigué, sur une route glissante, avec des pneus usés, parce qu'il doit livrer avant midi. Corrigez un seul maillon de la chaîne, des pneus neufs, une heure de sommeil, une tournée réaliste, et l'accident n'a probablement pas lieu. C'est exactement là que l'IDSR intervient.</div></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Le véhicule</span><span class="nom">1<sup>er</sup> élément</span><span class="plus">+</span><span class="detail"><span>État général et entretien : pneumatiques, freins, éclairage, amortisseurs, pare-brise. Charge et répartition du chargement. Équipements de sécurité présents et en état de fonctionnement. Adaptation du véhicule à l'usage qui en est fait.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">L'environnement</span><span class="nom">2<sup>e</sup> élément</span><span class="plus">+</span><span class="detail"><span>Tracé et aménagement de la route, état de la chaussée, signalisation, visibilité, obstacles latéraux. Conditions météorologiques, luminosité, densité et nature du trafic. Un même comportement n'a pas les mêmes conséquences selon l'environnement.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Le conducteur</span><span class="nom">3<sup>e</sup> élément</span><span class="plus">+</span><span class="detail"><span>Vigilance et fatigue, état de santé, alcool, stupéfiants et médicaments, expérience et formation, connaissance des règles, prise d'information, analyse de la situation, décision et maîtrise du véhicule. C'est l'élément le plus souvent cité, mais il n'est jamais seul en cause.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">L'organisation</span><span class="nom">4<sup>e</sup> élément</span><span class="plus">+</span><span class="detail"><span>Tout ce qui a décidé du déplacement et de ses conditions : horaires, délais imposés, kilométrage à couvrir, planification des tournées, choix du véhicule mis à disposition, obligation de répondre au téléphone pendant le service, pression du résultat. C'est l'élément le plus souvent oublié et pourtant l'un des plus faciles à corriger, en particulier dans le cadre professionnel.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">La combinaison</span><span class="nom">Le principe à retenir</span><span class="plus">+</span><span class="detail"><span>Un accident n'a jamais une cause unique : il naît de la dégradation simultanée de ces quatre éléments. Un conducteur fatigué, sur une route glissante, avec des pneus usés, parce qu'il doit livrer avant midi. Corrigez un seul maillon de la chaîne, des pneus neufs, une heure de sommeil, une tournée réaliste, et l'accident n'a probablement pas lieu. C'est exactement là que l'IDSR intervient.</span></span></button>
           </div>
         </div>
         <figure class="schema">
@@ -229,44 +310,44 @@
   <h4>Facteurs cités chez les présumés responsables d'accidents mortels</h4>
   <svg viewBox="0 0 720 320" role="img" aria-labelledby="m5f1t m5f1d">
     <title id="m5f1t">Part des principaux facteurs chez les présumés responsables d'accidents mortels, Hauts-de-France et France métropolitaine</title>
-    <desc id="m5f1d">Vitesse : 31 % en Hauts-de-France contre 30 % en France métropolitaine. Alcool : 23 % contre 21 %. Inattention : 13 % contre 12 %. Stupéfiants : 13 % contre 11 %. Malaise : 10 % contre 11 %. Refus de priorité : 8 % contre 10 %. Un même accident peut cumuler plusieurs facteurs, le total dépasse donc 100 %.</desc>
+    <desc id="m5f1d">Vitesse : 31 % en Hauts-de-France contre 30 % en France métropolitaine. Alcool : 23 % contre 21 %. Inattention : 13 % contre 12 %. Stupéfiants : 13 % contre 11 %. Malaise : 10 % contre 11 %. Refus de priorité : 8 % contre 10 %. Un même accident peut cumuler plusieurs facteurs, le total dépasse donc 100 %.</desc>
     <g font-family="Marianne,Segoe UI,Arial,sans-serif" font-size="13">
       <text x="200" y="40" text-anchor="end" font-weight="700">Vitesse</text>
       <rect x="210" y="18" width="418.5" height="16" rx="3" fill="#000"/>
-      <text x="634.5" y="31" font-size="12" font-weight="800">31 %</text>
+      <text x="634.5" y="31" font-size="12" font-weight="800">31 %</text>
       <rect x="210" y="37" width="405.0" height="16" rx="3" fill="#FECF41" stroke="#c9a300" stroke-width="0.8"/>
-      <text x="621.0" y="50" font-size="12" font-weight="800">30 %</text>
+      <text x="621.0" y="50" font-size="12" font-weight="800">30 %</text>
       <text x="200" y="84" text-anchor="end" font-weight="700">Alcool</text>
       <rect x="210" y="62" width="310.5" height="16" rx="3" fill="#000"/>
-      <text x="526.5" y="75" font-size="12" font-weight="800">23 %</text>
+      <text x="526.5" y="75" font-size="12" font-weight="800">23 %</text>
       <rect x="210" y="81" width="283.5" height="16" rx="3" fill="#FECF41" stroke="#c9a300" stroke-width="0.8"/>
-      <text x="499.5" y="94" font-size="12" font-weight="800">21 %</text>
+      <text x="499.5" y="94" font-size="12" font-weight="800">21 %</text>
       <text x="200" y="128" text-anchor="end" font-weight="700">Inattention</text>
       <rect x="210" y="106" width="175.5" height="16" rx="3" fill="#000"/>
-      <text x="391.5" y="119" font-size="12" font-weight="800">13 %</text>
+      <text x="391.5" y="119" font-size="12" font-weight="800">13 %</text>
       <rect x="210" y="125" width="162.0" height="16" rx="3" fill="#FECF41" stroke="#c9a300" stroke-width="0.8"/>
-      <text x="378.0" y="138" font-size="12" font-weight="800">12 %</text>
+      <text x="378.0" y="138" font-size="12" font-weight="800">12 %</text>
       <text x="200" y="172" text-anchor="end" font-weight="700">Stupéfiants</text>
       <rect x="210" y="150" width="175.5" height="16" rx="3" fill="#000"/>
-      <text x="391.5" y="163" font-size="12" font-weight="800">13 %</text>
+      <text x="391.5" y="163" font-size="12" font-weight="800">13 %</text>
       <rect x="210" y="169" width="148.5" height="16" rx="3" fill="#FECF41" stroke="#c9a300" stroke-width="0.8"/>
-      <text x="364.5" y="182" font-size="12" font-weight="800">11 %</text>
+      <text x="364.5" y="182" font-size="12" font-weight="800">11 %</text>
       <text x="200" y="216" text-anchor="end" font-weight="700">Malaise</text>
       <rect x="210" y="194" width="135.0" height="16" rx="3" fill="#000"/>
-      <text x="351.0" y="207" font-size="12" font-weight="800">10 %</text>
+      <text x="351.0" y="207" font-size="12" font-weight="800">10 %</text>
       <rect x="210" y="213" width="148.5" height="16" rx="3" fill="#FECF41" stroke="#c9a300" stroke-width="0.8"/>
-      <text x="364.5" y="226" font-size="12" font-weight="800">11 %</text>
+      <text x="364.5" y="226" font-size="12" font-weight="800">11 %</text>
       <text x="200" y="260" text-anchor="end" font-weight="700">Refus de priorité</text>
       <rect x="210" y="238" width="108.0" height="16" rx="3" fill="#000"/>
-      <text x="324.0" y="251" font-size="12" font-weight="800">8 %</text>
+      <text x="324.0" y="251" font-size="12" font-weight="800">8 %</text>
       <rect x="210" y="257" width="135.0" height="16" rx="3" fill="#FECF41" stroke="#c9a300" stroke-width="0.8"/>
-      <text x="351.0" y="270" font-size="12" font-weight="800">10 %</text>
+      <text x="351.0" y="270" font-size="12" font-weight="800">10 %</text>
       <rect x="210" y="288" width="14" height="14" rx="2" fill="#000"/><text x="232" y="300" font-size="12">Hauts-de-France</text>
       <rect x="360" y="288" width="14" height="14" rx="2" fill="#FECF41" stroke="#c9a300" stroke-width="0.8"/><text x="382" y="300" font-size="12">France métropolitaine</text>
     </g>
   </svg>
-  <figcaption>Les forces de l'ordre peuvent renseigner jusqu'à trois facteurs par usager : un accident mortel cumule souvent plusieurs facteurs, le total dépasse donc 100 %.</figcaption>
-  <p class="src">Source : ONISR, <em>L'accidentalité routière en France, principaux résultats 2025</em>, données définitives, mai 2026, atlas territorial Hauts-de-France. Moyenne sur la période 2023-2025, afin de disposer d'un effectif régional représentatif. Sur la seule année 2025 en France métropolitaine, la vitesse excessive ou inadaptée est citée chez 29 % des présumés responsables et l'alcool chez 21 %.</p>
+  <figcaption>Les forces de l'ordre peuvent renseigner jusqu'à trois facteurs par usager : un accident mortel cumule souvent plusieurs facteurs, le total dépasse donc 100 %.</figcaption>
+  <p class="src">Source : ONISR, <em>L'accidentalité routière en France, principaux résultats 2025</em>, données définitives, mai 2026, atlas territorial Hauts-de-France. Moyenne sur la période 2023-2025, afin de disposer d'un effectif régional représentatif. Sur la seule année 2025 en France métropolitaine, la vitesse excessive ou inadaptée est citée chez 29 % des présumés responsables et l'alcool chez 21 %.</p>
 </figure>
         <div class="docs">
           <h4>Ce que ces chiffres disent, et ce qu'ils ne disent pas</h4>
@@ -302,46 +383,46 @@
         <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
         <div class="org" data-explore="1">
           <div class="cartes">
-            <button class="role" aria-expanded="false"><p class="sigle">Les 4 phases de la conduite</p><p class="nom">Une démarche permanente</p><span class="plus">+</span><div class="detail">Observation de l'environnement, analyse de la situation et du risque, élaboration d'une stratégie, exécution de la décision.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">« Pas vu » (35 %)</p><p class="nom">Prise d'information</p><span class="plus">+</span><div class="detail">35 % des accidents sont liés à une prise d'information insuffisante : « je ne l'ai pas vu ».</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">« Pas cru » (40 %)</p><p class="nom">Analyse</p><span class="plus">+</span><div class="detail">40 % sont liés à une analyse erronée de la situation : « j'ai cru que ».</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">« Pas voulu » (10 %)</p><p class="nom">Décision</p><span class="plus">+</span><div class="detail">10 % sont liés à une prise de décision inadéquate : « j'ai doublé ».</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">« Pas su » (6 %)</p><p class="nom">Exécution</p><span class="plus">+</span><div class="detail">6 % sont liés à une mauvaise exécution de la décision : « j'accélère ».</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Le champ de l'IDSR</p><p class="nom">Agir sur le comportement</p><span class="plus">+</span><div class="detail">Le champ d'intervention de l'IDSR porte principalement sur le comportement de l'usager.</div></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Les 4 phases de la conduite</span><span class="nom">Une démarche permanente</span><span class="plus">+</span><span class="detail"><span>Observation de l'environnement, analyse de la situation et du risque, élaboration d'une stratégie, exécution de la décision.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">« Pas vu » (35 %)</span><span class="nom">Prise d'information</span><span class="plus">+</span><span class="detail"><span>35 % des accidents sont liés à une prise d'information insuffisante : « je ne l'ai pas vu ».</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">« Pas cru » (40 %)</span><span class="nom">Analyse</span><span class="plus">+</span><span class="detail"><span>40 % sont liés à une analyse erronée de la situation : « j'ai cru que ».</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">« Pas voulu » (10 %)</span><span class="nom">Décision</span><span class="plus">+</span><span class="detail"><span>10 % sont liés à une prise de décision inadéquate : « j'ai doublé ».</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">« Pas su » (6 %)</span><span class="nom">Exécution</span><span class="plus">+</span><span class="detail"><span>6 % sont liés à une mauvaise exécution de la décision : « j'accélère ».</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Le champ de l'IDSR</span><span class="nom">Agir sur le comportement</span><span class="plus">+</span><span class="detail"><span>Le champ d'intervention de l'IDSR porte principalement sur le comportement de l'usager.</span></span></button>
           </div>
         </div>
         <div class="docs">
           <h3>Facteurs cités chez les présumés responsables d'accidents mortels (France métropolitaine, 2025)</h3>
           <dl>
-            <dt>Vitesse excessive ou inadaptée</dt><dd>29 %</dd>
-            <dt>Alcool</dt><dd>21 %</dd>
-            <dt>Inattention</dt><dd>13 %</dd>
-            <dt>Stupéfiants</dt><dd>11 %</dd>
-            <dt>Malaise</dt><dd>11 %</dd>
-            <dt>Manœuvres dangereuses</dt><dd>10 %</dd>
-            <dt>Refus de priorité</dt><dd>10 %</dd>
-            <dt>Contresens</dt><dd>4 %</dd>
+            <dt>Vitesse excessive ou inadaptée</dt><dd>29 %</dd>
+            <dt>Alcool</dt><dd>21 %</dd>
+            <dt>Inattention</dt><dd>13 %</dd>
+            <dt>Stupéfiants</dt><dd>11 %</dd>
+            <dt>Malaise</dt><dd>11 %</dd>
+            <dt>Manœuvres dangereuses</dt><dd>10 %</dd>
+            <dt>Refus de priorité</dt><dd>10 %</dd>
+            <dt>Contresens</dt><dd>4 %</dd>
           </dl>
-          <p class="src">Source : ONISR, <em>L'accidentalité routière en France, principaux résultats 2025</em>, données définitives, mai 2026. 3 235 personnes ont été identifiées comme présumées responsables d'un accident mortel en 2025, dont 83 % d'hommes. Jusqu'à trois facteurs peuvent être cités par usager.</p>
+          <p class="src">Source : ONISR, <em>L'accidentalité routière en France, principaux résultats 2025</em>, données définitives, mai 2026. 3 235 personnes ont été identifiées comme présumées responsables d'un accident mortel en 2025, dont 83 % d'hommes. Jusqu'à trois facteurs peuvent être cités par usager.</p>
         </div>
         <figure class="schema">
   <h4>L'origine comportementale des accidents</h4>
   <svg viewBox="0 0 720 290" role="img" aria-labelledby="m5bt m5bd">
     <title id="m5bt">Répartition des accidents selon la phase de conduite défaillante</title>
-    <desc id="m5bd">Pas vu, prise d'information, 35 % ; pas cru, analyse, 40 % ; pas voulu, décision, 10 % ; pas su, exécution, 6 %.</desc>
+    <desc id="m5bd">Pas vu, prise d'information, 35 % ; pas cru, analyse, 40 % ; pas voulu, décision, 10 % ; pas su, exécution, 6 %.</desc>
     <line x1="40" y1="230" x2="700" y2="230" stroke="#ccc"/>
     <g font-family="Marianne,Segoe UI,Arial,sans-serif" font-size="12.5" text-anchor="middle">
       <rect x="70" y="72" width="120" height="158" rx="3" fill="#FECF41"/>
-      <text x="130" y="64" font-size="15" font-weight="800">35 %</text>
+      <text x="130" y="64" font-size="15" font-weight="800">35 %</text>
       <text x="130" y="250" font-weight="700">« Pas vu »</text><text x="130" y="268">prise d'information</text>
       <rect x="230" y="50" width="120" height="180" rx="3" fill="#000"/>
-      <text x="290" y="42" font-size="15" font-weight="800">40 %</text>
+      <text x="290" y="42" font-size="15" font-weight="800">40 %</text>
       <text x="290" y="250" font-weight="700">« Pas cru »</text><text x="290" y="268">analyse</text>
       <rect x="390" y="185" width="120" height="45" rx="3" fill="#FECF41"/>
-      <text x="450" y="177" font-size="15" font-weight="800">10 %</text>
+      <text x="450" y="177" font-size="15" font-weight="800">10 %</text>
       <text x="450" y="250" font-weight="700">« Pas voulu »</text><text x="450" y="268">décision</text>
       <rect x="550" y="203" width="120" height="27" rx="3" fill="#FECF41"/>
-      <text x="610" y="195" font-size="15" font-weight="800">6 %</text>
+      <text x="610" y="195" font-size="15" font-weight="800">6 %</text>
       <text x="610" y="250" font-weight="700">« Pas su »</text><text x="610" y="268">exécution</text>
     </g>
   </svg>
@@ -352,25 +433,25 @@
   <h4>Où se produit la défaillance ? Les 4 étapes de la tâche de conduite</h4>
   <svg viewBox="0 0 720 250" role="img" aria-labelledby="m5f2t m5f2d">
     <title id="m5f2t">Répartition des défaillances humaines dans les accidents</title>
-    <desc id="m5f2d">35 % prise d'information insuffisante, 40 % analyse erronée, 10 % décision inadéquate, 6 % mauvaise exécution.</desc>
+    <desc id="m5f2d">35 % prise d'information insuffisante, 40 % analyse erronée, 10 % décision inadéquate, 6 % mauvaise exécution.</desc>
     <g font-family="Marianne,Segoe UI,Arial,sans-serif" text-anchor="middle">
       <rect x="20" y="30" width="160" height="120" rx="10" fill="#FFF3CC" stroke="#E9B400" stroke-width="2"/>
-      <text x="100" y="70" font-size="26" font-weight="800">35 %</text>
+      <text x="100" y="70" font-size="26" font-weight="800">35 %</text>
       <text x="100" y="95" font-size="13" font-weight="700">« Je ne l'ai pas vu »</text>
       <text x="100" y="113" font-size="11.5" fill="#3a3a3a">prise d'information</text>
       <text x="100" y="128" font-size="11.5" fill="#3a3a3a">insuffisante</text>
       <rect x="200" y="30" width="160" height="120" rx="10" fill="#FECF41" stroke="#E9B400" stroke-width="2"/>
-      <text x="280" y="70" font-size="26" font-weight="800">40 %</text>
+      <text x="280" y="70" font-size="26" font-weight="800">40 %</text>
       <text x="280" y="95" font-size="13" font-weight="700">« J'ai cru que… »</text>
       <text x="280" y="113" font-size="11.5" fill="#3a3a3a">analyse erronée</text>
       <text x="280" y="128" font-size="11.5" fill="#3a3a3a">de la situation</text>
       <rect x="380" y="30" width="160" height="120" rx="10" fill="#FFF3CC" stroke="#E9B400" stroke-width="2"/>
-      <text x="460" y="70" font-size="26" font-weight="800">10 %</text>
+      <text x="460" y="70" font-size="26" font-weight="800">10 %</text>
       <text x="460" y="95" font-size="13" font-weight="700">« J'ai doublé… »</text>
       <text x="460" y="113" font-size="11.5" fill="#3a3a3a">décision</text>
       <text x="460" y="128" font-size="11.5" fill="#3a3a3a">inadéquate</text>
       <rect x="560" y="30" width="140" height="120" rx="10" fill="#FFF3CC" stroke="#E9B400" stroke-width="2"/>
-      <text x="630" y="70" font-size="26" font-weight="800">6 %</text>
+      <text x="630" y="70" font-size="26" font-weight="800">6 %</text>
       <text x="630" y="95" font-size="13" font-weight="700">« J'accélère… »</text>
       <text x="630" y="113" font-size="11.5" fill="#3a3a3a">mauvaise</text>
       <text x="630" y="128" font-size="11.5" fill="#3a3a3a">exécution</text>
@@ -421,8 +502,8 @@
           <span class="v-tag">🔒 Question 3</span>
           <p class="q">Quel est le premier facteur cité chez les présumés responsables d'accidents mortels en 2025 ?</p>
           <div class="opts">
-            <button class="opt" data-ok="0"><span class="mark"></span> L'alcool, cité chez 21 % d'entre eux</button>
-            <button class="opt" data-ok="1"><span class="mark"></span> La vitesse excessive ou inadaptée, citée chez 29 % d'entre eux</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> L'alcool, cité chez 21 % d'entre eux</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> La vitesse excessive ou inadaptée, citée chez 29 % d'entre eux</button>
             <button class="opt" data-ok="0"><span class="mark"></span> Le téléphone au volant</button>
           </div>
           <p class="feedback"></p>
@@ -525,6 +606,7 @@
 })();
 </script>
 <script src="assets/js/quiz-extras.js" defer></script>
+<script src="assets/js/ui-parcours.js" defer></script>
 <script src="assets/js/attestation.js" defer></script>
 </body>
 </html>

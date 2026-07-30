@@ -190,6 +190,87 @@
     .reponses,.dial-fb{margin-left:0;}
   }
   @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+
+  /* ============================================================
+     CORRECTIFS TRANSVERSES — audit design du 30 juillet 2026
+     Bloc identique sur toutes les pages, placé en fin de feuille
+     pour surcharger les règles ci-dessus. Il constituera le point
+     de départ du futur socle.css : toute modification doit être
+     reportée sur les autres pages tant que le socle n'existe pas.
+     ============================================================ */
+  :root{
+    --h-header:132px;
+    --jaune-trait:#8A6D00;
+    --gris-400:#8c8c8c;
+    --vert-fort:#14532D;
+  }
+  html{scroll-padding-top:calc(var(--h-header) + 16px);}
+
+  /* B2 · la barre de progression devient lisible (jaune sur gris foncé) */
+  .progress{background:#3a3a3a;}
+  .progress > span{background:var(--jaune,#FECF41);}
+
+  /* B3 · le menu d'étapes ne passe plus sous l'en-tête collant */
+  .stepper{top:calc(var(--h-header) + 12px);z-index:1;}
+  .etape-compteur{margin:.2rem .3rem .5rem;font-size:.78rem;font-weight:700;
+    text-transform:uppercase;letter-spacing:.05em;color:#3a3a3a;}
+
+  /* B6 · le bouton verrouillé est lisible et sa condition est écrite */
+  .btn:disabled,.btn-primary:disabled,.btn-ghost:disabled{
+    opacity:1;background:#f4f4f4;color:#6b6b6b;
+    box-shadow:inset 0 0 0 2px #cfcfcf;cursor:not-allowed;}
+  .lock-note{margin:1.2rem 0 -.6rem;font-size:.88rem;color:#3a3a3a;font-weight:600;}
+  .step-item:disabled{opacity:1;color:#6b6b6b;}
+  .step-item:disabled .pastille{border-color:var(--gris-400);color:#6b6b6b;}
+
+  /* contraste des bordures de contrôles interactifs */
+  .opt{border-color:var(--gris-400);}
+  .role{border-color:#cfcfcf;}
+  .role .plus{color:#000;background:var(--jaune,#FECF41);width:26px;height:26px;
+    border-radius:50%;display:grid;place-items:center;top:.7rem;right:.7rem;
+    font-size:1rem;line-height:1;}
+  .feedback.ok{color:var(--vert-fort);}
+
+  /* B8 · le panneau déplié ne tronque plus le texte */
+  .role .sigle,.role .nom{display:block;margin:0 0 .15rem;}
+  .role .nom{margin-bottom:0;}
+  .role .detail{max-height:none;display:grid;grid-template-rows:0fr;
+    overflow:hidden;transition:grid-template-rows var(--t,.25s ease);}
+  .role .detail > *{min-height:0;}
+  .role[aria-expanded="true"] .detail{max-height:none;grid-template-rows:1fr;}
+
+  /* lisibilité des barres jaunes sur fond blanc, sans toucher aux schémas
+     dont le contour est déjà défini dans le SVG */
+  .schema svg rect[fill="#FECF41"]:not([stroke]){stroke:var(--jaune-trait);stroke-width:.8;}
+
+  /* B10 · les nombres et les unités ne se coupent plus en fin de ligne */
+  .sc b,.chiffre{white-space:nowrap;}
+
+  @media (max-width:640px){
+    /* B5 · l'en-tête mobile n'occupe plus le quart de l'écran */
+    :root{--h-header:92px;}
+    .topbar{padding:.5rem 1rem;gap:.7rem;}
+    .topbar .logo-prefet{height:52px!important;}
+    .topbar img{width:104px;}
+
+    /* B1 · les graphiques redeviennent consultables */
+    .etape{padding:1.1rem;}
+    .schema{padding:.8rem;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .schema svg{min-width:560px;}
+    .schema::after{content:"↔ Faites défiler le graphique horizontalement";
+      display:block;font-size:.8rem;color:#3a3a3a;margin-top:.5rem;font-style:normal;}
+
+    /* menu d'étapes : accrochage au défilement */
+    .stepper ol{scroll-snap-type:x mandatory;}
+    .step-item{scroll-snap-align:start;}
+  }
+
+  /* B4 · mouvement réduit traité en CSS, et non par un script différé */
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;
+      animation-iteration-count:1!important;transition-duration:.01ms!important;
+      scroll-behavior:auto!important;}
+  }
 </style>
 </head>
 <body data-module="m12">
@@ -261,10 +342,10 @@
 
         <p class="hint-explore">Cliquez sur chaque carte pour découvrir ce que ce mandat implique.</p>
         <div class="cartes" data-explore="1">
-          <button class="role" aria-expanded="false"><p class="sigle">Un acte d'engagement</p><p class="nom">Signé auprès de la préfecture</p><span class="plus">+</span><div class="detail">L'IDSR s'engage sur son comportement personnel vis-à-vis des règles de circulation et sur son adhésion aux principes de lutte contre l'insécurité routière. Un IDSR verbalisé pour alcool ou grande vitesse perd toute crédibilité — et peut perdre sa nomination.</div></button>
-          <button class="role" aria-expanded="false"><p class="sigle">Sous l'autorité du préfet</p><p class="nom">Un ordre de mission par action</p><span class="plus">+</span><div class="detail">L'IDSR intervient à la demande du coordinateur sécurité routière, avec un ordre de mission. Il est assuré par l'État pendant ses missions. Hors mission, il ne parle plus au nom de l'État.</div></button>
-          <button class="role" aria-expanded="false"><p class="sigle">La parole de l'État</p><p class="nom">Messages officiels uniquement</p><span class="plus">+</span><div class="detail">En intervention, l'IDSR porte les messages officiels de la Sécurité routière. Il ne donne pas d'opinion personnelle sur les lois, les radars, les politiques ou les polémiques : il les explique.</div></button>
-          <button class="role" aria-expanded="false"><p class="sigle">Les mêmes devoirs qu'un agent public</p><p class="nom">Déontologie</p><span class="plus">+</span><div class="detail">Collaborateur occasionnel du service public, l'IDSR est tenu aux mêmes exigences que les agents de l'État : neutralité, réserve, intégrité, discrétion. Le bénévolat n'exonère d'aucun de ces devoirs.</div></button>
+          <button class="role" aria-expanded="false"><span class="sigle">Un acte d'engagement</span><span class="nom">Signé auprès de la préfecture</span><span class="plus">+</span><span class="detail"><span>L'IDSR s'engage sur son comportement personnel vis-à-vis des règles de circulation et sur son adhésion aux principes de lutte contre l'insécurité routière. Un IDSR verbalisé pour alcool ou grande vitesse perd toute crédibilité — et peut perdre sa nomination.</span></span></button>
+          <button class="role" aria-expanded="false"><span class="sigle">Sous l'autorité du préfet</span><span class="nom">Un ordre de mission par action</span><span class="plus">+</span><span class="detail"><span>L'IDSR intervient à la demande du coordinateur sécurité routière, avec un ordre de mission. Il est assuré par l'État pendant ses missions. Hors mission, il ne parle plus au nom de l'État.</span></span></button>
+          <button class="role" aria-expanded="false"><span class="sigle">La parole de l'État</span><span class="nom">Messages officiels uniquement</span><span class="plus">+</span><span class="detail"><span>En intervention, l'IDSR porte les messages officiels de la Sécurité routière. Il ne donne pas d'opinion personnelle sur les lois, les radars, les politiques ou les polémiques : il les explique.</span></span></button>
+          <button class="role" aria-expanded="false"><span class="sigle">Les mêmes devoirs qu'un agent public</span><span class="nom">Déontologie</span><span class="plus">+</span><span class="detail"><span>Collaborateur occasionnel du service public, l'IDSR est tenu aux mêmes exigences que les agents de l'État : neutralité, réserve, intégrité, discrétion. Le bénévolat n'exonère d'aucun de ces devoirs.</span></span></button>
         </div>
 
         <div class="verrou" data-quiz="1">
@@ -286,10 +367,10 @@
         <p class="lead">Quatre réflexes professionnels, à mobiliser ensemble, dans chaque échange.</p>
         <p class="hint-explore">Cliquez sur chaque pilier pour l'explorer.</p>
         <div class="cartes" data-explore="1">
-          <button class="role" aria-expanded="false"><p class="sigle">⚖️ Objectivité</p><p class="nom">Ni pour, ni contre : à côté des faits</p><span class="plus">+</span><div class="detail">L'IDSR ne prend jamais parti — ni pour un groupe d'usagers, ni contre un autre, ni dans les polémiques. Il présente la situation telle que les données la décrivent, même quand son interlocuteur cherche l'affrontement.</div></button>
-          <button class="role" aria-expanded="false"><p class="sigle">🔍 Factualité</p><p class="nom">Des chiffres sourcés, jamais d'à-peu-près</p><span class="plus">+</span><div class="detail">Chaque affirmation s'appuie sur une source vérifiable : ONISR, Sécurité routière, études publiques. En cas de doute : « Je vérifie et je reviens vers vous » vaut mieux qu'un chiffre inventé. Un seul chiffre faux décrédibilise toute l'intervention.</div></button>
-          <button class="role" aria-expanded="false"><p class="sigle">🤝 Neutralité</p><p class="nom">Pas d'opinion personnelle en mission</p><span class="plus">+</span><div class="detail">Sur les lois, les radars, les décisions politiques : l'avis personnel de l'IDSR n'existe pas en intervention. Ni approbation, ni critique. C'est la condition pour que le message soit reçu par tous les publics, quelles que soient leurs sensibilités.</div></button>
-          <button class="role" aria-expanded="false"><p class="sigle">💡 Pédagogie de la règle</p><p class="nom">Toujours expliquer pourquoi la loi existe</p><span class="plus">+</span><div class="detail">Une règle assénée est rejetée ; une règle expliquée est comprise. Derrière chaque obligation du code de la route, il y a des morts évitables et des données d'accidentalité. Le travail de l'IDSR : rendre ce lien visible.</div></button>
+          <button class="role" aria-expanded="false"><span class="sigle">⚖️ Objectivité</span><span class="nom">Ni pour, ni contre : à côté des faits</span><span class="plus">+</span><span class="detail"><span>L'IDSR ne prend jamais parti — ni pour un groupe d'usagers, ni contre un autre, ni dans les polémiques. Il présente la situation telle que les données la décrivent, même quand son interlocuteur cherche l'affrontement.</span></span></button>
+          <button class="role" aria-expanded="false"><span class="sigle">🔍 Factualité</span><span class="nom">Des chiffres sourcés, jamais d'à-peu-près</span><span class="plus">+</span><span class="detail"><span>Chaque affirmation s'appuie sur une source vérifiable : ONISR, Sécurité routière, études publiques. En cas de doute : « Je vérifie et je reviens vers vous » vaut mieux qu'un chiffre inventé. Un seul chiffre faux décrédibilise toute l'intervention.</span></span></button>
+          <button class="role" aria-expanded="false"><span class="sigle">🤝 Neutralité</span><span class="nom">Pas d'opinion personnelle en mission</span><span class="plus">+</span><span class="detail"><span>Sur les lois, les radars, les décisions politiques : l'avis personnel de l'IDSR n'existe pas en intervention. Ni approbation, ni critique. C'est la condition pour que le message soit reçu par tous les publics, quelles que soient leurs sensibilités.</span></span></button>
+          <button class="role" aria-expanded="false"><span class="sigle">💡 Pédagogie de la règle</span><span class="nom">Toujours expliquer pourquoi la loi existe</span><span class="plus">+</span><span class="detail"><span>Une règle assénée est rejetée ; une règle expliquée est comprise. Derrière chaque obligation du code de la route, il y a des morts évitables et des données d'accidentalité. Le travail de l'IDSR : rendre ce lien visible.</span></span></button>
         </div>
 
         <h3 style="margin:1.8rem 0 .4rem;">Pourquoi tant de rigueur ? Parce que le message se déforme</h3>
@@ -790,6 +871,7 @@
   show(Math.min(state.unlocked,TOTAL-1)===TOTAL-1&&state.unlocked>=TOTAL?TOTAL-1:Math.min(state.unlocked,current));
 })();
 </script>
+<script src="assets/js/ui-parcours.js" defer></script>
 <script src="assets/js/attestation.js" defer></script>
 </body>
 </html>

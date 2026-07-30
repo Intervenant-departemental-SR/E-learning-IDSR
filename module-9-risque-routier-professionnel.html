@@ -128,6 +128,87 @@
     .step-sub{display:none;}
     .module-hero h1{font-size:1.55rem;}
   }
+
+  /* ============================================================
+     CORRECTIFS TRANSVERSES — audit design du 30 juillet 2026
+     Bloc identique sur toutes les pages, placé en fin de feuille
+     pour surcharger les règles ci-dessus. Il constituera le point
+     de départ du futur socle.css : toute modification doit être
+     reportée sur les autres pages tant que le socle n'existe pas.
+     ============================================================ */
+  :root{
+    --h-header:132px;
+    --jaune-trait:#8A6D00;
+    --gris-400:#8c8c8c;
+    --vert-fort:#14532D;
+  }
+  html{scroll-padding-top:calc(var(--h-header) + 16px);}
+
+  /* B2 · la barre de progression devient lisible (jaune sur gris foncé) */
+  .progress{background:#3a3a3a;}
+  .progress > span{background:var(--jaune,#FECF41);}
+
+  /* B3 · le menu d'étapes ne passe plus sous l'en-tête collant */
+  .stepper{top:calc(var(--h-header) + 12px);z-index:1;}
+  .etape-compteur{margin:.2rem .3rem .5rem;font-size:.78rem;font-weight:700;
+    text-transform:uppercase;letter-spacing:.05em;color:#3a3a3a;}
+
+  /* B6 · le bouton verrouillé est lisible et sa condition est écrite */
+  .btn:disabled,.btn-primary:disabled,.btn-ghost:disabled{
+    opacity:1;background:#f4f4f4;color:#6b6b6b;
+    box-shadow:inset 0 0 0 2px #cfcfcf;cursor:not-allowed;}
+  .lock-note{margin:1.2rem 0 -.6rem;font-size:.88rem;color:#3a3a3a;font-weight:600;}
+  .step-item:disabled{opacity:1;color:#6b6b6b;}
+  .step-item:disabled .pastille{border-color:var(--gris-400);color:#6b6b6b;}
+
+  /* contraste des bordures de contrôles interactifs */
+  .opt{border-color:var(--gris-400);}
+  .role{border-color:#cfcfcf;}
+  .role .plus{color:#000;background:var(--jaune,#FECF41);width:26px;height:26px;
+    border-radius:50%;display:grid;place-items:center;top:.7rem;right:.7rem;
+    font-size:1rem;line-height:1;}
+  .feedback.ok{color:var(--vert-fort);}
+
+  /* B8 · le panneau déplié ne tronque plus le texte */
+  .role .sigle,.role .nom{display:block;margin:0 0 .15rem;}
+  .role .nom{margin-bottom:0;}
+  .role .detail{max-height:none;display:grid;grid-template-rows:0fr;
+    overflow:hidden;transition:grid-template-rows var(--t,.25s ease);}
+  .role .detail > *{min-height:0;}
+  .role[aria-expanded="true"] .detail{max-height:none;grid-template-rows:1fr;}
+
+  /* lisibilité des barres jaunes sur fond blanc, sans toucher aux schémas
+     dont le contour est déjà défini dans le SVG */
+  .schema svg rect[fill="#FECF41"]:not([stroke]){stroke:var(--jaune-trait);stroke-width:.8;}
+
+  /* B10 · les nombres et les unités ne se coupent plus en fin de ligne */
+  .sc b,.chiffre{white-space:nowrap;}
+
+  @media (max-width:640px){
+    /* B5 · l'en-tête mobile n'occupe plus le quart de l'écran */
+    :root{--h-header:92px;}
+    .topbar{padding:.5rem 1rem;gap:.7rem;}
+    .topbar .logo-prefet{height:52px!important;}
+    .topbar img{width:104px;}
+
+    /* B1 · les graphiques redeviennent consultables */
+    .etape{padding:1.1rem;}
+    .schema{padding:.8rem;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .schema svg{min-width:560px;}
+    .schema::after{content:"↔ Faites défiler le graphique horizontalement";
+      display:block;font-size:.8rem;color:#3a3a3a;margin-top:.5rem;font-style:normal;}
+
+    /* menu d'étapes : accrochage au défilement */
+    .stepper ol{scroll-snap-type:x mandatory;}
+    .step-item{scroll-snap-align:start;}
+  }
+
+  /* B4 · mouvement réduit traité en CSS, et non par un script différé */
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;
+      animation-iteration-count:1!important;transition-duration:.01ms!important;
+      scroll-behavior:auto!important;}
+  }
 </style>
 </head>
 <body data-module="m8">
@@ -187,20 +268,20 @@
         <p class="lead">Le risque routier professionnel recouvre deux situations : les trajets domicile-travail et les déplacements en mission (sous l'autorité de l'employeur).</p>
         <div class="stat-cards">
           <div class="sc"><b>~28 M</b><span>de travailleurs concernés par le risque routier</span></div>
-          <div class="sc"><b>37 %</b><span>des accidents corporels impliquent un usager en déplacement lié au travail</span></div>
+          <div class="sc"><b>37 %</b><span>des accidents corporels impliquent un usager en déplacement lié au travail</span></div>
           <div class="sc"><b>1,2</b><span>décès par jour en moyenne dans un déplacement lié au travail, soit environ 1,7 par jour ouvré</span></div>
           <div class="sc"><b>440</b><span>personnes tuées en 2023 (296 trajet + 144 mission)</span></div>
-          <div class="sc"><b>30 %</b><span>des accidents du travail mortels sont des accidents de la route</span></div>
+          <div class="sc"><b>30 %</b><span>des accidents du travail mortels sont des accidents de la route</span></div>
           <div class="sc"><b>~5 M</b><span>de journées de travail perdues par an</span></div>
         </div>
         <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
         <div class="org" data-explore="1">
           <div class="cartes">
-            <button class="role" aria-expanded="false"><p class="sigle">Trajet vs mission</p><p class="nom">Deux situations</p><span class="plus">+</span><div class="detail">En 2023, sur 440 personnes tuées : 296 lors d'un trajet domicile-travail et 144 lors d'une mission. Les accidents de mission représentent 30 % de l'ensemble des accidents mortels liés au travail.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Qui est concerné ?</p><p class="nom">Genre</p><span class="plus">+</span><div class="detail">Les hommes sont très majoritairement concernés : 81 % des tués en trajet domicile-travail et 95 % en mission. Sur les trajets domicile-travail, les moins de 35 ans représentent la part la plus élevée (45 %).</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Les deux-roues surexposés</p><p class="nom">Mode de déplacement</p><span class="plus">+</span><div class="detail">En trajet domicile-travail, les deux-roues motorisés représentent 38 % des tués (112 personnes) alors qu'ils ne sont utilisés que pour 2 % des trajets. Les modes doux (marche, vélo, EDPM) représentent 11 % des tués en trajet et 7 % en mission.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Les causes</p><p class="nom">Facteurs d'accident</p><span class="plus">+</span><div class="detail">Pour les accidents mortels en trajet domicile-travail, les premières causes attribuées aux personnes présumées responsables sont la vitesse excessive ou inadaptée (28 %) et l'inattention (27 %).</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Les véhicules du travail</p><p class="nom">Données 2025</p><span class="plus">+</span><div class="detail">En 2025, 783 personnes sont mortes dans un accident impliquant un véhicule utilitaire, un poids lourd, un bus ou un car : 24 % de la mortalité routière. Sur ces 783 personnes, seules 160 étaient occupantes de ces véhicules. Autrement dit, dans huit cas sur dix, la victime d'un accident impliquant un véhicule professionnel n'est pas la personne au travail mais un autre usager.</div></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Trajet vs mission</span><span class="nom">Deux situations</span><span class="plus">+</span><span class="detail"><span>En 2023, sur 440 personnes tuées : 296 lors d'un trajet domicile-travail et 144 lors d'une mission. Les accidents de mission représentent 30 % de l'ensemble des accidents mortels liés au travail.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Qui est concerné ?</span><span class="nom">Genre</span><span class="plus">+</span><span class="detail"><span>Les hommes sont très majoritairement concernés : 81 % des tués en trajet domicile-travail et 95 % en mission. Sur les trajets domicile-travail, les moins de 35 ans représentent la part la plus élevée (45 %).</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Les deux-roues surexposés</span><span class="nom">Mode de déplacement</span><span class="plus">+</span><span class="detail"><span>En trajet domicile-travail, les deux-roues motorisés représentent 38 % des tués (112 personnes) alors qu'ils ne sont utilisés que pour 2 % des trajets. Les modes doux (marche, vélo, EDPM) représentent 11 % des tués en trajet et 7 % en mission.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Les causes</span><span class="nom">Facteurs d'accident</span><span class="plus">+</span><span class="detail"><span>Pour les accidents mortels en trajet domicile-travail, les premières causes attribuées aux personnes présumées responsables sont la vitesse excessive ou inadaptée (28 %) et l'inattention (27 %).</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Les véhicules du travail</span><span class="nom">Données 2025</span><span class="plus">+</span><span class="detail"><span>En 2025, 783 personnes sont mortes dans un accident impliquant un véhicule utilitaire, un poids lourd, un bus ou un car : 24 % de la mortalité routière. Sur ces 783 personnes, seules 160 étaient occupantes de ces véhicules. Autrement dit, dans huit cas sur dix, la victime d'un accident impliquant un véhicule professionnel n'est pas la personne au travail mais un autre usager.</span></span></button>
           </div>
         </div>
 
@@ -224,19 +305,19 @@
           <h4>Mode de déplacement des personnes tuées en trajet domicile-travail (2023)</h4>
           <svg viewBox="0 0 720 230" role="img" aria-labelledby="m8g2t m8g2d">
             <title id="m8g2t">Répartition par mode, trajet domicile-travail 2023</title>
-            <desc id="m8g2d">Véhicule de tourisme 45 %, deux-roues motorisés 38 %, modes doux 11 %, véhicules utilitaires 4 %.</desc>
+            <desc id="m8g2d">Véhicule de tourisme 45 %, deux-roues motorisés 38 %, modes doux 11 %, véhicules utilitaires 4 %.</desc>
             <g font-family="Marianne,Segoe UI,Arial,sans-serif" font-size="13">
               <text x="200" y="38" text-anchor="end" font-weight="700">Véhicule de tourisme</text>
-              <rect x="210" y="24" width="450" height="24" rx="3" fill="#FECF41"/><text x="667" y="42" font-weight="800">45 %</text>
+              <rect x="210" y="24" width="450" height="24" rx="3" fill="#FECF41"/><text x="667" y="42" font-weight="800">45 %</text>
               <text x="200" y="84" text-anchor="end" font-weight="700">2-roues motorisés</text>
-              <rect x="210" y="70" width="380" height="24" rx="3" fill="#000"/><text x="597" y="88" font-weight="800">38 %</text>
+              <rect x="210" y="70" width="380" height="24" rx="3" fill="#000"/><text x="597" y="88" font-weight="800">38 %</text>
               <text x="200" y="130" text-anchor="end" font-weight="700">Modes doux</text>
-              <rect x="210" y="116" width="110" height="24" rx="3" fill="#FECF41"/><text x="327" y="134" font-weight="800">11 %</text>
+              <rect x="210" y="116" width="110" height="24" rx="3" fill="#FECF41"/><text x="327" y="134" font-weight="800">11 %</text>
               <text x="200" y="176" text-anchor="end" font-weight="700">Véhicules utilitaires</text>
-              <rect x="210" y="162" width="40" height="24" rx="3" fill="#FECF41"/><text x="257" y="180" font-weight="800">4 %</text>
+              <rect x="210" y="162" width="40" height="24" rx="3" fill="#FECF41"/><text x="257" y="180" font-weight="800">4 %</text>
             </g>
           </svg>
-          <p class="src">Les deux-roues motorisés sont fortement surexposés : 38 % des tués pour seulement 2 % des trajets. Source : ONISR et CNAM-MSA, <em>L'essentiel du risque routier professionnel</em>, chiffres 2023.</p>
+          <p class="src">Les deux-roues motorisés sont fortement surexposés : 38 % des tués pour seulement 2 % des trajets. Source : ONISR et CNAM-MSA, <em>L'essentiel du risque routier professionnel</em>, chiffres 2023.</p>
         </figure>
 
         <div class="verrou" data-quiz="1">
@@ -245,7 +326,7 @@
           <div class="opts">
             <button class="opt" data-ok="0"><span class="mark"></span> 37</button>
             <button class="opt" data-ok="1"><span class="mark"></span> 440</button>
-            <button class="opt" data-ok="0"><span class="mark"></span> 12 300</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> 12 300</button>
           </div>
           <p class="feedback"></p>
         </div>
@@ -263,12 +344,12 @@
         <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
         <div class="org" data-explore="1">
           <div class="cartes">
-            <button class="role" aria-expanded="false"><p class="sigle">Responsabilité</p><p class="nom">Pénale et civile</p><span class="plus">+</span><div class="detail">La responsabilité pénale consiste à répondre en justice du dommage causé (amende, voire prison). La responsabilité civile est l'obligation de réparer le préjudice causé à autrui (dommages et intérêts).</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Obligation de sécurité</p><p class="nom">Article L4121-1</p><span class="plus">+</span><div class="detail">L'employeur prend les mesures nécessaires pour assurer la sécurité et protéger la santé des travailleurs : actions de prévention, actions d'information et de formation, et mise en place d'une organisation et de moyens adaptés.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Moyens / résultat</p><p class="nom">La jurisprudence</p><span class="plus">+</span><div class="detail">L'obligation de moyens impose de tout mettre en œuvre pour atteindre un objectif ; l'obligation de résultat impose d'atteindre un résultat déterminé. La jurisprudence a fait évoluer l'obligation de l'employeur vers une obligation de moyens renforcés.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">DUERP</p><p class="nom">Identifier le risque</p><span class="plus">+</span><div class="detail">Le Document Unique d'Évaluation des Risques Professionnels (art. L4121-3-1) est obligatoire dès le 1er salarié. Il retranscrit l'évaluation des risques professionnels, dont le risque routier.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">PAPRIPACT</p><p class="nom">Programmer les actions</p><span class="plus">+</span><div class="detail">Le Programme Annuel de Prévention transforme l'évaluation en actions concrètes : hiérarchiser les priorités, planifier, affecter des responsables, allouer un budget et assurer un suivi.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Règlement intérieur</p><p class="nom">Créer des règles</p><span class="plus">+</span><div class="detail">Le règlement intérieur rend les règles opposables, encadre les comportements et permet la sanction disciplinaire.</div></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Responsabilité</span><span class="nom">Pénale et civile</span><span class="plus">+</span><span class="detail"><span>La responsabilité pénale consiste à répondre en justice du dommage causé (amende, voire prison). La responsabilité civile est l'obligation de réparer le préjudice causé à autrui (dommages et intérêts).</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Obligation de sécurité</span><span class="nom">Article L4121-1</span><span class="plus">+</span><span class="detail"><span>L'employeur prend les mesures nécessaires pour assurer la sécurité et protéger la santé des travailleurs : actions de prévention, actions d'information et de formation, et mise en place d'une organisation et de moyens adaptés.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Moyens / résultat</span><span class="nom">La jurisprudence</span><span class="plus">+</span><span class="detail"><span>L'obligation de moyens impose de tout mettre en œuvre pour atteindre un objectif ; l'obligation de résultat impose d'atteindre un résultat déterminé. La jurisprudence a fait évoluer l'obligation de l'employeur vers une obligation de moyens renforcés.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">DUERP</span><span class="nom">Identifier le risque</span><span class="plus">+</span><span class="detail"><span>Le Document Unique d'Évaluation des Risques Professionnels (art. L4121-3-1) est obligatoire dès le 1er salarié. Il retranscrit l'évaluation des risques professionnels, dont le risque routier.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">PAPRIPACT</span><span class="nom">Programmer les actions</span><span class="plus">+</span><span class="detail"><span>Le Programme Annuel de Prévention transforme l'évaluation en actions concrètes : hiérarchiser les priorités, planifier, affecter des responsables, allouer un budget et assurer un suivi.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Règlement intérieur</span><span class="nom">Créer des règles</span><span class="plus">+</span><span class="detail"><span>Le règlement intérieur rend les règles opposables, encadre les comportements et permet la sanction disciplinaire.</span></span></button>
           </div>
         </div>
         <div class="docs">
@@ -307,16 +388,16 @@
         </ul>
         <div class="stat-cards">
           <div class="sc"><b>7</b><span>engagements concrets et opérationnels</span></div>
-          <div class="sc"><b>+ 4 000</b><span>employeurs déjà engagés</span></div>
+          <div class="sc"><b>+ 4 000</b><span>employeurs déjà engagés</span></div>
           <div class="sc"><b>+ 5,5 M</b><span>de collaborateurs concernés</span></div>
         </div>
         <p class="hint-explore">Cliquez sur les cartes pour comprendre comment agir.</p>
         <div class="org" data-explore="1">
           <div class="cartes">
-            <button class="role" aria-expanded="false"><p class="sigle">Organiser les déplacements</p><p class="nom">Axe de management</p><span class="plus">+</span><div class="detail">Adapter l'organisation du travail, prévoir le temps nécessaire, définir le mode de transport le plus adapté et privilégier les communications hors temps de conduite.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Entretenir les véhicules</p><p class="nom">Axe de management</p><span class="plus">+</span><div class="detail">Adapter le véhicule au travail à réaliser et l'aménager pour le transport de charges et d'outils.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Développer les compétences</p><p class="nom">Axe de management</p><span class="plus">+</span><div class="detail">Former les chefs d'entreprise, les managers, les membres du CSE, les responsables du parc automobile et les salariés aux bonnes pratiques de prévention du risque routier.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Signer l'appel</p><p class="nom">S'engager</p><span class="plus">+</span><div class="detail">Tout employeur peut rejoindre la démarche sur securite-routiere.gouv.fr/employeurs-engages et afficher publiquement son engagement.</div></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Organiser les déplacements</span><span class="nom">Axe de management</span><span class="plus">+</span><span class="detail"><span>Adapter l'organisation du travail, prévoir le temps nécessaire, définir le mode de transport le plus adapté et privilégier les communications hors temps de conduite.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Entretenir les véhicules</span><span class="nom">Axe de management</span><span class="plus">+</span><span class="detail"><span>Adapter le véhicule au travail à réaliser et l'aménager pour le transport de charges et d'outils.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Développer les compétences</span><span class="nom">Axe de management</span><span class="plus">+</span><span class="detail"><span>Former les chefs d'entreprise, les managers, les membres du CSE, les responsables du parc automobile et les salariés aux bonnes pratiques de prévention du risque routier.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Signer l'appel</span><span class="nom">S'engager</span><span class="plus">+</span><span class="detail"><span>Tout employeur peut rejoindre la démarche sur securite-routiere.gouv.fr/employeurs-engages et afficher publiquement son engagement.</span></span></button>
           </div>
         </div>
         <div class="verrou" data-quiz="1">
@@ -343,11 +424,11 @@
         <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
         <div class="org" data-explore="1">
           <div class="cartes">
-            <button class="role" aria-expanded="false"><p class="sigle">Focus alcool & drogues</p><p class="nom">Cadre réglementaire</p><span class="plus">+</span><div class="detail">Une « drogue » est toute substance psychoactive qui perturbe le système nerveux central. L'article L235-1 du code de la route punit la conduite après usage de stupéfiants de 3 ans d'emprisonnement et de 9 000 € d'amende.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Lever les idées reçues</p><p class="nom">Salariés & employeurs</p><span class="plus">+</span><div class="detail">Côté salarié : « je consomme chez moi, ça ne concerne que moi », « les médicaments, ce n'est pas de la drogue ». Côté employeur : « je ne peux rien imposer hors temps de travail », « une procédure, c'est trop lourd ». L'IDSR aide à dépasser ces idées reçues.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Sensibiliser et orienter</p><p class="nom">Les bons relais</p><span class="plus">+</span><div class="detail">L'IDSR oriente les salariés vers les services de prévention et de santé au travail (SPST), le médecin, les associations et les managers ; et les employeurs vers les SPST, la CARSAT, la DREETS et l'INRS.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">La démarche en 4 étapes</p><p class="nom">Conduites addictives</p><span class="plus">+</span><div class="detail">Adapter le règlement intérieur ; informer et associer les acteurs (CSE, inspection du travail) ; organiser les contrôles de façon progressive (tests volontaires, puis prévus, puis inopinés, avec matériel étalonné et confidentialité) ; prévoir l'accompagnement.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Gérer un cas positif</p><p class="nom">Sécuriser, accompagner</p><span class="plus">+</span><div class="detail">Retrait immédiat du poste, ne jamais laisser la personne repartir seule, contre-expertise possible, rendez-vous avec le SPST et procédure claire. Ne jamais banaliser.</div></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Focus alcool & drogues</span><span class="nom">Cadre réglementaire</span><span class="plus">+</span><span class="detail"><span>Une « drogue » est toute substance psychoactive qui perturbe le système nerveux central. L'article L235-1 du code de la route punit la conduite après usage de stupéfiants de 3 ans d'emprisonnement et de 9 000 € d'amende.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Lever les idées reçues</span><span class="nom">Salariés & employeurs</span><span class="plus">+</span><span class="detail"><span>Côté salarié : « je consomme chez moi, ça ne concerne que moi », « les médicaments, ce n'est pas de la drogue ». Côté employeur : « je ne peux rien imposer hors temps de travail », « une procédure, c'est trop lourd ». L'IDSR aide à dépasser ces idées reçues.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Sensibiliser et orienter</span><span class="nom">Les bons relais</span><span class="plus">+</span><span class="detail"><span>L'IDSR oriente les salariés vers les services de prévention et de santé au travail (SPST), le médecin, les associations et les managers ; et les employeurs vers les SPST, la CARSAT, la DREETS et l'INRS.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">La démarche en 4 étapes</span><span class="nom">Conduites addictives</span><span class="plus">+</span><span class="detail"><span>Adapter le règlement intérieur ; informer et associer les acteurs (CSE, inspection du travail) ; organiser les contrôles de façon progressive (tests volontaires, puis prévus, puis inopinés, avec matériel étalonné et confidentialité) ; prévoir l'accompagnement.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Gérer un cas positif</span><span class="nom">Sécuriser, accompagner</span><span class="plus">+</span><span class="detail"><span>Retrait immédiat du poste, ne jamais laisser la personne repartir seule, contre-expertise possible, rendez-vous avec le SPST et procédure claire. Ne jamais banaliser.</span></span></button>
           </div>
         </div>
         <div class="verrou" data-quiz="1">
@@ -371,9 +452,9 @@
           <span class="v-tag">🔒 Question 1</span>
           <p class="q">Quelle part des accidents du travail mortels est liée à la route ?</p>
           <div class="opts">
-            <button class="opt" data-ok="0"><span class="mark"></span> 1,4 %</button>
-            <button class="opt" data-ok="1"><span class="mark"></span> Environ 30 %</button>
-            <button class="opt" data-ok="0"><span class="mark"></span> 95 %</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> 1,4 %</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> Environ 30 %</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> 95 %</button>
           </div>
           <p class="feedback"></p>
         </div>
@@ -381,8 +462,8 @@
           <span class="v-tag">🔒 Question 2</span>
           <p class="q">Conduire après usage de stupéfiants (art. L235-1 du code de la route) est puni de :</p>
           <div class="opts">
-            <button class="opt" data-ok="0"><span class="mark"></span> Une amende forfaitaire de 135 €</button>
-            <button class="opt" data-ok="1"><span class="mark"></span> 3 ans d'emprisonnement et 9 000 € d'amende</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> Une amende forfaitaire de 135 €</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> 3 ans d'emprisonnement et 9 000 € d'amende</button>
             <button class="opt" data-ok="0"><span class="mark"></span> Un simple avertissement</button>
           </div>
           <p class="feedback"></p>
@@ -481,6 +562,7 @@
 })();
 </script>
 <script src="assets/js/quiz-extras.js" defer></script>
+<script src="assets/js/ui-parcours.js" defer></script>
 <script src="assets/js/attestation.js" defer></script>
 </body>
 </html>

@@ -118,6 +118,87 @@
     .step-sub{display:none;}
     .module-hero h1{font-size:1.55rem;}
   }
+
+  /* ============================================================
+     CORRECTIFS TRANSVERSES — audit design du 30 juillet 2026
+     Bloc identique sur toutes les pages, placé en fin de feuille
+     pour surcharger les règles ci-dessus. Il constituera le point
+     de départ du futur socle.css : toute modification doit être
+     reportée sur les autres pages tant que le socle n'existe pas.
+     ============================================================ */
+  :root{
+    --h-header:132px;
+    --jaune-trait:#8A6D00;
+    --gris-400:#8c8c8c;
+    --vert-fort:#14532D;
+  }
+  html{scroll-padding-top:calc(var(--h-header) + 16px);}
+
+  /* B2 · la barre de progression devient lisible (jaune sur gris foncé) */
+  .progress{background:#3a3a3a;}
+  .progress > span{background:var(--jaune,#FECF41);}
+
+  /* B3 · le menu d'étapes ne passe plus sous l'en-tête collant */
+  .stepper{top:calc(var(--h-header) + 12px);z-index:1;}
+  .etape-compteur{margin:.2rem .3rem .5rem;font-size:.78rem;font-weight:700;
+    text-transform:uppercase;letter-spacing:.05em;color:#3a3a3a;}
+
+  /* B6 · le bouton verrouillé est lisible et sa condition est écrite */
+  .btn:disabled,.btn-primary:disabled,.btn-ghost:disabled{
+    opacity:1;background:#f4f4f4;color:#6b6b6b;
+    box-shadow:inset 0 0 0 2px #cfcfcf;cursor:not-allowed;}
+  .lock-note{margin:1.2rem 0 -.6rem;font-size:.88rem;color:#3a3a3a;font-weight:600;}
+  .step-item:disabled{opacity:1;color:#6b6b6b;}
+  .step-item:disabled .pastille{border-color:var(--gris-400);color:#6b6b6b;}
+
+  /* contraste des bordures de contrôles interactifs */
+  .opt{border-color:var(--gris-400);}
+  .role{border-color:#cfcfcf;}
+  .role .plus{color:#000;background:var(--jaune,#FECF41);width:26px;height:26px;
+    border-radius:50%;display:grid;place-items:center;top:.7rem;right:.7rem;
+    font-size:1rem;line-height:1;}
+  .feedback.ok{color:var(--vert-fort);}
+
+  /* B8 · le panneau déplié ne tronque plus le texte */
+  .role .sigle,.role .nom{display:block;margin:0 0 .15rem;}
+  .role .nom{margin-bottom:0;}
+  .role .detail{max-height:none;display:grid;grid-template-rows:0fr;
+    overflow:hidden;transition:grid-template-rows var(--t,.25s ease);}
+  .role .detail > *{min-height:0;}
+  .role[aria-expanded="true"] .detail{max-height:none;grid-template-rows:1fr;}
+
+  /* lisibilité des barres jaunes sur fond blanc, sans toucher aux schémas
+     dont le contour est déjà défini dans le SVG */
+  .schema svg rect[fill="#FECF41"]:not([stroke]){stroke:var(--jaune-trait);stroke-width:.8;}
+
+  /* B10 · les nombres et les unités ne se coupent plus en fin de ligne */
+  .sc b,.chiffre{white-space:nowrap;}
+
+  @media (max-width:640px){
+    /* B5 · l'en-tête mobile n'occupe plus le quart de l'écran */
+    :root{--h-header:92px;}
+    .topbar{padding:.5rem 1rem;gap:.7rem;}
+    .topbar .logo-prefet{height:52px!important;}
+    .topbar img{width:104px;}
+
+    /* B1 · les graphiques redeviennent consultables */
+    .etape{padding:1.1rem;}
+    .schema{padding:.8rem;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .schema svg{min-width:560px;}
+    .schema::after{content:"↔ Faites défiler le graphique horizontalement";
+      display:block;font-size:.8rem;color:#3a3a3a;margin-top:.5rem;font-style:normal;}
+
+    /* menu d'étapes : accrochage au défilement */
+    .stepper ol{scroll-snap-type:x mandatory;}
+    .step-item{scroll-snap-align:start;}
+  }
+
+  /* B4 · mouvement réduit traité en CSS, et non par un script différé */
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;
+      animation-iteration-count:1!important;transition-duration:.01ms!important;
+      scroll-behavior:auto!important;}
+  }
 </style>
 </head>
 <body data-module="m3">
@@ -175,9 +256,9 @@
         <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
         <div class="org" data-explore="1">
           <div class="cartes">
-            <button class="role" aria-expanded="false"><p class="sigle">Décennie d'action 2021-2030</p><p class="nom">Un cap mondial</p><span class="plus">+</span><div class="detail">L'ONU a lancé une deuxième décennie mondiale d'action pour la sécurité routière (2021-2030), soutenue par la France, avec pour objectif de réduire de 50 % le nombre de tués et de blessés graves.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Le repère France</p><p class="nom">Point de départ et cible</p><span class="plus">+</span><div class="detail">L'année de référence est 2019 : 3 244 personnes tuées et 16 248 blessés graves estimés en France métropolitaine. L'objectif est exprimé en pourcentage et non en nombre de morts : réduire de moitié les tués et les blessés graves d'ici 2030 par rapport à cette année de référence. À retenir en animation : on ne dit jamais « l'objectif de la France, c'est tant de morts », on dit « diviser par deux ».</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Où en est-on ?</p><p class="nom">Données 2025</p><span class="plus">+</span><div class="detail">En 2025 : 3 263 personnes tuées et 16 751 blessés graves estimés en France métropolitaine. Six ans après l'année de référence, la mortalité est légèrement supérieure à celle de 2019 (+ 0,6 %) et les blessés graves également (+ 3,1 %). La trajectoire ne va donc pas dans le sens de l'objectif fixé pour 2030.</div></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Décennie d'action 2021-2030</span><span class="nom">Un cap mondial</span><span class="plus">+</span><span class="detail"><span>L'ONU a lancé une deuxième décennie mondiale d'action pour la sécurité routière (2021-2030), soutenue par la France, avec pour objectif de réduire de 50 % le nombre de tués et de blessés graves.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Le repère France</span><span class="nom">Point de départ et cible</span><span class="plus">+</span><span class="detail"><span>L'année de référence est 2019 : 3 244 personnes tuées et 16 248 blessés graves estimés en France métropolitaine. L'objectif est exprimé en pourcentage et non en nombre de morts : réduire de moitié les tués et les blessés graves d'ici 2030 par rapport à cette année de référence. À retenir en animation : on ne dit jamais « l'objectif de la France, c'est tant de morts », on dit « diviser par deux ».</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Où en est-on ?</span><span class="nom">Données 2025</span><span class="plus">+</span><span class="detail"><span>En 2025 : 3 263 personnes tuées et 16 751 blessés graves estimés en France métropolitaine. Six ans après l'année de référence, la mortalité est légèrement supérieure à celle de 2019 (+ 0,6 %) et les blessés graves également (+ 3,1 %). La trajectoire ne va donc pas dans le sens de l'objectif fixé pour 2030.</span></span></button>
           </div>
         </div>
         <p class="src">Source des chiffres : ONISR, <em>L'accidentalité routière en France, principaux résultats 2025</em>, données définitives, mai 2026. France métropolitaine.</p>
@@ -186,7 +267,7 @@
           <p class="q">Quel est l'objectif de la décennie d'action 2021-2030 ?</p>
           <div class="opts">
             <button class="opt" data-ok="0"><span class="mark"></span> Supprimer la limitation de vitesse</button>
-            <button class="opt" data-ok="1"><span class="mark"></span> Réduire de 50 % le nombre de tués et de blessés graves</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> Réduire de 50 % le nombre de tués et de blessés graves</button>
             <button class="opt" data-ok="0"><span class="mark"></span> Doubler le nombre de contrôles</button>
           </div>
           <p class="feedback"></p>
@@ -201,14 +282,14 @@
         <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
         <div class="org" data-explore="1">
           <div class="cartes">
-            <button class="role" aria-expanded="false"><p class="sigle">Deux-roues motorisés</p><p class="nom">Un enjeu majeur</p><span class="plus">+</span><div class="detail">Les deux-roues motorisés (2RM) constituent un enjeu prioritaire.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Conduites à risques</p><p class="nom">Comportements</p><span class="plus">+</span><div class="detail">Alcool, stupéfiants, vitesse, non-respect des priorités et distracteurs.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Mobilités douces</p><p class="nom">Nouveaux usages</p><span class="plus">+</span><div class="detail">Vélo (y compris à assistance électrique), EDPM, cyclomobile et marche.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Risque routier professionnel</p><p class="nom">Au travail</p><span class="plus">+</span><div class="detail">Le risque routier lié à l'activité professionnelle.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Enjeux facultatifs</p><p class="nom">Adaptation locale</p><span class="plus">+</span><div class="detail">Deux enjeux facultatifs peuvent être ajoutés selon le contexte du département.</div></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Deux-roues motorisés</span><span class="nom">Un enjeu majeur</span><span class="plus">+</span><span class="detail"><span>Les deux-roues motorisés (2RM) constituent un enjeu prioritaire.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Conduites à risques</span><span class="nom">Comportements</span><span class="plus">+</span><span class="detail"><span>Alcool, stupéfiants, vitesse, non-respect des priorités et distracteurs.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Mobilités douces</span><span class="nom">Nouveaux usages</span><span class="plus">+</span><span class="detail"><span>Vélo (y compris à assistance électrique), EDPM, cyclomobile et marche.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Risque routier professionnel</span><span class="nom">Au travail</span><span class="plus">+</span><span class="detail"><span>Le risque routier lié à l'activité professionnelle.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Enjeux facultatifs</span><span class="nom">Adaptation locale</span><span class="plus">+</span><span class="detail"><span>Deux enjeux facultatifs peuvent être ajoutés selon le contexte du département.</span></span></button>
           </div>
         </div>
-        <figure class="schema"><img src="assets/photos/stock-moto.jpg" alt="Motard casqué roulant à vive allure au coucher du soleil" loading="lazy" style="border-radius:8px;width:100%;height:auto;" /><figcaption>Enjeu n°1 du DGO : les deux-roues motorisés. 697 tués et 5 200 blessés graves en 2025, soit 21 % de la mortalité et 31 % des blessés graves pour une part très faible du trafic. 61 % de ces décès ont lieu hors agglomération, et 37 % des tués en 2RM ont entre 18 et 34 ans (ONISR, principaux résultats 2025, données définitives, mai 2026).</figcaption><p class="src">Image Adobe Stock — licence standard.</p></figure>
+        <figure class="schema"><img src="assets/photos/stock-moto.jpg" alt="Motard casqué roulant à vive allure au coucher du soleil" loading="lazy" style="border-radius:8px;width:100%;height:auto;" /><figcaption>Enjeu n°1 du DGO : les deux-roues motorisés. 697 tués et 5 200 blessés graves en 2025, soit 21 % de la mortalité et 31 % des blessés graves pour une part très faible du trafic. 61 % de ces décès ont lieu hors agglomération, et 37 % des tués en 2RM ont entre 18 et 34 ans (ONISR, principaux résultats 2025, données définitives, mai 2026).</figcaption><p class="src">Image Adobe Stock — licence standard.</p></figure>
         <div class="verrou" data-quiz="1">
           <span class="v-tag">🔒 Question de déverrouillage</span>
           <p class="q">Lequel de ces thèmes est un enjeu prioritaire du DGO 2023-2027 ?</p>
@@ -229,12 +310,12 @@
         <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
         <div class="org" data-explore="1">
           <div class="cartes">
-            <button class="role" aria-expanded="false"><p class="sigle">Bilan 2025</p><p class="nom">Les chiffres de référence</p><span class="plus">+</span><div class="detail">En 2025, 3 263 personnes sont décédées sur les routes de France métropolitaine, soit 70 tués de plus qu'en 2024 (+ 2,2 %). On estime à 247 000 le nombre de blessés, dont 16 751 blessés graves. 2 523 hommes ont été tués (77 %) et 740 femmes (23 %).</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Répartition par mode</p><p class="nom">Qui sont les victimes ?</p><span class="plus">+</span><div class="detail">Parmi les 3 263 personnes tuées en 2025 : 1 543 occupants de véhicule de tourisme (47 %), 697 usagers de deux-roues motorisés (21 %), 503 piétons, 235 cyclistes et 79 utilisateurs d'EDPm. Les modes doux (marche, vélo, EDPm) représentent 25 % de la mortalité et 35 % des blessés graves.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Les plus exposés</p><p class="nom">L'âge du risque</p><span class="plus">+</span><div class="detail">Les 18-24 ans courent deux fois plus de risques que la moyenne d'être tués ou blessés gravement : 528 tués en 2025, soit 96 tués par million d'habitants contre 49 en moyenne. Ils représentent 19 % des présumés responsables d'accidents mortels pour 8 % de la population. Viennent ensuite les 75 ans ou plus (538 tués) et les 25-34 ans (471 tués).</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Le réseau le plus meurtrier</p><p class="nom">Hors agglomération</p><span class="plus">+</span><div class="detail">En 2025, les routes hors agglomération concentrent 60 % des décès (1 973 tués) et 49 % des blessés graves, contre 1 031 tués en agglomération (32 %) et 259 sur autoroute (8 %).</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Les accidents sans tiers</p><p class="nom">Seul en cause</p><span class="plus">+</span><div class="detail">1 381 personnes sont mortes dans un accident n'impliquant qu'un seul véhicule, soit 42 % de la mortalité routière. Parmi elles, 834 étaient en véhicule de tourisme et 292 en deux-roues motorisé. Un argument utile en animation : la route n'est pas dangereuse seulement à cause des autres.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Hauts-de-France</p><p class="nom">Au niveau régional</p><span class="plus">+</span><div class="detail">Les Hauts-de-France font partie des 7 régions métropolitaines où la mortalité est stable ou en hausse en 2025. Ces 7 régions cumulent 1 838 tués, soit 137 de plus qu'en 2024, alors que les 6 autres régions enregistrent 67 tués de moins.</div></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Bilan 2025</span><span class="nom">Les chiffres de référence</span><span class="plus">+</span><span class="detail"><span>En 2025, 3 263 personnes sont décédées sur les routes de France métropolitaine, soit 70 tués de plus qu'en 2024 (+ 2,2 %). On estime à 247 000 le nombre de blessés, dont 16 751 blessés graves. 2 523 hommes ont été tués (77 %) et 740 femmes (23 %).</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Répartition par mode</span><span class="nom">Qui sont les victimes ?</span><span class="plus">+</span><span class="detail"><span>Parmi les 3 263 personnes tuées en 2025 : 1 543 occupants de véhicule de tourisme (47 %), 697 usagers de deux-roues motorisés (21 %), 503 piétons, 235 cyclistes et 79 utilisateurs d'EDPm. Les modes doux (marche, vélo, EDPm) représentent 25 % de la mortalité et 35 % des blessés graves.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Les plus exposés</span><span class="nom">L'âge du risque</span><span class="plus">+</span><span class="detail"><span>Les 18-24 ans courent deux fois plus de risques que la moyenne d'être tués ou blessés gravement : 528 tués en 2025, soit 96 tués par million d'habitants contre 49 en moyenne. Ils représentent 19 % des présumés responsables d'accidents mortels pour 8 % de la population. Viennent ensuite les 75 ans ou plus (538 tués) et les 25-34 ans (471 tués).</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Le réseau le plus meurtrier</span><span class="nom">Hors agglomération</span><span class="plus">+</span><span class="detail"><span>En 2025, les routes hors agglomération concentrent 60 % des décès (1 973 tués) et 49 % des blessés graves, contre 1 031 tués en agglomération (32 %) et 259 sur autoroute (8 %).</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Les accidents sans tiers</span><span class="nom">Seul en cause</span><span class="plus">+</span><span class="detail"><span>1 381 personnes sont mortes dans un accident n'impliquant qu'un seul véhicule, soit 42 % de la mortalité routière. Parmi elles, 834 étaient en véhicule de tourisme et 292 en deux-roues motorisé. Un argument utile en animation : la route n'est pas dangereuse seulement à cause des autres.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Hauts-de-France</span><span class="nom">Au niveau régional</span><span class="plus">+</span><span class="detail"><span>Les Hauts-de-France font partie des 7 régions métropolitaines où la mortalité est stable ou en hausse en 2025. Ces 7 régions cumulent 1 838 tués, soit 137 de plus qu'en 2024, alors que les 6 autres régions enregistrent 67 tués de moins.</span></span></button>
           </div>
         </div>
 
@@ -242,7 +323,7 @@
           <h4>Évolution de la mortalité routière en France métropolitaine</h4>
           <svg viewBox="0 0 720 320" role="img" aria-labelledby="m3g1t m3g1d">
             <title id="m3g1t">Nombre de personnes tuées par an en France métropolitaine</title>
-            <desc id="m3g1d">2019 : 3 244 tués ; 2023 : 3 167 ; 2024 : 3 193 ; 2025 : 3 263. La ligne pointillée matérialise la moitié du niveau de 2019, cible de la décennie d'action pour 2030.</desc>
+            <desc id="m3g1d">2019 : 3 244 tués ; 2023 : 3 167 ; 2024 : 3 193 ; 2025 : 3 263. La ligne pointillée matérialise la moitié du niveau de 2019, cible de la décennie d'action pour 2030.</desc>
             <line x1="60" y1="270" x2="700" y2="270" stroke="#ccc" stroke-width="1"/>
             <!-- objectif 2030 -->
             <line x1="60" y1="175" x2="700" y2="175" stroke="#c0392b" stroke-width="2" stroke-dasharray="6 5"/>
@@ -250,19 +331,19 @@
             <!-- barres : échelle 0..3400 -> hauteur 200px (y de 270 à 70) ; y = 270 - val/3400*200 -->
             <g font-family="Marianne,Segoe UI,Arial,sans-serif">
               <rect x="95" y="79" width="90" height="191" rx="3" fill="#FECF41"/>
-              <text x="140" y="72" text-anchor="middle" font-size="15" font-weight="800">3 244</text>
+              <text x="140" y="72" text-anchor="middle" font-size="15" font-weight="800">3 244</text>
               <text x="140" y="290" text-anchor="middle" font-size="13">2019</text>
 
               <rect x="240" y="84" width="90" height="186" rx="3" fill="#FECF41"/>
-              <text x="285" y="77" text-anchor="middle" font-size="15" font-weight="800">3 167</text>
+              <text x="285" y="77" text-anchor="middle" font-size="15" font-weight="800">3 167</text>
               <text x="285" y="290" text-anchor="middle" font-size="13">2023</text>
 
               <rect x="385" y="82" width="90" height="188" rx="3" fill="#FECF41"/>
-              <text x="430" y="75" text-anchor="middle" font-size="15" font-weight="800">3 193</text>
+              <text x="430" y="75" text-anchor="middle" font-size="15" font-weight="800">3 193</text>
               <text x="430" y="290" text-anchor="middle" font-size="13">2024</text>
 
               <rect x="530" y="78" width="90" height="192" rx="3" fill="#000"/>
-              <text x="575" y="71" text-anchor="middle" font-size="15" font-weight="800">3 263</text>
+              <text x="575" y="71" text-anchor="middle" font-size="15" font-weight="800">3 263</text>
               <text x="575" y="290" text-anchor="middle" font-size="13" font-weight="700">2025</text>
             </g>
           </svg>
@@ -273,12 +354,12 @@
           <h4>Répartition des personnes tuées par mode de déplacement (métropole, 2025)</h4>
           <svg viewBox="0 0 720 300" role="img" aria-labelledby="m3g2t m3g2d">
             <title id="m3g2t">Nombre de tués par mode de déplacement en 2025</title>
-            <desc id="m3g2d">Véhicule de tourisme : 1 543 ; deux-roues motorisés : 697 ; piétons : 503 ; cyclistes : 235 ; EDPM : 79.</desc>
+            <desc id="m3g2d">Véhicule de tourisme : 1 543 ; deux-roues motorisés : 697 ; piétons : 503 ; cyclistes : 235 ; EDPM : 79.</desc>
             <!-- barres horizontales : échelle 0..1600 -> largeur 480px ; x départ 200 -->
             <g font-family="Marianne,Segoe UI,Arial,sans-serif" font-size="13">
               <text x="190" y="35" text-anchor="end" font-weight="700">Véhicule de tourisme</text>
               <rect x="200" y="22" width="463" height="22" rx="3" fill="#FECF41"/>
-              <text x="670" y="39" font-size="14" font-weight="800">1 543</text>
+              <text x="670" y="39" font-size="14" font-weight="800">1 543</text>
 
               <text x="190" y="83" text-anchor="end" font-weight="700">2-roues motorisés</text>
               <rect x="200" y="70" width="209" height="22" rx="3" fill="#FECF41"/>
@@ -297,24 +378,24 @@
               <text x="231" y="231" font-size="14" font-weight="800">79</text>
             </g>
           </svg>
-          <p class="src">Source : ONISR, <em>L'accidentalité routière en France, principaux résultats 2025</em>, données définitives, mai 2026. France métropolitaine. Les occupants de véhicule de tourisme représentent 47 % des tués, les deux-roues motorisés 21 %, les modes doux 25 %.</p>
+          <p class="src">Source : ONISR, <em>L'accidentalité routière en France, principaux résultats 2025</em>, données définitives, mai 2026. France métropolitaine. Les occupants de véhicule de tourisme représentent 47 % des tués, les deux-roues motorisés 21 %, les modes doux 25 %.</p>
         </figure>
 
         <h4 style="margin-top:2rem;">La région Hauts-de-France en 2025</h4>
         <div class="stat-cards">
           <div class="sc"><b>255</b><span>personnes tuées dans la région, soit 32 de plus qu'en 2024</span></div>
           <div class="sc"><b>43</b><span>tués par million d'habitants, contre 48 en moyenne en métropole</span></div>
-          <div class="sc"><b>53 %</b><span>des tués de la région le sont dans les communes rurales, qui ne rassemblent que 29 % de la population</span></div>
+          <div class="sc"><b>53 %</b><span>des tués de la région le sont dans les communes rurales, qui ne rassemblent que 29 % de la population</span></div>
           <div class="sc"><b>143</b><span>tués hors agglomération, contre 90 en agglomération et 22 sur autoroute</span></div>
         </div>
-        <p class="src">Source : ONISR, <em>L'accidentalité routière en France, principaux résultats 2025</em>, atlas territorial, données définitives, mai 2026. Population : Insee, estimation au 1<sup>er</sup> janvier 2026 (5 974 447 habitants). Les tués par million d'habitants sont une moyenne 2021-2025.</p>
+        <p class="src">Source : ONISR, <em>L'accidentalité routière en France, principaux résultats 2025</em>, atlas territorial, données définitives, mai 2026. Population : Insee, estimation au 1<sup>er</sup> janvier 2026 (5 974 447 habitants). Les tués par million d'habitants sont une moyenne 2021-2025.</p>
         <div class="verrou" data-quiz="1">
           <span class="v-tag">🔒 Question de déverrouillage</span>
           <p class="q">En 2025, combien de personnes ont perdu la vie sur les routes de France métropolitaine ?</p>
           <div class="opts">
-            <button class="opt" data-ok="0"><span class="mark"></span> Environ 1 600</button>
-            <button class="opt" data-ok="1"><span class="mark"></span> Environ 3 260</button>
-            <button class="opt" data-ok="0"><span class="mark"></span> Environ 16 700</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> Environ 1 600</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> Environ 3 260</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> Environ 16 700</button>
           </div>
           <p class="feedback"></p>
         </div>
@@ -330,17 +411,17 @@
           <h4>Personnes tuées sur les routes de France métropolitaine, de 1970 à 2025</h4>
           <svg viewBox="0 0 720 300" role="img" aria-labelledby="m4g3t m4g3d">
             <title id="m4g3t">Courbe de la mortalité routière annuelle en France métropolitaine de 1970 à 2025</title>
-            <desc id="m4g3d">La courbe part de 15 034 tués en 1970, culmine à 16 545 tués en 1972, puis décroît presque sans interruption : 12 384 en 1980, 10 289 en 1990, 7 643 en 2000, 5 318 en 2005, 3 992 en 2010, 3 244 en 2019, 2 541 en 2020 pendant les confinements, et 3 263 en 2025. Sept repères numérotés marquent les grandes mesures de sécurité routière.</desc>
+            <desc id="m4g3d">La courbe part de 15 034 tués en 1970, culmine à 16 545 tués en 1972, puis décroît presque sans interruption : 12 384 en 1980, 10 289 en 1990, 7 643 en 2000, 5 318 en 2005, 3 992 en 2010, 3 244 en 2019, 2 541 en 2020 pendant les confinements, et 3 263 en 2025. Sept repères numérotés marquent les grandes mesures de sécurité routière.</desc>
             <line x1="62.0" y1="268.0" x2="706.0" y2="268.0" stroke="#e6e6e6" stroke-width="1"/>
             <text x="56.0" y="272.0" text-anchor="end" font-size="11" fill="#666">0</text>
             <line x1="62.0" y1="212.0" x2="706.0" y2="212.0" stroke="#e6e6e6" stroke-width="1"/>
-            <text x="56.0" y="216.0" text-anchor="end" font-size="11" fill="#666">4 000</text>
+            <text x="56.0" y="216.0" text-anchor="end" font-size="11" fill="#666">4 000</text>
             <line x1="62.0" y1="156.0" x2="706.0" y2="156.0" stroke="#e6e6e6" stroke-width="1"/>
-            <text x="56.0" y="160.0" text-anchor="end" font-size="11" fill="#666">8 000</text>
+            <text x="56.0" y="160.0" text-anchor="end" font-size="11" fill="#666">8 000</text>
             <line x1="62.0" y1="100.0" x2="706.0" y2="100.0" stroke="#e6e6e6" stroke-width="1"/>
-            <text x="56.0" y="104.0" text-anchor="end" font-size="11" fill="#666">12 000</text>
+            <text x="56.0" y="104.0" text-anchor="end" font-size="11" fill="#666">12 000</text>
             <line x1="62.0" y1="44.0" x2="706.0" y2="44.0" stroke="#e6e6e6" stroke-width="1"/>
-            <text x="56.0" y="48.0" text-anchor="end" font-size="11" fill="#666">16 000</text>
+            <text x="56.0" y="48.0" text-anchor="end" font-size="11" fill="#666">16 000</text>
             <line x1="62.0" y1="268.0" x2="706.0" y2="268.0" stroke="#333" stroke-width="1.5"/>
             <text x="62.0" y="286.0" text-anchor="middle" font-size="11" fill="#444">1970</text>
             <line x1="62.0" y1="268.0" x2="62.0" y2="272.0" stroke="#333" stroke-width="1"/>
@@ -372,22 +453,22 @@
             <text x="624.0" y="226.5" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">6</text>
             <circle cx="706.0" cy="222.3" r="9" fill="#c0392b"/>
             <text x="706.0" y="226.3" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">7</text>
-            <text x="91.4" y="24.4" text-anchor="middle" font-size="13" font-weight="800">16 545</text>
-            <text x="704.0" y="194.3" text-anchor="end" font-size="13" font-weight="800">3 263</text>
+            <text x="91.4" y="24.4" text-anchor="middle" font-size="13" font-weight="800">16 545</text>
+            <text x="704.0" y="194.3" text-anchor="end" font-size="13" font-weight="800">3 263</text>
           </svg>
-          <p class="src">Sources : ONISR, séries statistiques de la mortalité routière ; pour 2025, ONISR, <em>L'accidentalité routière en France, principaux résultats 2025</em>, données définitives, mai 2026. France métropolitaine. Attention à la méthode de comptage : jusqu'en 2004 la France comptait les personnes décédées dans les 6 jours suivant l'accident, depuis 2005 elle compte les décès à 30 jours. Les années anciennes sont donc légèrement sous-évaluées : le pic de 1972 correspond à 16 545 tués à 6 jours, soit 18 034 tués en équivalent 30 jours. Les années 1981 et 1982 ne sont pas reportées ici : le changement intervenu dans la remontée des données de la police nationale a rompu la comparabilité de la série sur ces deux années.</p>
+          <p class="src">Sources : ONISR, séries statistiques de la mortalité routière ; pour 2025, ONISR, <em>L'accidentalité routière en France, principaux résultats 2025</em>, données définitives, mai 2026. France métropolitaine. Attention à la méthode de comptage : jusqu'en 2004 la France comptait les personnes décédées dans les 6 jours suivant l'accident, depuis 2005 elle compte les décès à 30 jours. Les années anciennes sont donc légèrement sous-évaluées : le pic de 1972 correspond à 16 545 tués à 6 jours, soit 18 034 tués en équivalent 30 jours. Les années 1981 et 1982 ne sont pas reportées ici : le changement intervenu dans la remontée des données de la police nationale a rompu la comparabilité de la série sur ces deux années.</p>
         </figure>
 
         <p class="hint-explore">Cliquez sur chaque repère pour découvrir la mesure qui correspond au numéro affiché sur la courbe.</p>
         <div class="org" data-explore="1">
           <div class="cartes">
-            <button class="role" aria-expanded="false"><p class="sigle">Repère 1 &middot; 1973</p><p class="nom">La règle apparaît</p><span class="plus">+</span><div class="detail">Limitations de vitesse généralisées sur l'ensemble du réseau, ceinture de sécurité obligatoire à l'avant hors agglomération, casque obligatoire pour tous les usagers de deux-roues motorisés. Jusque-là, on roulait sans limite sur route ouverte. La mortalité recule de plus de 3 000 tués en deux ans.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Repère 2 &middot; 1983</p><p class="nom">L'alcool devient contrôlable</p><span class="plus">+</span><div class="detail">Les forces de l'ordre peuvent désormais contrôler l'alcoolémie d'un conducteur sans qu'une infraction ou un accident ait eu lieu au préalable, et le seuil est fixé à 0,8 g/l. La règle existait, il devenait possible de la faire respecter.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Repère 3 &middot; 1990</p><p class="nom">La ville ralentit</p><span class="plus">+</span><div class="detail">La vitesse en agglomération passe de 60 à 50 km/h et la ceinture devient obligatoire aux places arrière. Deux mesures simples qui protègent d'abord les piétons et les passagers.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Repère 4 &middot; 1992</p><p class="nom">Le permis à points</p><span class="plus">+</span><div class="detail">La sanction devient progressive et pédagogique : chaque infraction coûte des points, et la perte du permis sanctionne l'accumulation. Le conducteur est responsabilisé dans la durée, pas seulement au moment du contrôle.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Repère 5 &middot; 2003</p><p class="nom">Le contrôle automatisé</p><span class="plus">+</span><div class="detail">La mise en service des premiers radars automatiques s'inscrit dans une politique d'ensemble de contrôle et de sanction, associée au permis probatoire et à une communication très visible. C'est la chute la plus brutale de toute la courbe : 7 242 tués en 2002, 5 731 en 2003, 5 232 en 2004, soit plus de 2 000 morts de moins en deux ans alors que la circulation continuait d'augmenter. L'évaluation attribue ce résultat à l'ensemble de cette politique de contrôle-sanction, dont le contrôle automatisé est l'outil le plus visible.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Repère 6 &middot; 2018</p><p class="nom">Les 80 km/h</p><span class="plus">+</span><div class="detail">La vitesse maximale passe à 80 km/h sur les routes bidirectionnelles sans séparateur central, celles où se concentre la mortalité. Mesure très contestée à l'époque, puis assouplie par certains départements : un bon exemple de la difficulté à faire accepter la règle.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Repère 7 &middot; 2025</p><p class="nom">Le grand excès devient un délit</p><span class="plus">+</span><div class="detail">Dépasser de 50 km/h ou plus la vitesse autorisée n'est plus une contravention mais un délit, désormais inscrit à l'article L. 413-1 du code de la route. La logique reste la même depuis 1973 : quand un comportement tue, la règle se durcit.</div></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Repère 1 &middot; 1973</span><span class="nom">La règle apparaît</span><span class="plus">+</span><span class="detail"><span>Limitations de vitesse généralisées sur l'ensemble du réseau, ceinture de sécurité obligatoire à l'avant hors agglomération, casque obligatoire pour tous les usagers de deux-roues motorisés. Jusque-là, on roulait sans limite sur route ouverte. La mortalité recule de plus de 3 000 tués en deux ans.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Repère 2 &middot; 1983</span><span class="nom">L'alcool devient contrôlable</span><span class="plus">+</span><span class="detail"><span>Les forces de l'ordre peuvent désormais contrôler l'alcoolémie d'un conducteur sans qu'une infraction ou un accident ait eu lieu au préalable, et le seuil est fixé à 0,8 g/l. La règle existait, il devenait possible de la faire respecter.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Repère 3 &middot; 1990</span><span class="nom">La ville ralentit</span><span class="plus">+</span><span class="detail"><span>La vitesse en agglomération passe de 60 à 50 km/h et la ceinture devient obligatoire aux places arrière. Deux mesures simples qui protègent d'abord les piétons et les passagers.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Repère 4 &middot; 1992</span><span class="nom">Le permis à points</span><span class="plus">+</span><span class="detail"><span>La sanction devient progressive et pédagogique : chaque infraction coûte des points, et la perte du permis sanctionne l'accumulation. Le conducteur est responsabilisé dans la durée, pas seulement au moment du contrôle.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Repère 5 &middot; 2003</span><span class="nom">Le contrôle automatisé</span><span class="plus">+</span><span class="detail"><span>La mise en service des premiers radars automatiques s'inscrit dans une politique d'ensemble de contrôle et de sanction, associée au permis probatoire et à une communication très visible. C'est la chute la plus brutale de toute la courbe : 7 242 tués en 2002, 5 731 en 2003, 5 232 en 2004, soit plus de 2 000 morts de moins en deux ans alors que la circulation continuait d'augmenter. L'évaluation attribue ce résultat à l'ensemble de cette politique de contrôle-sanction, dont le contrôle automatisé est l'outil le plus visible.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Repère 6 &middot; 2018</span><span class="nom">Les 80 km/h</span><span class="plus">+</span><span class="detail"><span>La vitesse maximale passe à 80 km/h sur les routes bidirectionnelles sans séparateur central, celles où se concentre la mortalité. Mesure très contestée à l'époque, puis assouplie par certains départements : un bon exemple de la difficulté à faire accepter la règle.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Repère 7 &middot; 2025</span><span class="nom">Le grand excès devient un délit</span><span class="plus">+</span><span class="detail"><span>Dépasser de 50 km/h ou plus la vitesse autorisée n'est plus une contravention mais un délit, désormais inscrit à l'article L. 413-1 du code de la route. La logique reste la même depuis 1973 : quand un comportement tue, la règle se durcit.</span></span></button>
           </div>
         </div>
 
@@ -397,7 +478,7 @@
           <ul>
             <li><strong>La baisse n'est pas due à une baisse du trafic.</strong> Entre 1970 et aujourd'hui, la circulation a été multipliée par trois. Il y a beaucoup plus de véhicules sur les routes et cinq fois moins de morts.</li>
             <li><strong>Les décrochages coïncident avec les mesures.</strong> 1973, 2003 : à chaque fois qu'une règle nouvelle est assortie d'un contrôle réel, la courbe casse. À l'inverse, quand rien ne bouge, elle stagne.</li>
-            <li><strong>Depuis 2013, la courbe ne baisse plus.</strong> Le creux de 2020 (2 541 tués) est un effet des confinements, pas un progrès. Nous sommes revenus au niveau de 2019, alors que l'objectif est de diviser encore la mortalité par deux d'ici 2030. Les gains faciles ont été obtenus ; les suivants passent par le comportement de chacun, donc par la prévention.</li>
+            <li><strong>Depuis 2013, la courbe ne baisse plus.</strong> Le creux de 2020 (2 541 tués) est un effet des confinements, pas un progrès. Nous sommes revenus au niveau de 2019, alors que l'objectif est de diviser encore la mortalité par deux d'ici 2030. Les gains faciles ont été obtenus ; les suivants passent par le comportement de chacun, donc par la prévention.</li>
           </ul>
         </div>
 
@@ -405,16 +486,16 @@
           <span class="v-tag">🔒 Question de déverrouillage</span>
           <p class="q">1972 est l'année la plus meurtrière de l'histoire routière française. Combien de personnes ont été tuées cette année-là en France métropolitaine ?</p>
           <div class="opts">
-            <button class="opt" data-ok="0"><span class="mark"></span> Environ 3 300, comme aujourd'hui</button>
-            <button class="opt" data-ok="0"><span class="mark"></span> Environ 8 000</button>
-            <button class="opt" data-ok="1"><span class="mark"></span> Environ 16 500, soit cinq fois plus qu'aujourd'hui</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> Environ 3 300, comme aujourd'hui</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> Environ 8 000</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> Environ 16 500, soit cinq fois plus qu'aujourd'hui</button>
           </div>
           <p class="feedback"></p>
         </div>
 
         <div class="verrou" data-quiz="2">
           <span class="v-tag">🔒 Question de déverrouillage</span>
-          <p class="q">Entre 2002 et 2004, la mortalité chute de 7 242 à 5 232 tués. Qu'est-ce qui intervient à ce moment-là ?</p>
+          <p class="q">Entre 2002 et 2004, la mortalité chute de 7 242 à 5 232 tués. Qu'est-ce qui intervient à ce moment-là ?</p>
           <div class="opts">
             <button class="opt" data-ok="0"><span class="mark"></span> Une forte baisse du nombre de kilomètres parcourus</button>
             <button class="opt" data-ok="1"><span class="mark"></span> Une politique d'ensemble de contrôle et de sanction, dont la mise en service du contrôle automatisé</button>
@@ -428,7 +509,7 @@
           <p class="q">Un participant vous dit : « les radars, c'est juste une pompe à fric, ça n'a jamais sauvé personne ». Que répondez-vous en vous appuyant sur la courbe ?</p>
           <div class="opts">
             <button class="opt" data-ok="0"><span class="mark"></span> Qu'il a en partie raison, les recettes sont bien réelles</button>
-            <button class="opt" data-ok="1"><span class="mark"></span> Que la mortalité a reculé de près de 2 000 tués en deux ans après leur mise en service, alors que le trafic n'a pas baissé</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> Que la mortalité a reculé de près de 2 000 tués en deux ans après leur mise en service, alors que le trafic n'a pas baissé</button>
             <button class="opt" data-ok="0"><span class="mark"></span> Que ce n'est pas le sujet et qu'il faut passer à la suite</button>
           </div>
           <p class="feedback"></p>
@@ -466,8 +547,8 @@
           <p class="q">Sur quel réseau routier se concentre la mortalité en 2025 ?</p>
           <div class="opts">
             <button class="opt" data-ok="0"><span class="mark"></span> L'autoroute, avec 259 tués</button>
-            <button class="opt" data-ok="1"><span class="mark"></span> Les routes hors agglomération, avec 1 973 tués, soit 60 % des décès</button>
-            <button class="opt" data-ok="0"><span class="mark"></span> Les voies en agglomération, avec 1 031 tués</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> Les routes hors agglomération, avec 1 973 tués, soit 60 % des décès</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> Les voies en agglomération, avec 1 031 tués</button>
           </div>
           <p class="feedback"></p>
         </div>
@@ -579,6 +660,7 @@
 })();
 </script>
 <script src="assets/js/quiz-extras.js" defer></script>
+<script src="assets/js/ui-parcours.js" defer></script>
 <script src="assets/js/attestation.js" defer></script>
 </body>
 </html>

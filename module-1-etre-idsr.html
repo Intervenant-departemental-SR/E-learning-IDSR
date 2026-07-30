@@ -113,6 +113,87 @@
     .step-sub{display:none;}
     .module-hero h1{font-size:1.55rem;}
   }
+
+  /* ============================================================
+     CORRECTIFS TRANSVERSES — audit design du 30 juillet 2026
+     Bloc identique sur toutes les pages, placé en fin de feuille
+     pour surcharger les règles ci-dessus. Il constituera le point
+     de départ du futur socle.css : toute modification doit être
+     reportée sur les autres pages tant que le socle n'existe pas.
+     ============================================================ */
+  :root{
+    --h-header:132px;
+    --jaune-trait:#8A6D00;
+    --gris-400:#8c8c8c;
+    --vert-fort:#14532D;
+  }
+  html{scroll-padding-top:calc(var(--h-header) + 16px);}
+
+  /* B2 · la barre de progression devient lisible (jaune sur gris foncé) */
+  .progress{background:#3a3a3a;}
+  .progress > span{background:var(--jaune,#FECF41);}
+
+  /* B3 · le menu d'étapes ne passe plus sous l'en-tête collant */
+  .stepper{top:calc(var(--h-header) + 12px);z-index:1;}
+  .etape-compteur{margin:.2rem .3rem .5rem;font-size:.78rem;font-weight:700;
+    text-transform:uppercase;letter-spacing:.05em;color:#3a3a3a;}
+
+  /* B6 · le bouton verrouillé est lisible et sa condition est écrite */
+  .btn:disabled,.btn-primary:disabled,.btn-ghost:disabled{
+    opacity:1;background:#f4f4f4;color:#6b6b6b;
+    box-shadow:inset 0 0 0 2px #cfcfcf;cursor:not-allowed;}
+  .lock-note{margin:1.2rem 0 -.6rem;font-size:.88rem;color:#3a3a3a;font-weight:600;}
+  .step-item:disabled{opacity:1;color:#6b6b6b;}
+  .step-item:disabled .pastille{border-color:var(--gris-400);color:#6b6b6b;}
+
+  /* contraste des bordures de contrôles interactifs */
+  .opt{border-color:var(--gris-400);}
+  .role{border-color:#cfcfcf;}
+  .role .plus{color:#000;background:var(--jaune,#FECF41);width:26px;height:26px;
+    border-radius:50%;display:grid;place-items:center;top:.7rem;right:.7rem;
+    font-size:1rem;line-height:1;}
+  .feedback.ok{color:var(--vert-fort);}
+
+  /* B8 · le panneau déplié ne tronque plus le texte */
+  .role .sigle,.role .nom{display:block;margin:0 0 .15rem;}
+  .role .nom{margin-bottom:0;}
+  .role .detail{max-height:none;display:grid;grid-template-rows:0fr;
+    overflow:hidden;transition:grid-template-rows var(--t,.25s ease);}
+  .role .detail > *{min-height:0;}
+  .role[aria-expanded="true"] .detail{max-height:none;grid-template-rows:1fr;}
+
+  /* lisibilité des barres jaunes sur fond blanc, sans toucher aux schémas
+     dont le contour est déjà défini dans le SVG */
+  .schema svg rect[fill="#FECF41"]:not([stroke]){stroke:var(--jaune-trait);stroke-width:.8;}
+
+  /* B10 · les nombres et les unités ne se coupent plus en fin de ligne */
+  .sc b,.chiffre{white-space:nowrap;}
+
+  @media (max-width:640px){
+    /* B5 · l'en-tête mobile n'occupe plus le quart de l'écran */
+    :root{--h-header:92px;}
+    .topbar{padding:.5rem 1rem;gap:.7rem;}
+    .topbar .logo-prefet{height:52px!important;}
+    .topbar img{width:104px;}
+
+    /* B1 · les graphiques redeviennent consultables */
+    .etape{padding:1.1rem;}
+    .schema{padding:.8rem;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .schema svg{min-width:560px;}
+    .schema::after{content:"↔ Faites défiler le graphique horizontalement";
+      display:block;font-size:.8rem;color:#3a3a3a;margin-top:.5rem;font-style:normal;}
+
+    /* menu d'étapes : accrochage au défilement */
+    .stepper ol{scroll-snap-type:x mandatory;}
+    .step-item{scroll-snap-align:start;}
+  }
+
+  /* B4 · mouvement réduit traité en CSS, et non par un script différé */
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;
+      animation-iteration-count:1!important;transition-duration:.01ms!important;
+      scroll-behavior:auto!important;}
+  }
 </style>
 </head>
 <body data-module="m1">
@@ -168,9 +249,9 @@
         <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
         <div class="org" data-explore="1">
           <div class="cartes">
-            <button class="role" aria-expanded="false"><p class="sigle">Un acteur du programme</p><p class="nom">Sa raison d'être</p><span class="plus">+</span><div class="detail">L'IDSR est la cheville ouvrière du programme « Agir pour la sécurité routière », dont l'objectif est de mobiliser les acteurs locaux contre l'insécurité routière. Ses actions ne sont jamais improvisées : elles sont concentrées sur des objectifs précis, cohérentes avec l'étude des enjeux locaux (DGO) et ciblées sur les publics les plus exposés du département — jeunes, seniors, salariés, deux-roues.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Des origines diverses</p><p class="nom">D'où viennent les IDSR ?</p><span class="plus">+</span><div class="detail">Quatre viviers : fonctionnaires de l'État ou des collectivités territoriales, salariés d'organismes socio-professionnels (les deux pouvant être mis à disposition par une convention signée entre l'employeur et la préfecture), membres d'associations, et bénévoles sur engagement personnel — la voie la plus fréquente. Cette mixité donne au réseau des compétences très variées : enseignants, soignants, gendarmes retraités, professionnels de la route…</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Une motivation commune</p><p class="nom">Le point commun</p><span class="plus">+</span><div class="detail">L'engagement est souvent ancré dans un vécu : un accident, un proche touché, un métier de la route, un engagement associatif. Cette diversité est une force — chaque IDSR sait parler à des publics différents. Le point commun non négociable : l'exemplarité personnelle au volant, formalisée par l'acte d'engagement signé en préfecture. Un IDSR verbalisé perd sa crédibilité… et peut perdre sa nomination.</div></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Un acteur du programme</span><span class="nom">Sa raison d'être</span><span class="plus">+</span><span class="detail"><span>L'IDSR est la cheville ouvrière du programme « Agir pour la sécurité routière », dont l'objectif est de mobiliser les acteurs locaux contre l'insécurité routière. Ses actions ne sont jamais improvisées : elles sont concentrées sur des objectifs précis, cohérentes avec l'étude des enjeux locaux (DGO) et ciblées sur les publics les plus exposés du département — jeunes, seniors, salariés, deux-roues.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Des origines diverses</span><span class="nom">D'où viennent les IDSR ?</span><span class="plus">+</span><span class="detail"><span>Quatre viviers : fonctionnaires de l'État ou des collectivités territoriales, salariés d'organismes socio-professionnels (les deux pouvant être mis à disposition par une convention signée entre l'employeur et la préfecture), membres d'associations, et bénévoles sur engagement personnel — la voie la plus fréquente. Cette mixité donne au réseau des compétences très variées : enseignants, soignants, gendarmes retraités, professionnels de la route…</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Une motivation commune</span><span class="nom">Le point commun</span><span class="plus">+</span><span class="detail"><span>L'engagement est souvent ancré dans un vécu : un accident, un proche touché, un métier de la route, un engagement associatif. Cette diversité est une force — chaque IDSR sait parler à des publics différents. Le point commun non négociable : l'exemplarité personnelle au volant, formalisée par l'acte d'engagement signé en préfecture. Un IDSR verbalisé perd sa crédibilité… et peut perdre sa nomination.</span></span></button>
           </div>
         </div>
         <figure class="schema">
@@ -218,11 +299,11 @@
         <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
         <div class="org" data-explore="1">
           <div class="cartes">
-            <button class="role" aria-expanded="false"><p class="sigle">Cadre d'intervention</p><p class="nom">À la demande du coordinateur</p><span class="plus">+</span><div class="detail">L'IDSR intervient à la demande du coordinateur sécurité routière, dans le cadre du programme, sur les enjeux et les publics cibles de l'accidentalité du département.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Actions de prévention</p><p class="nom">Sur le terrain</p><span class="plus">+</span><div class="detail">Réalisation d'actions de prévention : stands, exposés, participation à des manifestations publiques.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Diffusion de l'information</p><p class="nom">Relais de la politique locale</p><span class="plus">+</span><div class="detail">Diffusion de l'information sur la politique locale de sécurité routière auprès des publics rencontrés.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Contribution & accompagnement</p><p class="nom">Faire vivre le réseau</p><span class="plus">+</span><div class="detail">Contribution au développement et à la gestion d'actions de sécurité routière. Les IDSR expérimentés peuvent accompagner et assister les nouveaux IDSR.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Savoir-être</p><p class="nom">Les qualités attendues</p><span class="plus">+</span><div class="detail">Savoir écouter (accueillir les objections sans juger), transmettre (des messages simples et sourcés), diffuser (relayer la politique locale) et s'adapter (un stand d'entreprise ne s'anime pas comme une classe de 3e). Ces qualités comptent plus que l'expertise technique : elles font l'objet du module 3 « Posture de l'IDSR ».</div></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Cadre d'intervention</span><span class="nom">À la demande du coordinateur</span><span class="plus">+</span><span class="detail"><span>L'IDSR intervient à la demande du coordinateur sécurité routière, dans le cadre du programme, sur les enjeux et les publics cibles de l'accidentalité du département.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Actions de prévention</span><span class="nom">Sur le terrain</span><span class="plus">+</span><span class="detail"><span>Réalisation d'actions de prévention : stands, exposés, participation à des manifestations publiques.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Diffusion de l'information</span><span class="nom">Relais de la politique locale</span><span class="plus">+</span><span class="detail"><span>Diffusion de l'information sur la politique locale de sécurité routière auprès des publics rencontrés.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Contribution & accompagnement</span><span class="nom">Faire vivre le réseau</span><span class="plus">+</span><span class="detail"><span>Contribution au développement et à la gestion d'actions de sécurité routière. Les IDSR expérimentés peuvent accompagner et assister les nouveaux IDSR.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Savoir-être</span><span class="nom">Les qualités attendues</span><span class="plus">+</span><span class="detail"><span>Savoir écouter (accueillir les objections sans juger), transmettre (des messages simples et sourcés), diffuser (relayer la politique locale) et s'adapter (un stand d'entreprise ne s'anime pas comme une classe de 3e). Ces qualités comptent plus que l'expertise technique : elles font l'objet du module 3 « Posture de l'IDSR ».</span></span></button>
           </div>
         </div>
         <figure class="schema"><img src="assets/photos/stock-animation-salle.jpg" alt="Un intervenant anime une séance de sensibilisation devant un public en salle" loading="lazy" style="border-radius:8px;width:100%;height:auto;" /><figcaption>L'essentiel des missions : stands, exposés et animations devant tous les publics, à la demande du coordinateur sécurité routière.</figcaption><p class="src">Image Adobe Stock — licence standard.</p></figure>
@@ -246,9 +327,9 @@
         <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
         <div class="org" data-explore="1">
           <div class="cartes">
-            <button class="role" aria-expanded="false"><p class="sigle">L'engagement</p><p class="nom">Acte d'engagement & nomination</p><span class="plus">+</span><div class="detail">L'IDSR remplit un acte d'engagement auprès de la préfecture portant sur son comportement personnel vis-à-vis des règles de circulation et son adhésion aux grands principes de lutte contre l'insécurité routière. Il est nommé par le préfet de département par un arrêté de nomination (un an au minimum). Le nombre de jours minimum à réaliser dans l'année est défini avec le coordinateur.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Les conditions</p><p class="nom">Bénévolat encadré</p><span class="plus">+</span><div class="detail">Il n'y a pas de rémunération ni de vacation. Les frais de déplacement et de restauration sont remboursés selon les règles et tarifs en vigueur dans les services de l'État. L'IDSR est assuré par l'État lorsqu'il effectue une mission ou participe à une réunion. Il dispose du soutien logistique adapté (tenue, matériel, documentation).</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">La formation</p><p class="nom">Initiale et continue</p><span class="plus">+</span><div class="detail">Tous les intervenants suivent une formation initiale obligatoire de sensibilisation (une journée) apportant une culture de base en sécurité routière. Des formations complémentaires et thématiques peuvent être proposées, et des réunions d'information tiennent les IDSR au courant de l'actualité.</div></button>
+            <button class="role" aria-expanded="false"><span class="sigle">L'engagement</span><span class="nom">Acte d'engagement & nomination</span><span class="plus">+</span><span class="detail"><span>L'IDSR remplit un acte d'engagement auprès de la préfecture portant sur son comportement personnel vis-à-vis des règles de circulation et son adhésion aux grands principes de lutte contre l'insécurité routière. Il est nommé par le préfet de département par un arrêté de nomination (un an au minimum). Le nombre de jours minimum à réaliser dans l'année est défini avec le coordinateur.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Les conditions</span><span class="nom">Bénévolat encadré</span><span class="plus">+</span><span class="detail"><span>Il n'y a pas de rémunération ni de vacation. Les frais de déplacement et de restauration sont remboursés selon les règles et tarifs en vigueur dans les services de l'État. L'IDSR est assuré par l'État lorsqu'il effectue une mission ou participe à une réunion. Il dispose du soutien logistique adapté (tenue, matériel, documentation).</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">La formation</span><span class="nom">Initiale et continue</span><span class="plus">+</span><span class="detail"><span>Tous les intervenants suivent une formation initiale obligatoire de sensibilisation (une journée) apportant une culture de base en sécurité routière. Des formations complémentaires et thématiques peuvent être proposées, et des réunions d'information tiennent les IDSR au courant de l'actualité.</span></span></button>
           </div>
         </div>
         <div class="docs">
@@ -261,7 +342,7 @@
         </div>
         
 <div class="stat-cards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.8rem;margin:1.2rem 0;">
-  <div style="background:var(--gris-clair);border-radius:10px;padding:1rem;text-align:center;border-bottom:4px solid var(--jaune);"><b style="display:block;font-size:1.35rem;">0 €</b><span style="font-size:.82rem;color:var(--gris);">bénévolat : ni rémunération, ni vacation — les frais sont remboursés aux tarifs de l'État</span></div>
+  <div style="background:var(--gris-clair);border-radius:10px;padding:1rem;text-align:center;border-bottom:4px solid var(--jaune);"><b style="display:block;font-size:1.35rem;">0 €</b><span style="font-size:.82rem;color:var(--gris);">bénévolat : ni rémunération, ni vacation — les frais sont remboursés aux tarifs de l'État</span></div>
   <div style="background:var(--gris-clair);border-radius:10px;padding:1rem;text-align:center;border-bottom:4px solid var(--jaune);"><b style="display:block;font-size:1.35rem;">1 an min.</b><span style="font-size:.82rem;color:var(--gris);">durée de l'arrêté préfectoral de nomination, renouvelable</span></div>
   <div style="background:var(--gris-clair);border-radius:10px;padding:1rem;text-align:center;border-bottom:4px solid var(--jaune);"><b style="display:block;font-size:1.35rem;">1 journée</b><span style="font-size:.82rem;color:var(--gris);">de formation initiale obligatoire, puis formations thématiques et réunions d'actualité</span></div>
   <div style="background:var(--gris-clair);border-radius:10px;padding:1rem;text-align:center;border-bottom:4px solid var(--jaune);"><b style="display:block;font-size:1.35rem;">Assuré</b><span style="font-size:.82rem;color:var(--gris);">par l'État en mission et en réunion, avec soutien logistique (tenue, matériel, documentation)</span></div>
@@ -450,6 +531,7 @@
 })();
 </script>
 <script src="assets/js/quiz-extras.js" defer></script>
+<script src="assets/js/ui-parcours.js" defer></script>
 <script src="assets/js/attestation.js" defer></script>
 </body>
 </html>

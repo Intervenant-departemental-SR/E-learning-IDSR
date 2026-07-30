@@ -113,6 +113,87 @@
     .step-sub{display:none;}
     .module-hero h1{font-size:1.55rem;}
   }
+
+  /* ============================================================
+     CORRECTIFS TRANSVERSES — audit design du 30 juillet 2026
+     Bloc identique sur toutes les pages, placé en fin de feuille
+     pour surcharger les règles ci-dessus. Il constituera le point
+     de départ du futur socle.css : toute modification doit être
+     reportée sur les autres pages tant que le socle n'existe pas.
+     ============================================================ */
+  :root{
+    --h-header:132px;
+    --jaune-trait:#8A6D00;
+    --gris-400:#8c8c8c;
+    --vert-fort:#14532D;
+  }
+  html{scroll-padding-top:calc(var(--h-header) + 16px);}
+
+  /* B2 · la barre de progression devient lisible (jaune sur gris foncé) */
+  .progress{background:#3a3a3a;}
+  .progress > span{background:var(--jaune,#FECF41);}
+
+  /* B3 · le menu d'étapes ne passe plus sous l'en-tête collant */
+  .stepper{top:calc(var(--h-header) + 12px);z-index:1;}
+  .etape-compteur{margin:.2rem .3rem .5rem;font-size:.78rem;font-weight:700;
+    text-transform:uppercase;letter-spacing:.05em;color:#3a3a3a;}
+
+  /* B6 · le bouton verrouillé est lisible et sa condition est écrite */
+  .btn:disabled,.btn-primary:disabled,.btn-ghost:disabled{
+    opacity:1;background:#f4f4f4;color:#6b6b6b;
+    box-shadow:inset 0 0 0 2px #cfcfcf;cursor:not-allowed;}
+  .lock-note{margin:1.2rem 0 -.6rem;font-size:.88rem;color:#3a3a3a;font-weight:600;}
+  .step-item:disabled{opacity:1;color:#6b6b6b;}
+  .step-item:disabled .pastille{border-color:var(--gris-400);color:#6b6b6b;}
+
+  /* contraste des bordures de contrôles interactifs */
+  .opt{border-color:var(--gris-400);}
+  .role{border-color:#cfcfcf;}
+  .role .plus{color:#000;background:var(--jaune,#FECF41);width:26px;height:26px;
+    border-radius:50%;display:grid;place-items:center;top:.7rem;right:.7rem;
+    font-size:1rem;line-height:1;}
+  .feedback.ok{color:var(--vert-fort);}
+
+  /* B8 · le panneau déplié ne tronque plus le texte */
+  .role .sigle,.role .nom{display:block;margin:0 0 .15rem;}
+  .role .nom{margin-bottom:0;}
+  .role .detail{max-height:none;display:grid;grid-template-rows:0fr;
+    overflow:hidden;transition:grid-template-rows var(--t,.25s ease);}
+  .role .detail > *{min-height:0;}
+  .role[aria-expanded="true"] .detail{max-height:none;grid-template-rows:1fr;}
+
+  /* lisibilité des barres jaunes sur fond blanc, sans toucher aux schémas
+     dont le contour est déjà défini dans le SVG */
+  .schema svg rect[fill="#FECF41"]:not([stroke]){stroke:var(--jaune-trait);stroke-width:.8;}
+
+  /* B10 · les nombres et les unités ne se coupent plus en fin de ligne */
+  .sc b,.chiffre{white-space:nowrap;}
+
+  @media (max-width:640px){
+    /* B5 · l'en-tête mobile n'occupe plus le quart de l'écran */
+    :root{--h-header:92px;}
+    .topbar{padding:.5rem 1rem;gap:.7rem;}
+    .topbar .logo-prefet{height:52px!important;}
+    .topbar img{width:104px;}
+
+    /* B1 · les graphiques redeviennent consultables */
+    .etape{padding:1.1rem;}
+    .schema{padding:.8rem;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .schema svg{min-width:560px;}
+    .schema::after{content:"↔ Faites défiler le graphique horizontalement";
+      display:block;font-size:.8rem;color:#3a3a3a;margin-top:.5rem;font-style:normal;}
+
+    /* menu d'étapes : accrochage au défilement */
+    .stepper ol{scroll-snap-type:x mandatory;}
+    .step-item{scroll-snap-align:start;}
+  }
+
+  /* B4 · mouvement réduit traité en CSS, et non par un script différé */
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;
+      animation-iteration-count:1!important;transition-duration:.01ms!important;
+      scroll-behavior:auto!important;}
+  }
 </style>
 </head>
 <body data-module="m7">
@@ -167,11 +248,11 @@
         <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
         <div class="org" data-explore="1">
           <div class="cartes">
-            <button class="role" aria-expanded="false"><p class="sigle">Ateliers de sensibilisation</p><p class="nom">Faire expérimenter</p><span class="plus">+</span><div class="detail">Parcours et lunettes de simulation d'alcoolémie, réactiomètre, atelier distracteurs, simulateurs de conduite (vélo, EDPM, deux-roues motorisé, voiture) et voiture-tonneau.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Outils « alcool »</p><p class="nom">Sensibiliser à l'alcool</p><span class="plus">+</span><div class="detail">Lunettes de simulation et parcours alcool, éthylotest chimique, valise alcool (dose-bar), simulateur d'alcoolémie et gobelets doseurs.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Intervenants spécialisés</p><p class="nom">Des partenaires</p><span class="plus">+</span><div class="detail">Forces de l'ordre, SDIS (sapeurs-pompiers) et professionnels peuvent compléter les actions.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Supports d'échange</p><p class="nom">Faire réfléchir</p><span class="plus">+</span><div class="detail">Débats, films de prévention et rappels de la réglementation.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Actualités réglementaires</p><p class="nom">Se tenir à jour</p><span class="plus">+</span><div class="detail">Circulation inter-files généralisée depuis le 11 janvier 2025 pour les deux ou trois-roues motorisés de moins d'un mètre de large ; contrôle technique des deux-roues, trois-roues et quadricycles motorisés (arrêté publié au Journal officiel le 24 octobre 2023) ; permis B accessible dès 17 ans depuis le 1er janvier 2024 ; création du délit d'homicide routier par la loi n° 2025-622 du 9 juillet 2025.</div></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Ateliers de sensibilisation</span><span class="nom">Faire expérimenter</span><span class="plus">+</span><span class="detail"><span>Parcours et lunettes de simulation d'alcoolémie, réactiomètre, atelier distracteurs, simulateurs de conduite (vélo, EDPM, deux-roues motorisé, voiture) et voiture-tonneau.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Outils « alcool »</span><span class="nom">Sensibiliser à l'alcool</span><span class="plus">+</span><span class="detail"><span>Lunettes de simulation et parcours alcool, éthylotest chimique, valise alcool (dose-bar), simulateur d'alcoolémie et gobelets doseurs.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Intervenants spécialisés</span><span class="nom">Des partenaires</span><span class="plus">+</span><span class="detail"><span>Forces de l'ordre, SDIS (sapeurs-pompiers) et professionnels peuvent compléter les actions.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Supports d'échange</span><span class="nom">Faire réfléchir</span><span class="plus">+</span><span class="detail"><span>Débats, films de prévention et rappels de la réglementation.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Actualités réglementaires</span><span class="nom">Se tenir à jour</span><span class="plus">+</span><span class="detail"><span>Circulation inter-files généralisée depuis le 11 janvier 2025 pour les deux ou trois-roues motorisés de moins d'un mètre de large ; contrôle technique des deux-roues, trois-roues et quadricycles motorisés (arrêté publié au Journal officiel le 24 octobre 2023) ; permis B accessible dès 17 ans depuis le 1er janvier 2024 ; création du délit d'homicide routier par la loi n° 2025-622 du 9 juillet 2025.</span></span></button>
           </div>
         </div>
         <div class="verrou" data-quiz="1">
@@ -194,10 +275,10 @@
         <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
         <div class="org" data-explore="1">
           <div class="cartes">
-            <button class="role" aria-expanded="false"><p class="sigle">La distorsion du message</p><p class="nom">On perd en route</p><span class="plus">+</span><div class="detail">Entre ce que l'on veut dire et ce que l'autre retient, le message se déforme à chaque étape : ce que je pense dire, ce que je dis, ce qu'il entend, ce qu'il comprend, ce qu'il retient.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Ce que l'on assimile</p><p class="nom">Être actif</p><span class="plus">+</span><div class="detail">On retient d'autant mieux qu'on a été actif : formuler soi-même une idée, manipuler un outil ou répondre à une question ancre le message bien plus durablement que l'écouter ou le lire. C'est pour cette raison que l'animation par le jeu, les simulateurs et le questionnement fonctionne mieux qu'un exposé descendant. Méfiez-vous en revanche des pourcentages de mémorisation qui circulent (« on retient 10 % de ce qu'on lit, 80 % de ce qu'on dit ») : ils sont très répandus mais n'ont jamais été établis par aucune étude, et un enseignant dans votre public peut vous le rappeler.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Se poser les bonnes questions</p><p class="nom">Préparer son intervention</p><span class="plus">+</span><div class="detail">Définir l'objectif, les cibles, le contenu, le mode d'intervention et l'environnement.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">L'écoute</p><p class="nom">Un maillon essentiel</p><span class="plus">+</span><div class="detail">Savoir écouter est essentiel à toute communication réussie.</div></button>
+            <button class="role" aria-expanded="false"><span class="sigle">La distorsion du message</span><span class="nom">On perd en route</span><span class="plus">+</span><span class="detail"><span>Entre ce que l'on veut dire et ce que l'autre retient, le message se déforme à chaque étape : ce que je pense dire, ce que je dis, ce qu'il entend, ce qu'il comprend, ce qu'il retient.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Ce que l'on assimile</span><span class="nom">Être actif</span><span class="plus">+</span><span class="detail"><span>On retient d'autant mieux qu'on a été actif : formuler soi-même une idée, manipuler un outil ou répondre à une question ancre le message bien plus durablement que l'écouter ou le lire. C'est pour cette raison que l'animation par le jeu, les simulateurs et le questionnement fonctionne mieux qu'un exposé descendant. Méfiez-vous en revanche des pourcentages de mémorisation qui circulent (« on retient 10 % de ce qu'on lit, 80 % de ce qu'on dit ») : ils sont très répandus mais n'ont jamais été établis par aucune étude, et un enseignant dans votre public peut vous le rappeler.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Se poser les bonnes questions</span><span class="nom">Préparer son intervention</span><span class="plus">+</span><span class="detail"><span>Définir l'objectif, les cibles, le contenu, le mode d'intervention et l'environnement.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">L'écoute</span><span class="nom">Un maillon essentiel</span><span class="plus">+</span><span class="detail"><span>Savoir écouter est essentiel à toute communication réussie.</span></span></button>
           </div>
         </div>
 <figure class="schema">
@@ -371,6 +452,7 @@
 })();
 </script>
 <script src="assets/js/quiz-extras.js" defer></script>
+<script src="assets/js/ui-parcours.js" defer></script>
 <script src="assets/js/attestation.js" defer></script>
 </body>
 </html>

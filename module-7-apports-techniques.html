@@ -113,6 +113,87 @@
     .step-sub{display:none;}
     .module-hero h1{font-size:1.55rem;}
   }
+
+  /* ============================================================
+     CORRECTIFS TRANSVERSES — audit design du 30 juillet 2026
+     Bloc identique sur toutes les pages, placé en fin de feuille
+     pour surcharger les règles ci-dessus. Il constituera le point
+     de départ du futur socle.css : toute modification doit être
+     reportée sur les autres pages tant que le socle n'existe pas.
+     ============================================================ */
+  :root{
+    --h-header:132px;
+    --jaune-trait:#8A6D00;
+    --gris-400:#8c8c8c;
+    --vert-fort:#14532D;
+  }
+  html{scroll-padding-top:calc(var(--h-header) + 16px);}
+
+  /* B2 · la barre de progression devient lisible (jaune sur gris foncé) */
+  .progress{background:#3a3a3a;}
+  .progress > span{background:var(--jaune,#FECF41);}
+
+  /* B3 · le menu d'étapes ne passe plus sous l'en-tête collant */
+  .stepper{top:calc(var(--h-header) + 12px);z-index:1;}
+  .etape-compteur{margin:.2rem .3rem .5rem;font-size:.78rem;font-weight:700;
+    text-transform:uppercase;letter-spacing:.05em;color:#3a3a3a;}
+
+  /* B6 · le bouton verrouillé est lisible et sa condition est écrite */
+  .btn:disabled,.btn-primary:disabled,.btn-ghost:disabled{
+    opacity:1;background:#f4f4f4;color:#6b6b6b;
+    box-shadow:inset 0 0 0 2px #cfcfcf;cursor:not-allowed;}
+  .lock-note{margin:1.2rem 0 -.6rem;font-size:.88rem;color:#3a3a3a;font-weight:600;}
+  .step-item:disabled{opacity:1;color:#6b6b6b;}
+  .step-item:disabled .pastille{border-color:var(--gris-400);color:#6b6b6b;}
+
+  /* contraste des bordures de contrôles interactifs */
+  .opt{border-color:var(--gris-400);}
+  .role{border-color:#cfcfcf;}
+  .role .plus{color:#000;background:var(--jaune,#FECF41);width:26px;height:26px;
+    border-radius:50%;display:grid;place-items:center;top:.7rem;right:.7rem;
+    font-size:1rem;line-height:1;}
+  .feedback.ok{color:var(--vert-fort);}
+
+  /* B8 · le panneau déplié ne tronque plus le texte */
+  .role .sigle,.role .nom{display:block;margin:0 0 .15rem;}
+  .role .nom{margin-bottom:0;}
+  .role .detail{max-height:none;display:grid;grid-template-rows:0fr;
+    overflow:hidden;transition:grid-template-rows var(--t,.25s ease);}
+  .role .detail > *{min-height:0;}
+  .role[aria-expanded="true"] .detail{max-height:none;grid-template-rows:1fr;}
+
+  /* lisibilité des barres jaunes sur fond blanc, sans toucher aux schémas
+     dont le contour est déjà défini dans le SVG */
+  .schema svg rect[fill="#FECF41"]:not([stroke]){stroke:var(--jaune-trait);stroke-width:.8;}
+
+  /* B10 · les nombres et les unités ne se coupent plus en fin de ligne */
+  .sc b,.chiffre{white-space:nowrap;}
+
+  @media (max-width:640px){
+    /* B5 · l'en-tête mobile n'occupe plus le quart de l'écran */
+    :root{--h-header:92px;}
+    .topbar{padding:.5rem 1rem;gap:.7rem;}
+    .topbar .logo-prefet{height:52px!important;}
+    .topbar img{width:104px;}
+
+    /* B1 · les graphiques redeviennent consultables */
+    .etape{padding:1.1rem;}
+    .schema{padding:.8rem;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .schema svg{min-width:560px;}
+    .schema::after{content:"↔ Faites défiler le graphique horizontalement";
+      display:block;font-size:.8rem;color:#3a3a3a;margin-top:.5rem;font-style:normal;}
+
+    /* menu d'étapes : accrochage au défilement */
+    .stepper ol{scroll-snap-type:x mandatory;}
+    .step-item{scroll-snap-align:start;}
+  }
+
+  /* B4 · mouvement réduit traité en CSS, et non par un script différé */
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;
+      animation-iteration-count:1!important;transition-duration:.01ms!important;
+      scroll-behavior:auto!important;}
+  }
 </style>
 </head>
 <body data-module="m6">
@@ -169,20 +250,20 @@
         <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
         <div class="org" data-explore="1">
           <div class="cartes">
-            <button class="role" aria-expanded="false"><p class="sigle">Équivalence des verres</p><p class="nom">Une même dose</p><span class="plus">+</span><div class="detail">Chaque verre servi (un demi de bière, un verre de vin, un apéritif, un whisky...) contient environ 10 g d'alcool pur, soit environ 0,20 à 0,25 g/l de sang.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Élimination</p><p class="nom">Le temps, seul remède</p><span class="plus">+</span><div class="detail">L'alcool est éliminé à 95 % par le foie, à une vitesse de 0,10 à 0,15 g/l par heure, propre à chaque personne. Rien ne permet d'accélérer ce processus.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Effets dès 0,2 g/l</p><p class="nom">Sur la conduite</p><span class="plus">+</span><div class="detail">Coordination des mouvements, allongement du temps de réaction, prise de risque accrue, réduction du champ visuel et de la perception du danger.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Sanctions</p><p class="nom">Le cadre légal</p><span class="plus">+</span><div class="detail">De 0,5 à 0,79 g/l de sang : contravention (retrait de 6 points, amende). À partir de 0,8 g/l : délit (amende jusqu'à 4 500 €, suspension du permis, peine de prison possible).</div></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Équivalence des verres</span><span class="nom">Une même dose</span><span class="plus">+</span><span class="detail"><span>Chaque verre servi (un demi de bière, un verre de vin, un apéritif, un whisky...) contient environ 10 g d'alcool pur, soit environ 0,20 à 0,25 g/l de sang.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Élimination</span><span class="nom">Le temps, seul remède</span><span class="plus">+</span><span class="detail"><span>L'alcool est éliminé à 95 % par le foie, à une vitesse de 0,10 à 0,15 g/l par heure, propre à chaque personne. Rien ne permet d'accélérer ce processus.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Effets dès 0,2 g/l</span><span class="nom">Sur la conduite</span><span class="plus">+</span><span class="detail"><span>Coordination des mouvements, allongement du temps de réaction, prise de risque accrue, réduction du champ visuel et de la perception du danger.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Sanctions</span><span class="nom">Le cadre légal</span><span class="plus">+</span><span class="detail"><span>De 0,5 à 0,79 g/l de sang : contravention (retrait de 6 points, amende). À partir de 0,8 g/l : délit (amende jusqu'à 4 500 €, suspension du permis, peine de prison possible).</span></span></button>
           </div>
         </div>
-        <figure class="schema"><img src="assets/photos/stock-alcool-bar.jpg" alt="Verres de bière vus de dessus sur une table en bois" loading="lazy" style="border-radius:8px;width:100%;height:auto;" /><figcaption>Chaque verre servi au bar contient environ 10 g d'alcool pur. L'alcool est cité chez 21 % des présumés responsables d'accidents mortels en 2025, juste derrière la vitesse (29 %) (ONISR, <em>L'accidentalité routière en France, principaux résultats 2025</em>, données définitives, mai 2026, France métropolitaine).</figcaption><p class="src">Image Adobe Stock — licence standard.</p></figure>
+        <figure class="schema"><img src="assets/photos/stock-alcool-bar.jpg" alt="Verres de bière vus de dessus sur une table en bois" loading="lazy" style="border-radius:8px;width:100%;height:auto;" /><figcaption>Chaque verre servi au bar contient environ 10 g d'alcool pur. L'alcool est cité chez 21 % des présumés responsables d'accidents mortels en 2025, juste derrière la vitesse (29 %) (ONISR, <em>L'accidentalité routière en France, principaux résultats 2025</em>, données définitives, mai 2026, France métropolitaine).</figcaption><p class="src">Image Adobe Stock — licence standard.</p></figure>
         <div class="verrou" data-quiz="1">
           <span class="v-tag">🔒 Question de déverrouillage</span>
           <p class="q">À partir de quel taux d'alcool dans le sang parle-t-on de délit ?</p>
           <div class="opts">
-            <button class="opt" data-ok="0"><span class="mark"></span> 0,2 g/l</button>
-            <button class="opt" data-ok="0"><span class="mark"></span> 0,5 g/l</button>
-            <button class="opt" data-ok="1"><span class="mark"></span> 0,8 g/l</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> 0,2 g/l</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> 0,5 g/l</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> 0,8 g/l</button>
           </div>
           <p class="feedback"></p>
         </div>
@@ -196,10 +277,10 @@
         <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
         <div class="org" data-explore="1">
           <div class="cartes">
-            <button class="role" aria-expanded="false"><p class="sigle">Stupéfiants : un délit</p><p class="nom">Loi du 3 février 2003</p><span class="plus">+</span><div class="detail">Conduire après usage de stupéfiants est un délit, au même titre que l'alcool. Le dépistage se fait par test salivaire, confirmé si besoin par une prise de sang.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Effets du cannabis</p><p class="nom">Sur la conduite</p><span class="plus">+</span><div class="detail">Somnolence, altération du sens du risque, baisse de la concentration, allongement du temps de réaction, modification de la perception visuelle et auditive.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Médicaments : les pictogrammes</p><p class="nom">Arrêté du 18 juillet 2005</p><span class="plus">+</span><div class="detail">Trois niveaux : niveau 1 « soyez prudent », niveau 2 « ne pas conduire sans l'avis d'un professionnel de santé », niveau 3 « ne pas conduire ».</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Effets des médicaments</p><p class="nom">Vigilance et plus</p><span class="plus">+</span><div class="detail">Altération de la vigilance, de la vision, de la coordination des mouvements et du comportement. Entre 1 500 et 1 700 médicaments présentent un risque pour la conduite.</div></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Stupéfiants : un délit</span><span class="nom">Loi du 3 février 2003</span><span class="plus">+</span><span class="detail"><span>Conduire après usage de stupéfiants est un délit, au même titre que l'alcool. Le dépistage se fait par test salivaire, confirmé si besoin par une prise de sang.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Effets du cannabis</span><span class="nom">Sur la conduite</span><span class="plus">+</span><span class="detail"><span>Somnolence, altération du sens du risque, baisse de la concentration, allongement du temps de réaction, modification de la perception visuelle et auditive.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Médicaments : les pictogrammes</span><span class="nom">Arrêté du 18 juillet 2005</span><span class="plus">+</span><span class="detail"><span>Trois niveaux : niveau 1 « soyez prudent », niveau 2 « ne pas conduire sans l'avis d'un professionnel de santé », niveau 3 « ne pas conduire ».</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Effets des médicaments</span><span class="nom">Vigilance et plus</span><span class="plus">+</span><span class="detail"><span>Altération de la vigilance, de la vision, de la coordination des mouvements et du comportement. Entre 1 500 et 1 700 médicaments présentent un risque pour la conduite.</span></span></button>
           </div>
         </div>
         <figure class="schema">
@@ -241,25 +322,25 @@
         <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
         <div class="org" data-explore="1">
           <div class="cartes">
-            <button class="role" aria-expanded="false"><p class="sigle">Distance d'arrêt</p><p class="nom">Deux composantes</p><span class="plus">+</span><div class="detail">La distance d'arrêt = distance parcourue pendant le temps de réaction (environ 1 seconde) + distance de freinage.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Distance de sécurité</p><p class="nom">Décret du 23 novembre 2001</p><span class="plus">+</span><div class="detail">Au moins l'équivalent de 2 secondes : 28 m à 50 km/h, 50 m à 90 km/h, 62 m à 110 km/h, 73 m à 130 km/h.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Violence du choc</p><p class="nom">L'énergie</p><span class="plus">+</span><div class="detail">Plus la vitesse augmente, plus l'énergie libérée lors du choc croît fortement.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Lésions de décélération</p><p class="nom">Sur le corps</p><span class="plus">+</span><div class="detail">Lors d'un choc, les organes internes poursuivent leur mouvement et peuvent être lésés ; la gravité augmente avec la vitesse.</div></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Distance d'arrêt</span><span class="nom">Deux composantes</span><span class="plus">+</span><span class="detail"><span>La distance d'arrêt = distance parcourue pendant le temps de réaction (environ 1 seconde) + distance de freinage.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Distance de sécurité</span><span class="nom">Décret du 23 novembre 2001</span><span class="plus">+</span><span class="detail"><span>Au moins l'équivalent de 2 secondes : 28 m à 50 km/h, 50 m à 90 km/h, 62 m à 110 km/h, 73 m à 130 km/h.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Violence du choc</span><span class="nom">L'énergie</span><span class="plus">+</span><span class="detail"><span>Plus la vitesse augmente, plus l'énergie libérée lors du choc croît fortement.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Lésions de décélération</span><span class="nom">Sur le corps</span><span class="plus">+</span><span class="detail"><span>Lors d'un choc, les organes internes poursuivent leur mouvement et peuvent être lésés ; la gravité augmente avec la vitesse.</span></span></button>
           </div>
         </div>
         <figure class="schema">
   <h4>La distance de sécurité (intervalle de 2 secondes)</h4>
   <svg viewBox="0 0 720 220" role="img" aria-labelledby="m6bt m6bd">
     <title id="m6bt">Distance de sécurité selon la vitesse</title>
-    <desc id="m6bd">28 mètres à 50 km/h, 50 mètres à 90 km/h, 62 mètres à 110 km/h, 73 mètres à 130 km/h.</desc>
+    <desc id="m6bd">28 mètres à 50 km/h, 50 mètres à 90 km/h, 62 mètres à 110 km/h, 73 mètres à 130 km/h.</desc>
     <g font-family="Marianne,Segoe UI,Arial,sans-serif" font-size="13">
-      <text x="140" y="42" text-anchor="end" font-weight="700">50 km/h</text>
+      <text x="140" y="42" text-anchor="end" font-weight="700">50 km/h</text>
       <rect x="150" y="28" width="157" height="24" rx="3" fill="#FECF41"/><text x="315" y="46" font-weight="800">28 m</text>
-      <text x="140" y="90" text-anchor="end" font-weight="700">90 km/h</text>
+      <text x="140" y="90" text-anchor="end" font-weight="700">90 km/h</text>
       <rect x="150" y="76" width="280" height="24" rx="3" fill="#FECF41"/><text x="438" y="94" font-weight="800">50 m</text>
-      <text x="140" y="138" text-anchor="end" font-weight="700">110 km/h</text>
+      <text x="140" y="138" text-anchor="end" font-weight="700">110 km/h</text>
       <rect x="150" y="124" width="347" height="24" rx="3" fill="#FECF41"/><text x="505" y="142" font-weight="800">62 m</text>
-      <text x="140" y="186" text-anchor="end" font-weight="700">130 km/h</text>
+      <text x="140" y="186" text-anchor="end" font-weight="700">130 km/h</text>
       <rect x="150" y="172" width="409" height="24" rx="3" fill="#000"/><text x="567" y="190" font-weight="800">73 m</text>
     </g>
   </svg>
@@ -285,13 +366,13 @@
         <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
         <div class="org" data-explore="1">
           <div class="cartes">
-            <button class="role" aria-expanded="false"><p class="sigle">Ceinture et siège-auto</p><p class="nom">Protéger les occupants</p><span class="plus">+</span><div class="detail">Un enfant de moins de 10 ans doit être retenu par un dispositif homologué adapté à son âge et à sa morphologie.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Casque</p><p class="nom">Deux-roues</p><span class="plus">+</span><div class="detail">Le casque est obligatoire pour le conducteur et le passager d'un cyclomoteur ou d'une motocyclette.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Vigilance et sommeil</p><p class="nom">La fatigue</p><span class="plus">+</span><div class="detail">Les dettes de sommeil s'additionnent et ne se rattrapent pas à l'avance. La vigilance baisse en début d'après-midi et en milieu de nuit ; les longs trajets monotones favorisent l'hypovigilance.</div></button>
-            <button class="role" aria-expanded="false"><p class="sigle">Téléphone et distracteurs</p><p class="nom">Quitter la route des yeux</p><span class="plus">+</span><div class="detail">Lire ou écrire un message fait quitter la route des yeux environ 5 secondes et multiplie par 23 le risque d'accident. Environ 1 accident corporel sur 10 est lié au téléphone. L'usage tenu en main est interdit (art. R.412-6-1), ainsi que les oreillettes et casques audio depuis le 1er juillet 2015.</div></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Ceinture et siège-auto</span><span class="nom">Protéger les occupants</span><span class="plus">+</span><span class="detail"><span>Un enfant de moins de 10 ans doit être retenu par un dispositif homologué adapté à son âge et à sa morphologie.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Casque</span><span class="nom">Deux-roues</span><span class="plus">+</span><span class="detail"><span>Le casque est obligatoire pour le conducteur et le passager d'un cyclomoteur ou d'une motocyclette.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Vigilance et sommeil</span><span class="nom">La fatigue</span><span class="plus">+</span><span class="detail"><span>Les dettes de sommeil s'additionnent et ne se rattrapent pas à l'avance. La vigilance baisse en début d'après-midi et en milieu de nuit ; les longs trajets monotones favorisent l'hypovigilance.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Téléphone et distracteurs</span><span class="nom">Quitter la route des yeux</span><span class="plus">+</span><span class="detail"><span>Lire ou écrire un message fait quitter la route des yeux environ 5 secondes et multiplie par 23 le risque d'accident. Environ 1 accident corporel sur 10 est lié au téléphone. L'usage tenu en main est interdit (art. R.412-6-1), ainsi que les oreillettes et casques audio depuis le 1er juillet 2015.</span></span></button>
           </div>
         </div>
-        <figure class="schema"><img src="assets/photos/stock-fatigue.jpg" alt="Conducteur s'endormant au volant de sa voiture" loading="lazy" style="border-radius:8px;width:100%;height:auto;" /><figcaption>Le malaise est cité chez 11 % des présumés responsables d'accidents mortels, à égalité avec les stupéfiants. Une heure de sommeil en moins chaque jour équivaut à une nuit blanche en fin de semaine (formation Agir).</figcaption><p class="src">Image Adobe Stock — licence standard.</p></figure><figure class="schema"><img src="assets/photos/stock-telephone-volant.jpg" alt="Conducteur écrivant un message sur son téléphone en conduisant" loading="lazy" style="border-radius:8px;width:100%;height:auto;" /><figcaption>49 % des Français reconnaissent utiliser leur téléphone au volant ; écrire un message détourne les yeux de la route 5 secondes et multiplie le risque par 23 (formation Agir / Sécurité routière).</figcaption><p class="src">Image Adobe Stock — licence standard.</p></figure>
+        <figure class="schema"><img src="assets/photos/stock-fatigue.jpg" alt="Conducteur s'endormant au volant de sa voiture" loading="lazy" style="border-radius:8px;width:100%;height:auto;" /><figcaption>Le malaise est cité chez 11 % des présumés responsables d'accidents mortels, à égalité avec les stupéfiants. Une heure de sommeil en moins chaque jour équivaut à une nuit blanche en fin de semaine (formation Agir).</figcaption><p class="src">Image Adobe Stock — licence standard.</p></figure><figure class="schema"><img src="assets/photos/stock-telephone-volant.jpg" alt="Conducteur écrivant un message sur son téléphone en conduisant" loading="lazy" style="border-radius:8px;width:100%;height:auto;" /><figcaption>49 % des Français reconnaissent utiliser leur téléphone au volant ; écrire un message détourne les yeux de la route 5 secondes et multiplie le risque par 23 (formation Agir / Sécurité routière).</figcaption><p class="src">Image Adobe Stock — licence standard.</p></figure>
         <div class="verrou" data-quiz="1">
           <span class="v-tag">🔒 Question de déverrouillage</span>
           <p class="q">De combien l'envoi d'un message multiplie-t-il le risque d'accident ?</p>
@@ -314,7 +395,7 @@
           <p class="q">À quelle vitesse l'alcool est-il éliminé par l'organisme ?</p>
           <div class="opts">
             <button class="opt" data-ok="0"><span class="mark"></span> En quelques minutes avec un café</button>
-            <button class="opt" data-ok="1"><span class="mark"></span> Environ 0,10 à 0,15 g/l par heure</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> Environ 0,10 à 0,15 g/l par heure</button>
             <button class="opt" data-ok="0"><span class="mark"></span> Instantanément</button>
           </div>
           <p class="feedback"></p>
@@ -427,6 +508,7 @@
 })();
 </script>
 <script src="assets/js/quiz-extras.js" defer></script>
+<script src="assets/js/ui-parcours.js" defer></script>
 <script src="assets/js/attestation.js" defer></script>
 </body>
 </html>
