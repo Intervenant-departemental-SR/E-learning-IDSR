@@ -7,9 +7,21 @@
 (function(){
   "use strict";
 
-  /* ---- CONFIGURATION ---- */
-  // Coordination sécurité routière Hauts-de-France (Mme Adeline Rubben)
-  var MAIL_COORDINATION = "ser-hdf@developpement-durable.gouv.fr";
+  /* ---- CONFIGURATION ----
+     Boîtes fonctionnelles uniquement, jamais d'adresse nominative :
+     un agent change de poste, une boîte fonctionnelle reste.
+     Le suivi des IDSR étant départemental, l'apprenant choisit
+     la coordination de son département de nomination. */
+  var COORDINATIONS = [
+    {dep:"", lib:"Choisissez votre département…", mail:""},
+    {dep:"02", lib:"Aisne (02)", mail:""},
+    {dep:"59", lib:"Nord (59)", mail:""},
+    {dep:"60", lib:"Oise (60)", mail:""},
+    {dep:"62", lib:"Pas-de-Calais (62)", mail:""},
+    {dep:"80", lib:"Somme (80)", mail:""}
+  ];
+  // Boîte fonctionnelle régionale, utilisée à défaut de boîte départementale renseignée.
+  var MAIL_DEFAUT = "ser-hdf@developpement-durable.gouv.fr";
 
   /* ---- Infos du module courant ---- */
   function infosModule(){
@@ -60,10 +72,10 @@
     s.push("0 0 0 rg 0 0 595 30 re f");                /* bande noire bas */
     s.push(Y+" rg 60 640 6 90 re f");                  /* barre jaune du titre */
 
-    t("F2", 11, 60, 770, "SÉCURITÉ ROUTIÈRE — RÉSEAU IDSR");
-    t("F1", 10, 60, 754, "Préfecture de la région Hauts-de-France");
+    t("F2", 11, 60, 770, "ESPACE E-LEARNING DU RÉSEAU IDSR");
+    t("F1", 10, 60, 754, "Réseau des Intervenants Départementaux de Sécurité Routière, Hauts-de-France");
 
-    t("F2", 26, 80, 700, "ATTESTATION DE SUIVI");
+    t("F2", 23, 80, 700, "ATTESTATION DÉCLARATIVE DE SUIVI");
     t("F1", 13, 80, 672, "E-learning des Intervenants Départementaux");
     t("F1", 13, 80, 655, "de Sécurité Routière");
 
@@ -80,9 +92,10 @@
     t("F1", 12, 60, y, "Fait le " + dateStr + "."); y -= 60;
 
     s.push("0.89 0.89 0.89 RG 1 w 60 "+(y+20)+" m 535 "+(y+20)+" l S");
-    t("F1", 10, 60, y, "Cette attestation déclarative est générée localement à l'issue du parcours,", "0.42 0.42 0.42"); y -= 14;
-    t("F1", 10, 60, y, "sans collecte ni transmission de données personnelles.", "0.42 0.42 0.42"); y -= 14;
-    t("F1", 10, 60, y, "Espace e-learning IDSR — formation initiale et continue.", "0.42 0.42 0.42");
+    t("F1", 10, 60, y, "Document déclaratif rempli par l'apprenant et généré sur son appareil.", "0.42 0.42 0.42"); y -= 14;
+    t("F1", 10, 60, y, "Il ne constitue pas une attestation de formation délivrée par la préfecture.", "0.42 0.42 0.42"); y -= 14;
+    t("F1", 10, 60, y, "Aucune donnée n'est transmise lors de sa génération. Si l'apprenant choisit de", "0.42 0.42 0.42"); y -= 14;
+    t("F1", 10, 60, y, "l'adresser à sa coordination, cet envoi relève de sa seule initiative.", "0.42 0.42 0.42");
 
     var stream = s.join("\n");
     var objs = [
@@ -126,7 +139,8 @@
       ".attestation-bloc h4{margin:0 0 .4rem;font-size:1.05rem;}" +
       ".attestation-bloc p{margin:.2rem 0 .8rem;font-size:.92rem;color:#3a3a3a;}" +
       ".attestation-bloc input{width:100%;font:inherit;padding:.7rem .9rem;border:2px solid #e2e2e2;border-radius:9px;margin-bottom:.8rem;box-sizing:border-box;}" +
-      ".attestation-bloc input:focus-visible{outline:3px solid #000;outline-offset:1px;}" +
+      ".attestation-bloc input:focus-visible,.attestation-bloc select:focus-visible{outline:3px solid #000;outline-offset:1px;}" +
+      ".attestation-bloc select{width:100%;font:inherit;padding:.7rem .9rem;border:2px solid #e2e2e2;border-radius:9px;margin-bottom:.9rem;box-sizing:border-box;background:#fff;}" +
       ".attestation-actions{display:flex;gap:.6rem;flex-wrap:wrap;}" +
       ".attestation-bloc .note{font-size:.78rem;color:#6b6b6b;margin:.8rem 0 0;}" +
       ".attestation-bloc .err{color:#c0392b;font-weight:600;font-size:.88rem;display:none;margin:-.4rem 0 .6rem;}";
@@ -135,19 +149,25 @@
     var bloc = document.createElement("div");
     bloc.className = "attestation-bloc";
     bloc.innerHTML =
-      '<h4>📄 Votre attestation de suivi</h4>' +
+      '<h4>📄 Votre attestation déclarative de suivi</h4>' +
       '<p>Indiquez votre prénom et votre nom tels qu’ils doivent apparaître sur l’attestation.</p>' +
       '<label class="sr-only" for="attestation-nom" style="position:absolute;left:-9999px;">Prénom et nom</label>' +
       '<input id="attestation-nom" type="text" autocomplete="name" placeholder="Prénom NOM" maxlength="60">' +
       '<p class="err" role="alert">Merci d’indiquer votre prénom et votre nom.</p>' +
+      '<label for="attestation-dep" style="display:block;font-size:.88rem;font-weight:600;margin:.2rem 0 .3rem;">Votre département de nomination</label>' +
+      '<select id="attestation-dep">' + COORDINATIONS.map(function(c){
+        return '<option value="'+c.mail+'">'+c.lib+'</option>';
+      }).join('') + '</select>' +
       '<div class="attestation-actions">' +
       '<button type="button" class="btn btn-primary" data-pdf>Télécharger l’attestation (PDF)</button>' +
-      '<button type="button" class="btn btn-ghost" data-mail>Transmettre par mail</button>' +
+      '<button type="button" class="btn btn-ghost" data-mail>Préparer l’envoi à ma coordination</button>' +
       '</div>' +
-      '<p class="note">L’attestation est générée sur votre appareil : aucune donnée n’est collectée ni transmise. Pour l’envoi par mail, joignez le PDF téléchargé au message pré-rempli.</p>';
+      '<p class="note">Ce document est déclaratif : vous l’établissez vous-même, il ne vaut pas attestation délivrée par la préfecture. Il est fabriqué sur votre appareil, rien n’est transmis à ce stade. Votre prénom et votre nom sont conservés dans votre navigateur pour ne pas être ressaisis à chaque module ; sur un poste partagé, utilisez le bouton ci-dessous pour les effacer. Si vous choisissez d’envoyer l’attestation à votre coordination, ce courriel part de votre messagerie et relève de votre initiative : la coordination en devient alors destinataire au titre du suivi de votre parcours.</p>' +
+      '<p class="note"><button type="button" class="lien-oubli" data-oubli style="background:none;border:none;padding:0;font:inherit;text-decoration:underline;cursor:pointer;color:#6b6b6b;">Effacer mon nom de ce navigateur</button></p>';
     fin.appendChild(bloc);
 
     var input = bloc.querySelector("input");
+    var select = bloc.querySelector("select");
     var err = bloc.querySelector(".err");
     try{ input.value = localStorage.getItem("elearning_idsr_nom") || ""; }catch(e){}
 
@@ -174,13 +194,22 @@
 
     bloc.querySelector("[data-mail]").addEventListener("click", function(){
       var n = nomValide(); if(!n) return;
-      var sujet = "Attestation de suivi — " + mod.numero + " (" + n + ")";
-      var corps = "Bonjour Madame Rubben,\n\nJe vous transmets mon attestation de suivi du " + mod.numero +
+      var dest = (select && select.value) ? select.value : MAIL_DEFAUT;
+      var sujet = "Attestation déclarative de suivi — " + mod.numero + " (" + n + ")";
+      var corps = "Bonjour,\n\nJe vous transmets mon attestation déclarative de suivi du " + mod.numero +
         " « " + mod.titre + " » de l’espace e-learning IDSR, validé le " + dateFr() + ".\n\n" +
-        "(Attestation PDF jointe — pensez à joindre le fichier téléchargé.)\n\n" +
+        "(Attestation PDF à joindre : pensez à ajouter le fichier téléchargé à ce message.)\n\n" +
         "Cordialement,\n" + n;
-      window.location.href = "mailto:" + MAIL_COORDINATION +
+      window.location.href = "mailto:" + dest +
         "?subject=" + encodeURIComponent(sujet) + "&body=" + encodeURIComponent(corps);
+    });
+
+    bloc.querySelector("[data-oubli]").addEventListener("click", function(){
+      try{ localStorage.removeItem("elearning_idsr_nom"); }catch(e){}
+      input.value = "";
+      this.textContent = "Votre nom a été effacé de ce navigateur.";
+      this.disabled = true;
+      this.style.textDecoration = "none";
     });
   }
 

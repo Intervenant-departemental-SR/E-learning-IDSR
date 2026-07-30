@@ -259,10 +259,6 @@
           </div>
         </div>
 
-        <div class="video">
-          <iframe src="https://www.youtube-nocookie.com/embed/c5_xMgXz96I" title="Aperçu d'une vidéo de sensibilisation intégrable au module" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <p class="video-cap">Aperçu : une vidéo de sensibilisation peut être intégrée directement dans un module, avec quiz interactif en option (séquence pause → question → reprise).</p>
         <div class="nav-etape">
           <span></span>
           <button class="btn btn-primary" data-next>Commencer le parcours →</button>
@@ -386,15 +382,19 @@
           <div class="cartes">
             <button class="role" aria-expanded="false">
               <p class="sigle">Préfet de département</p><p class="nom">Responsable de la politique locale</p><span class="plus">+</span>
-              <div class="detail">Responsable de la politique locale de sécurité routière : il arrête le DGO et le PDASR, nomme les IDSR par arrêté et détient d'importants pouvoirs de police de la circulation. Toute l'action départementale se mène sous son autorité.</div>
+              <div class="detail">Maître d'ouvrage de la politique locale de sécurité routière : il arrête le DGO et le PDASR, nomme les IDSR par arrêté et détient des pouvoirs de police de la circulation sur les routes de son ressort. Attention en animation : l'état des routes et la signalisation relèvent le plus souvent du maire en agglomération et du président du conseil départemental hors agglomération, pas du préfet. Toute l'action de prévention départementale se mène en revanche sous son autorité.</div>
             </button>
             <button class="role" aria-expanded="false">
               <p class="sigle">Chef de projet</p><p class="nom">Chef de projet sécurité routière</p><span class="plus">+</span>
-              <div class="detail">Le plus souvent le directeur ou la directrice de cabinet du préfet : il ou elle pilote la politique départementale, valide le PDASR et porte les arbitrages devant le préfet.</div>
+              <div class="detail">Le plus souvent le directeur ou la directrice de cabinet du préfet. C'est le maître d'œuvre de la politique départementale : il ou elle en assure le pilotage, valide le PDASR et porte les arbitrages devant le préfet.</div>
             </button>
             <button class="role" aria-expanded="false">
               <p class="sigle">Coordinateur</p><p class="nom">Coordinateur sécurité routière</p><span class="plus">+</span>
-              <div class="detail">La cheville ouvrière du dispositif : prépare et suit le PDASR, lance les appels à projets, gère le réseau des IDSR au quotidien (recrutement, ordres de mission, jours d'activité, matériel) et déclenche leurs interventions. C'est l'interlocuteur direct de l'IDSR.</div>
+              <div class="detail">Il assure la mise en œuvre opérationnelle et l'animation du réseau : prépare et suit le PDASR, lance les appels à projets, gère le réseau des IDSR au quotidien (recrutement, ordres de mission, jours d'activité, matériel) et déclenche leurs interventions. C'est votre interlocuteur direct, celui que vous appellerez pour toute question sur vos missions, vos frais ou votre matériel. Selon les départements, il est rattaché au cabinet du préfet ou à la direction départementale des territoires (DDT ou DDTM).</div>
+            </button>
+            <button class="role" aria-expanded="false">
+              <p class="sigle">DDT ou DDTM</p><p class="nom">Direction départementale des territoires (et de la mer)</p><span class="plus">+</span>
+              <div class="detail">Le service de l'État qui, dans la plupart des départements, héberge la coordination sécurité routière et l'observatoire départemental. C'est donc souvent l'administration que vous aurez au téléphone. Elle apporte aussi l'expertise technique sur l'infrastructure et les aménagements. L'implantation varie d'un département à l'autre : dans certains cas la coordination est directement rattachée au cabinet du préfet. Demandez à votre coordinateur comment c'est organisé chez vous.</div>
             </button>
             <button class="role" aria-expanded="false">
               <p class="sigle">ODSR</p><p class="nom">Observatoire départemental de sécurité routière</p><span class="plus">+</span>
@@ -416,18 +416,17 @@
           <dl>
             <dt>DGO</dt><dd>Document Général d'Orientations : fixe les priorités pluriannuelles du département.</dd>
             <dt>PDASR</dt><dd>Plan Départemental d'Actions de Sécurité Routière : programme annuel des actions de prévention.</dd>
-            <dt>BOP</dt><dd>Budget Opérationnel de Programme : cadre de gestion des moyens financiers.</dd>
           </dl>
         </div>
 
         <div class="verrou" data-quiz="3">
           <span class="v-tag">🔒 Question de déverrouillage</span>
-          <p class="q">Qui assure la maîtrise d'œuvre de la politique locale et met en œuvre le DGO et le PDASR ?</p>
+          <p class="q">Qui est votre interlocuteur direct au quotidien, celui qui déclenche vos interventions et gère vos ordres de mission ?</p>
           <div class="opts">
             <button class="opt" data-ok="0"><span class="mark"></span> Le préfet de région</button>
-            <button class="opt" data-ok="0"><span class="mark"></span> Le chef de projet</button>
-            <button class="opt" data-ok="1"><span class="mark"></span> Le coordinateur</button>
-            <button class="opt" data-ok="0"><span class="mark"></span> L'animateur régional</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> Le chef de projet, maître d'œuvre de la politique départementale</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> Le coordinateur sécurité routière du département</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> L'observatoire départemental</button>
           </div>
           <p class="feedback"></p>
         </div>
@@ -526,7 +525,7 @@
 </main>
 
 <footer class="site">
-  <div class="wrap">Espace e-learning des Intervenants Départementaux de Sécurité Routière — Préfecture des Hauts-de-France. <a href="index.html">Retour à l'accueil</a></div>
+  <div class="wrap">Espace e-learning des Intervenants Départementaux de Sécurité Routière — Préfecture des Hauts-de-France. <a href="index.html">Retour à l'accueil</a> <a href="mentions-legales.html">Mentions légales, confidentialité et accessibilité</a></div>
 </footer>
 
 <script>
@@ -538,9 +537,17 @@
   var quizDone={};             // quiz validés
   var STORE="elearning_idsr_m2";
 
-  // Pas de persistance : la page repart d'un état neuf à chaque ouverture
-  // (présentation commerciale, postes partagés) -> les quiz restent toujours sélectionnables.
-  function save(){}
+  // Progression conservée dans le navigateur, comme les autres modules, afin qu'une
+  // interruption ne contraigne pas à tout reprendre depuis le début.
+  try{
+    var s=JSON.parse(localStorage.getItem(STORE)||"{}");
+    if(typeof s.unlocked==="number"){
+      unlocked=s.unlocked; explored=s.explored||{}; quizDone=s.quiz||{};
+    }
+  }catch(e){}
+  function save(){
+    try{ localStorage.setItem(STORE,JSON.stringify({unlocked:unlocked,explored:explored,quiz:quizDone})); }catch(e){}
+  }
 
   var etapes=document.querySelectorAll(".etape");
   var stepBtns=document.querySelectorAll(".step-item");
@@ -605,6 +612,13 @@
   document.querySelectorAll(".verrou").forEach(function(v){
     var qid=v.dataset.quiz;
     var fb=v.querySelector(".feedback");
+    if(quizDone[qid]){
+      v.querySelectorAll(".opt").forEach(function(o){
+        o.disabled=true;
+        if(o.dataset.ok==="1"){ o.classList.add("correct"); o.querySelector(".mark").textContent="✓"; }
+      });
+      if(fb){ fb.textContent="Bonne réponse. Étape suivante déverrouillée."; fb.className="feedback show ok"; }
+    }
     v.querySelectorAll(".opt").forEach(function(opt){
       opt.addEventListener("click",function(){
         if(quizDone[qid]) return;
