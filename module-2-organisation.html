@@ -195,6 +195,23 @@
     .module-hero h1{font-size:1.55rem;}
   }
 
+  /* --- Encadré « focus » sur le dernier comité interministériel --- */
+  .focus-cisr{background:var(--gris-clair,#f4f4f4);border-radius:14px;
+    padding:1.4rem 1.6rem;margin:1.8rem 0 0;border-top:5px solid var(--noir,#000);}
+  .focus-cisr h3{margin:0 0 .7rem;font-size:1.15rem;line-height:1.25;}
+  .focus-cisr > p{margin:.5rem 0;max-width:78ch;}
+  .focus-cisr .hint-explore{margin-bottom:.8rem;}
+  .focus-cisr .org{margin-top:0;}
+  ol.axes-cisr{margin:.6rem 0 .2rem;padding-left:1.4rem;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+    gap:.15rem 1.6rem;}
+  ol.axes-cisr li{margin:.1rem 0;font-size:.95rem;}
+  .focus-cisr .src{margin-top:1.1rem;}
+  @media (max-width:640px){
+    .focus-cisr{padding:1.1rem 1.1rem;}
+    ol.axes-cisr{grid-template-columns:1fr;}
+  }
+
   /* ============================================================
      CORRECTIFS TRANSVERSES — audit design du 30 juillet 2026
      Bloc identique sur toutes les pages, placé en fin de feuille
@@ -367,7 +384,7 @@
             </button>
             <button class="role" aria-expanded="false">
               <span class="sigle">CISR</span><span class="nom">Comité interministériel de la sécurité routière</span><span class="plus">+</span>
-              <span class="detail"><span>Réunit les ministres concernés sous la présidence du Premier ministre pour arrêter les grandes orientations. C'est de CISR successifs que sont issues les mesures structurantes : contrôle automatisé (2002), permis probatoire (2004) ou les 38 mesures du CISR de janvier 2018.</span></span>
+              <span class="detail"><span>C'est l'instance de décision de la politique nationale. Elle existe depuis 1972 et son fonctionnement est fixé par le décret du 15 mai 1975, modifié en dernier lieu en 2020.<br /><br /><strong>Ce qu'il fait, concrètement.</strong> Le décret lui confie cinq missions : arrêter les mesures générales destinées à améliorer la sécurité routière, fixer les orientations des programmes d'équipement, examiner les projets de loi, d'ordonnance et de décret relatifs à la sécurité routière, définir la politique d'information du public, et coordonner l'utilisation des moyens des différents ministères. Il arrête aussi les positions de la France dans les négociations internationales.<br /><br /><strong>Qui y siège.</strong> Il est présidé par le <strong>Premier ministre</strong>, ou par délégation par le ministre chargé de la sécurité routière. Y siègent les ministres concernés, une dizaine : Intérieur, Transports, Justice, Défense, Éducation nationale, Santé, Travail et Solidarités, Économie et Finances, Budget, Recherche, Industrie, Logement. Le décret prévoit que d'autres ministres peuvent être appelés à siéger pour les questions relevant de leurs compétences. Le <strong>délégué interministériel à la sécurité routière</strong> en assure le secrétariat : il prépare les délibérations et suit l'application des décisions prises.<br /><br /><strong>À quel rythme.</strong> Le décret prévoit au moins une réunion par an. En pratique le rythme est beaucoup plus lent : le comité s'est réuni en janvier 2018, puis en <strong>juillet 2023</strong>, qui est à ce jour le dernier. C'est de ces comités successifs que sont issues les mesures structurantes de la politique nationale : le contrôle automatisé en 2002, le permis probatoire en 2004, les 80 km/h en 2018, ou l'homicide routier en 2023.</span></span>
             </button>
             <button class="role" aria-expanded="false">
               <span class="sigle">CNSR</span><span class="nom">Conseil national de la sécurité routière</span><span class="plus">+</span>
@@ -380,14 +397,51 @@
           </div>
         </div>
 
+        <div class="focus-cisr">
+          <h3>Le dernier comité en date : le CISR du 17 juillet 2023</h3>
+          <p>Présidé par la Première ministre à Matignon, c'était le premier comité depuis janvier 2018. Son diagnostic tient en une phrase : la mortalité ne baisse plus, mais <strong>la nature des accidents a changé</strong>. En 2013, les usagers des modes doux représentaient 19 % des tués ; en 2022, 24 %. Sur la même période, le nombre de blessés graves est resté stable dans l'ensemble, mais il a augmenté de 38 % chez les cyclistes et les utilisateurs de trottinettes.</p>
+          <p>La feuille de route qui en découle s'intitule « Circuler en sécurité et en sérénité sur les routes de France ». Elle compte <strong>38 mesures réparties en 7 axes</strong> :</p>
+          <ol class="axes-cisr">
+            <li>Éduquer pour mieux partager la route</li>
+            <li>Mieux détecter, évaluer et suivre les inaptitudes à la conduite</li>
+            <li>Protéger les usagers vulnérables de la route et accompagner les victimes</li>
+            <li>S'engager pour la sécurité de toutes et tous sur les routes</li>
+            <li>Lutter contre les comportements les plus dangereux</li>
+            <li>Simplifier la vie des usagers de la route</li>
+            <li>Agir pour une meilleure sécurité routière dans les outre-mer</li>
+          </ol>
+          <p class="hint-explore" style="margin-top:1rem;">Cliquez sur chaque mesure pour comprendre ce qu'elle change pour vous.</p>
+          <div class="org" data-explore="1b">
+            <div class="cartes">
+              <button class="role" aria-expanded="false"><span class="sigle">Mesure 20</span><span class="nom">Renforcer le soutien aux associations</span><span class="plus">+</span><span class="detail"><span>C'est la mesure qui a le plus d'effet visible sur le terrain, et celle que vous croiserez le plus souvent.<br /><br /><strong>Le constat du comité.</strong> Les associations sont des acteurs majeurs du volet pédagogique et préventif, et <strong>environ 40 % des crédits délégués aux préfets au titre du PDASR servent déjà à les soutenir</strong>. Le comité a voulu amplifier ce levier.<br /><br /><strong>La décision.</strong> Créer un <strong>appel à projets national ouvert</strong>, accompagné d'un renforcement du soutien financier, et proposer aux associations des formations à l'ingénierie de projet pour renforcer leur efficacité.<br /><br /><strong>Où en est-on.</strong> C'est devenu une campagne annuelle portée par la Délégation à la sécurité routière : sessions 2024, 2025, puis 2026, ouverte du 19 mars au 24 avril 2026. Elle est ouverte à toute association, et non plus seulement aux partenaires historiques. Les projets peuvent porter sur n'importe quel facteur d'accident, n'importe quel public et n'importe quelle forme d'action.<br /><br /><strong>Ce que cela change pour vous.</strong> Vous verrez apparaître dans votre département des associations nouvelles, financées au niveau national, qui interviennent sur les mêmes publics que vous. Savoir que ce financement existe vous permet aussi d'orienter une association qui vous sollicite.</span></span></button>
+              <button class="role" aria-expanded="false"><span class="sigle">Mesure 18</span><span class="nom">Créer une réserve opérationnelle de sécurité routière</span><span class="plus">+</span><span class="detail"><span>C'est la mesure qui parle directement de vous, et il faut en connaître le contenu exact autant que son sort.<br /><br /><strong>Ce que le comité a écrit du réseau IDSR.</strong> Le dossier de presse constate que le titre d'intervenant départemental de sécurité routière donne aux bénévoles un statut de collaborateur occasionnel du service public, qu'ils sont <strong>3 000 en France</strong>, mais que « le recrutement de nouveaux bénévoles s'avère compliqué et leur nombre tend à diminuer ». Il relève aussi que les observatoires départementaux manquent d'expertise.<br /><br /><strong>La décision annoncée.</strong> Créer une réserve opérationnelle de sécurité routière ouverte aux citoyens, sur le modèle des réserves citoyennes de la gendarmerie, de la police et de la sécurité civile, afin de donner un cadre à cet engagement et d'accorder aux réservistes <strong>une gratification financière</strong>.<br /><br /><strong>Où en est-on, et c'est important.</strong> À ce jour, <strong>aucun texte n'a créé cette réserve</strong> : ni décret, ni arrêté, et aucun dispositif ouvert aux candidatures. Elle reste une annonce. Le seul statut qui existe est donc celui d'IDSR, tel que ce module et le module 3 le décrivent. Si un participant ou un collègue vous en parle, c'est la réponse à donner : le sujet a été posé par l'État en 2023, il n'a pas encore été tranché.</span></span></button>
+              <button class="role" aria-expanded="false"><span class="sigle">Mesure 4</span><span class="nom">Un parcours d'e-formation tout au long de la vie</span><span class="plus">+</span><span class="detail"><span>Le comité part d'un constat simple : pour beaucoup de conducteurs, la préparation du permis est <strong>la seule formation de toute leur vie</strong>, alors que le code et les usages changent. Et pour le vélo ou la trottinette, aucune formation n'est exigée.<br /><br /><strong>La décision.</strong> Mettre à disposition de tous les usagers, gratuitement, des modules d'e-formation sur le site de la Sécurité routière : un module d'auto-évaluation d'une heure, un module de test des connaissances du code d'une heure avec explication des réponses erronées, puis une bibliothèque de modules thématiques de 30 à 45 minutes.<br /><br /><strong>Ce que cela change pour vous.</strong> C'est exactement la logique de cet espace de formation, appliquée au grand public. Deux usages en animation : orienter un participant qui veut aller plus loin, et rappeler qu'un conducteur n'est pas censé s'en tenir à ce qu'il a appris à 18 ans.</span></span></button>
+              <button class="role" aria-expanded="false"><span class="sigle">Mesures 10 et 24</span><span class="nom">Homicide routier et grand excès de vitesse</span><span class="plus">+</span><span class="detail"><span>Les deux mesures les plus commentées du comité, et celles sur lesquelles on vous interrogera le plus.<br /><br /><strong>Mesure 10.</strong> Créer la qualification d'homicide routier, pour remplacer l'homicide involontaire lorsqu'un conducteur tue. Annoncée en 2023, elle a été traduite par la <strong>loi du 9 juillet 2025</strong>.<br /><br /><strong>Mesure 24.</strong> Délictualiser le grand excès de vitesse. Le dossier de presse justifiait la mesure par une progression forte : 39 690 grands excès relevés en 2019, 70 845 en 2022. C'est devenu un délit fin 2025.<br /><br />Le comité a aussi allégé la sanction des petits excès : plus de retrait de point sous 5 km/h de dépassement depuis le 1<sup>er</sup> janvier 2024, l'amende restant due. Ces trois points sont détaillés dans le module 8, actualités réglementaires.</span></span></button>
+              <button class="role" aria-expanded="false"><span class="sigle">Mesure 21</span><span class="nom">Associer les employeurs au risque routier professionnel</span><span class="plus">+</span><span class="detail"><span><strong>Le constat.</strong> Le risque routier reste la première cause de mortalité au travail. En 2022, 485 personnes ont été tuées dans un accident de la route lié au travail, dont 345 lors d'un trajet domicile-travail et 140 en mission.<br /><br /><strong>La décision.</strong> Conclure des conventions de prévention avec les branches professionnelles, poursuivre les clubs d'entreprises en département, et continuer à promouvoir la charte des 7 engagements auprès des employeurs publics et privés.<br /><br /><strong>Ce que cela change pour vous.</strong> C'est le fondement de vos interventions en entreprise, traitées dans le module 9. Quand un employeur vous accueille, il agit dans ce cadre.</span></span></button>
+            </div>
+          </div>
+          <p class="src">Source : dossier de presse du comité interministériel de la sécurité routière du 17 juillet 2023, <em>Circuler en sécurité et en sérénité sur les routes de France</em>, publié par les services du Premier ministre et mis en ligne par l'ONISR. Les chiffres cités dans cet encadré sont ceux du dossier de presse, arrêtés à 2022, et non ceux du bilan 2025 utilisé dans le module 4. Missions et composition du comité : décret n<sup>o</sup>&nbsp;75-360 du 15 mai 1975 modifié.</p>
+        </div>
+
         <div class="verrou" data-quiz="1">
-          <span class="v-tag">🔒 Question de déverrouillage</span>
+          <span class="v-tag">🔒 Question 1</span>
           <p class="q">Quelle structure recueille, analyse et diffuse les données nationales d'accidentalité ?</p>
           <div class="opts">
             <button class="opt" data-ok="0"><span class="mark"></span> La DREAL</button>
             <button class="opt" data-ok="1"><span class="mark"></span> L'ONISR</button>
             <button class="opt" data-ok="0"><span class="mark"></span> Le PDASR</button>
             <button class="opt" data-ok="0"><span class="mark"></span> Les IDSR</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+
+        <div class="verrou" data-quiz="1b">
+          <span class="v-tag">🔒 Question 2</span>
+          <p class="q">Un participant vous demande où en est la « réserve de sécurité routière » dont il a entendu parler. Que répondez-vous ?</p>
+          <div class="opts">
+            <button class="opt" data-ok="0"><span class="mark"></span> Elle a remplacé les IDSR, il faut désormais s'y inscrire</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> Elle a été annoncée par le comité interministériel de 2023, mais aucun texte ne l'a créée à ce jour : le statut d'IDSR reste le seul qui existe</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> Elle est ouverte depuis 2024 et rémunérée</button>
           </div>
           <p class="feedback"></p>
         </div>
@@ -543,7 +597,7 @@
   "use strict";
   var P=[["DISR","Coordonne l'action de la dizaine de ministères concernés"],
          ["ONISR","Publie le bilan officiel de l'accidentalité et les baromètres mensuels"],
-         ["CISR","Réunion des ministres qui arrête les grandes orientations"],
+         ["CISR","Comité présidé par le Premier ministre : arrête les mesures nationales, dernier en date juillet 2023"],
          ["CNSR","« Parlement de la sécurité routière » : avis et recommandations"],
          ["DREAL","Pilote régional : pôle d'appui, formations, répartition des moyens"],
          ["Coordination SR","Prépare le PDASR et anime le réseau des IDSR au quotidien"]];
@@ -677,14 +731,14 @@
       r.addEventListener("click",function(){
         var open=r.getAttribute("aria-expanded")==="true";
         r.setAttribute("aria-expanded", open?"false":"true");
-        if(!open){ r.dataset.seen="1"; checkExplore(grp,roles); }
+        if(!open){ r.dataset.seen="1"; checkExplore(org,roles); }
       });
     });
     if(explored[grp]) roles.forEach(function(r){r.dataset.seen="1";});
   });
-  function checkExplore(grp,roles){
+  function checkExplore(org,roles){
     var allSeen=Array.prototype.every.call(roles,function(r){return r.dataset.seen==="1";});
-    if(allSeen){ explored[grp]=true; save(); maybeEnableNext(grp); }
+    if(allSeen){ explored[org.dataset.explore]=true; save(); maybeEnableNext(etapeDe(org)); }
   }
 
   // quiz verrous
@@ -709,7 +763,7 @@
           fb.textContent="Bonne réponse. Étape suivante déverrouillée.";
           fb.className="feedback show ok";
           quizDone[qid]=true; save();
-          maybeEnableNext(qid);
+          maybeEnableNext(etapeDe(v));
         }else{
           opt.classList.add("wrong");
           opt.querySelector(".mark").textContent="✗";
@@ -721,16 +775,26 @@
     });
   });
 
-  // active le bouton "suivant" d'une étape quand exploration + quiz faits
+  // active le bouton "suivant" d'une étape quand exploration + toutes les
+  // questions de l'étape sont faites (une étape peut en compter plusieurs)
   function maybeEnableNext(id){
     var etape=document.querySelector('.etape[data-etape="'+id+'"]');
     if(!etape) return;
-    var exploreOk=explored[id]===true;
-    var quizOk=quizDone[id]===true;
+    var exploreOk = Array.prototype.every.call(
+      etape.querySelectorAll(".org[data-explore]"),
+      function(o){ return explored[o.dataset.explore]===true; });
+    var quizOk = Array.prototype.every.call(
+      etape.querySelectorAll(".verrou"),
+      function(v){ return quizDone[v.dataset.quiz]===true; });
     if(exploreOk && quizOk){
       var nb=etape.querySelector("[data-next]");
       if(nb) nb.disabled=false;
     }
+  }
+  // retrouve le numéro d'étape d'un élément, le nom du quiz ne le donne plus
+  function etapeDe(el){
+    var e=el.closest ? el.closest(".etape") : null;
+    return e ? e.dataset.etape : null;
   }
   // ré-applique au chargement (reprise de session)
   [1,2,3].forEach(function(id){ maybeEnableNext(id); });
