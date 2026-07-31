@@ -96,6 +96,11 @@
   @media (max-width:640px){
     .module-hero h1{font-size:1.5rem;}
     .fiche > header h2{font-size:1.2rem;}
+    .fiche .corps{padding:1rem 1.1rem 1.2rem;}
+    .cols{grid-template-columns:1fr;gap:1rem;}
+    /* les tableaux de sanctions defilent plutot que de se comprimer */
+    .sanctions{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .sanctions table{min-width:420px;}
   }
 
   /* ---------- Impression : une fiche par page A4 ---------- */
