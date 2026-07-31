@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Registre des demandes de modification — E-learning IDSR</title>
+<meta name="description" content="Suivi partagé du projet e-learning IDSR : demandes de modification reçues, décisions prises et versions publiées." />
+<style>
+  :root{--jaune:#FECF41;--jaune-clair:#FFF3CC;--jaune-trait:#8A6D00;
+        --noir:#000;--gris:#3a3a3a;--gris-2:#6b6b6b;--gris-clair:#f6f6f6;
+        --bordure:#e2e2e2;--rouge:#C0392B;--orange:#B35309;--vert:#14532D;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Marianne","Segoe UI",Arial,sans-serif;color:var(--noir);
+       line-height:1.6;background:#fff;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem 4rem;}
+  a{color:inherit;}
+  .skip{position:absolute;left:-9999px;background:var(--noir);color:var(--jaune);
+        padding:.6rem 1rem;z-index:200;font-weight:700;}
+  .skip:focus{left:0;top:0;}
+  :focus-visible{outline:3px solid var(--noir);outline-offset:2px;border-radius:4px;}
+  header.doc{background:var(--noir);color:#fff;padding:2.2rem 0;margin-bottom:2rem;
+             border-bottom:8px solid var(--jaune);}
+  header.doc .wrap{padding-bottom:0;}
+  header.doc .eyebrow{color:var(--jaune);text-transform:uppercase;letter-spacing:.06em;
+                      font-size:.8rem;font-weight:700;margin:0 0 .5rem;}
+  header.doc h1{margin:0 0 .6rem;font-size:1.9rem;line-height:1.2;}
+  header.doc p{margin:0;color:#e4e4e4;max-width:78ch;}
+  h2{font-size:1.3rem;border-left:8px solid var(--jaune);padding-left:.6rem;margin:2.6rem 0 .8rem;}
+  p,li{max-width:82ch;}
+  table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.9rem;}
+  th,td{border:1px solid var(--bordure);padding:.5rem .6rem;text-align:left;vertical-align:top;}
+  th{background:var(--gris-clair);font-size:.8rem;text-transform:uppercase;letter-spacing:.03em;}
+  tbody tr:nth-child(even){background:#fcfcfc;}
+  code{background:var(--gris-clair);padding:.1rem .3rem;border-radius:3px;font-size:.88em;}
+  .tag{display:inline-block;font-size:.7rem;font-weight:800;text-transform:uppercase;
+       letter-spacing:.04em;border-radius:999px;padding:.12rem .5rem;white-space:nowrap;}
+  .t-attente{background:var(--gris-clair);color:var(--gris);border:1px solid #8c8c8c;}
+  .t-cours{background:#fff6e3;color:var(--orange);border:1px solid var(--orange);}
+  .t-preprod{background:var(--jaune-clair);color:var(--jaune-trait);border:1px solid var(--jaune-trait);}
+  .t-publie{background:#eafaf0;color:var(--vert);border:1px solid var(--vert);}
+  .t-refuse{background:#fdeeec;color:var(--rouge);border:1px solid var(--rouge);}
+  .encadre{background:var(--jaune-clair);border-radius:10px;padding:1.1rem 1.3rem;margin:1.6rem 0;}
+  .encadre h3{margin-top:0;font-size:1rem;}
+  .encadre p:last-child{margin-bottom:0;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem;margin:1.4rem 0;}
+  .kpi{background:var(--gris-clair);border-radius:10px;padding:1rem 1.1rem;border-top:4px solid var(--jaune);}
+  .kpi b{font-size:1.9rem;line-height:1;display:block;}
+  .kpi span{font-size:.88rem;color:var(--gris);display:block;margin-top:.3rem;}
+  .nav-suivi{display:flex;gap:.7rem;flex-wrap:wrap;margin:1.4rem 0 0;}
+  .nav-suivi a{display:inline-flex;align-items:center;gap:.4rem;background:var(--gris-clair);
+    color:var(--noir);border-radius:999px;padding:.6rem 1.2rem;text-decoration:none;
+    font-weight:700;font-size:.94rem;box-shadow:inset 0 0 0 2px var(--bordure);}
+  .nav-suivi a:hover{background:var(--bordure);}
+  .nav-suivi a.actif{background:var(--jaune);box-shadow:none;}
+  footer.doc{border-top:1px solid var(--bordure);margin-top:3rem;padding-top:1.2rem;
+             font-size:.88rem;color:var(--gris-2);}
+  @media (max-width:640px){
+    header.doc h1{font-size:1.4rem;}
+    table{font-size:.84rem;}
+    .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .table-scroll table{min-width:720px;}
+  }
+  @media print{
+    @page{size:A4 landscape;margin:12mm;}
+    header.doc{background:#000!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .nav-suivi{display:none;}
+    body{font-size:9.5pt;}
+    .tag,.kpi,.encadre{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu principal</a>
+<header class="doc">
+  <div class="wrap">
+    <p class="eyebrow">Registre — tenu à jour en continu</p>
+    <h1>Registre des demandes de modification</h1>
+    <p>Toutes les demandes reçues sur l'espace e-learning, avec leur analyse, leur décision et la version dans laquelle elles ont été publiées.</p>
+    <nav class="nav-suivi" aria-label="Documents de suivi"><a href="index.html">Vue d'ensemble</a><a href="registre.html" class="actif">Registre des demandes</a><a href="cr-2026-07-31-v1.1.html">Compte rendu v1.1</a></nav>
+  </div>
+</header>
+<main id="contenu">
+  <div class="wrap">
+<h2>Demandes en cours</h2>
+<div class="table-scroll">
+<table>
+  <thead><tr>
+    <th style="width:3.5rem;">Réf.</th><th style="width:6rem;">Reçue le</th>
+    <th style="width:8rem;">Demandeur</th><th>Demande</th>
+    <th style="width:9rem;">Où</th><th style="width:8rem;">Statut</th><th style="width:6rem;">Version</th>
+  </tr></thead>
+  <tbody>
+<tr>
+      <td>C01</td>
+      <td>31/07/2026</td>
+      <td>Léa<br /><span style="font-size:.85em;color:#6b6b6b;">coordination départementale<br />retour n° 1</span></td>
+      <td>La notion de « convention de mise à disposition signée entre l'employeur et la préfecture » est inexacte : aucun texte national ne l'établit. Le mécanisme réel est la fiche d'engagement IDSR contresignée par le responsable de service, avec un nombre de jours. Réécrire la carte des viviers.</td>
+      <td>module 1, carte « Origines diverses »</td>
+      <td><span class="tag t-cours">à arbitrer</span></td>
+      <td>–</td>
+    </tr>
+    <tr>
+      <td>C02</td>
+      <td>31/07/2026</td>
+      <td>Léa<br /><span style="font-size:.85em;color:#6b6b6b;">coordination départementale<br />retour n° 1</span></td>
+      <td>Ajouter les autorisations d'absence : aucun droit à ASA (CGFP art. L. 622-1, liste limitative), décision discrétionnaire du chef de service. Répondre par avance à la question que poseront les IDSR agents publics.</td>
+      <td>module 1, étape engagement</td>
+      <td><span class="tag t-cours">à arbitrer</span></td>
+      <td>–</td>
+    </tr>
+    <tr>
+      <td>C03</td>
+      <td>31/07/2026</td>
+      <td>Léa<br /><span style="font-size:.85em;color:#6b6b6b;">coordination départementale<br />retour n° 1</span></td>
+      <td>Mentionner l'ordre de mission, obligatoire avant chaque action et condition de la couverture par l'État au titre du collaborateur occasionnel du service public.</td>
+      <td>module 1 et module 3</td>
+      <td><span class="tag t-cours">à arbitrer</span></td>
+      <td>–</td>
+    </tr>
+    <tr>
+      <td>C04</td>
+      <td>31/07/2026</td>
+      <td>Léa<br /><span style="font-size:.85em;color:#6b6b6b;">coordination départementale<br />retour n° 1</span></td>
+      <td>Actualiser le fondement de la protection fonctionnelle : citer le code général de la fonction publique (art. L. 134-1) et non l'article 11 de la loi de 1983, abrogé et codifié depuis le 1er mars 2022.</td>
+      <td>module 1</td>
+      <td><span class="tag t-cours">à arbitrer</span></td>
+      <td>–</td>
+    </tr>
+    <tr>
+      <td>C05</td>
+      <td>31/07/2026</td>
+      <td>Léa<br /><span style="font-size:.85em;color:#6b6b6b;">coordination départementale<br />retour n° 1</span></td>
+      <td>Le PDASR est cité plusieurs fois avant d'être défini. Déplacer l'encadré des documents clés avant la description des acteurs départementaux.</td>
+      <td>module 2, étape 3</td>
+      <td><span class="tag t-publie">publiée</span></td>
+      <td>v1.1</td>
+    </tr>
+    <tr>
+      <td>C06</td>
+      <td>31/07/2026</td>
+      <td>Léa<br /><span style="font-size:.85em;color:#6b6b6b;">coordination départementale<br />retour n° 1</span></td>
+      <td>Le coordinateur n'est pas seul : préciser qu'une équipe peut l'accompagner (coordinateur adjoint, animateurs PDASR) et que selon les départements ce ne sont pas les mêmes personnes qui gèrent les ordres de mission, le matériel et l'astreinte pendant une action.</td>
+      <td>module 2, carte coordinateur</td>
+      <td><span class="tag t-cours">à arbitrer</span></td>
+      <td>–</td>
+    </tr>
+    <tr>
+      <td>C07</td>
+      <td>31/07/2026</td>
+      <td>Léa<br /><span style="font-size:.85em;color:#6b6b6b;">coordination départementale<br />retour n° 1</span></td>
+      <td>Le module laisse croire à un DGO unique national. Écrire que chaque département a son propre DGO, signé par son préfet et ses partenaires, et qu'il reprend obligatoirement les quatre enjeux nationaux plus deux enjeux locaux facultatifs au maximum. Cadrage : texte DSR du 25 mai 2022 et vademecum du 6 septembre 2022.</td>
+      <td>module 4, étape 2</td>
+      <td><span class="tag t-publie">publiée</span></td>
+      <td>v1.1</td>
+    </tr>
+    <tr>
+      <td>C08</td>
+      <td>31/07/2026</td>
+      <td>Léa<br /><span style="font-size:.85em;color:#6b6b6b;">coordination départementale<br />retour n° 1</span></td>
+      <td>Compléter la définition du BAAC : rempli par les forces de l'ordre pour chaque accident corporel, puis transmis à l'observatoire qui en établit les données d'accidentalité.</td>
+      <td>module 6, étape 1</td>
+      <td><span class="tag t-publie">publiée</span></td>
+      <td>v1.1</td>
+    </tr>
+    <tr>
+      <td>C09</td>
+      <td>31/07/2026</td>
+      <td>Léa<br /><span style="font-size:.85em;color:#6b6b6b;">coordination départementale<br />retour n° 1</span></td>
+      <td>Rétablir la définition du blessé hospitalisé plus de 24 heures à côté de celle du blessé grave MAIS3+. Les deux figurent au glossaire ONISR et la confusion entre elles est un piège classique en animation.</td>
+      <td>module 6, étape 1</td>
+      <td><span class="tag t-publie">publiée</span></td>
+      <td>v1.1</td>
+    </tr>
+    <tr>
+      <td>C10</td>
+      <td>31/07/2026</td>
+      <td>Léa<br /><span style="font-size:.85em;color:#6b6b6b;">coordination départementale<br />retour n° 1</span></td>
+      <td>Alcool : préciser que les 10 g d'alcool pur correspondent à une dose bar, et alerter sur les doses servies à la maison, souvent supérieures.</td>
+      <td>module 7, étape 1</td>
+      <td><span class="tag t-publie">publiée</span></td>
+      <td>v1.1</td>
+    </tr>
+    <tr>
+      <td>C11</td>
+      <td>31/07/2026</td>
+      <td>Léa<br /><span style="font-size:.85em;color:#6b6b6b;">coordination départementale<br />retour n° 1</span></td>
+      <td>Alcool : ajouter un vrai/faux sur les idées reçues. Ni le café, ni le repas, ni le sport, ni la douche n'accélèrent l'élimination : seul le temps compte.</td>
+      <td>module 7, étape 1</td>
+      <td><span class="tag t-publie">publiée</span></td>
+      <td>v1.1</td>
+    </tr>
+    <tr>
+      <td>C12</td>
+      <td>31/07/2026</td>
+      <td>Léa<br /><span style="font-size:.85em;color:#6b6b6b;">coordination départementale<br />retour n° 1</span></td>
+      <td>Alcool : donner l'ordre de grandeur « 0,5 g/L, environ deux verres ». À reformuler pour ne pas devenir une règle de conversion (voir argumentaire).</td>
+      <td>module 7, étape 1</td>
+      <td><span class="tag t-publie">publiée</span></td>
+      <td>v1.1</td>
+    </tr>
+    <tr>
+      <td>C13</td>
+      <td>31/07/2026</td>
+      <td>Léa<br /><span style="font-size:.85em;color:#6b6b6b;">coordination départementale<br />retour n° 1</span></td>
+      <td>Stupéfiants : ajouter le protoxyde d'azote. Non classé stupéfiant à ce jour, donc hors du champ de l'article L. 235-1. La loi créant le délit de conduite après consommation de substances psychoactives a été adoptée le 21 juillet 2026 mais n'est pas encore en vigueur. À écrire comme tel.</td>
+      <td>module 7, étape 2</td>
+      <td><span class="tag t-publie">publiée</span></td>
+      <td>v1.1</td>
+    </tr>
+    <tr>
+      <td>C14</td>
+      <td>31/07/2026</td>
+      <td>Léa<br /><span style="font-size:.85em;color:#6b6b6b;">coordination départementale<br />retour n° 1</span></td>
+      <td>Vitesse : ajouter que la vitesse aggrave la gravité de tous les accidents, même lorsqu'elle n'en est pas la cause.</td>
+      <td>module 7, étape 3</td>
+      <td><span class="tag t-publie">publiée</span></td>
+      <td>v1.1</td>
+    </tr>
+    <tr>
+      <td>C15</td>
+      <td>31/07/2026</td>
+      <td>Léa<br /><span style="font-size:.85em;color:#6b6b6b;">coordination départementale<br />retour n° 1</span></td>
+      <td>Équipements de protection : les gants sont obligatoires en deux-roues motorisé pour le conducteur et le passager depuis le 20 novembre 2016 (art. R. 431-1-2), sanction 68 € et un point. Le module ne cite que le casque.</td>
+      <td>module 7, étape 3</td>
+      <td><span class="tag t-publie">publiée</span></td>
+      <td>v1.1</td>
+    </tr>
+    <tr>
+      <td>C16</td>
+      <td>31/07/2026</td>
+      <td>Léa<br /><span style="font-size:.85em;color:#6b6b6b;">coordination départementale<br />retour n° 1</span></td>
+      <td>Équipements : ajouter le casque obligatoire pour les conducteurs et passagers de cycle de moins de 12 ans (art. R. 431-1-3), seul l'adulte accompagnant étant verbalisable, 135 € sans retrait de point.</td>
+      <td>module 7, étape 3</td>
+      <td><span class="tag t-publie">publiée</span></td>
+      <td>v1.1</td>
+    </tr>
+    <tr>
+      <td>C17</td>
+      <td>31/07/2026</td>
+      <td>Léa<br /><span style="font-size:.85em;color:#6b6b6b;">coordination départementale<br />retour n° 1</span></td>
+      <td>Équipements : casque EDPM. Non obligatoire en agglomération au niveau national, mais les cinq départements des Hauts-de-France ont pris un arrêté préfectoral en 2026. Sanction 35 € et non 135 €. Suspendu à la communication des arrêtés.</td>
+      <td>module 7, étape 3</td>
+      <td><span class="tag t-publie">publiée</span></td>
+      <td>v1.1</td>
+    </tr>
+    <tr>
+      <td>C18</td>
+      <td>31/07/2026</td>
+      <td>Léa<br /><span style="font-size:.85em;color:#6b6b6b;">coordination départementale<br />retour n° 1</span></td>
+      <td>Créer des fiches mémo par thème sur le modèle de ses fiches vélo et EDPM (une page, équipements obligatoires, conditions, interdictions, circulation). Extension de périmètre, voir argumentaire.</td>
+      <td>nouveau contenu</td>
+      <td><span class="tag t-publie">publiée</span></td>
+      <td>v1.1</td>
+    </tr>
+    <tr>
+      <td>C19</td>
+      <td>31/07/2026</td>
+      <td>Léa<br /><span style="font-size:.85em;color:#6b6b6b;">coordination départementale<br />retour n° 1</span></td>
+      <td>Préciser que les outils de sensibilisation sont mis à disposition par la coordination sécurité routière et qu'il ne s'agit pas d'une valise attribuée à chaque IDSR.</td>
+      <td>module 8, étape 1</td>
+      <td><span class="tag t-publie">publiée</span></td>
+      <td>v1.1</td>
+    </tr>
+    <tr>
+      <td>C20</td>
+      <td>31/07/2026</td>
+      <td>Léa<br /><span style="font-size:.85em;color:#6b6b6b;">coordination départementale<br />retour n° 1</span></td>
+      <td>Développer les actualités réglementaires : le paragraphe actuel est trop condensé pour quelqu'un qui découvre le sujet. Retenir trois ou quatre textes récents et les expliquer. Choix des textes à faire valider.</td>
+      <td>module 8, étape 1</td>
+      <td><span class="tag t-publie">publiée</span></td>
+      <td>v1.1</td>
+    </tr>
+    <tr>
+      <td>C21</td>
+      <td>31/07/2026</td>
+      <td>Léa<br /><span style="font-size:.85em;color:#6b6b6b;">coordination départementale<br />retour n° 1</span></td>
+      <td>Incohérence des boutons de fin de module, tantôt « module suivant », tantôt « retour à l'accueil ». Déjà corrigé dans la version en ligne du 30 juillet 2026.</td>
+      <td>tous les modules</td>
+      <td><span class="tag t-publie">publiée</span></td>
+      <td>v1.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2>Demandes traitées</h2>
+<div class="table-scroll">
+<table>
+  <thead><tr>
+    <th style="width:3.5rem;">Réf.</th><th style="width:6rem;">Reçue le</th>
+    <th style="width:8rem;">Demandeur</th><th>Demande et traitement</th>
+    <th style="width:8rem;">Statut</th><th style="width:6rem;">Version</th>
+  </tr></thead>
+  <tbody>
+<tr>
+      <td>A01</td>
+      <td>30/07/2026</td>
+      <td>Adeline Rubben</td>
+      <td>L'IDSR doit-il saisir son identité pour l'attestation, et cela constitue-t-il une collecte de données personnelles ? Réponse apportée par courriel, puis traduite dans le site : page de protection des données créée, attestation requalifiée en document déclaratif, bouton d'effacement du nom pour les postes partagés.</td>
+      <td><span class="tag t-publie">publiée</span></td>
+      <td>v1.0</td>
+    </tr>
+    <tr>
+      <td>A02</td>
+      <td>30/07/2026</td>
+      <td>Adeline Rubben</td>
+      <td>Le parcours peut-il être suivi en plusieurs fois ? Réponse apportée par courriel. Correctif associé : la mémoire de progression du module 2, qui ne s'enregistrait pas, a été rétablie.</td>
+      <td><span class="tag t-publie">publiée</span></td>
+      <td>v1.0</td>
+    </tr>
+    <tr>
+      <td>M01</td>
+      <td>30/07/2026</td>
+      <td>Mickaël Lopes</td>
+      <td>Reprendre toutes les statistiques sur le bilan ONISR 2025, France métropolitaine, avec citation de la source partout.</td>
+      <td><span class="tag t-publie">publiée</span></td>
+      <td>v1.0</td>
+    </tr>
+    <tr>
+      <td>M02</td>
+      <td>30/07/2026</td>
+      <td>Mickaël Lopes</td>
+      <td>Intégrer la courbe de la mortalité routière depuis 1970 avec un questionnement sur le lien entre sanction et baisse de la mortalité. Réalisé dans le module 4, sept repères cliquables et trois questions.</td>
+      <td><span class="tag t-publie">publiée</span></td>
+      <td>v1.0</td>
+    </tr>
+    <tr>
+      <td>M03</td>
+      <td>30/07/2026</td>
+      <td>Mickaël Lopes</td>
+      <td>Présenter la multifactorialité comme quatre éléments : véhicule, environnement, conducteur, organisation. Module 6 refondu, schéma, cartes et quiz alignés.</td>
+      <td><span class="tag t-publie">publiée</span></td>
+      <td>v1.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="encadre">
+  <h3>Une demande absente de ce registre n'a pas été traitée</h3>
+  <p>Si vous avez formulé une remarque qui ne figure pas ici, c'est qu'elle n'a pas été
+  enregistrée : signalez-le, elle sera ajoutée. Ce registre est la seule référence du suivi.</p>
+</div>
+
+  </div>
+</main>
+<footer class="doc">
+  <div class="wrap">
+    <p>Document de suivi de l'espace e-learning des Intervenants Départementaux de Sécurité Routière.
+    Mis à jour le 31 juillet 2026. <a href="../index.html">Accéder au site e-learning</a></p>
+  </div>
+</footer>
+</body>
+</html>

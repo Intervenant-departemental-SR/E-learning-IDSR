@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Suivi du projet — E-learning IDSR</title>
+<meta name="description" content="Suivi partagé du projet e-learning IDSR : demandes de modification reçues, décisions prises et versions publiées." />
+<style>
+  :root{--jaune:#FECF41;--jaune-clair:#FFF3CC;--jaune-trait:#8A6D00;
+        --noir:#000;--gris:#3a3a3a;--gris-2:#6b6b6b;--gris-clair:#f6f6f6;
+        --bordure:#e2e2e2;--rouge:#C0392B;--orange:#B35309;--vert:#14532D;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Marianne","Segoe UI",Arial,sans-serif;color:var(--noir);
+       line-height:1.6;background:#fff;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem 4rem;}
+  a{color:inherit;}
+  .skip{position:absolute;left:-9999px;background:var(--noir);color:var(--jaune);
+        padding:.6rem 1rem;z-index:200;font-weight:700;}
+  .skip:focus{left:0;top:0;}
+  :focus-visible{outline:3px solid var(--noir);outline-offset:2px;border-radius:4px;}
+  header.doc{background:var(--noir);color:#fff;padding:2.2rem 0;margin-bottom:2rem;
+             border-bottom:8px solid var(--jaune);}
+  header.doc .wrap{padding-bottom:0;}
+  header.doc .eyebrow{color:var(--jaune);text-transform:uppercase;letter-spacing:.06em;
+                      font-size:.8rem;font-weight:700;margin:0 0 .5rem;}
+  header.doc h1{margin:0 0 .6rem;font-size:1.9rem;line-height:1.2;}
+  header.doc p{margin:0;color:#e4e4e4;max-width:78ch;}
+  h2{font-size:1.3rem;border-left:8px solid var(--jaune);padding-left:.6rem;margin:2.6rem 0 .8rem;}
+  p,li{max-width:82ch;}
+  table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.9rem;}
+  th,td{border:1px solid var(--bordure);padding:.5rem .6rem;text-align:left;vertical-align:top;}
+  th{background:var(--gris-clair);font-size:.8rem;text-transform:uppercase;letter-spacing:.03em;}
+  tbody tr:nth-child(even){background:#fcfcfc;}
+  code{background:var(--gris-clair);padding:.1rem .3rem;border-radius:3px;font-size:.88em;}
+  .tag{display:inline-block;font-size:.7rem;font-weight:800;text-transform:uppercase;
+       letter-spacing:.04em;border-radius:999px;padding:.12rem .5rem;white-space:nowrap;}
+  .t-attente{background:var(--gris-clair);color:var(--gris);border:1px solid #8c8c8c;}
+  .t-cours{background:#fff6e3;color:var(--orange);border:1px solid var(--orange);}
+  .t-preprod{background:var(--jaune-clair);color:var(--jaune-trait);border:1px solid var(--jaune-trait);}
+  .t-publie{background:#eafaf0;color:var(--vert);border:1px solid var(--vert);}
+  .t-refuse{background:#fdeeec;color:var(--rouge);border:1px solid var(--rouge);}
+  .encadre{background:var(--jaune-clair);border-radius:10px;padding:1.1rem 1.3rem;margin:1.6rem 0;}
+  .encadre h3{margin-top:0;font-size:1rem;}
+  .encadre p:last-child{margin-bottom:0;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem;margin:1.4rem 0;}
+  .kpi{background:var(--gris-clair);border-radius:10px;padding:1rem 1.1rem;border-top:4px solid var(--jaune);}
+  .kpi b{font-size:1.9rem;line-height:1;display:block;}
+  .kpi span{font-size:.88rem;color:var(--gris);display:block;margin-top:.3rem;}
+  .nav-suivi{display:flex;gap:.7rem;flex-wrap:wrap;margin:1.4rem 0 0;}
+  .nav-suivi a{display:inline-flex;align-items:center;gap:.4rem;background:var(--gris-clair);
+    color:var(--noir);border-radius:999px;padding:.6rem 1.2rem;text-decoration:none;
+    font-weight:700;font-size:.94rem;box-shadow:inset 0 0 0 2px var(--bordure);}
+  .nav-suivi a:hover{background:var(--bordure);}
+  .nav-suivi a.actif{background:var(--jaune);box-shadow:none;}
+  footer.doc{border-top:1px solid var(--bordure);margin-top:3rem;padding-top:1.2rem;
+             font-size:.88rem;color:var(--gris-2);}
+  @media (max-width:640px){
+    header.doc h1{font-size:1.4rem;}
+    table{font-size:.84rem;}
+    .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .table-scroll table{min-width:720px;}
+  }
+  @media print{
+    @page{size:A4 landscape;margin:12mm;}
+    header.doc{background:#000!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .nav-suivi{display:none;}
+    body{font-size:9.5pt;}
+    .tag,.kpi,.encadre{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu principal</a>
+<header class="doc">
+  <div class="wrap">
+    <p class="eyebrow">Suivi partagé du projet</p>
+    <h1>Suivi des demandes et des versions</h1>
+    <p>Cet espace permet à chaque contributeur de vérifier que sa remarque a bien été prise en compte, et de suivre ce qui a été publié.</p>
+    <nav class="nav-suivi" aria-label="Documents de suivi"><a href="index.html" class="actif">Vue d'ensemble</a><a href="registre.html">Registre des demandes</a><a href="cr-2026-07-31-v1.1.html">Compte rendu v1.1</a></nav>
+  </div>
+</header>
+<main id="contenu">
+  <div class="wrap">
+<h2>À quoi sert cet espace</h2>
+<p>Chaque remarque formulée sur l'espace e-learning est enregistrée, analysée, puis suivie
+jusqu'à sa mise en ligne ou son écartement motivé. Cet espace rend ce suivi consultable par
+tous les contributeurs : vous pouvez vérifier qu'une remarque a bien été prise en compte,
+savoir ce qui a été fait, et voir ce qui reste en discussion.</p>
+
+<div class="kpis">
+  <div class="kpi"><b>26</b><span>demandes enregistrées à ce jour</span></div>
+  <div class="kpi"><b>21</b><span>traitées et en ligne</span></div>
+  <div class="kpi"><b>5</b><span>en cours d'instruction ou en attente d'arbitrage</span></div>
+</div>
+
+<h2>Comment lire les statuts</h2>
+<table>
+  <thead><tr><th style="width:12rem;">Statut</th><th>Signification</th></tr></thead>
+  <tbody>
+    <tr><td><span class="tag t-attente">à instruire</span></td><td>Demande reçue et enregistrée, pas encore analysée.</td></tr>
+    <tr><td><span class="tag t-cours">à arbitrer</span></td><td>Analysée, mais elle nécessite un arbitrage ou un élément complémentaire avant d'être réalisée.</td></tr>
+    <tr><td><span class="tag t-preprod">faite, à valider</span></td><td>Réalisée et testée, en attente de validation avant publication.</td></tr>
+    <tr><td><span class="tag t-publie">publiée</span></td><td>En ligne. La colonne « version » indique dans quelle publication elle est partie.</td></tr>
+    <tr><td><span class="tag t-refuse">écartée</span></td><td>Non retenue, avec son motif. Conservée au registre pour mémoire.</td></tr>
+  </tbody>
+</table>
+
+<h2>Comment adresser une remarque</h2>
+<p>Toute remarque est bienvenue, qu'elle porte sur un contenu, un chiffre, une référence
+juridique, une formulation ou un défaut d'affichage. Le plus utile est d'indiquer le module
+concerné et, si possible, l'étape. Les remarques sont enregistrées avec une référence
+(par exemple <code>C07</code>) que vous pouvez ensuite citer dans vos échanges pour désigner
+un point sans ambiguïté.</p>
+
+<div class="encadre">
+  <h3>Une règle éditoriale à connaître</h3>
+  <p>Le site est destiné aux cinq départements de la région. Il retient donc ce qui leur est
+  commun et signale explicitement les variations locales, par une formule du type
+  « selon votre département, à voir avec votre coordination ». Une remarque propre à un seul
+  département sera donc traitée sous cette forme plutôt qu'intégrée telle quelle, afin que le
+  support reste exact partout.</p>
+</div>
+
+<h2>Traçabilité des versions</h2>
+<div class="table-scroll">
+<table>
+  <thead><tr><th style="width:7rem;">Version</th><th style="width:7rem;">Date</th><th>Contenu</th></tr></thead>
+  <tbody>
+<tr>
+      <td><code>v1.1</code></td>
+      <td>31/07/2026</td>
+      <td>Premier retour de la coordination départementale, seize demandes traitées. DGO présenté comme départemental et non national, bulletin d'analyse des accidents corporels détaillé, deux définitions de blessé rétablies, protoxyde d'azote ajouté avec l'atteinte de la gaine de myéline, équipements de protection traités mode par mode, nouvelle page de fiches mémo imprimables, actualités réglementaires développées. Étiquette <code>v1.1-retour-coordination</code>.</td>
+    </tr>
+    <tr>
+      <td><code>v1.0</code></td>
+      <td>30/07/2026</td>
+      <td>Version transmise à Adeline. Neuf modules, cinq outils, statistiques ONISR 2025, courbe historique, quatre éléments de l'accident, mentions légales et protection des données, correctifs issus des trois tests utilisateurs et des dix points de blocage de l'audit design.</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p>Chaque publication est étiquetée dans l'historique du projet. Toute version antérieure peut
+être restaurée à l'identique, ce qui permet de revenir en arrière si une modification ne
+convient pas après coup.</p>
+
+  </div>
+</main>
+<footer class="doc">
+  <div class="wrap">
+    <p>Document de suivi de l'espace e-learning des Intervenants Départementaux de Sécurité Routière.
+    Mis à jour le 31 juillet 2026. <a href="../index.html">Accéder au site e-learning</a></p>
+  </div>
+</footer>
+</body>
+</html>
