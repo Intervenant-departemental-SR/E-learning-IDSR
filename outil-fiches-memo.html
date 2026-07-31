@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fiches mémo de l'IDSR — à consulter et à imprimer | E-learning IDSR</title>
+<meta name="description" content="Fiches mémo thématiques pour les Intervenants Départementaux de Sécurité Routière : équipements obligatoires, règles de circulation, sanctions et réponses aux objections du public. Consultables à l'écran et imprimables." />
+<style>
+  :root{
+    --jaune:#FECF41; --jaune-fonce:#E9B400; --jaune-clair:#FFF3CC; --jaune-trait:#8A6D00;
+    --noir:#000; --gris:#3a3a3a; --gris-2:#6b6b6b; --gris-400:#8c8c8c;
+    --gris-clair:#f4f4f4; --bordure:#e2e2e2; --blanc:#fff;
+    --vert:#14532D; --rouge:#C0392B;
+    --rayon:12px; --ombre:0 4px 18px rgba(0,0,0,.12);
+    --max:1080px; --t:.25s cubic-bezier(.4,0,.2,1);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:"Marianne","Segoe UI",Arial,Helvetica,sans-serif;color:var(--noir);background:var(--gris-clair);line-height:1.55;}
+  img{max-width:100%;display:block;}
+  :focus-visible{outline:3px solid var(--noir);outline-offset:2px;border-radius:4px;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 1.25rem;}
+  .skip{position:absolute;left:-9999px;background:var(--noir);color:var(--jaune);padding:.6rem 1rem;z-index:200;font-weight:700;}
+  .skip:focus{left:0;top:0;}
+  header.site{background:var(--blanc);border-bottom:6px solid var(--jaune);}
+  .topbar{display:flex;align-items:center;gap:1rem;padding:.7rem 1.25rem;max-width:var(--max);margin:0 auto;flex-wrap:wrap;}
+  .topbar img{width:150px;}
+  .topbar .fil{font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--gris-2);font-weight:700;}
+  .topbar .fil a{color:var(--gris-2);text-decoration:none;}
+  .module-hero{background:var(--noir);color:var(--blanc);padding:2.2rem 0 2.4rem;}
+  .module-hero .eyebrow{color:var(--jaune);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.8rem;margin:0 0 .5rem;}
+  .module-hero h1{font-size:2rem;line-height:1.15;margin:0 0 .8rem;max-width:780px;}
+  .module-hero p{margin:0;color:#e9e9e9;max-width:70ch;}
+  main{padding:2rem 0 4rem;}
+
+  .mode-emploi{background:var(--blanc);border:1px solid var(--bordure);border-radius:var(--rayon);
+    box-shadow:var(--ombre);padding:1.4rem 1.6rem;margin-bottom:2rem;}
+  .mode-emploi h2{font-size:1.2rem;margin:0 0 .6rem;border-left:8px solid var(--jaune);padding-left:.6rem;}
+  .mode-emploi p{margin:.4rem 0;max-width:74ch;color:var(--gris);}
+  .actions{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1rem;}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;border:none;border-radius:999px;
+    padding:.7rem 1.3rem;font:inherit;font-weight:700;cursor:pointer;text-decoration:none;
+    transition:background var(--t);}
+  .btn-primary{background:var(--jaune);color:var(--noir);}
+  .btn-primary:hover{background:var(--jaune-fonce);}
+  .btn-ghost{background:var(--gris-clair);color:var(--noir);box-shadow:inset 0 0 0 2px var(--bordure);}
+  .btn-ghost:hover{background:var(--bordure);}
+
+  .sommaire{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.8rem;margin:1.2rem 0 0;}
+  .sommaire a{display:block;background:var(--blanc);border:1px solid var(--bordure);
+    border-left:5px solid var(--jaune);border-radius:10px;padding:.8rem 1rem;text-decoration:none;
+    color:var(--noir);font-weight:700;transition:transform var(--t),box-shadow var(--t),border-color var(--t);}
+  .sommaire a:hover{transform:translateY(-3px);box-shadow:var(--ombre);border-left-color:var(--noir);}
+  .sommaire a span{display:block;font-weight:500;font-size:.85rem;color:var(--gris-2);margin-top:.15rem;}
+
+  .fiche{background:var(--blanc);border:1px solid var(--bordure);border-radius:var(--rayon);
+    box-shadow:var(--ombre);padding:0;margin:2rem 0;overflow:hidden;}
+  .fiche > header{background:var(--noir);color:var(--blanc);padding:1.1rem 1.5rem;
+    display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap;border-bottom:6px solid var(--jaune);}
+  .fiche > header h2{margin:0;font-size:1.5rem;}
+  .fiche > header .sous{color:var(--jaune);font-weight:700;font-size:.85rem;
+    text-transform:uppercase;letter-spacing:.05em;}
+  .fiche .corps{padding:1.4rem 1.5rem 1.6rem;}
+  .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;}
+  .bloc h3{font-size:.82rem;text-transform:uppercase;letter-spacing:.06em;margin:0 0 .5rem;
+    padding-bottom:.3rem;border-bottom:2px solid var(--jaune);}
+  .bloc ul{margin:0;padding-left:1.1rem;}
+  .bloc li{margin-bottom:.35rem;font-size:.94rem;}
+  .bloc li strong{font-weight:800;}
+
+  .sanctions{background:var(--gris-clair);border-radius:10px;padding:.9rem 1.1rem;margin-top:1.2rem;}
+  .sanctions h3{font-size:.82rem;text-transform:uppercase;letter-spacing:.06em;margin:0 0 .5rem;
+    padding-bottom:.3rem;border-bottom:2px solid var(--jaune-trait);}
+  .sanctions table{border-collapse:collapse;width:100%;font-size:.9rem;}
+  .sanctions td{border-bottom:1px solid var(--bordure);padding:.35rem .4rem;vertical-align:top;}
+  .sanctions tr:last-child td{border-bottom:none;}
+  .sanctions td:first-child{font-weight:700;width:52%;}
+
+  .objections{background:var(--noir);color:var(--blanc);border-radius:10px;padding:1rem 1.2rem;margin-top:1.2rem;}
+  .objections h3{color:var(--jaune);font-size:.9rem;margin:0 0 .7rem;text-transform:uppercase;letter-spacing:.05em;}
+  .objections dl{margin:0;}
+  .objections dt{font-weight:800;color:var(--jaune);margin-top:.7rem;font-size:.94rem;}
+  .objections dt:first-child{margin-top:0;}
+  .objections dd{margin:.2rem 0 0;color:#eaeaea;font-size:.93rem;}
+
+  .cle{background:var(--jaune-clair);border-left:5px solid var(--jaune-trait);border-radius:8px;
+    padding:.8rem 1rem;margin-top:1.2rem;font-size:.95rem;}
+  .cle strong{font-weight:800;}
+  .src{font-size:.78rem;color:var(--gris-2);margin:1rem 0 0;font-style:italic;}
+  .source{font-size:.85rem;color:var(--gris-2);margin-top:2rem;}
+  footer.site{background:var(--blanc);border-top:6px solid var(--jaune);padding:1.6rem 0;
+    font-size:.88rem;color:var(--gris-2);}
+  footer.site a{color:var(--noir);font-weight:700;}
+  .noprint-hint{font-size:.85rem;color:var(--gris-2);margin:.6rem 0 0;}
+
+  @media (max-width:640px){
+    .module-hero h1{font-size:1.5rem;}
+    .fiche > header h2{font-size:1.2rem;}
+    .fiche .corps{padding:1rem 1.1rem 1.2rem;}
+    .cols{grid-template-columns:1fr;gap:1rem;}
+    /* les tableaux de sanctions defilent plutot que de se comprimer */
+    .sanctions{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .sanctions table{min-width:420px;}
+  }
+
+  /* ---------- Impression : une fiche par page A4 ---------- */
+  @media print{
+    @page{size:A4 portrait;margin:12mm;}
+    body{background:#fff;line-height:1.35;font-size:10.5pt;}
+    header.site,.module-hero,.mode-emploi,footer.site,.sommaire,.actions,.noprint-hint{display:none!important;}
+    main{padding:0;}
+    .wrap{max-width:none;padding:0;}
+    .fiche{border:2px solid #000;border-radius:0;box-shadow:none;margin:0 0 6mm;
+      page-break-after:always;break-after:page;}
+    .fiche:last-of-type{page-break-after:auto;break-after:auto;}
+    .fiche > header{background:#000!important;color:#fff!important;padding:6mm 7mm;
+      -webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .fiche .corps{padding:6mm 7mm;}
+    .objections{background:#000!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .sanctions,.cle{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .cols{grid-template-columns:1fr 1fr;gap:6mm;}
+    .bloc li{margin-bottom:.15rem;}
+  }
+
+  /* ============================================================
+     CORRECTIFS TRANSVERSES — audit design du 30 juillet 2026
+     Bloc identique sur toutes les pages, placé en fin de feuille
+     pour surcharger les règles ci-dessus. Il constituera le point
+     de départ du futur socle.css : toute modification doit être
+     reportée sur les autres pages tant que le socle n'existe pas.
+     ============================================================ */
+  :root{
+    --h-header:132px;
+    --jaune-trait:#8A6D00;
+    --gris-400:#8c8c8c;
+    --vert-fort:#14532D;
+  }
+  html{scroll-padding-top:calc(var(--h-header) + 16px);}
+
+  /* B2 · la barre de progression devient lisible (jaune sur gris foncé) */
+  .progress{background:#3a3a3a;}
+  .progress > span{background:var(--jaune,#FECF41);}
+
+  /* B3 · le menu d'étapes ne passe plus sous l'en-tête collant */
+  .stepper{top:calc(var(--h-header) + 12px);z-index:1;}
+  .etape-compteur{margin:.2rem .3rem .5rem;font-size:.78rem;font-weight:700;
+    text-transform:uppercase;letter-spacing:.05em;color:#3a3a3a;}
+
+  /* B6 · le bouton verrouillé est lisible et sa condition est écrite */
+  .btn:disabled,.btn-primary:disabled,.btn-ghost:disabled{
+    opacity:1;background:#f4f4f4;color:#6b6b6b;
+    box-shadow:inset 0 0 0 2px #cfcfcf;cursor:not-allowed;}
+  .lock-note{margin:1.2rem 0 -.6rem;font-size:.88rem;color:#3a3a3a;font-weight:600;}
+  .step-item:disabled{opacity:1;color:#6b6b6b;}
+  .step-item:disabled .pastille{border-color:var(--gris-400);color:#6b6b6b;}
+
+  /* contraste des bordures de contrôles interactifs */
+  .opt{border-color:var(--gris-400);}
+  .role{border-color:#cfcfcf;}
+  .role .plus{color:#000;background:var(--jaune,#FECF41);width:26px;height:26px;
+    border-radius:50%;display:grid;place-items:center;top:.7rem;right:.7rem;
+    font-size:1rem;line-height:1;}
+  .feedback.ok{color:var(--vert-fort);}
+
+  /* B8 · le panneau déplié ne tronque plus le texte */
+  .role .sigle,.role .nom{display:block;margin:0 0 .15rem;}
+  .role .nom{margin-bottom:0;}
+  .role .detail{max-height:none;display:grid;grid-template-rows:0fr;
+    overflow:hidden;transition:grid-template-rows var(--t,.25s ease);}
+  .role .detail > *{min-height:0;}
+  .role[aria-expanded="true"] .detail{max-height:none;grid-template-rows:1fr;}
+
+  /* lisibilité des barres jaunes sur fond blanc, sans toucher aux schémas
+     dont le contour est déjà défini dans le SVG */
+  .schema svg rect[fill="#FECF41"]:not([stroke]){stroke:var(--jaune-trait);stroke-width:.8;}
+
+  /* B10 · les nombres et les unités ne se coupent plus en fin de ligne */
+  .sc b,.chiffre,.docs dd{white-space:nowrap;}
+  .docs dd{white-space:normal;}
+
+  @media (max-width:640px){
+    /* B5 · l'en-tête mobile n'occupe plus le quart de l'écran */
+    :root{--h-header:92px;}
+    .topbar{padding:.5rem 1rem;gap:.7rem;}
+    .topbar .logo-prefet{height:52px!important;}
+    .topbar img{width:104px;}
+
+    /* B1 · les graphiques redeviennent consultables */
+    .etape{padding:1.1rem;}
+    .schema{padding:.8rem;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .schema svg{min-width:560px;}
+    .schema::after{content:"↔ Faites défiler le graphique horizontalement";
+      display:block;font-size:.8rem;color:#3a3a3a;margin-top:.5rem;font-style:normal;}
+
+    /* menu d'étapes : accrochage au défilement */
+    .stepper ol{scroll-snap-type:x mandatory;}
+    .step-item{scroll-snap-align:start;}
+  }
+
+  /* B4 · mouvement réduit traité en CSS, et non par un script différé */
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;
+      animation-iteration-count:1!important;transition-duration:.01ms!important;
+      scroll-behavior:auto!important;}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu principal</a>
+
+<header class="site">
+  <div class="topbar">
+    <img src="assets/logo-prefet-hdf.png" alt="Préfet de la région Hauts-de-France" class="logo-prefet" style="width:auto;height:96px" />
+    <img src="assets/logo-securite-routiere.png" alt="Sécurité routière — Vivre, Ensemble" />
+    <span class="fil"><a href="index.html">Accueil e-learning</a> › Fiches mémo</span>
+  </div>
+</header>
+
+<section class="module-hero">
+  <div class="wrap">
+    <p class="eyebrow">Outil de terrain · à emporter en intervention</p>
+    <h1>Fiches mémo de l'IDSR</h1>
+    <p>Une page par thème : les règles, les sanctions, et surtout les réponses aux objections que vous entendrez vraiment. Conçues pour être imprimées et glissées dans la valise, ou consultées sur le téléphone pendant une action.</p>
+  </div>
+</section>
+
+<main id="contenu">
+  <div class="wrap">
+
+    <div class="mode-emploi">
+      <h2>Comment s'en servir</h2>
+      <p>Chaque fiche tient sur une page A4 et suit toujours le même plan : ce qui est obligatoire, ce qui est interdit, où l'on circule, ce que l'on risque, et ce que vous répondez si le public vous conteste. Les références du code de la route sont indiquées pour que vous puissiez vérifier ou citer la source.</p>
+      <p>Le bouton d'impression met en page automatiquement une fiche par feuille, en noir et blanc lisible. Vous pouvez aussi enregistrer l'ensemble en PDF depuis la fenêtre d'impression.</p>
+      <p class="noprint-hint">Un point de vigilance : certaines règles dépendent d'un arrêté départemental, notamment le casque pour les trottinettes. Ces cas sont signalés dans les fiches. Vérifiez toujours auprès de votre coordination ce qui s'applique chez vous avant de l'annoncer en public.</p>
+      <div class="actions">
+        <button type="button" class="btn btn-primary" onclick="window.print()">Imprimer les fiches</button>
+        <a class="btn btn-ghost" href="index.html">Retour à l'accueil</a>
+      </div>
+      <div class="sommaire">
+        <a href="#fiche-velo">Vélo<span>et vélo à assistance électrique</span></a>
+        <a href="#fiche-edpm">EDPm<span>trottinettes et engins motorisés</span></a>
+        <a href="#fiche-2rm">Deux-roues motorisé<span>cyclomoteur et motocyclette</span></a>
+        <a href="#fiche-alcool">Alcool<span>seuils, doses et idées reçues</span></a>
+      </div>
+    </div>
+
+    <!-- ================= FICHE VÉLO ================= -->
+    <article class="fiche" id="fiche-velo">
+      <header>
+        <h2>Vélo</h2>
+        <span class="sous">Vélo mécanique et vélo à assistance électrique</span>
+      </header>
+      <div class="corps">
+        <div class="cols">
+          <div class="bloc">
+            <h3>Équipements obligatoires</h3>
+            <ul>
+              <li>Deux <strong>freins</strong>, avant et arrière</li>
+              <li><strong>Avertisseur sonore</strong> (sonnette)</li>
+              <li><strong>Feu avant</strong> blanc ou jaune, <strong>feu arrière</strong> rouge, la nuit et le jour par visibilité insuffisante</li>
+              <li><strong>Catadioptres</strong> : avant, arrière, sur les roues et sur les pédales</li>
+              <li><strong>Gilet rétro-réfléchissant</strong> hors agglomération, la nuit ou par visibilité insuffisante, pour le cycliste et son passager</li>
+              <li><strong>Casque obligatoire avant 12 ans</strong>, conducteur comme passager, homologué et attaché</li>
+              <li>Siège adapté pour transporter un enfant</li>
+            </ul>
+          </div>
+          <div class="bloc">
+            <h3>Ce qui est interdit</h3>
+            <ul>
+              <li>Tenir un <strong>téléphone en main</strong></li>
+              <li><strong>Oreillettes et casque audio</strong>, quels qu'ils soient</li>
+              <li>Rouler sur les <strong>trottoirs</strong> (sauf enfant de moins de 8 ans)</li>
+              <li><strong>Dépasser par la droite</strong> et remonter une file par la droite</li>
+              <li>Conduire sous l'emprise d'<strong>alcool ou de stupéfiants</strong> : les seuils et les délits s'appliquent aussi au vélo</li>
+            </ul>
+          </div>
+        </div>
+        <div class="cols" style="margin-top:1.2rem;">
+          <div class="bloc">
+            <h3>Circulation</h3>
+            <ul>
+              <li>Sur les <strong>bandes et pistes cyclables</strong> quand elles existent, sinon à droite sur la chaussée</li>
+              <li><strong>Indiquer chaque changement de direction</strong> en tendant le bras</li>
+              <li>Respecter la signalisation comme tout usager : feux, priorités, passages piétons</li>
+              <li>Se méfier des <strong>angles morts</strong> des bus et des poids lourds : ne jamais se placer à leur droite à un carrefour</li>
+              <li>Un véhicule qui dépasse un cycliste doit laisser <strong>1 m en agglomération</strong> et <strong>1,50 m hors agglomération</strong></li>
+            </ul>
+          </div>
+          <div class="bloc">
+            <h3>Vélo à assistance électrique</h3>
+            <ul>
+              <li>Assistance coupée à <strong>25 km/h</strong>, moteur de <strong>250 W</strong> maximum</li>
+              <li>Juridiquement, c'est un <strong>cycle</strong> : mêmes règles que le vélo mécanique</li>
+              <li><strong>Aucun âge minimum</strong>, aucun permis, aucune immatriculation</li>
+              <li>Au-delà de 25 km/h ou de 250 W, l'engin devient un <strong>cyclomoteur</strong> : permis AM à partir de 14 ans, casque, assurance et immatriculation obligatoires</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sanctions">
+          <h3>Ce que l'on risque</h3>
+          <table>
+            <tr><td>Enfant de moins de 12 ans sans casque</td><td>135 €, à la charge de l'adulte accompagnant, sans retrait de point (art. R. 431-1-3)</td></tr>
+            <tr><td>Téléphone tenu en main, oreillettes</td><td>135 € (art. R. 412-6-1)</td></tr>
+            <tr><td>Absence d'éclairage ou de gilet</td><td>35 €</td></tr>
+            <tr><td>Franchissement d'un feu rouge, sens interdit</td><td>135 €</td></tr>
+            <tr><td>Alcool au-delà de 0,5 g/l</td><td>135 € ; délit à partir de 0,8 g/l. Aucun retrait de point pour un cycliste, mais la responsabilité pénale reste entière</td></tr>
+          </table>
+        </div>
+
+        <div class="objections">
+          <h3>Ce que vous répondez si l'on vous dit…</h3>
+          <dl>
+            <dt>« Le casque n'est pas obligatoire, donc ce n'est pas dangereux. »</dt>
+            <dd>Il n'est pas obligatoire après 12 ans, c'est exact. Mais en 2025, 235 cyclistes ont été tués, et la moitié avaient 65 ans ou plus. La tête est ce qui touche le sol en premier lors d'une chute à vélo. Le casque ne rend pas invulnérable, il réduit la gravité des lésions à la tête.</dd>
+            <dt>« Sur mon vélo je ne risque rien, c'est les voitures qui sont dangereuses. »</dt>
+            <dd>Pas seulement. En 2025, 96 cyclistes ont été tués dans un accident <strong>sans aucun autre véhicule impliqué</strong> : chute, obstacle, perte de contrôle. C'est plus de 40 % des cyclistes tués.</dd>
+            <dt>« À vélo, l'alcool ne compte pas, je n'ai pas de permis à perdre. »</dt>
+            <dd>Les seuils légaux s'appliquent au cycliste comme au conducteur de voiture, et à partir de 0,8 g/l c'est un délit. Ce n'est pas parce qu'il n'y a pas de points à perdre qu'il n'y a rien à perdre.</dd>
+            <dt>« Je peux rouler sur le trottoir, c'est plus sûr. »</dt>
+            <dd>C'est interdit au-delà de 8 ans, et c'est surtout dangereux : le cycliste devient invisible pour les voitures qui sortent d'un portail ou d'un parking, et il apparaît sans prévenir aux intersections.</dd>
+          </dl>
+        </div>
+
+        <div class="cle">
+          <strong>Le message à retenir en une phrase :</strong> à vélo on est un usager de la route à part entière, avec les mêmes règles et les mêmes contrôles, mais sans carrosserie.
+        </div>
+        <p class="src">Références : code de la route, art. R. 313-1 et suivants (éclairage et signalisation), R. 431-1-3 (casque avant 12 ans), R. 412-6-1 (téléphone), R. 414-4 (distance de dépassement), R. 311-1 6.11 (vélo à assistance électrique). Chiffres : ONISR, principaux résultats 2025, données définitives, mai 2026, France métropolitaine.</p>
+      </div>
+    </article>
+
+    <!-- ================= FICHE EDPm ================= -->
+    <article class="fiche" id="fiche-edpm">
+      <header>
+        <h2>EDPm</h2>
+        <span class="sous">Trottinettes électriques, monoroues, gyropodes, hoverboards</span>
+      </header>
+      <div class="corps">
+        <div class="cols">
+          <div class="bloc">
+            <h3>Équipements obligatoires</h3>
+            <ul>
+              <li><strong>Système de freinage</strong> efficace</li>
+              <li><strong>Avertisseur sonore</strong></li>
+              <li><strong>Feux de position</strong> avant et arrière</li>
+              <li><strong>Catadioptres</strong> arrière et latéraux</li>
+              <li><strong>Gilet rétro-réfléchissant</strong> ou équipement rétro-réfléchissant la nuit et par visibilité insuffisante</li>
+              <li><strong>Casque : attention, cela dépend de votre département.</strong> Voir l'encadré ci-dessous</li>
+            </ul>
+          </div>
+          <div class="bloc">
+            <h3>Conditions et interdictions</h3>
+            <ul>
+              <li><strong>14 ans minimum</strong> depuis novembre 2024</li>
+              <li><strong>Assurance obligatoire</strong>, en responsabilité civile, spécifique à l'engin</li>
+              <li>Moteur bridé à <strong>25 km/h</strong></li>
+              <li><strong>Un seul occupant</strong> : le transport d'un passager est interdit</li>
+              <li>Téléphone en main, oreillettes et casque audio interdits</li>
+              <li><strong>Trottoirs interdits</strong></li>
+              <li>Alcool et stupéfiants : mêmes règles que pour tout conducteur</li>
+            </ul>
+          </div>
+        </div>
+        <div class="cols" style="margin-top:1.2rem;">
+          <div class="bloc">
+            <h3>Où circuler</h3>
+            <ul>
+              <li><strong>En agglomération :</strong> sur les bandes et pistes cyclables quand elles existent, sinon sur la chaussée</li>
+              <li><strong>Hors agglomération : circulation interdite</strong> sur la chaussée, sauf autorisation par arrêté sur une voie donnée</li>
+              <li>Hors agglomération, restent accessibles les <strong>voies vertes</strong> et les <strong>pistes cyclables</strong></li>
+              <li>Un quart des utilisateurs d'EDPm tués en 2025 l'ont été hors agglomération, là où ils n'ont en principe pas le droit de circuler</li>
+            </ul>
+          </div>
+          <div class="bloc">
+            <h3>Le casque, cas par cas</h3>
+            <ul>
+              <li><strong>Règle nationale :</strong> non obligatoire en agglomération. Obligatoire seulement lorsqu'un arrêté autorise la circulation sur une route limitée à 80 km/h ou moins</li>
+              <li><strong>Hauts-de-France :</strong> les cinq départements ont pris en 2026 un arrêté préfectoral rendant le casque obligatoire sur leur territoire, avec des dates d'application échelonnées</li>
+              <li>Sanction au titre d'un arrêté de police : <strong>35 €</strong>, et non 135 € comme cela a parfois été indiqué</li>
+              <li><strong>Vérifiez auprès de votre coordination</strong> la date et le périmètre applicables chez vous avant d'en parler en public</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sanctions">
+          <h3>Ce que l'on risque</h3>
+          <table>
+            <tr><td>Conduite avant 14 ans</td><td>135 €, à la charge de l'adulte exerçant une autorité sur le mineur</td></tr>
+            <tr><td>Défaut d'assurance</td><td>Jusqu'à 3 750 €, immobilisation et confiscation possibles de l'engin</td></tr>
+            <tr><td>Engin débridé au-delà de 25 km/h</td><td>L'engin change de catégorie : amende, immobilisation, confiscation possible</td></tr>
+            <tr><td>Circulation sur le trottoir</td><td>135 €</td></tr>
+            <tr><td>Transport d'un passager</td><td>135 €</td></tr>
+            <tr><td>Circulation hors agglomération sur la chaussée</td><td>35 €</td></tr>
+            <tr><td>Casque, dans les départements l'ayant rendu obligatoire</td><td>35 €</td></tr>
+          </table>
+        </div>
+
+        <div class="objections">
+          <h3>Ce que vous répondez si l'on vous dit…</h3>
+          <dl>
+            <dt>« C'est comme un vélo, il n'y a pas de règles. »</dt>
+            <dd>Ce n'est justement pas un vélo. Un vélo n'a ni âge minimum, ni obligation d'assurance, et il peut circuler hors agglomération. Une trottinette électrique impose 14 ans, une assurance, et son usage hors agglomération est interdit sur la chaussée. Ce sont deux catégories juridiques distinctes.</dd>
+            <dt>« Ma trottinette n'a pas besoin d'être assurée, ce n'est pas un véhicule. »</dt>
+            <dd>Si, c'est un véhicule à moteur, et l'assurance en responsabilité civile est obligatoire. En cas de blessure causée à un piéton sans assurance, c'est le patrimoine personnel du conducteur qui est engagé, et l'amende peut atteindre 3 750 euros. Beaucoup de gens l'ignorent, et c'est souvent l'argument qui fait le plus réfléchir.</dd>
+            <dt>« Je roule doucement, je ne risque rien. »</dt>
+            <dd>Le nombre de personnes tuées en trottinette est passé de 45 en 2024 à 79 en 2025 : c'est la plus forte hausse de tout le bilan de l'année. Sur un engin sans carrosserie, avec de petites roues et une position debout, une simple bordure ou un nid-de-poule suffit à provoquer une chute tête la première.</dd>
+            <dt>« Les arrêtés casque, c'est de l'abus, ce n'est pas dans la loi. »</dt>
+            <dd>La règle nationale n'impose effectivement pas le casque en agglomération. Les préfets ont pris des arrêtés au titre de leur pouvoir de police, ce qui est un mécanisme classique lorsque la sécurité de la circulation l'exige. Vous n'avez pas à défendre le fondement juridique : votre rôle est de rappeler la règle applicable localement et d'expliquer le pourquoi, qui est la vulnérabilité de la tête.</dd>
+          </dl>
+        </div>
+
+        <div class="cle">
+          <strong>Le message à retenir en une phrase :</strong> une trottinette électrique est un véhicule à moteur, avec un âge minimum, une assurance obligatoire et des lieux de circulation limités. Ce n'est pas un jouet, et ce n'est pas un vélo.
+        </div>
+        <p class="src">Références : code de la route, art. R. 412-43-1 (circulation et équipements), R. 412-43-3 (âge minimum, gilet, passager), R. 311-1 (définition). Arrêtés préfectoraux des cinq départements des Hauts-de-France, 2026, à vérifier auprès de la coordination. Chiffres : ONISR, principaux résultats 2025, données définitives, mai 2026, France métropolitaine.</p>
+      </div>
+    </article>
+
+    <!-- ================= FICHE 2RM ================= -->
+    <article class="fiche" id="fiche-2rm">
+      <header>
+        <h2>Deux-roues motorisé</h2>
+        <span class="sous">Cyclomoteur, motocyclette, scooter</span>
+      </header>
+      <div class="corps">
+        <div class="cols">
+          <div class="bloc">
+            <h3>Équipements obligatoires</h3>
+            <ul>
+              <li><strong>Casque homologué et attaché</strong>, conducteur et passager. Un casque non attaché équivaut à pas de casque</li>
+              <li><strong>Gants homologués</strong>, marquage CE, conducteur et passager, depuis le 20 novembre 2016</li>
+              <li><strong>Gilet de haute visibilité</strong> à avoir sur soi ou dans un rangement du véhicule, et à revêtir en cas d'arrêt d'urgence (art. R. 416-19)</li>
+              <li>Plaque d'immatriculation, assurance, dispositifs d'éclairage en état</li>
+            </ul>
+            <p style="font-size:.88rem;color:#3a3a3a;margin:.5rem 0 0;">Fortement recommandé, sans être obligatoire : blouson ou veste avec coques, pantalon renforcé, chaussures montantes, protection dorsale.</p>
+          </div>
+          <div class="bloc">
+            <h3>Ce qu'il faut savoir</h3>
+            <ul>
+              <li><strong>Contrôle technique</strong> obligatoire pour les deux, trois-roues et quadricycles motorisés, selon un calendrier échelonné par année de mise en circulation</li>
+              <li><strong>Circulation inter-files</strong> autorisée depuis le 11 janvier 2025, mais uniquement sur autoroutes et routes à chaussées séparées de deux voies minimum par sens, en trafic ralenti en file continue, et à <strong>50 km/h maximum</strong></li>
+              <li>Hors de ces conditions, l'inter-files reste une infraction</li>
+              <li>Le permis A2 puis A, le permis AM à 14 ans pour le cyclomoteur</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sanctions">
+          <h3>Ce que l'on risque</h3>
+          <table>
+            <tr><td>Absence de casque, ou casque non attaché</td><td>135 € et 3 points, immobilisation possible</td></tr>
+            <tr><td>Absence de gants homologués</td><td>68 € et 1 point pour le conducteur ; amende seule pour le passager (art. R. 431-1-2)</td></tr>
+            <tr><td>Inter-files hors des conditions autorisées</td><td>135 € et 3 points</td></tr>
+            <tr><td>Gilet non détenu à bord</td><td>11 €. Ne pas le revêtir lors d'un arrêt d'urgence : 135 €</td></tr>
+            <tr><td>Défaut de contrôle technique</td><td>135 €, immobilisation possible</td></tr>
+            <tr><td>Débridage du véhicule</td><td>Délit : jusqu'à 30 000 € d'amende et un an d'emprisonnement, confiscation possible</td></tr>
+          </table>
+        </div>
+
+        <div class="objections">
+          <h3>Ce que vous répondez si l'on vous dit…</h3>
+          <dl>
+            <dt>« Les gants, ce n'est pas obligatoire, c'est une invention. »</dt>
+            <dd>C'est obligatoire depuis le 20 novembre 2016, article R. 431-1-2 du code de la route, pour le conducteur comme pour le passager, et c'est 68 euros plus un point. Beaucoup l'ignorent encore. La raison est simple : les mains sont ce qu'on met devant soi en tombant, et les lésions des mains sont parmi les plus invalidantes, avec des conséquences professionnelles durables.</dd>
+            <dt>« Les motards sont les meilleurs conducteurs, ce sont les voitures qui nous tuent. »</dt>
+            <dd>Les deux affirmations méritent d'être nuancées avec les chiffres. En 2025, 697 usagers de deux-roues motorisés ont été tués, soit 21 % de la mortalité routière pour une part très faible du trafic. Et 292 de ces décès sont survenus dans un accident <strong>sans aucun autre véhicule impliqué</strong>, soit plus de quatre sur dix. Le partage de la route est un vrai sujet, mais il n'explique pas tout.</dd>
+            <dt>« En ville je fais des petits trajets, je ne mets pas tout l'équipement. »</dt>
+            <dd>Le paradoxe est là : la mortalité en deux-roues se concentre hors agglomération, 61 % des cas, mais c'est en agglomération qu'on s'équipe le moins. Or la chute à 40 km/h sur du bitume abîme autant les mains qu'à 90. Et en agglomération, près de 8 % des conducteurs de deux-roues tués ne portaient pas de casque.</dd>
+            <dt>« L'inter-files est autorisée maintenant, je peux le faire partout. »</dt>
+            <dd>Elle est autorisée depuis janvier 2025, mais sous conditions strictes : autoroutes et routes à chaussées séparées de deux voies par sens, trafic ralenti en file continue, 50 km/h maximum. En dehors de ces cas c'est 135 euros et 3 points. Rappeler les conditions vous crédibilise, au lieu de laisser croire à une autorisation générale.</dd>
+          </dl>
+        </div>
+
+        <div class="cle">
+          <strong>Le message à retenir en une phrase :</strong> en deux-roues, le casque et les gants sont obligatoires, mais c'est l'équipement complet qui fait la différence entre une chute et un handicap.
+        </div>
+        <p class="src">Références : code de la route, art. R. 431-1 (casque), R. 431-1-2 et arrêté du 19 septembre 2016 (gants), R. 416-19 (gilet de haute visibilité), décret du 9 janvier 2025 (circulation inter-files). Chiffres : ONISR, principaux résultats 2025, données définitives, mai 2026, France métropolitaine.</p>
+      </div>
+    </article>
+
+    <!-- ================= FICHE ALCOOL ================= -->
+    <article class="fiche" id="fiche-alcool">
+      <header>
+        <h2>Alcool</h2>
+        <span class="sous">Seuils, doses, élimination et idées reçues</span>
+      </header>
+      <div class="corps">
+        <div class="cols">
+          <div class="bloc">
+            <h3>Les seuils</h3>
+            <ul>
+              <li><strong>0,5 g/l</strong> de sang, soit 0,25 mg/l d'air expiré : limite pour tout conducteur</li>
+              <li><strong>0,2 g/l</strong>, soit 0,10 mg/l d'air expiré : limite en permis probatoire et pour les conducteurs de transport en commun</li>
+              <li>De <strong>0,5 à 0,79 g/l</strong> : contravention, 135 € et 6 points</li>
+              <li>À partir de <strong>0,8 g/l</strong> : délit, jusqu'à 4 500 € d'amende, 6 points, suspension ou annulation du permis, prison possible</li>
+            </ul>
+          </div>
+          <div class="bloc">
+            <h3>La dose et l'élimination</h3>
+            <ul>
+              <li>Un <strong>verre standard</strong>, ou dose bar, contient environ <strong>10 g d'alcool pur</strong>, quel que soit le breuvage</li>
+              <li>Un verre fait monter l'alcoolémie d'environ <strong>0,20 à 0,25 g/l</strong> : deux verres approchent donc la limite, mais ce n'est qu'un ordre de grandeur</li>
+              <li>Cela varie selon le <strong>sexe, le poids, la corpulence</strong> et le fait d'avoir mangé</li>
+              <li><strong>Attention aux doses servies à la maison</strong>, souvent bien supérieures à une dose bar</li>
+              <li>Élimination : <strong>0,10 à 0,15 g/l par heure</strong> seulement, à 95 % par le foie</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="objections">
+          <h3>Les cinq idées reçues à démonter, et la seule bonne réponse</h3>
+          <dl>
+            <dt>Le café dessoûle</dt>
+            <dd><strong>Faux.</strong> La caféine réveille, elle ne fait pas baisser l'alcoolémie. Le danger est double : la personne se sent en forme et se croit apte à conduire alors que ses réflexes restent altérés.</dd>
+            <dt>Manger fait baisser le taux</dt>
+            <dd><strong>Faux, et vrai à moitié.</strong> Manger avant ou pendant ralentit l'absorption, donc le pic est plus bas. Mais une fois l'alcool dans le sang, manger n'accélère rien. Le sandwich de fin de soirée ne dessoûle personne.</dd>
+            <dt>Le sport, la sueur, la douche froide</dt>
+            <dd><strong>Faux.</strong> L'alcool part à 95 % par le foie, à un rythme que rien ne modifie. Le reste s'élimine par la respiration, la sueur et les urines, en quantité négligeable.</dd>
+            <dt>Vomir, boire de l'eau, un médicament</dt>
+            <dd><strong>Faux.</strong> Vomir ne retire que l'alcool encore dans l'estomac. L'eau évite la gueule de bois, pas l'alcoolémie. Aucune substance en vente ne fait baisser un taux.</dd>
+            <dt>Dormir quelques heures suffit</dt>
+            <dd><strong>Insuffisant, et c'est le piège du lendemain matin.</strong> Après une soirée à 1,2 g/l, il faut huit à douze heures pour revenir à zéro. Quelqu'un qui se couche à 3 heures peut être encore positif à 8 heures.</dd>
+          </dl>
+          <p style="color:var(--jaune);font-weight:800;margin:.9rem 0 0;">La seule réponse juste : il n'y a que le temps.</p>
+        </div>
+
+        <div class="sanctions">
+          <h3>Autres repères utiles en animation</h3>
+          <table>
+            <tr><td>Refus de se soumettre au dépistage</td><td>Même sanction que le délit d'alcoolémie : jusqu'à 4 500 €, 6 points, suspension</td></tr>
+            <tr><td>Alcool au guidon d'un vélo</td><td>Les seuils s'appliquent, délit à partir de 0,8 g/l, sans retrait de point</td></tr>
+            <tr><td>Alcool et stupéfiants ensemble</td><td>Les peines sont aggravées</td></tr>
+            <tr><td>Éthylotest, ce qui fait foi</td><td>Seul l'éthylomètre des forces de l'ordre a valeur probante. Un éthylotest est un outil d'auto-évaluation, jamais une autorisation de conduire</td></tr>
+          </table>
+        </div>
+
+        <div class="cle">
+          <strong>Le message à retenir en une phrase :</strong> l'alcool est cité chez un présumé responsable d'accident mortel sur cinq, et la seule chose qui fait baisser un taux, c'est le temps. Pour le démontrer devant un public, utilisez le simulateur d'alcoolémie : il calcule avec le sexe et le poids de la personne, ce qui est bien plus parlant qu'une moyenne.
+        </div>
+        <p class="src">Références : code de la route, art. R. 234-1 (les deux seuils, 0,20 g/l pour le permis probatoire, l'apprentissage et les transports en commun, 0,50 g/l pour les autres conducteurs), L. 234-1 (délit à partir de 0,80 g/l), L. 234-8 (refus de se soumettre au dépistage). Chiffres : ONISR, principaux résultats 2025, données définitives, mai 2026, France métropolitaine.</p>
+      </div>
+    </article>
+
+    <p class="source">Ces fiches reprennent le principe des fiches thématiques diffusées par la coordination sécurité routière et le complètent d'un volet argumentaire destiné aux intervenants. Les références du code de la route ont été vérifiées dans leur version en vigueur. Les règles dépendant d'un arrêté départemental sont signalées comme telles et doivent être confirmées auprès de votre coordination avant toute annonce en public.</p>
+
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">Espace e-learning des Intervenants Départementaux de Sécurité Routière — Préfecture des Hauts-de-France. <a href="index.html">Retour à l'accueil</a> <a href="mentions-legales.html">Mentions légales, confidentialité et accessibilité</a></div>
+</footer>
+</body>
+</html>
