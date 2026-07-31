@@ -106,20 +106,40 @@
   /* ---------- Impression : une fiche par page A4 ---------- */
   @media print{
     @page{size:A4 portrait;margin:12mm;}
-    body{background:#fff;line-height:1.35;font-size:10.5pt;}
+    body{background:#fff;line-height:1.3;font-size:9.5pt;}
     header.site,.module-hero,.mode-emploi,footer.site,.sommaire,.actions,.noprint-hint{display:none!important;}
     main{padding:0;}
     .wrap{max-width:none;padding:0;}
     .fiche{border:2px solid #000;border-radius:0;box-shadow:none;margin:0 0 6mm;
       page-break-after:always;break-after:page;}
     .fiche:last-of-type{page-break-after:auto;break-after:auto;}
-    .fiche > header{background:#000!important;color:#fff!important;padding:6mm 7mm;
+    .fiche > header{background:#000!important;color:#fff!important;padding:4mm 6mm;
       -webkit-print-color-adjust:exact;print-color-adjust:exact;}
-    .fiche .corps{padding:6mm 7mm;}
+    .fiche > header h2{font-size:15pt;}
+    .fiche > header .sous{font-size:8pt;}
+    .fiche .corps{padding:4mm 6mm;}
     .objections{background:#000!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
     .sanctions,.cle{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-    .cols{grid-template-columns:1fr 1fr;gap:6mm;}
-    .bloc li{margin-bottom:.15rem;}
+    .cols{grid-template-columns:1fr 1fr;gap:5mm;margin-top:4mm!important;}
+    .bloc li{margin-bottom:.12rem;font-size:9.5pt;}
+    .bloc h3{font-size:8pt;margin-bottom:.3rem;}
+    .sanctions,.objections,.cle{margin-top:4mm;padding:3mm 4mm;}
+    .sanctions table{font-size:8.5pt;}
+    .sanctions td{padding:.2rem .3rem;}
+    .objections dt{font-size:9.2pt;margin-top:.5rem;}
+    .objections dd{font-size:9pt;}
+    .cle{font-size:9.5pt;}
+    .src{font-size:7.5pt;margin-top:3mm;}
+    /* le tableau des sanctions passe en deux colonnes de lignes : il est large et court */
+    .sanctions table{font-size:9pt;}
+    /* les blocs ne se coupent plus entre deux pages */
+    .bloc,.sanctions,.objections,.cle{page-break-inside:avoid;break-inside:avoid;}
+    .sanctions tr,.objections dt,.objections dd{page-break-inside:avoid;break-inside:avoid;}
+    .objections dt{page-break-after:avoid;break-after:avoid;}
+    .bloc h3,.sanctions h3,.objections h3{page-break-after:avoid;break-after:avoid;}
+    /* le tableau de sanctions reprend son affichage normal a l'impression */
+    .sanctions{overflow:visible;}
+    .sanctions table{min-width:0;}
   }
 
   /* ============================================================
@@ -229,8 +249,9 @@
 
     <div class="mode-emploi">
       <h2>Comment s'en servir</h2>
-      <p>Chaque fiche tient sur une page A4 et suit toujours le même plan : ce qui est obligatoire, ce qui est interdit, où l'on circule, ce que l'on risque, et ce que vous répondez si le public vous conteste. Les références du code de la route sont indiquées pour que vous puissiez vérifier ou citer la source.</p>
-      <p>Le bouton d'impression met en page automatiquement une fiche par feuille, en noir et blanc lisible. Vous pouvez aussi enregistrer l'ensemble en PDF depuis la fenêtre d'impression.</p>
+      <p>Chaque fiche suit toujours le même plan : ce qui est obligatoire, ce qui est interdit, où l'on circule, ce que l'on risque, et ce que vous répondez si le public vous conteste. Les références du code de la route sont indiquées pour que vous puissiez vérifier ou citer la source.</p>
+      <p>Le bouton d'impression met en page les quatre fiches en noir et blanc lisible, <strong>chacune sur sa propre feuille au format A4, imprimée recto-verso</strong>. Une nouvelle fiche commence toujours sur une nouvelle feuille, et aucun tableau ni aucun bloc de réponses n'est coupé en deux. Vous pouvez aussi enregistrer l'ensemble en PDF depuis la fenêtre d'impression.</p>
+      <p class="noprint-hint">Pensez à cocher « recto verso » dans la fenêtre d'impression, et à laisser les couleurs de fond activées : les blocs de réponses aux objections sont sur fond noir et perdent en lisibilité sans elles.</p>
       <p class="noprint-hint">Un point de vigilance : certaines règles dépendent d'un arrêté départemental, notamment le casque pour les trottinettes. Ces cas sont signalés dans les fiches. Vérifiez toujours auprès de votre coordination ce qui s'applique chez vous avant de l'annoncer en public.</p>
       <div class="actions">
         <button type="button" class="btn btn-primary" onclick="window.print()">Imprimer les fiches</button>
@@ -374,10 +395,11 @@
           <div class="bloc">
             <h3>Le casque, cas par cas</h3>
             <ul>
-              <li><strong>Règle nationale :</strong> non obligatoire en agglomération. Obligatoire seulement lorsqu'un arrêté autorise la circulation sur une route limitée à 80 km/h ou moins</li>
-              <li><strong>Hauts-de-France :</strong> les cinq départements ont pris en 2026 un arrêté préfectoral rendant le casque obligatoire sur leur territoire, avec des dates d'application échelonnées</li>
-              <li>Sanction au titre d'un arrêté de police : <strong>35 €</strong>, et non 135 € comme cela a parfois été indiqué</li>
-              <li><strong>Vérifiez auprès de votre coordination</strong> la date et le périmètre applicables chez vous avant d'en parler en public</li>
+              <li><strong>Règle nationale :</strong> non obligatoire en agglomération</li>
+              <li>Obligatoire dans un seul cas prévu par le code : lorsque l'autorité de police a autorisé la circulation sur une route limitée à 80 km/h ou moins. S'y ajoutent alors le gilet de haute visibilité et un éclairage complémentaire</li>
+              <li>Dans ce cas, l'absence de casque est une contravention de quatrième classe, soit <strong>135 €</strong> (art. R. 412-43-1, V)</li>
+              <li><strong>Une autorité de police peut par ailleurs imposer le casque localement</strong>, par arrêté préfectoral ou municipal. Le périmètre, la date d'application et la sanction dépendent alors du texte lui-même</li>
+              <li><strong>Demandez à votre coordination l'arrêté applicable dans votre département</strong>, et n'annoncez ni date ni montant sans l'avoir lu</li>
             </ul>
           </div>
         </div>
@@ -390,8 +412,9 @@
             <tr><td>Engin débridé au-delà de 25 km/h</td><td>L'engin change de catégorie : amende, immobilisation, confiscation possible</td></tr>
             <tr><td>Circulation sur le trottoir</td><td>135 €</td></tr>
             <tr><td>Transport d'un passager</td><td>135 €</td></tr>
-            <tr><td>Circulation hors agglomération sur la chaussée</td><td>35 €</td></tr>
-            <tr><td>Casque, dans les départements l'ayant rendu obligatoire</td><td>35 €</td></tr>
+            <tr><td>Circulation hors agglomération sur la chaussée</td><td>135 € (contravention de quatrième classe, art. R. 412-43-1, V)</td></tr>
+            <tr><td>Absence de casque, sur une route dont la circulation a été autorisée par l'autorité de police</td><td>135 € (art. R. 412-43-1, IV et V)</td></tr>
+            <tr><td>Casque imposé par un arrêté local</td><td>Se reporter à l'arrêté applicable, à demander à votre coordination</td></tr>
           </table>
         </div>
 
@@ -403,16 +426,16 @@
             <dt>« Ma trottinette n'a pas besoin d'être assurée, ce n'est pas un véhicule. »</dt>
             <dd>Si, c'est un véhicule à moteur, et l'assurance en responsabilité civile est obligatoire. En cas de blessure causée à un piéton sans assurance, c'est le patrimoine personnel du conducteur qui est engagé, et l'amende peut atteindre 3 750 euros. Beaucoup de gens l'ignorent, et c'est souvent l'argument qui fait le plus réfléchir.</dd>
             <dt>« Je roule doucement, je ne risque rien. »</dt>
-            <dd>Le nombre de personnes tuées en trottinette est passé de 45 en 2024 à 79 en 2025 : c'est la plus forte hausse de tout le bilan de l'année. Sur un engin sans carrosserie, avec de petites roues et une position debout, une simple bordure ou un nid-de-poule suffit à provoquer une chute tête la première.</dd>
-            <dt>« Les arrêtés casque, c'est de l'abus, ce n'est pas dans la loi. »</dt>
-            <dd>La règle nationale n'impose effectivement pas le casque en agglomération. Les préfets ont pris des arrêtés au titre de leur pouvoir de police, ce qui est un mécanisme classique lorsque la sécurité de la circulation l'exige. Vous n'avez pas à défendre le fondement juridique : votre rôle est de rappeler la règle applicable localement et d'expliquer le pourquoi, qui est la vulnérabilité de la tête.</dd>
+            <dd>Le nombre de personnes tuées en trottinette est passé de 45 en 2024 à 79 en 2025, soit la plus forte hausse du bilan de l'année en proportion. Sur un engin sans carrosserie, avec de petites roues et une position debout, une simple bordure ou un nid-de-poule suffit à provoquer une chute tête la première.</dd>
+            <dt>« Un arrêté qui impose le casque, c'est de l'abus, ce n'est pas dans la loi. »</dt>
+            <dd>La règle nationale n'impose effectivement pas le casque en agglomération. Mais une autorité investie du pouvoir de police peut prendre un arrêté lorsque la sécurité de la circulation l'exige, et c'est un mécanisme classique. Vous n'avez pas à défendre le fondement juridique : votre rôle est de rappeler la règle applicable là où vous intervenez, après l'avoir vérifiée auprès de votre coordination, et d'expliquer le pourquoi, qui est la vulnérabilité de la tête.</dd>
           </dl>
         </div>
 
         <div class="cle">
           <strong>Le message à retenir en une phrase :</strong> une trottinette électrique est un véhicule à moteur, avec un âge minimum, une assurance obligatoire et des lieux de circulation limités. Ce n'est pas un jouet, et ce n'est pas un vélo.
         </div>
-        <p class="src">Références : code de la route, art. R. 412-43-1 (circulation et équipements), R. 412-43-3 (âge minimum, gilet, passager), R. 311-1 (définition). Arrêtés préfectoraux des cinq départements des Hauts-de-France, 2026, à vérifier auprès de la coordination. Chiffres : ONISR, principaux résultats 2025, données définitives, mai 2026, France métropolitaine.</p>
+        <p class="src">Références : code de la route, art. R. 412-43-1 (circulation, équipements et sanctions), R. 412-43-3 (âge minimum, gilet, passager), R. 311-1 (définition). Les obligations résultant d'un arrêté local ne figurent pas dans cette fiche : elles doivent être vérifiées sur le texte lui-même, auprès de votre coordination. Chiffres : ONISR, principaux résultats 2025, données définitives, mai 2026, France métropolitaine.</p>
       </div>
     </article>
 
