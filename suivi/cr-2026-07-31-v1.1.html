@@ -4,7 +4,7 @@
 <meta name="robots" content="noindex, nofollow" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Compte rendu des modifications — version 1.1 du 31 juillet 2026</title>
+<title>Compte rendu des modifications — version 1.1 du 31 juillet 2026 (rectifié)</title>
 <style>
   :root{--jaune:#FECF41;--jaune-clair:#FFF3CC;--jaune-trait:#8A6D00;
         --noir:#000;--gris:#3a3a3a;--gris-2:#6b6b6b;--gris-clair:#f6f6f6;
@@ -33,6 +33,10 @@
   .encadre p:last-child{margin-bottom:0;}
   .attention{background:#fdeeec;border-left:5px solid var(--rouge);border-radius:8px;padding:1rem 1.2rem;margin:1.6rem 0;}
   .attention strong{color:var(--rouge);}
+  .attention h3{margin-top:0;font-size:1.05rem;}
+  .attention p:last-child,.attention ul:last-child{margin-bottom:0;}
+  .attention ul{margin:.6rem 0;padding-left:1.2rem;}
+  .attention li{margin-bottom:.35rem;}
   .lien{background:var(--noir);color:#fff;border-radius:10px;padding:1.1rem 1.3rem;margin:1.6rem 0;}
   .lien a{color:var(--jaune);font-weight:800;word-break:break-all;}
   .lien p{color:#eaeaea;margin:.3rem 0;}
@@ -47,6 +51,13 @@
     .lien,.encadre,.attention,.kpi{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
     body{font-size:10.5pt;}
   }
+
+  .nav-suivi{display:flex;gap:.7rem;flex-wrap:wrap;margin:1.4rem 0 0;}
+  .nav-suivi a{display:inline-flex;align-items:center;gap:.4rem;background:#2a2a2a;
+    color:#fff;border-radius:999px;padding:.55rem 1.1rem;text-decoration:none;
+    font-weight:700;font-size:.92rem;box-shadow:inset 0 0 0 2px #4a4a4a;}
+  .nav-suivi a:hover{background:#3a3a3a;}
+  @media print{.nav-suivi{display:none;}}
 </style>
 </head>
 <body>
@@ -55,11 +66,22 @@
   <div class="wrap">
     <p class="eyebrow">Compte rendu de modifications — version 1.1</p>
     <h1>Suite donnée au premier retour de Léa</h1>
-    <p>Espace e-learning des Intervenants Départementaux de Sécurité Routière. Retour de Léa, coordination départementale : seize demandes traitées et mises en ligne le 31 juillet 2026, cinq restant en attente d'arbitrage.</p>
+    <p>Espace e-learning des Intervenants Départementaux de Sécurité Routière. Retour de Léa, coordination départementale : quatorze demandes traitées et mises en ligne le 31 juillet 2026.</p>
+    <nav class="nav-suivi" aria-label="Documents de suivi"><a href="index.html">Vue d'ensemble</a><a href="registre.html">Registre des demandes</a><a href="cr-2026-07-31-v1.2.html">Corrections v1.2</a><a href="cr-2026-07-31-v1.1.html">Compte rendu v1.1</a></nav>
   </div>
 </header>
 
 <div class="wrap">
+
+<div class="attention">
+  <p><strong>Document rectifié le 31 juillet 2026, après recette.</strong> Une relecture experte menée avant diffusion du lien aux IDSR a relevé trois inexactitudes dans la version initiale de ce compte rendu. Elles sont corrigées ci-dessous et signalées à chaque endroit concerné.</p>
+  <ul>
+    <li>Le décompte annoncé était de seize demandes traitées. Il y en avait <strong>quatorze</strong> : C21 n'était pas faite malgré ce qui était écrit, et C04 était sans objet, le site ne traitant pas le sujet visé.</li>
+    <li>La sanction indiquée pour la circulation d'un EDPm hors agglomération sur la chaussée était de 35 €. C'est <strong>135 €</strong>, le V de l'article R. 412-43-1 renvoyant aux contraventions de quatrième classe.</li>
+    <li>L'existence d'un arrêté casque dans chacun des cinq départements était présentée comme un fait, alors qu'aucun de ces textes n'a été communiqué ni lu. <strong>L'affirmation a été retirée du site.</strong></li>
+  </ul>
+  <p>Ces trois points, et les six autres relevés en recette, ont été corrigés dans la version 1.2 du site. Le détail figure dans le compte rendu des corrections de la version 1.2 et dans le registre de suivi, sous les références R01 à R06.</p>
+</div>
 
 <div class="lien">
   <p>Version en ligne, à jour de ces modifications :</p>
@@ -68,8 +90,8 @@
 </div>
 
 <div class="kpis">
-  <div class="kpi"><b>16</b><span>demandes traitées et en ligne</span></div>
-  <div class="kpi"><b>5</b><span>demandes en attente d'arbitrage</span></div>
+  <div class="kpi"><b>14</b><span>demandes traitées et en ligne</span></div>
+  <div class="kpi"><b>4</b><span>demandes en attente d'arbitrage</span></div>
   <div class="kpi"><b>1</b><span>nouvel outil créé, les fiches mémo</span></div>
   <div class="kpi"><b>15</b><span>références du code de la route vérifiées</span></div>
 </div>
@@ -136,21 +158,21 @@
     </tr>
     <tr>
       <td><strong>EDPm, casque</strong></td>
-      <td>Présenté en deux temps, la règle nationale d'un côté et les arrêtés préfectoraux de 2026 de l'autre. Voir le paragraphe ci-dessous.</td>
+      <td>Seule la règle nationale est écrite, vérifiée sur l'article R. 412-43-1. La partie locale a été retirée après recette. Voir l'encadré ci-dessous.</td>
     </tr>
   </tbody>
 </table>
 
-<div class="encadre">
-  <h3>Sur le casque des trottinettes, deux précisions à valider avec vous</h3>
-  <p>La distinction est faite entre la règle nationale, qui n'impose pas le casque en agglomération et interdit purement la circulation hors agglomération sauf voies vertes et pistes cyclables, et les arrêtés préfectoraux pris en 2026 dans les cinq départements de la région, avec des dates d'application échelonnées.</p>
-  <p>Premier point : la sanction indiquée est de <strong>35 €</strong> et non de 135 €, ce dernier montant relevant du régime national hors agglomération et ayant été repris à tort par une partie de la presse.</p>
-  <p>Second point : n'ayant pas eu accès au texte des arrêtés, la formulation retenue reste volontairement prudente et invite l'IDSR à vérifier auprès de sa coordination la date et le périmètre applicables dans son département avant toute annonce en public. La communication des cinq arrêtés nous permettrait d'être précis.</p>
+<div class="attention">
+  <h3>Sur le casque des trottinettes : ce que nous avions écrit, et ce que dit le texte</h3>
+  <p><strong>Rectifié le 31 juillet 2026.</strong> La version initiale de ce compte rendu, et le site avec elle, présentaient comme un fait établi que les cinq départements avaient pris en 2026 un arrêté rendant le casque obligatoire, sanctionné à 35 €. Nous n'avons lu aucun de ces textes. L'affirmation a donc été retirée du module 7, du module 8 et de la fiche mémo.</p>
+  <p>Ne subsiste que ce qui est vérifiable sur l'article R. 412-43-1 : le casque n'est pas obligatoire en agglomération, la circulation hors agglomération est interdite sauf voies vertes et pistes cyclables, et le casque ne devient obligatoire au titre du code que lorsque l'autorité de police a autorisé la circulation sur une route limitée à 80 km/h ou moins. Dans ce cas c'est une contravention de quatrième classe, soit <strong>135 €</strong>.</p>
+  <p>Le site indique désormais qu'une autorité de police peut par ailleurs imposer le casque localement, et que le périmètre, la date et la sanction dépendent alors du texte lui-même, qu'il faut avoir lu. <strong>La communication des arrêtés nous permettrait d'écrire la partie locale.</strong> En l'état, nous préférons ne rien affirmer que les IDSR auraient à défendre en public.</p>
 </div>
 
 <h3>Module 8 · La valise de l'IDSR et la communication</h3>
 
-<p><span class="ref">C19</span> <strong>Le statut du matériel est clarifié.</strong> Un encadré précise qu'il ne s'agit pas d'une valise attribuée à chaque intervenant, mais de matériel appartenant à la coordination départementale, mis à disposition pour la durée d'une action puis récupéré. Trois conséquences pratiques sont tirées : le matériel se réserve car il est partagé, le parc n'est pas identique d'un département à l'autre, et selon les départements ce n'est pas nécessairement le coordinateur lui-même qui gère les prêts. Le réflexe conseillé à l'IDSR est de demander à sa coordination la liste des outils réellement disponibles et de se les faire présenter avant de les utiliser devant du public.</p>
+<p><span class="ref">C19</span> <strong>Le statut du matériel est clarifié.</strong> Un encadré précise qu'il ne s'agit pas d'une valise attribuée à chaque intervenant, mais de matériel appartenant à la coordination départementale, mis à disposition pour la durée d'une action puis récupéré. Trois conséquences pratiques sont tirées : le matériel se réserve car il est partagé, le parc n'est pas identique d'un département à l'autre, et l'interlocuteur qui gère les prêts n'est pas le même partout au sein de la coordination. Le réflexe conseillé à l'IDSR est de demander à sa coordination la liste des outils réellement disponibles et de se les faire présenter avant de les utiliser devant du public.</p>
 
 <p><span class="ref">C20</span> <strong>Les actualités réglementaires sont développées en cinq cartes.</strong> Le paragraphe condensé, effectivement illisible pour quelqu'un qui découvre le sujet, a été remplacé par cinq entrées explicatives.</p>
 
@@ -159,7 +181,7 @@
   <tbody>
     <tr><td><strong>Homicide routier</strong><br />loi du 9 juillet 2025</td><td>Ce que la loi change, et une mise au point honnête : le changement est d'abord sémantique et symbolique, les peines restant proches de celles de l'homicide involontaire aggravé. Beaucoup de gens croient à un alourdissement massif des sanctions, c'est l'occasion de rétablir les faits sans minimiser la portée du texte.</td></tr>
     <tr><td><strong>Grand excès de vitesse</strong><br />délit depuis fin 2025</td><td>Le changement de nature et ses conséquences réelles, tribunal correctionnel, casier judiciaire, confiscation possible. Avec la réponse à l'objection « un délit à 300 euros, ce n'est pas sérieux ».</td></tr>
-    <tr><td><strong>EDPm</strong><br />14 ans et casque</td><td>L'âge minimum relevé de 12 à 14 ans en novembre 2024, et les arrêtés casque de 2026. Mode dont la mortalité progresse le plus vite, de 45 à 79 tués en un an.</td></tr>
+    <tr><td><strong>EDPm</strong><br />14 ans et casque</td><td>L'âge minimum relevé de 12 à 14 ans en novembre 2024, et la règle nationale du casque. Mode dont la mortalité progresse le plus vite en proportion, de 45 à 79 tués en un an.</td></tr>
     <tr><td><strong>Circulation inter-files</strong><br />depuis janvier 2025</td><td>L'autorisation et surtout ses conditions, souvent oubliées : autoroutes et routes à chaussées séparées de deux voies par sens, trafic ralenti en file continue, 50 km/h maximum. Hors de ces cas la manœuvre reste une infraction.</td></tr>
     <tr><td><strong>Ce qui arrive</strong><br />point de méthode</td><td>Une carte consacrée à la distinction entre ce qui est en vigueur et ce qui est seulement voté, avec le réflexe de vérification auprès de la coordination avant chaque intervention. C'est ce qui distingue un intervenant à jour d'un intervenant qui récite un support ancien.</td></tr>
   </tbody>
@@ -169,9 +191,9 @@
 
 <p><span class="ref">C18</span> Une page a été créée, accessible depuis l'accueil, qui reprend le principe des fiches thématiques de la coordination et le complète du volet argumentaire souhaité. Quatre fiches pour ce premier lot : <strong>vélo</strong>, <strong>EDPm</strong>, <strong>deux-roues motorisé</strong> et <strong>alcool</strong>.</p>
 
-<p>Chaque fiche tient sur une page A4 et suit toujours le même plan : équipements obligatoires, interdictions, règles de circulation, tableau des sanctions chiffrées, puis un bloc « ce que vous répondez si l'on vous dit », qui reprend les objections réellement entendues sur le terrain avec la réponse argumentée et sourcée. Chaque fiche se termine par le message à retenir en une phrase et par ses références au code de la route.</p>
+<p>Chaque fiche suit toujours le même plan : équipements obligatoires, interdictions, règles de circulation, tableau des sanctions chiffrées, puis un bloc « ce que vous répondez si l'on vous dit », qui reprend les objections réellement entendues sur le terrain avec la réponse argumentée et sourcée. Chaque fiche se termine par le message à retenir en une phrase et par ses références au code de la route.</p>
 
-<p>Un bouton d'impression met en page automatiquement une fiche par feuille, en noir et blanc lisible, et l'ensemble peut être enregistré en PDF. Les fiches sont également consultables sur téléphone pendant une action.</p>
+<p>Un bouton d'impression met en page les quatre fiches en noir et blanc lisible, chacune sur sa propre feuille A4 imprimée recto-verso, et l'ensemble peut être enregistré en PDF. Les fiches sont également consultables sur téléphone pendant une action. <em>Rectifié le 31 juillet 2026 : la version initiale annonçait une fiche par page. La mise en page a été revue en recette, une fiche occupe une feuille recto-verso et aucun bloc n'est coupé entre deux pages.</em></p>
 
 <p><strong>Adresse directe :</strong> <a href="https://intervenant-departemental-sr.github.io/E-learning-IDSR/outil-fiches-memo.html">https://intervenant-departemental-sr.github.io/E-learning-IDSR/outil-fiches-memo.html</a></p>
 
@@ -207,20 +229,16 @@
     </tr>
     <tr>
       <td>C04</td>
-      <td>Le fondement de la protection fonctionnelle, encore cité sur la base d'un texte de 1983 abrogé et codifié depuis mars 2022.</td>
-      <td>Simple validation de la mise à jour de la référence.</td>
-    </tr>
-    <tr>
-      <td>C06</td>
-      <td>La composition de l'équipe de coordination, qui varie d'un département à l'autre : coordinateur, adjoint, animateurs PDASR, et selon les cas des interlocuteurs différents pour les ordres de mission, le matériel et le suivi des actions.</td>
-      <td>Confirmation, avec Léa, d'une formulation valable pour les cinq départements, le site étant destiné à l'ensemble de la région.</td>
+      <td><strong>Sans objet, vérifié le 31 juillet 2026.</strong> Le site ne traite pas de la protection fonctionnelle et n'a jamais cité le texte de 1983. Il n'y avait donc rien à corriger, contrairement à ce que la version initiale de ce compte rendu laissait entendre.</td>
+      <td>Votre décision : faut-il ajouter ce sujet au module 1 ?</td>
     </tr>
   </tbody>
 </table>
 
 <div class="encadre">
   <h3>Une règle éditoriale que nous proposons d'adopter</h3>
-  <p>Plusieurs remarques du retour de Léa sont propres à un département : la composition de l'équipe de coordination, la répartition des tâches, l'arrêté casque. Le site étant destiné aux cinq départements de la région, l'intégration de chaque particularité locale le rendrait inexact ailleurs.</p>
+  <p><em>Rectification du 31 juillet 2026 : cette règle avait servi à classer C06 en arbitrage, à tort. Il s'agissait d'un simple remplacement de vocabulaire, et c'est justement « la coordination sécurité routière » qui est la formulation commune aux cinq départements. C06 est traitée dans la version 1.2.</em></p>
+  <p>Plusieurs remarques du retour de Léa restent néanmoins propres à un département : la répartition des tâches au sein de la coordination, ou l'existence d'un arrêté casque local. Le site étant destiné aux cinq départements de la région, l'intégration de chaque particularité locale le rendrait inexact ailleurs.</p>
   <p>Nous proposons donc la règle suivante, applicable aux retours à venir : <strong>le site écrit ce qui est commun aux cinq départements, et signale explicitement les variations locales</strong> par une formule du type « selon votre département, à voir avec votre coordination ». Cela donne un critère de tri objectif et évite d'arbitrer au cas par cas.</p>
 </div>
 
@@ -230,10 +248,12 @@
 
 <p>Toutes les statistiques restent celles de l'ONISR, <em>L'accidentalité routière en France, principaux résultats 2025</em>, données définitives publiées en mai 2026, périmètre France métropolitaine, avec la source rappelée sous chaque graphique et chaque bloc chiffré.</p>
 
+<p>Ce lot a fait l'objet d'une recette avant diffusion, dont les conclusions ont conduit aux rectifications signalées dans ce document et à la publication d'une version 1.2. Aucun défaut de fonctionnement n'a été trouvé : les parcours se déverrouillent normalement et l'attestation se génère.</p>
+
 <p>Chaque demande est consignée dans un registre de suivi avec sa référence, son statut et la version de publication dans laquelle elle est partie. Chaque publication est étiquetée, ce qui permet de restaurer à l'identique n'importe quel état antérieur du site. La version transmise le 30 juillet reste ainsi accessible et restaurable.</p>
 
 <footer>
-  <p>Compte rendu établi le 31 juillet 2026, à la suite du premier retour de Léa, coordination départementale. Les remarques de fond qu'elle a formulées, en particulier sur le caractère départemental du DGO, sur le circuit du bulletin d'analyse des accidents corporels et sur les équipements de protection, ont directement amélioré la justesse du support. Version publiée : 1.1. Version précédente : 1.0 du 30 juillet 2026.</p>
+  <p>Compte rendu établi le 31 juillet 2026, à la suite du premier retour de Léa, coordination départementale. Les remarques de fond qu'elle a formulées, en particulier sur le caractère départemental du DGO, sur le circuit du bulletin d'analyse des accidents corporels et sur les équipements de protection, ont directement amélioré la justesse du support. Version publiée : 1.1, rectifiée et complétée par la version 1.2 du même jour. Version précédente : 1.0 du 30 juillet 2026.</p>
 </footer>
 
 </div>

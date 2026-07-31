@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta name="robots" content="noindex, nofollow" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Compte rendu des corrections — version 1.2 du 31 juillet 2026</title>
+<style>
+  :root{--jaune:#FECF41;--jaune-clair:#FFF3CC;--jaune-trait:#8A6D00;
+        --noir:#000;--gris:#3a3a3a;--gris-2:#6b6b6b;--gris-clair:#f6f6f6;
+        --bordure:#e2e2e2;--rouge:#C0392B;--orange:#B35309;--vert:#14532D;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Marianne","Segoe UI",Arial,sans-serif;color:var(--noir);line-height:1.6;background:#fff;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 1.5rem 4rem;}
+  header{background:var(--noir);color:#fff;padding:2.4rem 0;margin-bottom:2.2rem;border-bottom:8px solid var(--jaune);}
+  header .wrap{padding-bottom:0;}
+  header .eyebrow{color:var(--jaune);text-transform:uppercase;letter-spacing:.06em;font-size:.8rem;font-weight:700;margin:0 0 .5rem;}
+  header h1{margin:0 0 .6rem;font-size:1.95rem;line-height:1.2;}
+  header p{margin:0;color:#e4e4e4;max-width:72ch;}
+  h2{font-size:1.35rem;border-left:8px solid var(--jaune);padding-left:.6rem;margin:2.6rem 0 .9rem;}
+  h3{font-size:1.05rem;margin:1.8rem 0 .4rem;}
+  p,li{max-width:80ch;}
+  .ref{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.04em;
+       background:var(--noir);color:var(--jaune);border-radius:4px;padding:.1rem .4rem;
+       margin-right:.4rem;vertical-align:.08em;}
+  table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.92rem;}
+  th,td{border:1px solid var(--bordure);padding:.5rem .65rem;text-align:left;vertical-align:top;}
+  th{background:var(--gris-clair);font-size:.82rem;text-transform:uppercase;letter-spacing:.03em;}
+  tbody tr:nth-child(even){background:#fcfcfc;}
+  code{background:var(--gris-clair);padding:.1rem .3rem;border-radius:3px;font-size:.88em;}
+  .encadre{background:var(--jaune-clair);border-radius:10px;padding:1.1rem 1.3rem;margin:1.6rem 0;}
+  .encadre h3{margin-top:0;}
+  .encadre p:last-child,.encadre ul:last-child{margin-bottom:0;}
+  .attention{background:#fdeeec;border-left:5px solid var(--rouge);border-radius:8px;padding:1rem 1.2rem;margin:1.6rem 0;}
+  .attention strong{color:var(--rouge);}
+  .attention h3{margin-top:0;font-size:1.05rem;}
+  .attention p:last-child,.attention ul:last-child{margin-bottom:0;}
+  .ok{background:#eafaf0;border-left:5px solid var(--vert);border-radius:8px;padding:1rem 1.2rem;margin:1.6rem 0;}
+  .ok h3{margin-top:0;font-size:1.05rem;}
+  .ok p:last-child{margin-bottom:0;}
+  .lien{background:var(--noir);color:#fff;border-radius:10px;padding:1.1rem 1.3rem;margin:1.6rem 0;}
+  .lien a{color:var(--jaune);font-weight:800;word-break:break-all;}
+  .lien p{color:#eaeaea;margin:.3rem 0;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem;margin:1.4rem 0;}
+  .kpi{background:var(--gris-clair);border-radius:10px;padding:1rem 1.1rem;border-top:4px solid var(--jaune);}
+  .kpi b{font-size:1.9rem;line-height:1;display:block;}
+  .kpi span{font-size:.88rem;color:var(--gris);display:block;margin-top:.3rem;}
+  .grav{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;
+        border-radius:999px;padding:.12rem .5rem;white-space:nowrap;display:inline-block;}
+  .g-haut{background:#fdeeec;color:var(--rouge);border:1px solid var(--rouge);}
+  .g-moyen{background:#fff6e3;color:var(--orange);border:1px solid var(--orange);}
+  .g-bas{background:var(--gris-clair);color:var(--gris);border:1px solid #cfcfcf;}
+  footer{border-top:1px solid var(--bordure);margin-top:3rem;padding-top:1.2rem;font-size:.88rem;color:var(--gris-2);}
+  @media print{
+    @page{size:A4;margin:14mm;}
+    header{background:#000!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .lien,.encadre,.attention,.ok,.kpi{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    body{font-size:10.5pt;}
+    table,.encadre,.attention,.ok{break-inside:avoid;}
+  }
+
+  .nav-suivi{display:flex;gap:.7rem;flex-wrap:wrap;margin:1.4rem 0 0;}
+  .nav-suivi a{display:inline-flex;align-items:center;gap:.4rem;background:#2a2a2a;
+    color:#fff;border-radius:999px;padding:.55rem 1.1rem;text-decoration:none;
+    font-weight:700;font-size:.92rem;box-shadow:inset 0 0 0 2px #4a4a4a;}
+  .nav-suivi a:hover{background:#3a3a3a;}
+  @media print{.nav-suivi{display:none;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Compte rendu de corrections — version 1.2</p>
+    <h1>Recette de la version 1.1, et correction des neuf points bloquants</h1>
+    <p>Espace e-learning des Intervenants Départementaux de Sécurité Routière. Avant de diffuser le lien aux IDSR, la version 1.1 a été soumise à une relecture experte. Elle n'a trouvé aucun défaut de fonctionnement, mais neuf points de contenu à corriger, dont trois erreurs de notre fait. Tous sont corrigés et en ligne.</p>
+    <nav class="nav-suivi" aria-label="Documents de suivi"><a href="index.html">Vue d'ensemble</a><a href="registre.html">Registre des demandes</a><a href="cr-2026-07-31-v1.2.html">Corrections v1.2</a><a href="cr-2026-07-31-v1.1.html">Compte rendu v1.1</a></nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+<div class="lien">
+  <p>Version en ligne, à jour de ces corrections :</p>
+  <p><a href="https://intervenant-departemental-sr.github.io/E-learning-IDSR/">https://intervenant-departemental-sr.github.io/E-learning-IDSR/</a></p>
+  <p>Registre de suivi, consultable par tous les collaborateurs :</p>
+  <p><a href="https://intervenant-departemental-sr.github.io/E-learning-IDSR/suivi/">https://intervenant-departemental-sr.github.io/E-learning-IDSR/suivi/</a></p>
+  <p style="font-size:.9rem;margin-top:.6rem;">Les points relevés en recette portent les références R01 à R06. Les demandes de Léa reprises à cette occasion gardent les leurs, de C01 à C21.</p>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><b>9</b><span>points bloquants corrigés</span></div>
+  <div class="kpi"><b>3</b><span>erreurs de notre fait</span></div>
+  <div class="kpi"><b>0</b><span>blocage de parcours</span></div>
+  <div class="kpi"><b>10</b><span>points reportés au lot suivant</span></div>
+</div>
+
+<h2>Pourquoi cette recette</h2>
+
+<p>La version 1.1 traitait quatorze demandes en une seule journée, dont plusieurs touchaient à des références juridiques et à des chiffres. Avant de mettre ce support entre les mains d'intervenants qui vont le porter devant du public au nom de l'État, nous avons voulu le faire relire par une personne experte du domaine, avec pour consigne de chercher les erreurs plutôt que de valider le travail.</p>
+
+<p>Cette relecture a porté sur deux choses distinctes. D'abord le fonctionnement : les questions ajoutées empêchent-elles de terminer un module, l'attestation se génère-t-elle encore, les parcours se déverrouillent-ils. Ensuite l'exactitude : chaque affirmation nouvelle est-elle vérifiable sur le texte ou sur la source citée.</p>
+
+<div class="ok">
+  <h3>Sur le fonctionnement, rien à signaler</h3>
+  <p>Tous les modules touchés, les modules 1, 2, 3, 4, 7, 8 et 9, ont été déroulés du début à la fin dans le navigateur en repartant d'une progression vierge, y compris les exercices de classement. Toutes les étapes se déverrouillent malgré les questions ajoutées, le bloc de fin s'affiche, l'attestation se génère, le compteur d'étapes et la note de verrouillage se comportent normalement, et aucune erreur n'apparaît dans la console. C'était le risque principal d'un lot de cette taille, il est écarté.</p>
+  <p>La seule chose qui ne fonctionnait pas comme annoncé est l'impression des fiches mémo, traitée sous la référence R05 ci-dessous. Elle a été vérifiée cette fois sur un fichier PDF réellement produit, et non sur une estimation.</p>
+</div>
+
+<h2>Les trois erreurs que nous avions commises</h2>
+
+<div class="attention">
+  <h3>1. Une sanction fausse sur un document destiné à l'impression</h3>
+  <p><span class="ref">R01</span> La fiche mémo EDPm indiquait <strong>35 €</strong> pour la circulation d'une trottinette hors agglomération sur la chaussée. Le montant est de <strong>135 €</strong> : le V de l'article R. 412-43-1 renvoie aux contraventions de quatrième classe pour toute infraction aux I et II de cet article, et le II est précisément l'interdiction de circuler hors agglomération.</p>
+  <p>C'est le type d'erreur le plus coûteux, parce que cette fiche est faite pour être imprimée et distribuée sur un stand. Le tableau porte désormais le bon montant et la référence de l'article, de façon à ce qu'un IDSR contredit puisse citer le texte.</p>
+</div>
+
+<div class="attention">
+  <h3>2. Une affirmation que nous ne pouvions pas vérifier</h3>
+  <p><span class="ref">C17</span> Le site présentait comme un fait établi que <strong>les cinq départements des Hauts-de-France avaient pris en 2026 un arrêté rendant le casque obligatoire pour les EDPm</strong>, sanctionné à 35 €, avec des dates échelonnées. Nous n'avons lu aucun de ces textes. L'affirmation reposait sur une information de seconde main.</p>
+  <p>Elle a été retirée du module 7, du module 8 et de la fiche mémo. Ne subsiste que ce qui est vérifiable sur l'article R. 412-43-1 : pas d'obligation en agglomération, circulation hors agglomération interdite sauf voies vertes et pistes cyclables, casque obligatoire uniquement lorsque l'autorité de police a autorisé la circulation sur une route limitée à 80 km/h ou moins, et dans ce cas 135 €.</p>
+  <p>Le site indique par ailleurs qu'une autorité de police peut imposer le casque localement, et que le périmètre, la date et la sanction dépendent alors du texte lui-même. <strong>La communication des arrêtés nous permettrait d'écrire cette partie.</strong> En l'état, nous préférons ne rien affirmer qu'un IDSR aurait à défendre en public sans pouvoir citer sa source.</p>
+</div>
+
+<div class="attention">
+  <h3>3. Une régression introduite par nos propres corrections</h3>
+  <p><span class="ref">R02</span> En développant les actualités réglementaires du module 8, demande C20, nous avons remplacé un paragraphe condensé par cinq cartes explicatives. Ce paragraphe contenait l'information sur le <strong>permis B accessible dès 17 ans</strong>, et la question de validation du module porte précisément dessus. Un IDSR ne pouvait donc plus valider ce module honnêtement : la réponse n'était plus dans le cours.</p>
+  <p>Une carte « Actualité 5 · Permis B » rétablit le contenu, avec ce que le changement implique concrètement pour un intervenant en lycée : le public rencontré comprend désormais des conducteurs autonomes, et non plus seulement de futurs conducteurs.</p>
+</div>
+
+<h2>Les six autres corrections</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width:4rem;">Réf.</th>
+      <th>Point relevé et correction apportée</th>
+      <th style="width:11rem;">Où</th>
+      <th style="width:6.5rem;">Gravité</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>R03</td>
+      <td><strong>Un superlatif inexact.</strong> Nous écrivions que la hausse de la mortalité en trottinette, de 45 à 79 tués, était « la plus forte hausse de tout le bilan ». C'est vrai en proportion, pas en valeur absolue, où la hausse des piétons est plus lourde. Un IDSR reprenant la formule devant quelqu'un qui connaît le bilan se ferait corriger. Les trois emplacements portent désormais « en proportion », avec la précision sur les piétons.</td>
+      <td>module 4, module 8, fiche mémo</td>
+      <td><span class="grav g-moyen">moyenne</span></td>
+    </tr>
+    <tr>
+      <td>R04</td>
+      <td><strong>Un sur-risque mal attribué.</strong> Nous écrivions que les 75 ans et plus courent une fois et demie plus de risques « d'être tués ou blessés gravement ». Le rapport porte sur la seule mortalité, et il s'explique par la fragilité : un choc qu'un adulte plus jeune surmonte leur est fatal. Leur exposition aux blessures graves n'est pas supérieure à la moyenne. La carte distingue maintenant les deux, ce qui rend le chiffre défendable devant un public de seniors et lui donne du sens.</td>
+      <td>module 4, étape 2</td>
+      <td><span class="grav g-moyen">moyenne</span></td>
+    </tr>
+    <tr>
+      <td>C06</td>
+      <td><strong>Une demande classée en arbitrage à tort.</strong> Léa demandait de ne pas laisser croire qu'une seule personne gère tout. Nous avions renvoyé le point à un arbitrage au motif que l'organisation varie d'un département à l'autre, alors qu'il s'agissait d'un remplacement de vocabulaire : « la coordination sécurité routière » est justement la formulation commune aux cinq départements, et « le coordinateur » la particularité locale. La carte du module 2 est réécrite, avec la nuance équipe ou personne seule, et le vocabulaire est harmonisé partout, quiz et exercices de classement compris.</td>
+      <td>modules 1, 2, 3 et 8</td>
+      <td><span class="grav g-moyen">moyenne</span></td>
+    </tr>
+    <tr>
+      <td>C01</td>
+      <td><strong>Une affirmation douteuse laissée en ligne.</strong> Le module 1 mentionnait une « convention de mise à disposition signée entre l'employeur et la préfecture ». Léa a indiqué qu'aucun texte national ne l'établit, et nous avons classé le point en attente de sa confirmation, en laissant la phrase publiée. C'était le mauvais choix : laisser en ligne une affirmation que nous savions douteuse est plus grave que la retirer. Elle est supprimée. La carte dit désormais que la disponibilité sur le temps de travail relève d'un accord avec l'employeur et qu'aucun texte national n'organise cette mise à disposition, ce qui est vrai et répond à la question que les IDSR salariés se posent.</td>
+      <td>module 1, étape 1</td>
+      <td><span class="grav g-haut">haute</span></td>
+    </tr>
+    <tr>
+      <td>C21</td>
+      <td><strong>Une demande annoncée comme faite alors qu'elle ne l'était pas.</strong> Léa signalait l'incohérence des boutons de fin de module. Nous avons répondu que c'était déjà corrigé le 30 juillet. Ce n'était pas le cas : les modules 2 et 3 n'offraient aucun accès au module suivant, le module 3 dupliquait le retour à l'accueil, et notre correction du module 8 avait même créé une troisième variante en le proposant trois fois. Les neuf modules ont désormais la même fin, un seul bouton principal et la même barre de navigation. Le module 9, dernier du parcours, renvoie à l'attestation.</td>
+      <td>les neuf modules</td>
+      <td><span class="grav g-moyen">moyenne</span></td>
+    </tr>
+    <tr>
+      <td>R05</td>
+      <td><strong>Les fiches mémo s'imprimaient mal, et nous annoncions une pagination fausse.</strong> Les tableaux de sanctions et les blocs d'objections pouvaient se couper entre deux pages, le tableau que nous faisions défiler horizontalement sur téléphone s'imprimait tronqué, et surtout la page annonçait « une fiche par page A4 » alors qu'aucune fiche n'y tenait. Les règles d'impression ont été complétées et la typographie resserrée. Contrôle fait sur un PDF réellement généré, et non sur une estimation : les quatre fiches occupent huit pages, soit <strong>une feuille recto-verso par fiche</strong>, chaque fiche démarrant sur une nouvelle feuille et aucun bloc n'étant coupé. C'est ce que la page annonce désormais. Nous avons préféré ce format à une réduction de la typographie qui aurait rendu la fiche illisible en main.</td>
+      <td>fiches mémo</td>
+      <td><span class="grav g-moyen">moyenne</span></td>
+    </tr>
+    <tr>
+      <td>R06</td>
+      <td><strong>Un décompte erroné dans le compte rendu précédent.</strong> Nous avions annoncé seize demandes traitées. Il y en avait quatorze : C21 n'était pas faite, et C04 était sans objet puisque le site ne traite pas de la protection fonctionnelle et n'a jamais cité le texte de 1983 visé par la remarque. Le compte rendu de la version 1.1 porte désormais un bandeau de rectification, et le registre est corrigé.</td>
+      <td>documents de suivi</td>
+      <td><span class="grav g-bas">forme</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Ce que la recette valide sans réserve</h2>
+
+<p>L'essentiel du travail de la version 1.1 passe la relecture. Le circuit du bulletin d'analyse des accidents corporels a été recoupé avec la méthodologie de l'ONISR. Les deux définitions du blessé, hospitalisé plus de 24 heures et blessé grave MAIS3+, sont correctement distinguées, ce qui était l'objet de la demande C09. La partie sur le document général d'orientation est jugée exacte, y compris le mécanisme des quatre enjeux nationaux obligatoires et des deux enjeux locaux au maximum.</p>
+
+<p>Sur l'alcool, l'encadrement de l'ordre de grandeur des deux verres est retenu comme la bonne solution : la valeur est donnée, mais accompagnée d'un avertissement explicite pour qu'elle ne devienne pas une règle de conversion. Sur le protoxyde d'azote, le choix de ne pas annoncer un délit qui n'est pas encore en vigueur est validé, y compris la formule proposée aux intervenants. Les équipements de protection ont été vérifiés article par article. Tous les chiffres sont conformes au bilan ONISR 2025 sur le périmètre France métropolitaine.</p>
+
+<div class="encadre">
+  <h3>Un point qui va dans l'autre sens</h3>
+  <p>La vérification faite pour la fiche vélo tient toujours : <strong>le code de la route ne fixe aucun âge minimum pour un vélo à assistance électrique</strong> restant dans les limites du cycle, assistance coupée à 25 km/h et moteur de 250 watts au plus. Les 14 ans sont ceux des engins de déplacement personnel motorisés. La fiche du site retient la formulation vérifiée et peut servir de base à la correction de la fiche diffusée à l'Éducation nationale.</p>
+</div>
+
+<h2>Ce qui est reporté au lot suivant</h2>
+
+<p>Dix points relevés en recette ne bloquent pas la diffusion et sont consignés au registre pour un prochain lot : rétablir la recommandation du casque à vélo à tout âge en plus de l'obligation avant 12 ans, préciser « moins de 5 ans » sur le siège enfant, nuancer la ligne sur le débridage, ajouter le permis A1, sortir les équipements et les actualités dans leurs propres étapes du module 7 et du module 8, supprimer deux doublons du module 4, harmoniser une donnée de mortalité par million d'habitants, transformer les idées reçues sur l'alcool en vrai-faux jouable, et définir le sigle CRS à sa première occurrence.</p>
+
+<h2>Ce que nous attendons encore de la préfecture</h2>
+
+<table>
+  <thead><tr><th>Pièce attendue</th><th style="width:22rem;">Ce qu'elle débloque</th></tr></thead>
+  <tbody>
+    <tr><td>Les arrêtés imposant le casque aux EDPm, s'ils existent, pour chacun des cinq départements</td><td>Écrire la partie locale de la règle du casque, aujourd'hui volontairement absente du site.</td></tr>
+    <tr><td>Le modèle de fiche d'engagement et le modèle d'ordre de mission</td><td>Décrire le parcours administratif réel de l'IDSR, demandes C01 et C03.</td></tr>
+    <tr><td>Un arrêté de nomination récent</td><td>Vérifier le fac-similé présenté dans le module 3.</td></tr>
+    <tr><td>La position écrite de la Délégation à la sécurité routière sur les absences des IDSR agents publics</td><td>Répondre à la demande C02, en particulier sur le régime applicable en cas d'accident pendant une mission effectuée sur le temps de travail.</td></tr>
+    <tr><td>Le nom du responsable de publication et les cinq adresses de contact des coordinations départementales</td><td>Compléter les mentions légales et l'envoi de l'attestation.</td></tr>
+    <tr><td>Des photographies du matériel de sensibilisation</td><td>Remplacer les descriptions du module 8 par des visuels réels.</td></tr>
+  </tbody>
+</table>
+
+<h2>Méthode</h2>
+
+<p>Les références du code de la route citées dans ce lot ont été vérifiées sur Légifrance dans leur version en vigueur, et l'article R. 412-43-1 a été relu intégralement pour établir le montant de 135 €. Les statistiques restent celles de l'ONISR, <em>L'accidentalité routière en France, principaux résultats 2025</em>, données définitives de mai 2026, périmètre France métropolitaine.</p>
+
+<p>Chaque point est consigné au registre avec sa référence, son statut et la version dans laquelle il est parti. La version 1.2 porte l'étiquette <code>v1.2-recette</code>, et les versions 1.0 et 1.1 restent restaurables à l'identique.</p>
+
+<footer>
+  <p>Compte rendu établi le 31 juillet 2026, après recette de la version 1.1 conduite avant diffusion du lien aux intervenants. Version publiée : 1.2. Versions précédentes : 1.1 du 31 juillet 2026, rectifiée, et 1.0 du 30 juillet 2026.</p>
+</footer>
+
+</div>
+</body>
+</html>
