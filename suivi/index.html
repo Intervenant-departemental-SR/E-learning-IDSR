@@ -4,164 +4,727 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex, nofollow" />
-<title>Suivi du projet — E-learning IDSR</title>
-<meta name="description" content="Suivi partagé du projet e-learning IDSR : demandes de modification reçues, décisions prises et versions publiées." />
+<title>Suivi du projet — Espace e-learning IDSR</title>
+<meta name="description" content="Suivi du projet e-learning IDSR : ce qui a changé à chaque version, registre de toutes les remarques reçues et de leur traitement." />
 <style>
-  :root{--jaune:#FECF41;--jaune-clair:#FFF3CC;--jaune-trait:#8A6D00;
-        --noir:#000;--gris:#3a3a3a;--gris-2:#6b6b6b;--gris-clair:#f6f6f6;
-        --bordure:#e2e2e2;--rouge:#C0392B;--orange:#B35309;--vert:#14532D;}
+  :root{--jaune:#FECF41;--jaune-clair:#FFF3CC;--jaune-trait:#7A5F00;
+        --noir:#000;--gris:#3a3a3a;--gris-2:#5f5f5f;--gris-clair:#f4f4f4;
+        --bordure:#dcdcdc;--rouge:#A6291C;--orange:#8A4200;--vert:#14532D;--bleu:#1B4E8A;}
   *{box-sizing:border-box;}
-  body{margin:0;font-family:"Marianne","Segoe UI",Arial,sans-serif;color:var(--noir);
-       line-height:1.6;background:#fff;}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem 4rem;}
+  [hidden]{display:none!important;}   /* sans JavaScript, filtres et pastilles restent masques */
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:"Marianne","Segoe UI",Arial,Helvetica,sans-serif;
+       color:var(--noir);background:#fff;line-height:1.55;}
   a{color:inherit;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 1.25rem;}
   .skip{position:absolute;left:-9999px;background:var(--noir);color:var(--jaune);
         padding:.6rem 1rem;z-index:200;font-weight:700;}
   .skip:focus{left:0;top:0;}
-  :focus-visible{outline:3px solid var(--noir);outline-offset:2px;border-radius:4px;}
-  header.doc{background:var(--noir);color:#fff;padding:2.2rem 0;margin-bottom:2rem;
-             border-bottom:8px solid var(--jaune);}
-  header.doc .wrap{padding-bottom:0;}
+  :focus-visible{outline:3px solid var(--noir);outline-offset:2px;border-radius:3px;}
+
+  header.doc{background:var(--noir);color:#fff;padding:2.2rem 0 2rem;border-bottom:8px solid var(--jaune);}
   header.doc .eyebrow{color:var(--jaune);text-transform:uppercase;letter-spacing:.06em;
-                      font-size:.8rem;font-weight:700;margin:0 0 .5rem;}
-  header.doc h1{margin:0 0 .6rem;font-size:1.9rem;line-height:1.2;}
-  header.doc p{margin:0;color:#e4e4e4;max-width:78ch;}
-  h2{font-size:1.3rem;border-left:8px solid var(--jaune);padding-left:.6rem;margin:2.6rem 0 .8rem;}
-  p,li{max-width:82ch;}
-  table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.9rem;}
+                      font-size:.78rem;font-weight:700;margin:0 0 .5rem;}
+  header.doc h1{margin:0 0 .7rem;font-size:1.95rem;line-height:1.2;}
+  header.doc p{margin:0;color:#e8e8e8;max-width:78ch;}
+  .etat{display:flex;gap:.6rem;flex-wrap:wrap;margin:1.2rem 0 0;font-size:.85rem;}
+  .etat span{background:#1e1e1e;border:1px solid #444;border-radius:999px;padding:.3rem .8rem;}
+  .etat span b{color:var(--jaune);}
+  nav.sommaire{display:flex;gap:.5rem;flex-wrap:wrap;margin:1.3rem 0 0;}
+  nav.sommaire a{background:var(--jaune);color:var(--noir);border-radius:999px;
+                 padding:.5rem 1.05rem;text-decoration:none;font-weight:700;font-size:.9rem;}
+  nav.sommaire a:hover{background:#fff;}
+
+  h2{font-size:1.35rem;border-left:8px solid var(--jaune);padding-left:.65rem;margin:3rem 0 .8rem;
+     scroll-margin-top:1rem;}
+  h3{font-size:1.05rem;margin:0 0 .3rem;}
+  p,li{max-width:88ch;}
+  .intro{color:var(--gris);}
+
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.9rem;margin:1.3rem 0 0;}
+  .kpi{background:var(--gris-clair);border-radius:10px;padding:.9rem 1rem;border-top:4px solid var(--jaune);}
+  .kpi b{font-size:1.8rem;line-height:1;display:block;}
+  .kpi span{font-size:.86rem;color:var(--gris);display:block;margin-top:.25rem;}
+
+  .pastilles{display:flex;gap:.5rem;flex-wrap:wrap;margin:1.1rem 0 1.4rem;}
+  .pastille{font:inherit;font-size:.9rem;font-weight:700;cursor:pointer;border-radius:999px;
+            padding:.45rem 1rem;background:#fff;color:var(--noir);border:2px solid var(--bordure);}
+  .pastille:hover{border-color:var(--noir);}
+  .pastille.actif{background:var(--jaune);border-color:var(--jaune);}
+
+  .bloc-version{border:1px solid var(--bordure);border-left:5px solid var(--jaune);
+                border-radius:8px;padding:1.05rem 1.2rem;margin:0 0 1rem;scroll-margin-top:1rem;}
+  .bloc-version .chapo-v{font-weight:700;margin:.2rem 0 .5rem;}
+  .bloc-version p{margin:.4rem 0;}
+  .etiquette{font-size:.85rem;color:var(--gris-2);}
+  .etiq{display:inline-block;font-size:.7rem;font-weight:800;text-transform:uppercase;
+        letter-spacing:.04em;background:var(--noir);color:var(--jaune);border-radius:3px;
+        padding:.1rem .4rem;margin-right:.35rem;vertical-align:.08em;}
+  .refs{font-size:.92rem;}
+  .puce{display:inline-block;font-weight:700;font-size:.82rem;background:var(--gris-clair);
+        border:1px solid var(--bordure);border-radius:4px;padding:.05rem .35rem;
+        margin:0 .15rem .25rem 0;text-decoration:none;}
+  .puce:hover{background:var(--jaune);}
+
+  .filtres{display:flex;gap:.9rem;flex-wrap:wrap;align-items:flex-end;
+           background:var(--gris-clair);border-radius:10px;padding:1rem 1.1rem;margin:1.2rem 0;}
+  .filtres label{display:block;font-size:.78rem;font-weight:700;text-transform:uppercase;
+                 letter-spacing:.03em;color:var(--gris);margin-bottom:.25rem;}
+  .filtres select,.filtres input{font:inherit;font-size:.92rem;padding:.42rem .55rem;
+    border:2px solid var(--bordure);border-radius:6px;background:#fff;min-width:11rem;}
+  .filtres input{min-width:15rem;}
+  .compteur{font-size:.9rem;color:var(--gris);margin-left:auto;padding-bottom:.5rem;}
+
+  .table-scroll{overflow-x:auto;}
+  table{border-collapse:collapse;width:100%;margin:.6rem 0 0;font-size:.9rem;}
   th,td{border:1px solid var(--bordure);padding:.5rem .6rem;text-align:left;vertical-align:top;}
-  th{background:var(--gris-clair);font-size:.8rem;text-transform:uppercase;letter-spacing:.03em;}
-  tbody tr:nth-child(even){background:#fcfcfc;}
+  thead th{background:var(--gris-clair);font-size:.78rem;text-transform:uppercase;
+           letter-spacing:.03em;position:sticky;top:0;z-index:2;}
+  tbody tr:target{background:var(--jaune-clair);box-shadow:inset 4px 0 0 var(--jaune);}
+  tbody th{background:#fff;font-size:.95rem;}
+  .ancre{text-decoration:none;font-weight:800;}
+  .ancre:hover{text-decoration:underline;}
+  .nowrap{white-space:nowrap;}
+  .dem,.ou{font-size:.85rem;color:var(--gris);}
+  td p{margin:0 0 .45rem;max-width:none;}
+  td p:last-child{margin-bottom:0;}
+  .trait{background:var(--gris-clair);border-radius:6px;padding:.45rem .6rem;}
   code{background:var(--gris-clair);padding:.1rem .3rem;border-radius:3px;font-size:.88em;}
+
   .tag{display:inline-block;font-size:.7rem;font-weight:800;text-transform:uppercase;
-       letter-spacing:.04em;border-radius:999px;padding:.12rem .5rem;white-space:nowrap;}
-  .t-attente{background:var(--gris-clair);color:var(--gris);border:1px solid #8c8c8c;}
-  .t-cours{background:#fff6e3;color:var(--orange);border:1px solid var(--orange);}
+       letter-spacing:.04em;border-radius:999px;padding:.14rem .55rem;white-space:nowrap;}
+  .t-attente{background:#f0f0f0;color:var(--gris);border:1px solid #8c8c8c;}
+  .t-cours{background:#fff4e0;color:var(--orange);border:1px solid var(--orange);}
+  .t-valider{background:#e9f1fb;color:var(--bleu);border:1px solid var(--bleu);}
   .t-preprod{background:var(--jaune-clair);color:var(--jaune-trait);border:1px solid var(--jaune-trait);}
-  .t-publie{background:#eafaf0;color:var(--vert);border:1px solid var(--vert);}
-  .t-refuse{background:#fdeeec;color:var(--rouge);border:1px solid var(--rouge);}
-  .encadre{background:var(--jaune-clair);border-radius:10px;padding:1.1rem 1.3rem;margin:1.6rem 0;}
-  .encadre h3{margin-top:0;font-size:1rem;}
+  .t-publie{background:#e7f7ee;color:var(--vert);border:1px solid var(--vert);}
+  .t-refuse{background:#fbeae7;color:var(--rouge);border:1px solid var(--rouge);}
+
+  .encadre{background:var(--jaune-clair);border-radius:10px;padding:1.1rem 1.3rem;margin:1.5rem 0;}
+  .encadre h3{margin-top:0;}
   .encadre p:last-child{margin-bottom:0;}
-  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem;margin:1.4rem 0;}
-  .kpi{background:var(--gris-clair);border-radius:10px;padding:1rem 1.1rem;border-top:4px solid var(--jaune);}
-  .kpi b{font-size:1.9rem;line-height:1;display:block;}
-  .kpi span{font-size:.88rem;color:var(--gris);display:block;margin-top:.3rem;}
-  .nav-suivi{display:flex;gap:.7rem;flex-wrap:wrap;margin:1.4rem 0 0;}
-  .nav-suivi a{display:inline-flex;align-items:center;gap:.4rem;background:var(--gris-clair);
-    color:var(--noir);border-radius:999px;padding:.6rem 1.2rem;text-decoration:none;
-    font-weight:700;font-size:.94rem;box-shadow:inset 0 0 0 2px var(--bordure);}
-  .nav-suivi a:hover{background:var(--bordure);}
-  .nav-suivi a.actif{background:var(--jaune);box-shadow:none;}
-  footer.doc{border-top:1px solid var(--bordure);margin-top:3rem;padding-top:1.2rem;
+  pre.canevas{background:var(--gris-clair);border:1px solid var(--bordure);border-radius:8px;
+              padding:1rem 1.1rem;overflow-x:auto;font-size:.86rem;line-height:1.5;
+              font-family:ui-monospace,"Cascadia Mono",Consolas,monospace;white-space:pre-wrap;}
+  .bouton{display:inline-block;background:var(--noir);color:var(--jaune);text-decoration:none;
+          font-weight:700;border-radius:8px;padding:.6rem 1.15rem;margin:.3rem .4rem .3rem 0;}
+  .bouton:hover{background:var(--gris);}
+  .bouton.clair{background:var(--jaune);color:var(--noir);}
+
+  footer.doc{border-top:1px solid var(--bordure);margin-top:3.5rem;padding:1.2rem 0 2.5rem;
              font-size:.88rem;color:var(--gris-2);}
-  @media (max-width:640px){
-    header.doc h1{font-size:1.4rem;}
-    table{font-size:.84rem;}
-    .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
-    .table-scroll table{min-width:720px;}
+  .cache{display:none!important;}
+
+  @media (max-width:700px){
+    header.doc h1{font-size:1.45rem;}
+    table{font-size:.85rem;}
+    .table-scroll table{min-width:760px;}
+    .compteur{margin-left:0;}
   }
   @media print{
-    @page{size:A4 landscape;margin:12mm;}
+    @page{size:A4 landscape;margin:11mm;}
     header.doc{background:#000!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-    .nav-suivi{display:none;}
-    body{font-size:9.5pt;}
-    .tag,.kpi,.encadre{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    nav.sommaire,.pastilles,.filtres,.bouton,.skip{display:none!important;}
+    .encadre,.kpi{break-inside:avoid;page-break-inside:avoid;}
+    h2{break-after:avoid;}
+    thead th{position:static;}
+    body{font-size:9pt;}
+    .tag,.kpi,.encadre,.etiq{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .bloc-version[hidden]{display:block!important;}
+    tr[hidden]{display:table-row!important;}
   }
 </style>
 </head>
 <body>
 <a class="skip" href="#contenu">Aller au contenu principal</a>
+
 <header class="doc">
   <div class="wrap">
-    <p class="eyebrow">Suivi partagé du projet</p>
-    <h1>Suivi des demandes et des versions</h1>
-    <p>Cet espace permet à chaque contributeur de vérifier que sa remarque a bien été prise en compte, et de suivre ce qui a été publié.</p>
-    <nav class="nav-suivi" aria-label="Documents de suivi"><a href="index.html" class="actif">Vue d'ensemble</a><a href="registre.html">Registre des demandes</a><a href="cr-2026-07-31-v1.2.html">Corrections v1.2</a><a href="cr-2026-07-31-v1.1.html">Compte rendu v1.1</a></nav>
+    <p class="eyebrow">Préfecture des Hauts-de-France · Réseau IDSR · Suivi de projet</p>
+    <h1>Suivi du projet — espace e-learning IDSR</h1>
+    <p>Cette page dit exactement où en est le projet : ce qui a changé à chaque version, et ce qu'il est advenu de chaque remarque reçue. Une remarque qui n'y figure pas n'a pas été enregistrée : signalez-le, elle sera ajoutée.</p>
+    <p class="etat">
+      <span>Version en ligne <b>v1.3</b></span>
+      <span>Mise à jour du <b>24 août 2026</b></span>
+      <span><b>36</b> remarques enregistrées</span>
+    </p>
+    <nav class="sommaire" aria-label="Sommaire">
+      <a href="#changements">Ce qui a changé</a>
+      <a href="#registre">Registre des remarques</a>
+      <a href="#remarque">Adresser une remarque</a>
+      <a href="#methode">Comment nous travaillons</a>
+      <a href="#comptes-rendus">Comptes rendus</a>
+    </nav>
   </div>
 </header>
+
 <main id="contenu">
   <div class="wrap">
-<h2>À quoi sert cet espace</h2>
-<p>Chaque remarque formulée sur l'espace e-learning est enregistrée, analysée, puis suivie
-jusqu'à sa mise en ligne ou son écartement motivé. Cet espace rend ce suivi consultable par
-tous les contributeurs : vous pouvez vérifier qu'une remarque a bien été prise en compte,
-savoir ce qui a été fait, et voir ce qui reste en discussion.</p>
 
-<div class="kpis">
-  <div class="kpi"><b>36</b><span>demandes enregistrées à ce jour</span></div>
-  <div class="kpi"><b>32</b><span>traitées et en ligne</span></div>
-  <div class="kpi"><b>1</b><span>partiellement traitées, en attente d'une pièce</span></div>
-  <div class="kpi"><b>3</b><span>en cours d'instruction ou en attente d'arbitrage</span></div>
-</div>
+    <h2 id="changements">Ce qui a changé</h2>
+    <p class="intro">Les versions sont présentées de la plus récente à la plus ancienne. Chaque version indique les remarques qui y sont parties : cliquez sur une référence pour aller directement à la ligne correspondante du registre.</p>
 
-<h2>Comment lire les statuts</h2>
-<table>
-  <thead><tr><th style="width:12rem;">Statut</th><th>Signification</th></tr></thead>
-  <tbody>
-    <tr><td><span class="tag t-attente">à instruire</span></td><td>Demande reçue et enregistrée, pas encore analysée.</td></tr>
-    <tr><td><span class="tag t-cours">à arbitrer</span></td><td>Analysée, mais elle nécessite un arbitrage ou un élément complémentaire avant d'être réalisée.</td></tr>
-    <tr><td><span class="tag t-preprod">partiellement traitée</span></td><td>Ce qui pouvait être vérifié est en ligne. Le reste attend un élément que la préfecture doit transmettre.</td></tr>
-    <tr><td><span class="tag t-publie">publiée</span></td><td>En ligne. La colonne « version » indique dans quelle publication elle est partie.</td></tr>
-    <tr><td><span class="tag t-refuse">écartée</span></td><td>Non retenue, avec son motif. Conservée au registre pour mémoire.</td></tr>
-  </tbody>
-</table>
+    <div class="kpis">
+      <div class="kpi"><b>36</b><span>remarques enregistrées</span></div>
+      <div class="kpi"><b>32</b><span>traitées et en ligne</span></div>
+      <div class="kpi"><b>1</b><span>partiellement traitées, en attente d'une pièce</span></div>
+      <div class="kpi"><b>3</b><span>en attente d'arbitrage</span></div>
+    </div>
 
-<h2>Comment adresser une remarque</h2>
-<p>Toute remarque est bienvenue, qu'elle porte sur un contenu, un chiffre, une référence
-juridique, une formulation ou un défaut d'affichage. Le plus utile est d'indiquer le module
-concerné et, si possible, l'étape. Les remarques sont enregistrées avec une référence
-(par exemple <code>C07</code>) que vous pouvez ensuite citer dans vos échanges pour désigner
-un point sans ambiguïté.</p>
+    <div class="pastilles" id="pastilles-version" hidden>
+        <button type="button" class="pastille actif" data-vue="tout">Tout l'historique</button>
+        <button type="button" class="pastille" data-vue="v1.3">v1.3</button>
+        <button type="button" class="pastille" data-vue="v1.2">v1.2</button>
+        <button type="button" class="pastille" data-vue="v1.1">v1.1</button>
+        <button type="button" class="pastille" data-vue="v1.0">v1.0</button>
+    </div>
 
-<div class="encadre">
-  <h3>Une règle éditoriale à connaître</h3>
-  <p>Le site est destiné aux cinq départements de la région. Il retient donc ce qui leur est
-  commun et signale explicitement les variations locales, par une formule du type
-  « selon votre département, à voir avec votre coordination ». Une remarque propre à un seul
-  département sera donc traitée sous cette forme plutôt qu'intégrée telle quelle, afin que le
-  support reste exact partout.</p>
-</div>
+    <section class="bloc-version" data-version="v1.3" id="version-v1.3">
+      <h3>v1.3 — 31/07/2026 <span class="tag t-publie">version en ligne</span></h3>
+      <p class="chapo-v">Le comité interministériel de la sécurité routière développé dans le module 2.</p>
+      <p>La carte du CISR passe de deux lignes à un exposé complet de ses missions, de sa composition et de son rythme réel de réunion, établi sur le décret du 15 mai 1975 modifié. Un encadré présente le comité du 17 juillet 2023, le dernier en date, avec son diagnostic, ses sept axes et cinq de ses trente-huit mesures détaillées : le soutien renforcé aux associations et l'appel à projets national, la réserve opérationnelle annoncée mais jamais créée, le parcours d'e-formation grand public, l'homicide routier et le grand excès de vitesse, et l'association des employeurs au risque routier professionnel. Une erreur de date est corrigée au passage : les 38 mesures étaient attribuées au comité de 2018. Le moteur de progression du module accepte désormais plusieurs questions par étape.</p>
+      <p class="refs"><span class="etiq">Demandes parties dans cette version</span> <a class="puce" href="#M04">M04</a> <a class="puce" href="#M05">M05</a> <a class="puce" href="#M06">M06</a> <a class="puce" href="#M07">M07</a></p>
+      <p class="etiquette">Étiquette de restauration : <code>v1.3-cisr-2023</code></p>
+    </section>
+    <section class="bloc-version" data-version="v1.2" id="version-v1.2">
+      <h3>v1.2 — 31/07/2026</h3>
+      <p class="chapo-v">Recette de la v1.1 par une relecture experte, et correction des neuf points bloquants relevés.</p>
+      <p>Sanction EDPm hors agglomération portée à 135 € sur la fiche imprimable, affirmation non vérifiée sur les arrêtés casque des cinq départements retirée des modules 7 et 8 et de la fiche, contenu sur le permis B à 17 ans rétabli dans le module 8, superlatif EDPm nuancé, sur-risque des 75 ans et plus rattaché à la seule mortalité, vocabulaire de la coordination harmonisé sur quatre modules, affirmation sur la convention de mise à disposition retirée du module 1, fins de module rendues identiques sur les neuf modules, impression des fiches mémo corrigée. Aucun bug fonctionnel n'a été trouvé dans la v1.1.</p>
+      <p class="refs"><span class="etiq">Demandes parties dans cette version</span> <a class="puce" href="#C01">C01</a> <a class="puce" href="#C06">C06</a> <a class="puce" href="#C17">C17</a> <a class="puce" href="#C21">C21</a> <a class="puce" href="#R01">R01</a> <a class="puce" href="#R02">R02</a> <a class="puce" href="#R03">R03</a> <a class="puce" href="#R04">R04</a> <a class="puce" href="#R05">R05</a> <a class="puce" href="#R06">R06</a></p>
+      <p class="etiquette">Étiquette de restauration : <code>v1.2-recette</code></p>
+    </section>
+    <section class="bloc-version" data-version="v1.1" id="version-v1.1">
+      <h3>v1.1 — 31/07/2026</h3>
+      <p class="chapo-v">Premier retour de la coordination départementale, quatorze demandes traitées.</p>
+      <p>DGO présenté comme départemental et non national, bulletin d'analyse des accidents corporels détaillé, deux définitions de blessé rétablies, protoxyde d'azote ajouté avec l'atteinte de la gaine de myéline, équipements de protection traités mode par mode, nouvelle page de fiches mémo imprimables, actualités réglementaires développées. Le compte rendu initial annonçait seize demandes traitées : le décompte a été rectifié le 31 juillet 2026, voir R06.</p>
+      <p class="refs"><span class="etiq">Demandes parties dans cette version</span> <a class="puce" href="#C05">C05</a> <a class="puce" href="#C07">C07</a> <a class="puce" href="#C08">C08</a> <a class="puce" href="#C09">C09</a> <a class="puce" href="#C10">C10</a> <a class="puce" href="#C11">C11</a> <a class="puce" href="#C12">C12</a> <a class="puce" href="#C13">C13</a> <a class="puce" href="#C14">C14</a> <a class="puce" href="#C15">C15</a> <a class="puce" href="#C16">C16</a> <a class="puce" href="#C17">C17</a> <a class="puce" href="#C18">C18</a> <a class="puce" href="#C19">C19</a> <a class="puce" href="#C20">C20</a></p>
+      <p class="etiquette">Étiquette de restauration : <code>v1.1-retour-coordination</code></p>
+    </section>
+    <section class="bloc-version" data-version="v1.0" id="version-v1.0">
+      <h3>v1.0 — 30/07/2026</h3>
+      <p class="chapo-v">Première version transmise.</p>
+      <p>Neuf modules, cinq outils, statistiques ONISR 2025, courbe historique, quatre éléments de l'accident, mentions légales et protection des données, correctifs issus des trois tests utilisateurs et des dix points de blocage de l'audit design.</p>
+      <p class="refs"><span class="etiq">Demandes parties dans cette version</span> <a class="puce" href="#A01">A01</a> <a class="puce" href="#A02">A02</a> <a class="puce" href="#M01">M01</a> <a class="puce" href="#M02">M02</a> <a class="puce" href="#M03">M03</a></p>
+      <p class="etiquette">Étiquette de restauration : <code>v1.0-presentation-adeline</code></p>
+    </section>
 
-<h2>Traçabilité des versions</h2>
-<div class="table-scroll">
-<table>
-  <thead><tr><th style="width:7rem;">Version</th><th style="width:7rem;">Date</th><th>Contenu</th></tr></thead>
-  <tbody>
-<tr>
-      <td><code>v1.3</code></td>
-      <td>31/07/2026</td>
-      <td><strong>Le comité interministériel de la sécurité routière développé dans le module 2.</strong> La carte du CISR passe de deux lignes à un exposé complet de ses missions, de sa composition et de son rythme réel de réunion, établi sur le décret du 15 mai 1975 modifié. Un encadré présente le comité du 17 juillet 2023, le dernier en date, avec son diagnostic, ses sept axes et cinq de ses trente-huit mesures détaillées : le soutien renforcé aux associations et l'appel à projets national, la réserve opérationnelle annoncée mais jamais créée, le parcours d'e-formation grand public, l'homicide routier et le grand excès de vitesse, et l'association des employeurs au risque routier professionnel. Une erreur de date est corrigée au passage : les 38 mesures étaient attribuées au comité de 2018. Le moteur de progression du module accepte désormais plusieurs questions par étape. Étiquette <code>v1.3-cisr-2023</code>.</td>
-    </tr>
-    <tr>
-      <td><code>v1.2</code></td>
-      <td>31/07/2026</td>
-      <td><strong>Recette de la v1.1 par une relecture experte, et correction des neuf points bloquants relevés.</strong> Sanction EDPm hors agglomération portée à 135 € sur la fiche imprimable, affirmation non vérifiée sur les arrêtés casque des cinq départements retirée des modules 7 et 8 et de la fiche, contenu sur le permis B à 17 ans rétabli dans le module 8, superlatif EDPm nuancé, sur-risque des 75 ans et plus rattaché à la seule mortalité, vocabulaire de la coordination harmonisé sur quatre modules, affirmation sur la convention de mise à disposition retirée du module 1, fins de module rendues identiques sur les neuf modules, impression des fiches mémo corrigée. Aucun bug fonctionnel n'a été trouvé dans la v1.1. Étiquette <code>v1.2-recette</code>.</td>
-    </tr>
-    <tr>
-      <td><code>v1.1</code></td>
-      <td>31/07/2026</td>
-      <td>Premier retour de la coordination départementale, quatorze demandes traitées. DGO présenté comme départemental et non national, bulletin d'analyse des accidents corporels détaillé, deux définitions de blessé rétablies, protoxyde d'azote ajouté avec l'atteinte de la gaine de myéline, équipements de protection traités mode par mode, nouvelle page de fiches mémo imprimables, actualités réglementaires développées. Étiquette <code>v1.1-retour-coordination</code>. <em>Le compte rendu initial annonçait seize demandes traitées : le décompte a été rectifié le 31 juillet 2026, voir R06.</em></td>
-    </tr>
-    <tr>
-      <td><code>v1.0</code></td>
-      <td>30/07/2026</td>
-      <td>Version transmise à Adeline. Neuf modules, cinq outils, statistiques ONISR 2025, courbe historique, quatre éléments de l'accident, mentions légales et protection des données, correctifs issus des trois tests utilisateurs et des dix points de blocage de l'audit design.</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-<p>Chaque publication est étiquetée dans l'historique du projet. Toute version antérieure peut
-être restaurée à l'identique, ce qui permet de revenir en arrière si une modification ne
-convient pas après coup.</p>
+    <h2 id="registre">Registre des remarques</h2>
+    <p class="intro">Toutes les remarques reçues, d'où qu'elles viennent, avec leur analyse, leur décision et la version dans laquelle elles ont été publiées. Chaque remarque porte une référence — <code>C07</code>, <code>R03</code> — à citer dans les échanges pour désigner un point sans ambiguïté.</p>
+
+    <div class="filtres" id="filtres" hidden>
+      <div>
+        <label for="f-statut">Statut</label>
+        <select id="f-statut"><option value="">Tous les statuts</option><option value="arbitrer">à arbitrer</option><option value="partielle">partiellement traitée</option><option value="publiee">publiée</option></select>
+      </div>
+      <div>
+        <label for="f-theme">Où</label>
+        <select id="f-theme"><option value="">Tout le parcours</option><option value="m1">Module 1 · Être IDSR</option><option value="m2">Module 2 · Organisation</option><option value="m3">Module 3 · Posture</option><option value="m4">Module 4 · Enjeux et chiffres</option><option value="m6">Module 6 · Comprendre l&#x27;accident</option><option value="m7">Module 7 · Apports techniques</option><option value="m8">Module 8 · Valise et communication</option><option value="memo">Fiches mémo</option><option value="transverse">Tout le parcours</option><option value="suivi">Documents de suivi</option></select>
+      </div>
+      <div>
+        <label for="f-version">Version</label>
+        <select id="f-version"><option value="">Toutes les versions</option><option value="v1.3">v1.3</option><option value="v1.2">v1.2</option><option value="v1.1">v1.1</option><option value="v1.0">v1.0</option></select>
+      </div>
+      <div>
+        <label for="f-texte">Rechercher</label>
+        <input type="search" id="f-texte" placeholder="un mot, un article, une référence…" />
+      </div>
+      <p class="compteur" id="compteur" role="status"></p>
+    </div>
+
+    <div class="table-scroll">
+    <table>
+      <caption class="cache">Registre des remarques reçues sur l'espace e-learning IDSR</caption>
+      <thead><tr>
+        <th scope="col" style="width:4%;">Réf.</th>
+        <th scope="col" style="width:7%;">Reçue le</th>
+        <th scope="col" style="width:12%;">Demandeur</th>
+        <th scope="col" style="width:44%;">Remarque et traitement</th>
+        <th scope="col" style="width:12%;">Où</th>
+        <th scope="col" style="width:11%;">Statut</th>
+        <th scope="col" style="width:10%;">Version</th>
+      </tr></thead>
+      <tbody id="corps-registre">
+      <tr id="C01" data-statut="publiee" data-themes="m1" data-version="v1.2" data-rech="c01 lea — coordination departementale (retour n° 1) module 1, carte « origines diverses » la notion de « convention de mise a disposition signee entre l&#x27;employeur et la prefecture » est inexacte : aucun texte national ne l&#x27;etablit. le mecanisme reel est la fiche d&#x27;engagement idsr contresignee par le responsable de service, avec un nombre de jours. reecrire la carte des viviers. l&#x27;affirmation inexacte est retiree. la carte indique desormais que la disponibilite sur le temps de travail releve d&#x27;un accord avec l&#x27;employeur et qu&#x27;aucun texte national n&#x27;organise cette mise a disposition. la description du mecanisme reel reste suspendue a la communication du modele de fiche d&#x27;engagement. publiee v1.2 module 1 · etre idsr">
+        <th scope="row"><a class="ancre" href="#C01" title="Lien direct vers C01">C01</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Léa — coordination départementale (retour n° 1)</td>
+        <td><p>La notion de « convention de mise à disposition signée entre l'employeur et la préfecture » est inexacte : aucun texte national ne l'établit. Le mécanisme réel est la fiche d'engagement IDSR contresignée par le responsable de service, avec un nombre de jours. Réécrire la carte des viviers.</p><p class="trait"><span class="etiq">Traitement</span> L'affirmation inexacte est retirée. La carte indique désormais que la disponibilité sur le temps de travail relève d'un accord avec l'employeur et qu'aucun texte national n'organise cette mise à disposition. La description du mécanisme réel reste suspendue à la communication du modèle de fiche d'engagement.</p></td>
+        <td class="ou">Module 1, carte « Origines diverses »</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.2</td>
+      </tr>
+      <tr id="C02" data-statut="arbitrer" data-themes="m1" data-version="–" data-rech="c02 lea — coordination departementale (retour n° 1) module 1, etape engagement ajouter les autorisations d&#x27;absence : aucun droit a asa (cgfp art. l. 622-1, liste limitative), decision discretionnaire du chef de service. repondre par avance a la question que poseront les idsr agents publics. a arbitrer – module 1 · etre idsr">
+        <th scope="row"><a class="ancre" href="#C02" title="Lien direct vers C02">C02</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Léa — coordination départementale (retour n° 1)</td>
+        <td><p>Ajouter les autorisations d'absence : aucun droit à ASA (CGFP art. L. 622-1, liste limitative), décision discrétionnaire du chef de service. Répondre par avance à la question que poseront les IDSR agents publics.</p></td>
+        <td class="ou">Module 1, étape engagement</td>
+        <td class="nowrap"><span class="tag t-cours">à arbitrer</span></td>
+        <td class="nowrap">–</td>
+      </tr>
+      <tr id="C03" data-statut="arbitrer" data-themes="m1 m3" data-version="–" data-rech="c03 lea — coordination departementale (retour n° 1) modules 1 et 3 mentionner l&#x27;ordre de mission, obligatoire avant chaque action et condition de la couverture par l&#x27;etat au titre du collaborateur occasionnel du service public. a arbitrer – module 1 · etre idsr module 3 · posture">
+        <th scope="row"><a class="ancre" href="#C03" title="Lien direct vers C03">C03</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Léa — coordination départementale (retour n° 1)</td>
+        <td><p>Mentionner l'ordre de mission, obligatoire avant chaque action et condition de la couverture par l'État au titre du collaborateur occasionnel du service public.</p></td>
+        <td class="ou">Modules 1 et 3</td>
+        <td class="nowrap"><span class="tag t-cours">à arbitrer</span></td>
+        <td class="nowrap">–</td>
+      </tr>
+      <tr id="C04" data-statut="arbitrer" data-themes="m1" data-version="sans objet" data-rech="c04 lea — coordination departementale (retour n° 1) module 1 actualiser le fondement de la protection fonctionnelle : citer le code general de la fonction publique (art. l. 134-1) et non l&#x27;article 11 de la loi de 1983, abroge et codifie depuis le 1 er mars 2022. verification du 31 juillet 2026 : le site ne traite pas de la protection fonctionnelle et n&#x27;a jamais cite la loi de 1983. il n&#x27;y a donc rien a corriger. la demande se transforme en question : faut-il ajouter ce sujet au module 1 ? a decider avec la coordination. a arbitrer sans objet module 1 · etre idsr">
+        <th scope="row"><a class="ancre" href="#C04" title="Lien direct vers C04">C04</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Léa — coordination départementale (retour n° 1)</td>
+        <td><p>Actualiser le fondement de la protection fonctionnelle : citer le code général de la fonction publique (art. L. 134-1) et non l'article 11 de la loi de 1983, abrogé et codifié depuis le 1<sup>er</sup> mars 2022.</p><p class="trait"><span class="etiq">Traitement</span> Vérification du 31 juillet 2026 : le site ne traite pas de la protection fonctionnelle et n'a jamais cité la loi de 1983. Il n'y a donc rien à corriger. La demande se transforme en question : faut-il ajouter ce sujet au module 1 ? À décider avec la coordination.</p></td>
+        <td class="ou">Module 1</td>
+        <td class="nowrap"><span class="tag t-cours">à arbitrer</span></td>
+        <td class="nowrap">sans objet</td>
+      </tr>
+      <tr id="C05" data-statut="publiee" data-themes="m2" data-version="v1.1" data-rech="c05 lea — coordination departementale (retour n° 1) module 2, etape 3 le pdasr est cite plusieurs fois avant d&#x27;etre defini. deplacer l&#x27;encadre des documents cles avant la description des acteurs departementaux. publiee v1.1 module 2 · organisation">
+        <th scope="row"><a class="ancre" href="#C05" title="Lien direct vers C05">C05</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Léa — coordination départementale (retour n° 1)</td>
+        <td><p>Le PDASR est cité plusieurs fois avant d'être défini. Déplacer l'encadré des documents clés avant la description des acteurs départementaux.</p></td>
+        <td class="ou">Module 2, étape 3</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.1</td>
+      </tr>
+      <tr id="C06" data-statut="publiee" data-themes="m1 m2 m3 m8" data-version="v1.2" data-rech="c06 lea — coordination departementale (retour n° 1) modules 1, 2, 3 et 8 le coordinateur n&#x27;est pas seul : preciser qu&#x27;une equipe peut l&#x27;accompagner (coordinateur adjoint, animateurs pdasr) et que selon les departements ce ne sont pas les memes personnes qui gerent les ordres de mission, le materiel et l&#x27;astreinte pendant une action. classee a tort en arbitrage, alors qu&#x27;il s&#x27;agissait d&#x27;un remplacement de vocabulaire. « la coordination securite routiere » est la formulation commune aux cinq departements ; « le coordinateur » est la particularite locale. la carte du module 2 est reecrite en ce sens, avec la nuance equipe ou personne seule, et le vocabulaire est harmonise dans les modules 1, 2, 3 et 8, y compris dans les quiz et les exercices de classement. publiee v1.2 module 1 · etre idsr module 2 · organisation module 3 · posture module 8 · valise et communication">
+        <th scope="row"><a class="ancre" href="#C06" title="Lien direct vers C06">C06</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Léa — coordination départementale (retour n° 1)</td>
+        <td><p>Le coordinateur n'est pas seul : préciser qu'une équipe peut l'accompagner (coordinateur adjoint, animateurs PDASR) et que selon les départements ce ne sont pas les mêmes personnes qui gèrent les ordres de mission, le matériel et l'astreinte pendant une action.</p><p class="trait"><span class="etiq">Traitement</span> Classée à tort en arbitrage, alors qu'il s'agissait d'un remplacement de vocabulaire. « La coordination sécurité routière » est la formulation commune aux cinq départements ; « le coordinateur » est la particularité locale. La carte du module 2 est réécrite en ce sens, avec la nuance équipe ou personne seule, et le vocabulaire est harmonisé dans les modules 1, 2, 3 et 8, y compris dans les quiz et les exercices de classement.</p></td>
+        <td class="ou">Modules 1, 2, 3 et 8</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.2</td>
+      </tr>
+      <tr id="C07" data-statut="publiee" data-themes="m4" data-version="v1.1" data-rech="c07 lea — coordination departementale (retour n° 1) module 4, etape 2 le module laisse croire a un dgo unique national. ecrire que chaque departement a son propre dgo, signe par son prefet et ses partenaires, et qu&#x27;il reprend obligatoirement les quatre enjeux nationaux plus deux enjeux locaux facultatifs au maximum. cadrage : texte dsr du 25 mai 2022 et vademecum du 6 septembre 2022. publiee v1.1 module 4 · enjeux et chiffres">
+        <th scope="row"><a class="ancre" href="#C07" title="Lien direct vers C07">C07</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Léa — coordination départementale (retour n° 1)</td>
+        <td><p>Le module laisse croire à un DGO unique national. Écrire que chaque département a son propre DGO, signé par son préfet et ses partenaires, et qu'il reprend obligatoirement les quatre enjeux nationaux plus deux enjeux locaux facultatifs au maximum. Cadrage : texte DSR du 25 mai 2022 et vademecum du 6 septembre 2022.</p></td>
+        <td class="ou">Module 4, étape 2</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.1</td>
+      </tr>
+      <tr id="C08" data-statut="publiee" data-themes="m6" data-version="v1.1" data-rech="c08 lea — coordination departementale (retour n° 1) module 6, etape 1 completer la definition du baac : rempli par les forces de l&#x27;ordre pour chaque accident corporel, puis transmis a l&#x27;observatoire qui en etablit les donnees d&#x27;accidentalite. publiee v1.1 module 6 · comprendre l&#x27;accident">
+        <th scope="row"><a class="ancre" href="#C08" title="Lien direct vers C08">C08</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Léa — coordination départementale (retour n° 1)</td>
+        <td><p>Compléter la définition du BAAC : rempli par les forces de l'ordre pour chaque accident corporel, puis transmis à l'observatoire qui en établit les données d'accidentalité.</p></td>
+        <td class="ou">Module 6, étape 1</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.1</td>
+      </tr>
+      <tr id="C09" data-statut="publiee" data-themes="m6" data-version="v1.1" data-rech="c09 lea — coordination departementale (retour n° 1) module 6, etape 1 retablir la definition du blesse hospitalise plus de 24 heures a cote de celle du blesse grave mais3+. les deux figurent au glossaire onisr et la confusion entre elles est un piege classique en animation. publiee v1.1 module 6 · comprendre l&#x27;accident">
+        <th scope="row"><a class="ancre" href="#C09" title="Lien direct vers C09">C09</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Léa — coordination départementale (retour n° 1)</td>
+        <td><p>Rétablir la définition du blessé hospitalisé plus de 24 heures à côté de celle du blessé grave MAIS3+. Les deux figurent au glossaire ONISR et la confusion entre elles est un piège classique en animation.</p></td>
+        <td class="ou">Module 6, étape 1</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.1</td>
+      </tr>
+      <tr id="C10" data-statut="publiee" data-themes="m7" data-version="v1.1" data-rech="c10 lea — coordination departementale (retour n° 1) module 7, etape 1 · alcool preciser que les 10 g d&#x27;alcool pur correspondent a une dose bar, et alerter sur les doses servies a la maison, souvent superieures. publiee v1.1 module 7 · apports techniques">
+        <th scope="row"><a class="ancre" href="#C10" title="Lien direct vers C10">C10</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Léa — coordination départementale (retour n° 1)</td>
+        <td><p>Préciser que les 10 g d'alcool pur correspondent à une dose bar, et alerter sur les doses servies à la maison, souvent supérieures.</p></td>
+        <td class="ou">Module 7, étape 1 · Alcool</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.1</td>
+      </tr>
+      <tr id="C11" data-statut="publiee" data-themes="m7" data-version="v1.1" data-rech="c11 lea — coordination departementale (retour n° 1) module 7, etape 1 · alcool ajouter un vrai/faux sur les idees recues. ni le cafe, ni le repas, ni le sport, ni la douche n&#x27;accelerent l&#x27;elimination : seul le temps compte. publiee v1.1 module 7 · apports techniques">
+        <th scope="row"><a class="ancre" href="#C11" title="Lien direct vers C11">C11</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Léa — coordination départementale (retour n° 1)</td>
+        <td><p>Ajouter un vrai/faux sur les idées reçues. Ni le café, ni le repas, ni le sport, ni la douche n'accélèrent l'élimination : seul le temps compte.</p></td>
+        <td class="ou">Module 7, étape 1 · Alcool</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.1</td>
+      </tr>
+      <tr id="C12" data-statut="publiee" data-themes="m7" data-version="v1.1" data-rech="c12 lea — coordination departementale (retour n° 1) module 7, etape 1 · alcool donner l&#x27;ordre de grandeur « 0,5 g/l, environ deux verres ». reformule pour que l&#x27;ordre de grandeur ne devienne pas une regle de conversion. publiee v1.1 module 7 · apports techniques">
+        <th scope="row"><a class="ancre" href="#C12" title="Lien direct vers C12">C12</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Léa — coordination départementale (retour n° 1)</td>
+        <td><p>Donner l'ordre de grandeur « 0,5 g/L, environ deux verres ».</p><p class="trait"><span class="etiq">Traitement</span> Reformulé pour que l'ordre de grandeur ne devienne pas une règle de conversion.</p></td>
+        <td class="ou">Module 7, étape 1 · Alcool</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.1</td>
+      </tr>
+      <tr id="C13" data-statut="publiee" data-themes="m7" data-version="v1.1" data-rech="c13 lea — coordination departementale (retour n° 1) module 7, etape 2 · stupefiants ajouter le protoxyde d&#x27;azote. non classe stupefiant a ce jour, donc hors du champ de l&#x27;article l. 235-1. la loi creant le delit de conduite apres consommation de substances psychoactives a ete adoptee le 21 juillet 2026 mais n&#x27;est pas encore en vigueur. a ecrire comme tel. publiee v1.1 module 7 · apports techniques">
+        <th scope="row"><a class="ancre" href="#C13" title="Lien direct vers C13">C13</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Léa — coordination départementale (retour n° 1)</td>
+        <td><p>Ajouter le protoxyde d'azote. Non classé stupéfiant à ce jour, donc hors du champ de l'article L. 235-1. La loi créant le délit de conduite après consommation de substances psychoactives a été adoptée le 21 juillet 2026 mais n'est pas encore en vigueur. À écrire comme tel.</p></td>
+        <td class="ou">Module 7, étape 2 · Stupéfiants</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.1</td>
+      </tr>
+      <tr id="C14" data-statut="publiee" data-themes="m7" data-version="v1.1" data-rech="c14 lea — coordination departementale (retour n° 1) module 7, etape 3 · vitesse ajouter que la vitesse aggrave la gravite de tous les accidents, meme lorsqu&#x27;elle n&#x27;en est pas la cause. publiee v1.1 module 7 · apports techniques">
+        <th scope="row"><a class="ancre" href="#C14" title="Lien direct vers C14">C14</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Léa — coordination départementale (retour n° 1)</td>
+        <td><p>Ajouter que la vitesse aggrave la gravité de tous les accidents, même lorsqu'elle n'en est pas la cause.</p></td>
+        <td class="ou">Module 7, étape 3 · Vitesse</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.1</td>
+      </tr>
+      <tr id="C15" data-statut="publiee" data-themes="m7" data-version="v1.1" data-rech="c15 lea — coordination departementale (retour n° 1) module 7, etape 3 · equipements les gants sont obligatoires en deux-roues motorise pour le conducteur et le passager depuis le 20 novembre 2016 (art. r. 431-1-2), sanction 68 € et un point. le module ne cite que le casque. publiee v1.1 module 7 · apports techniques">
+        <th scope="row"><a class="ancre" href="#C15" title="Lien direct vers C15">C15</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Léa — coordination départementale (retour n° 1)</td>
+        <td><p>Les gants sont obligatoires en deux-roues motorisé pour le conducteur et le passager depuis le 20 novembre 2016 (art. R. 431-1-2), sanction 68 € et un point. Le module ne cite que le casque.</p></td>
+        <td class="ou">Module 7, étape 3 · Équipements</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.1</td>
+      </tr>
+      <tr id="C16" data-statut="publiee" data-themes="m7" data-version="v1.1" data-rech="c16 lea — coordination departementale (retour n° 1) module 7, etape 3 · equipements ajouter le casque obligatoire pour les conducteurs et passagers de cycle de moins de 12 ans (art. r. 431-1-3), seul l&#x27;adulte accompagnant etant verbalisable, 135 € sans retrait de point. publiee v1.1 module 7 · apports techniques">
+        <th scope="row"><a class="ancre" href="#C16" title="Lien direct vers C16">C16</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Léa — coordination départementale (retour n° 1)</td>
+        <td><p>Ajouter le casque obligatoire pour les conducteurs et passagers de cycle de moins de 12 ans (art. R. 431-1-3), seul l'adulte accompagnant étant verbalisable, 135 € sans retrait de point.</p></td>
+        <td class="ou">Module 7, étape 3 · Équipements</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.1</td>
+      </tr>
+      <tr id="C17" data-statut="partielle" data-themes="m7 m8 memo" data-version="v1.1 puis v1.2" data-rech="c17 lea — coordination departementale (retour n° 1) modules 7 et 8, fiche memo edpm casque edpm : non obligatoire en agglomeration au niveau national, mais les cinq departements des hauts-de-france auraient pris un arrete prefectoral en 2026, avec une sanction de 35 € et non de 135 €. reprise du 31 juillet 2026 : la v1.1 affirmait a tort que les cinq departements avaient pris un arrete, alors qu&#x27;aucun de ces textes n&#x27;a ete communique ni lu. l&#x27;affirmation et le montant de 35 € sont retires du module 7, du module 8 et de la fiche memo. ne subsiste que la regle nationale, verifiee sur l&#x27;article r. 412-43-1, et l&#x27;indication qu&#x27;une autorite de police peut imposer le casque localement, avec obligation de lire l&#x27;arrete avant toute annonce. la partie locale reste suspendue a la communication des arretes. partiellement traitee v1.1 puis v1.2 module 7 · apports techniques module 8 · valise et communication fiches memo">
+        <th scope="row"><a class="ancre" href="#C17" title="Lien direct vers C17">C17</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Léa — coordination départementale (retour n° 1)</td>
+        <td><p>Casque EDPm : non obligatoire en agglomération au niveau national, mais les cinq départements des Hauts-de-France auraient pris un arrêté préfectoral en 2026, avec une sanction de 35 € et non de 135 €.</p><p class="trait"><span class="etiq">Traitement</span> Reprise du 31 juillet 2026 : la v1.1 affirmait à tort que les cinq départements avaient pris un arrêté, alors qu'aucun de ces textes n'a été communiqué ni lu. L'affirmation et le montant de 35 € sont retirés du module 7, du module 8 et de la fiche mémo. Ne subsiste que la règle nationale, vérifiée sur l'article R. 412-43-1, et l'indication qu'une autorité de police peut imposer le casque localement, avec obligation de lire l'arrêté avant toute annonce. <strong>La partie locale reste suspendue à la communication des arrêtés.</strong></p></td>
+        <td class="ou">Modules 7 et 8, fiche mémo EDPm</td>
+        <td class="nowrap"><span class="tag t-preprod">partiellement traitée</span></td>
+        <td class="nowrap">v1.1 puis v1.2</td>
+      </tr>
+      <tr id="C18" data-statut="publiee" data-themes="memo" data-version="v1.1" data-rech="c18 lea — coordination departementale (retour n° 1) nouveau contenu creer des fiches memo par theme sur le modele des fiches velo et edpm (une page, equipements obligatoires, conditions, interdictions, circulation). realise sous forme d&#x27;une page de fiches imprimables. extension de perimetre par rapport a la commande initiale. publiee v1.1 fiches memo">
+        <th scope="row"><a class="ancre" href="#C18" title="Lien direct vers C18">C18</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Léa — coordination départementale (retour n° 1)</td>
+        <td><p>Créer des fiches mémo par thème sur le modèle des fiches vélo et EDPM (une page, équipements obligatoires, conditions, interdictions, circulation).</p><p class="trait"><span class="etiq">Traitement</span> Réalisé sous forme d'une page de fiches imprimables. Extension de périmètre par rapport à la commande initiale.</p></td>
+        <td class="ou">Nouveau contenu</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.1</td>
+      </tr>
+      <tr id="C19" data-statut="publiee" data-themes="m8" data-version="v1.1" data-rech="c19 lea — coordination departementale (retour n° 1) module 8, etape 1 preciser que les outils de sensibilisation sont mis a disposition par la coordination securite routiere et qu&#x27;il ne s&#x27;agit pas d&#x27;une valise attribuee a chaque idsr. publiee v1.1 module 8 · valise et communication">
+        <th scope="row"><a class="ancre" href="#C19" title="Lien direct vers C19">C19</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Léa — coordination départementale (retour n° 1)</td>
+        <td><p>Préciser que les outils de sensibilisation sont mis à disposition par la coordination sécurité routière et qu'il ne s'agit pas d'une valise attribuée à chaque IDSR.</p></td>
+        <td class="ou">Module 8, étape 1</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.1</td>
+      </tr>
+      <tr id="C20" data-statut="publiee" data-themes="m8" data-version="v1.1" data-rech="c20 lea — coordination departementale (retour n° 1) module 8, etape 1 developper les actualites reglementaires : le paragraphe actuel est trop condense pour quelqu&#x27;un qui decouvre le sujet. retenir trois ou quatre textes recents et les expliquer. realise. le choix des textes retenus reste a faire valider par la coordination. publiee v1.1 module 8 · valise et communication">
+        <th scope="row"><a class="ancre" href="#C20" title="Lien direct vers C20">C20</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Léa — coordination départementale (retour n° 1)</td>
+        <td><p>Développer les actualités réglementaires : le paragraphe actuel est trop condensé pour quelqu'un qui découvre le sujet. Retenir trois ou quatre textes récents et les expliquer.</p><p class="trait"><span class="etiq">Traitement</span> Réalisé. Le choix des textes retenus reste à faire valider par la coordination.</p></td>
+        <td class="ou">Module 8, étape 1</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.1</td>
+      </tr>
+      <tr id="C21" data-statut="publiee" data-themes="transverse" data-version="v1.2" data-rech="c21 lea — coordination departementale (retour n° 1) tous les modules incoherence des boutons de fin de module, tantot « module suivant », tantot « retour a l&#x27;accueil ». rectification du 31 juillet 2026 : annoncee a tort comme deja corrigee en v1.0. elle ne l&#x27;etait pas. les modules 2 et 3 n&#x27;offraient aucun acces au module suivant, le module 3 dupliquait le retour a l&#x27;accueil et le module 8 le proposait trois fois. les neuf modules ont desormais la meme fin : un seul bouton principal « module suivant », et la meme barre de navigation. le module 9, dernier du parcours, renvoie a l&#x27;attestation. publiee v1.2 tout le parcours">
+        <th scope="row"><a class="ancre" href="#C21" title="Lien direct vers C21">C21</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Léa — coordination départementale (retour n° 1)</td>
+        <td><p>Incohérence des boutons de fin de module, tantôt « module suivant », tantôt « retour à l'accueil ».</p><p class="trait"><span class="etiq">Traitement</span> Rectification du 31 juillet 2026 : annoncée à tort comme déjà corrigée en v1.0. Elle ne l'était pas. Les modules 2 et 3 n'offraient aucun accès au module suivant, le module 3 dupliquait le retour à l'accueil et le module 8 le proposait trois fois. Les neuf modules ont désormais la même fin : un seul bouton principal « module suivant », et la même barre de navigation. Le module 9, dernier du parcours, renvoie à l'attestation.</p></td>
+        <td class="ou">Tous les modules</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.2</td>
+      </tr>
+      <tr id="R01" data-statut="publiee" data-themes="memo" data-version="v1.2" data-rech="r01 recette interne — relecture experte du 31/07/2026 fiche memo edpm erreur de sanction sur un document destine a l&#x27;impression. la fiche memo edpm indiquait 35 € pour la circulation hors agglomeration sur la chaussee. le v de l&#x27;article r. 412-43-1 renvoie aux contraventions de quatrieme classe, soit 135 €. corrige, avec la reference de l&#x27;article dans le tableau. publiee v1.2 fiches memo">
+        <th scope="row"><a class="ancre" href="#R01" title="Lien direct vers R01">R01</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Recette interne — relecture experte du 31/07/2026</td>
+        <td><p>Erreur de sanction sur un document destiné à l'impression. La fiche mémo EDPm indiquait 35 € pour la circulation hors agglomération sur la chaussée.</p><p class="trait"><span class="etiq">Traitement</span> Le V de l'article R. 412-43-1 renvoie aux contraventions de quatrième classe, soit 135 €. Corrigé, avec la référence de l'article dans le tableau.</p></td>
+        <td class="ou">Fiche mémo EDPm</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.2</td>
+      </tr>
+      <tr id="R02" data-statut="publiee" data-themes="m8" data-version="v1.2" data-rech="r02 recette interne — relecture experte du 31/07/2026 module 8, etape 1 regression introduite par la v1.1. la reecriture des actualites du module 8 avait supprime le contenu sur le permis b accessible des 17 ans, alors que la question de validation du module portait toujours dessus : le module n&#x27;etait plus validable honnetement. une carte « actualite 5 · permis b » retablit le contenu et le rattache a l&#x27;exposition des 18-24 ans. publiee v1.2 module 8 · valise et communication">
+        <th scope="row"><a class="ancre" href="#R02" title="Lien direct vers R02">R02</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Recette interne — relecture experte du 31/07/2026</td>
+        <td><p>Régression introduite par la v1.1. La réécriture des actualités du module 8 avait supprimé le contenu sur le permis B accessible dès 17 ans, alors que la question de validation du module portait toujours dessus : le module n'était plus validable honnêtement.</p><p class="trait"><span class="etiq">Traitement</span> Une carte « Actualité 5 · Permis B » rétablit le contenu et le rattache à l'exposition des 18-24 ans.</p></td>
+        <td class="ou">Module 8, étape 1</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.2</td>
+      </tr>
+      <tr id="R03" data-statut="publiee" data-themes="m4 m8 memo" data-version="v1.2" data-rech="r03 recette interne — relecture experte du 31/07/2026 module 4, module 8, fiche memo superlatif inexact. « la plus forte hausse de tout le bilan » a propos des edpm est vraie en proportion, pas en valeur absolue, ou la hausse des pietons est plus lourde. precise dans le module 4, la fiche memo et le module 8. publiee v1.2 module 4 · enjeux et chiffres module 8 · valise et communication fiches memo">
+        <th scope="row"><a class="ancre" href="#R03" title="Lien direct vers R03">R03</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Recette interne — relecture experte du 31/07/2026</td>
+        <td><p>Superlatif inexact. « La plus forte hausse de tout le bilan » à propos des EDPm est vraie en proportion, pas en valeur absolue, où la hausse des piétons est plus lourde.</p><p class="trait"><span class="etiq">Traitement</span> Précisé dans le module 4, la fiche mémo et le module 8.</p></td>
+        <td class="ou">Module 4, module 8, fiche mémo</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.2</td>
+      </tr>
+      <tr id="R04" data-statut="publiee" data-themes="m4" data-version="v1.2" data-rech="r04 recette interne — relecture experte du 31/07/2026 module 4, etape 2 sur-risque des 75 ans et plus mal attribue. le rapport d&#x27;environ une fois et demie porte sur la mortalite, du fait de la fragilite, et non sur les blessures graves. la carte « populations en surrisque » distingue desormais les deux, ce qui rend le chiffre defendable devant un public de seniors. publiee v1.2 module 4 · enjeux et chiffres">
+        <th scope="row"><a class="ancre" href="#R04" title="Lien direct vers R04">R04</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Recette interne — relecture experte du 31/07/2026</td>
+        <td><p>Sur-risque des 75 ans et plus mal attribué. Le rapport d'environ une fois et demie porte sur la mortalité, du fait de la fragilité, et non sur les blessures graves.</p><p class="trait"><span class="etiq">Traitement</span> La carte « populations en surrisque » distingue désormais les deux, ce qui rend le chiffre défendable devant un public de seniors.</p></td>
+        <td class="ou">Module 4, étape 2</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.2</td>
+      </tr>
+      <tr id="R05" data-statut="publiee" data-themes="memo" data-version="v1.2" data-rech="r05 recette interne — relecture experte du 31/07/2026 fiches memo, impression trois defauts d&#x27;impression : les tableaux de sanctions et les blocs d&#x27;objections pouvaient se couper entre deux pages, le tableau a defilement horizontal du mobile s&#x27;imprimait tronque, et la page annoncait « une fiche par page a4 » alors qu&#x27;aucune fiche n&#x27;y tenait. aucun bloc ne se coupe, un titre ne se detache plus de son contenu, le tableau reprend sa largeur normale sur papier, la typographie d&#x27;impression est resserree, et l&#x27;annonce est rectifiee. verifie sur un pdf reellement genere : les quatre fiches occupent huit pages, soit une feuille recto-verso par fiche, chaque fiche demarrant sur une nouvelle feuille. publiee v1.2 fiches memo">
+        <th scope="row"><a class="ancre" href="#R05" title="Lien direct vers R05">R05</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Recette interne — relecture experte du 31/07/2026</td>
+        <td><p>Trois défauts d'impression : les tableaux de sanctions et les blocs d'objections pouvaient se couper entre deux pages, le tableau à défilement horizontal du mobile s'imprimait tronqué, et la page annonçait « une fiche par page A4 » alors qu'aucune fiche n'y tenait.</p><p class="trait"><span class="etiq">Traitement</span> Aucun bloc ne se coupe, un titre ne se détache plus de son contenu, le tableau reprend sa largeur normale sur papier, la typographie d'impression est resserrée, et l'annonce est rectifiée. Vérifié sur un PDF réellement généré : les quatre fiches occupent huit pages, soit une feuille recto-verso par fiche, chaque fiche démarrant sur une nouvelle feuille.</p></td>
+        <td class="ou">Fiches mémo, impression</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.2</td>
+      </tr>
+      <tr id="R06" data-statut="publiee" data-themes="suivi" data-version="v1.2" data-rech="r06 recette interne — relecture experte du 31/07/2026 documents de suivi decompte errone dans le compte rendu de la v1.1, qui annoncait seize demandes traitees : il y en avait quatorze. c21 n&#x27;etait pas faite et c04 etait sans objet. le compte rendu et le registre sont corriges, et la version partagee en ligne regeneree. publiee v1.2 documents de suivi">
+        <th scope="row"><a class="ancre" href="#R06" title="Lien direct vers R06">R06</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Recette interne — relecture experte du 31/07/2026</td>
+        <td><p>Décompte erroné dans le compte rendu de la v1.1, qui annonçait seize demandes traitées : il y en avait quatorze. C21 n'était pas faite et C04 était sans objet.</p><p class="trait"><span class="etiq">Traitement</span> Le compte rendu et le registre sont corrigés, et la version partagée en ligne régénérée.</p></td>
+        <td class="ou">Documents de suivi</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.2</td>
+      </tr>
+      <tr id="M04" data-statut="publiee" data-themes="m2" data-version="v1.3" data-rech="m04 mickael lopes module 2, etape 1 developper le comite interministeriel de la securite routiere, et rattraper une erreur de date : le module attribuait « 38 mesures » au comite de janvier 2018, alors que ce comite en comptait 18. les 38 mesures sont celles du comite du 17 juillet 2023, le dernier en date. la carte cisr est reecrite a partir du decret n° 75-360 du 15 mai 1975 modifie : les cinq missions du comite, sa composition, sa presidence par le premier ministre ou par delegation le ministre charge de la securite routiere, le role de secretariat du delegue interministeriel, et le rythme reel de reunion, une fois par an en theorie, 2018 puis 2023 en pratique. un encadre nouveau presente le comite de 2023 : son diagnostic, ses sept axes, et cinq mesures detaillees, choisies parce qu&#x27;elles concernent directement les idsr. une seconde question de controle est ajoutee a l&#x27;etape. publiee v1.3 module 2 · organisation">
+        <th scope="row"><a class="ancre" href="#M04" title="Lien direct vers M04">M04</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Mickaël Lopes</td>
+        <td><p>Développer le comité interministériel de la sécurité routière, et rattraper une erreur de date : le module attribuait « 38 mesures » au comité de janvier 2018, alors que ce comité en comptait 18. Les 38 mesures sont celles du comité du 17 juillet 2023, le dernier en date.</p><p class="trait"><span class="etiq">Traitement</span> La carte CISR est réécrite à partir du décret n° 75-360 du 15 mai 1975 modifié : les cinq missions du comité, sa composition, sa présidence par le Premier ministre ou par délégation le ministre chargé de la sécurité routière, le rôle de secrétariat du délégué interministériel, et le rythme réel de réunion, une fois par an en théorie, 2018 puis 2023 en pratique. Un encadré nouveau présente le comité de 2023 : son diagnostic, ses sept axes, et cinq mesures détaillées, choisies parce qu'elles concernent directement les IDSR. Une seconde question de contrôle est ajoutée à l'étape.</p></td>
+        <td class="ou">Module 2, étape 1</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.3</td>
+      </tr>
+      <tr id="M05" data-statut="publiee" data-themes="m2" data-version="v1.3" data-rech="m05 mickael lopes module 2, etape 1 documenter l&#x27;ouverture des financements a de nouvelles associations. il s&#x27;agit de la mesure 20 du comite de 2023, « renforcer le soutien aux associations pour les mobiliser au plus pres des territoires » : creation d&#x27;un appel a projets national ouvert, avec renforcement du soutien financier et formation des associations a l&#x27;ingenierie de projet. le dossier de presse precise qu&#x27;environ 40 % des credits delegues aux prefets au titre du pdasr soutiennent deja les associations. la mesure est devenue une campagne annuelle de la delegation a la securite routiere : sessions 2024, 2025 et 2026, cette derniere ouverte du 19 mars au 24 avril 2026. la carte explique ce que cela change pour un idsr sur le terrain. publiee v1.3 module 2 · organisation">
+        <th scope="row"><a class="ancre" href="#M05" title="Lien direct vers M05">M05</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Mickaël Lopes</td>
+        <td><p>Documenter l'ouverture des financements à de nouvelles associations.</p><p class="trait"><span class="etiq">Traitement</span> Il s'agit de la mesure 20 du comité de 2023, « Renforcer le soutien aux associations pour les mobiliser au plus près des territoires » : création d'un appel à projets national ouvert, avec renforcement du soutien financier et formation des associations à l'ingénierie de projet. Le dossier de presse précise qu'environ 40 % des crédits délégués aux préfets au titre du PDASR soutiennent déjà les associations. La mesure est devenue une campagne annuelle de la Délégation à la sécurité routière : sessions 2024, 2025 et 2026, cette dernière ouverte du 19 mars au 24 avril 2026. La carte explique ce que cela change pour un IDSR sur le terrain.</p></td>
+        <td class="ou">Module 2, étape 1</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.3</td>
+      </tr>
+      <tr id="M06" data-statut="publiee" data-themes="m2" data-version="v1.3" data-rech="m06 mickael lopes module 2, etape 1 traiter la reserve operationnelle de securite routiere, mesure 18 du comite de 2023. elle concerne directement le reseau : le dossier de presse de l&#x27;etat constate que les idsr sont 3 000, que « le recrutement de nouveaux benevoles s&#x27;avere complique et leur nombre tend a diminuer », et annonce une reserve ouverte aux citoyens avec gratification financiere. verification faite avant publication : aucune trace de creation juridique de cette reserve, ni decret, ni arrete, ni dispositif ouvert aux candidatures, recherches menees sur legifrance et sur les sites officiels. le module l&#x27;ecrit donc comme une annonce non suivie d&#x27;effet a ce jour, et la question de controle porte sur ce point, car les idsr seront interroges dessus. a reprendre si un texte parait. publiee v1.3 module 2 · organisation">
+        <th scope="row"><a class="ancre" href="#M06" title="Lien direct vers M06">M06</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Mickaël Lopes</td>
+        <td><p>Traiter la réserve opérationnelle de sécurité routière, mesure 18 du comité de 2023. Elle concerne directement le réseau : le dossier de presse de l'État constate que les IDSR sont 3 000, que « le recrutement de nouveaux bénévoles s'avère compliqué et leur nombre tend à diminuer », et annonce une réserve ouverte aux citoyens avec gratification financière.</p><p class="trait"><span class="etiq">Traitement</span> Vérification faite avant publication : aucune trace de création juridique de cette réserve, ni décret, ni arrêté, ni dispositif ouvert aux candidatures, recherches menées sur Légifrance et sur les sites officiels. Le module l'écrit donc comme une annonce non suivie d'effet à ce jour, et la question de contrôle porte sur ce point, car les IDSR seront interrogés dessus. À reprendre si un texte paraît.</p></td>
+        <td class="ou">Module 2, étape 1</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.3</td>
+      </tr>
+      <tr id="M07" data-statut="publiee" data-themes="m2" data-version="v1.3" data-rech="m07 mickael lopes module 2, moteur de progression le moteur du module 2 n&#x27;acceptait qu&#x27;une question par etape. il indexait les questions sur le numero d&#x27;etape, ce qui empechait d&#x27;en ajouter une seconde sans casser le deverrouillage. une etape se deverrouille desormais lorsque tous ses groupes de cartes ont ete explores et que toutes ses questions ont ete validees, comme dans les autres modules. verifie en navigateur, y compris la reprise de session apres rechargement. publiee v1.3 module 2 · organisation">
+        <th scope="row"><a class="ancre" href="#M07" title="Lien direct vers M07">M07</a></th>
+        <td class="nowrap">31/07/2026</td>
+        <td class="dem">Mickaël Lopes</td>
+        <td><p>Le moteur du module 2 n'acceptait qu'une question par étape. Il indexait les questions sur le numéro d'étape, ce qui empêchait d'en ajouter une seconde sans casser le déverrouillage.</p><p class="trait"><span class="etiq">Traitement</span> Une étape se déverrouille désormais lorsque tous ses groupes de cartes ont été explorés et que toutes ses questions ont été validées, comme dans les autres modules. Vérifié en navigateur, y compris la reprise de session après rechargement.</p></td>
+        <td class="ou">Module 2, moteur de progression</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.3</td>
+      </tr>
+      <tr id="A01" data-statut="publiee" data-themes="transverse" data-version="v1.0" data-rech="a01 adeline rubben attestation, protection des donnees l&#x27;idsr doit-il saisir son identite pour l&#x27;attestation, et cela constitue-t-il une collecte de donnees personnelles ? reponse apportee par courriel, puis traduite dans le site : page de protection des donnees creee, attestation requalifiee en document declaratif, bouton d&#x27;effacement du nom pour les postes partages. publiee v1.0 tout le parcours">
+        <th scope="row"><a class="ancre" href="#A01" title="Lien direct vers A01">A01</a></th>
+        <td class="nowrap">30/07/2026</td>
+        <td class="dem">Adeline Rubben</td>
+        <td><p>L'IDSR doit-il saisir son identité pour l'attestation, et cela constitue-t-il une collecte de données personnelles ?</p><p class="trait"><span class="etiq">Traitement</span> Réponse apportée par courriel, puis traduite dans le site : page de protection des données créée, attestation requalifiée en document déclaratif, bouton d'effacement du nom pour les postes partagés.</p></td>
+        <td class="ou">Attestation, protection des données</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.0</td>
+      </tr>
+      <tr id="A02" data-statut="publiee" data-themes="m2" data-version="v1.0" data-rech="a02 adeline rubben module 2, memoire de progression le parcours peut-il etre suivi en plusieurs fois ? reponse apportee par courriel. correctif associe : la memoire de progression du module 2, qui ne s&#x27;enregistrait pas, a ete retablie. publiee v1.0 module 2 · organisation">
+        <th scope="row"><a class="ancre" href="#A02" title="Lien direct vers A02">A02</a></th>
+        <td class="nowrap">30/07/2026</td>
+        <td class="dem">Adeline Rubben</td>
+        <td><p>Le parcours peut-il être suivi en plusieurs fois ?</p><p class="trait"><span class="etiq">Traitement</span> Réponse apportée par courriel. Correctif associé : la mémoire de progression du module 2, qui ne s'enregistrait pas, a été rétablie.</p></td>
+        <td class="ou">Module 2, mémoire de progression</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.0</td>
+      </tr>
+      <tr id="M01" data-statut="publiee" data-themes="transverse" data-version="v1.0" data-rech="m01 mickael lopes tout le parcours reprendre toutes les statistiques sur le bilan onisr 2025, france metropolitaine, avec citation de la source partout. publiee v1.0 tout le parcours">
+        <th scope="row"><a class="ancre" href="#M01" title="Lien direct vers M01">M01</a></th>
+        <td class="nowrap">30/07/2026</td>
+        <td class="dem">Mickaël Lopes</td>
+        <td><p>Reprendre toutes les statistiques sur le bilan ONISR 2025, France métropolitaine, avec citation de la source partout.</p></td>
+        <td class="ou">Tout le parcours</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.0</td>
+      </tr>
+      <tr id="M02" data-statut="publiee" data-themes="m4" data-version="v1.0" data-rech="m02 mickael lopes module 4 integrer la courbe de la mortalite routiere depuis 1970 avec un questionnement sur le lien entre sanction et baisse de la mortalite. realise dans le module 4 : sept reperes cliquables et trois questions. publiee v1.0 module 4 · enjeux et chiffres">
+        <th scope="row"><a class="ancre" href="#M02" title="Lien direct vers M02">M02</a></th>
+        <td class="nowrap">30/07/2026</td>
+        <td class="dem">Mickaël Lopes</td>
+        <td><p>Intégrer la courbe de la mortalité routière depuis 1970 avec un questionnement sur le lien entre sanction et baisse de la mortalité.</p><p class="trait"><span class="etiq">Traitement</span> Réalisé dans le module 4 : sept repères cliquables et trois questions.</p></td>
+        <td class="ou">Module 4</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.0</td>
+      </tr>
+      <tr id="M03" data-statut="publiee" data-themes="m6" data-version="v1.0" data-rech="m03 mickael lopes module 6 presenter la multifactorialite comme quatre elements : vehicule, environnement, conducteur, organisation. module 6 refondu : schema, cartes et quiz alignes. publiee v1.0 module 6 · comprendre l&#x27;accident">
+        <th scope="row"><a class="ancre" href="#M03" title="Lien direct vers M03">M03</a></th>
+        <td class="nowrap">30/07/2026</td>
+        <td class="dem">Mickaël Lopes</td>
+        <td><p>Présenter la multifactorialité comme quatre éléments : véhicule, environnement, conducteur, organisation.</p><p class="trait"><span class="etiq">Traitement</span> Module 6 refondu : schéma, cartes et quiz alignés.</p></td>
+        <td class="ou">Module 6</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.0</td>
+      </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3 style="margin-top:2rem;">Ce que veulent dire les statuts</h3>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th scope="col" style="width:12rem;">Statut</th><th scope="col">Signification</th></tr></thead>
+      <tbody>
+        <tr><td class="nowrap"><span class="tag t-attente">à instruire</span></td><td>Remarque reçue et enregistrée, pas encore analysée.</td></tr>
+        <tr><td class="nowrap"><span class="tag t-cours">à arbitrer</span></td><td>Analysée, mais elle demande un arbitrage ou un élément complémentaire avant d'être réalisée.</td></tr>
+        <tr><td class="nowrap"><span class="tag t-valider">faite, à valider</span></td><td>Réalisée et testée, en attente de validation avant mise en ligne.</td></tr>
+        <tr><td class="nowrap"><span class="tag t-preprod">partiellement traitée</span></td><td>Ce qui pouvait être vérifié est en ligne. Le reste attend un élément que la préfecture doit transmettre.</td></tr>
+        <tr><td class="nowrap"><span class="tag t-publie">publiée</span></td><td>En ligne. La colonne « version » indique dans quelle publication elle est partie.</td></tr>
+        <tr><td class="nowrap"><span class="tag t-refuse">écartée</span></td><td>Non retenue, avec son motif. Conservée au registre pour mémoire.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h2 id="remarque">Adresser une remarque</h2>
+    <p class="intro">Aucun compte, aucun outil et aucune inscription ne sont nécessaires : un courriel suffit. Toute remarque est bienvenue, qu'elle porte sur un contenu, un chiffre, une référence juridique, une formulation ou un défaut d'affichage.</p>
+
+    <p><a class="bouton" href="mailto:mickael@destination-prevention.fr?subject=%5BREGISTRE%5D%20remarques%20sur%20l%27espace%20e-learning%20IDSR">Écrire au contact technique</a>
+       <a class="bouton clair" href="#registre">Vérifier si la remarque est déjà enregistrée</a></p>
+
+    <p>Le plus utile est d'indiquer le module concerné et, si possible, l'étape. Vous pouvez recopier ce canevas dans votre message :</p>
+    <pre class="canevas">Objet : [REGISTRE] remarques sur l&#x27;espace e-learning IDSR
+
+Nom, département :
+Version consultée : v1.3
+
+1. Module / page concernée :
+   Étape ou titre de la carte :
+   Ce qui pose problème :
+   Ce qu&#x27;il faudrait écrire à la place :
+   Référence ou source, si vous en avez une :
+
+2. Module / page concernée :
+   ...
+</pre>
+
+    <p>Chaque remarque reçoit ensuite une référence, qui apparaît au registre sous deux jours ouvrés. Les remarques portant sur une donnée chiffrée ou sur une règle de droit sont traitées en priorité.</p>
+
+    <div class="encadre">
+      <h3>Une règle éditoriale à connaître avant d'écrire</h3>
+      <p>Le site est destiné aux cinq départements de la région. Il retient donc ce qui leur est commun et signale explicitement les variations locales, par une formule du type « selon votre département, à voir avec votre coordination ». Une remarque propre à un seul département sera donc traitée sous cette forme plutôt qu'intégrée telle quelle, afin que le support reste exact partout.</p>
+      <p>Et une règle de méthode : rien n'est écrit sur la foi d'une affirmation, la nôtre comprise. Une règle locale n'est publiée qu'après lecture de l'arrêté ou de la note qui l'établit — c'est ce qui explique qu'une remarque puisse rester « partiellement traitée » le temps que la pièce nous parvienne.</p>
+    </div>
+
+    <h2 id="methode">Comment nous travaillons</h2>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th scope="col" style="width:13rem;">Élément</th><th scope="col">Rôle</th></tr></thead>
+      <tbody>
+        <tr><td>Version de travail</td><td>Toutes les modifications sont réalisées et testées hors ligne. Elles n'ont aucun effet sur le site que vous consultez.</td></tr>
+        <tr><td>Version publiée</td><td>Ce que vous voyez en ligne. Elle ne bouge qu'après relecture, et chaque publication est annoncée sur cette page.</td></tr>
+        <tr><td>Étiquettes de version</td><td>Chaque publication reçoit une étiquette (<code>v1.0</code>, <code>v1.1</code>…). Une version étiquetée se restaure à l'identique sur simple demande, même des mois plus tard : il est donc toujours possible de revenir en arrière si une modification ne convient pas après coup.</td></tr>
+        <tr><td>Traçabilité</td><td>Aucune modification n'est faite sans être inscrite au registre, et aucune remarque n'est écartée sans motif écrit.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h2 id="comptes-rendus">Comptes rendus détaillés</h2>
+    <p class="intro">Pour les versions qui ont donné lieu à un compte rendu rédigé, le détail des modifications reste consultable. Le registre ci-dessus en est le résumé opposable.</p>
+    <p><a class="bouton clair" href="cr-2026-07-31-v1.1.html">Compte rendu de la v1.1</a>
+       <a class="bouton clair" href="cr-2026-07-31-v1.2.html">Corrections de la v1.2</a></p>
+
+    <h2 id="lecture">Références du registre</h2>
+    <p>La lettre de la référence indique l'origine de la remarque : <b>C</b> pour les retours des coordinations départementales, <b>A</b> pour les questions posées au fil de la présentation du site, <b>R</b> pour les points relevés en recette interne avant diffusion, <b>M</b> pour les évolutions décidées par la maîtrise d'œuvre. Registre ouvert le 30 juillet 2026.</p>
 
   </div>
 </main>
+
 <footer class="doc">
   <div class="wrap">
-    <p>Document de suivi de l'espace e-learning des Intervenants Départementaux de Sécurité Routière.
-    Mis à jour le 31 juillet 2026. <a href="../index.html">Accéder au site e-learning</a></p>
+    <p>Suivi du projet de l'espace e-learning des Intervenants Départementaux de Sécurité Routière — Préfecture des Hauts-de-France, réseau IDSR. Page mise à jour le 24 août 2026.</p>
+    <p>Adresse de cette page : <code>https://intervenant-departemental-sr.github.io/E-learning-IDSR/suivi/</code> — contact technique : mickael@destination-prevention.fr.
+       <a href="../index.html">Accéder à l'espace e-learning</a> · <a href="../mentions-legales.html">Mentions légales</a></p>
   </div>
 </footer>
+
+<script>
+/* Ce script n'ajoute que du confort : le selecteur de version et les filtres.
+   Sans lui, la page reste entierement lisible et imprimable. */
+(function () {
+  "use strict";
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+  /* ---- selecteur de version -------------------------------------------- */
+  var zone = $("#pastilles-version"), blocs = $$(".bloc-version");
+  if (zone && blocs.length) {
+    zone.hidden = false;
+    var montrer = function (vue) {
+      blocs.forEach(function (b) {
+        b.hidden = !(vue === "tout" || b.getAttribute("data-version") === vue);
+      });
+      $$(".pastille", zone).forEach(function (b) {
+        var actif = b.getAttribute("data-vue") === vue;
+        b.classList.toggle("actif", actif);
+        b.setAttribute("aria-pressed", actif ? "true" : "false");
+      });
+    };
+    zone.addEventListener("click", function (e) {
+      var b = e.target.closest(".pastille");
+      if (b) montrer(b.getAttribute("data-vue"));
+    });
+    montrer(blocs[0].getAttribute("data-version"));   /* la derniere version d'abord */
+  }
+
+  /* ---- filtres du registre --------------------------------------------- */
+  var barre = $("#filtres"), corps = $("#corps-registre");
+  if (!barre || !corps) return;
+  barre.hidden = false;
+  var lignes = $$("tr", corps), compteur = $("#compteur");
+  var fs = $("#f-statut"), ft = $("#f-theme"), fv = $("#f-version"), fx = $("#f-texte");
+
+  var sansAccent = function (t) {
+    t = t.toLowerCase();
+    try { t = t.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); } catch (e) {}
+    return t;
+  };
+
+  var appliquer = function () {
+    var s = fs.value, th = ft.value, v = fv.value, x = sansAccent(fx.value.trim());
+    var vus = 0;
+    lignes.forEach(function (tr) {
+      var ok = (!s || tr.getAttribute("data-statut") === s)
+            && (!th || (" " + tr.getAttribute("data-themes") + " ").indexOf(" " + th + " ") > -1)
+            && (!v || tr.getAttribute("data-version").indexOf(v) > -1)
+            && (!x || tr.getAttribute("data-rech").indexOf(x) > -1);
+      tr.hidden = !ok;
+      if (ok) vus++;
+    });
+    compteur.textContent = vus === lignes.length
+      ? lignes.length + " remarques"
+      : vus + " remarque" + (vus > 1 ? "s" : "") + " sur " + lignes.length;
+  };
+
+  [fs, ft, fv].forEach(function (e) { e.addEventListener("change", appliquer); });
+  fx.addEventListener("input", appliquer);
+  appliquer();
+
+  /* une reference visee par l'adresse (#C07) doit rester visible */
+  var cible = function () {
+    var id = location.hash.replace("#", "");
+    if (!id) return;
+    var tr = document.getElementById(id);
+    if (tr && tr.hidden) {
+      fs.value = ft.value = fv.value = ""; fx.value = "";
+      appliquer();
+      tr.scrollIntoView({ block: "center" });
+    }
+  };
+  window.addEventListener("hashchange", cible);
+  cible();
+}());
+</script>
 </body>
 </html>
