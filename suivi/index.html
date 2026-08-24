@@ -144,9 +144,9 @@
     <h1>Suivi du projet — espace e-learning IDSR</h1>
     <p>Cette page dit exactement où en est le projet : ce qui a changé à chaque version, et ce qu'il est advenu de chaque remarque reçue. Une remarque qui n'y figure pas n'a pas été enregistrée : signalez-le, elle sera ajoutée.</p>
     <p class="etat">
-      <span>Version en ligne <b>v1.3</b></span>
+      <span>Version en ligne <b>v1.4</b></span>
       <span>Mise à jour du <b>24 août 2026</b></span>
-      <span><b>36</b> remarques enregistrées</span>
+      <span><b>37</b> remarques enregistrées</span>
     </p>
     <nav class="sommaire" aria-label="Sommaire">
       <a href="#changements">Ce qui a changé</a>
@@ -165,22 +165,30 @@
     <p class="intro">Les versions sont présentées de la plus récente à la plus ancienne. Chaque version indique les remarques qui y sont parties : cliquez sur une référence pour aller directement à la ligne correspondante du registre.</p>
 
     <div class="kpis">
-      <div class="kpi"><b>36</b><span>remarques enregistrées</span></div>
-      <div class="kpi"><b>32</b><span>traitées et en ligne</span></div>
+      <div class="kpi"><b>37</b><span>remarques enregistrées</span></div>
+      <div class="kpi"><b>33</b><span>traitées et en ligne</span></div>
       <div class="kpi"><b>1</b><span>partiellement traitées, en attente d'une pièce</span></div>
       <div class="kpi"><b>3</b><span>en attente d'arbitrage</span></div>
     </div>
 
     <div class="pastilles" id="pastilles-version" hidden>
         <button type="button" class="pastille actif" data-vue="tout">Tout l'historique</button>
+        <button type="button" class="pastille" data-vue="v1.4">v1.4</button>
         <button type="button" class="pastille" data-vue="v1.3">v1.3</button>
         <button type="button" class="pastille" data-vue="v1.2">v1.2</button>
         <button type="button" class="pastille" data-vue="v1.1">v1.1</button>
         <button type="button" class="pastille" data-vue="v1.0">v1.0</button>
     </div>
 
+    <section class="bloc-version" data-version="v1.4" id="version-v1.4">
+      <h3>v1.4 — 24/08/2026 <span class="tag t-publie">version en ligne</span></h3>
+      <p class="chapo-v">Le signalement d'une remarque rendu immédiat depuis n'importe quelle page.</p>
+      <p>Un bouton « Signaler un point » au pied des neuf modules, des six outils et de l'accueil ouvre la messagerie du relecteur avec le module et l'étape en cours déjà renseignés, et un canevas de remarque à compléter : plus besoin de noter où l'on était ni de retrouver une adresse. Aucun compte ni outil n'est nécessaire, et le lien reste utilisable si JavaScript est bloqué. L'adresse de contact du site est portée à <code>mickael@destination-prevention.fr</code>, mentions légales comprises. Cette page de suivi est refondue autour de « ce qui a changé » et d'un registre filtrable, en un fichier autonome qui s'ouvre hors ligne et s'imprime. Aucun contenu de formation n'est modifié par cette version.</p>
+      <p class="refs"><span class="etiq">Demandes parties dans cette version</span> <a class="puce" href="#M08">M08</a></p>
+      <p class="etiquette">Étiquette de restauration : <code>v1.4-lien-signalement</code></p>
+    </section>
     <section class="bloc-version" data-version="v1.3" id="version-v1.3">
-      <h3>v1.3 — 31/07/2026 <span class="tag t-publie">version en ligne</span></h3>
+      <h3>v1.3 — 31/07/2026</h3>
       <p class="chapo-v">Le comité interministériel de la sécurité routière développé dans le module 2.</p>
       <p>La carte du CISR passe de deux lignes à un exposé complet de ses missions, de sa composition et de son rythme réel de réunion, établi sur le décret du 15 mai 1975 modifié. Un encadré présente le comité du 17 juillet 2023, le dernier en date, avec son diagnostic, ses sept axes et cinq de ses trente-huit mesures détaillées : le soutien renforcé aux associations et l'appel à projets national, la réserve opérationnelle annoncée mais jamais créée, le parcours d'e-formation grand public, l'homicide routier et le grand excès de vitesse, et l'association des employeurs au risque routier professionnel. Une erreur de date est corrigée au passage : les 38 mesures étaient attribuées au comité de 2018. Le moteur de progression du module accepte désormais plusieurs questions par étape.</p>
       <p class="refs"><span class="etiq">Demandes parties dans cette version</span> <a class="puce" href="#M04">M04</a> <a class="puce" href="#M05">M05</a> <a class="puce" href="#M06">M06</a> <a class="puce" href="#M07">M07</a></p>
@@ -222,7 +230,7 @@
       </div>
       <div>
         <label for="f-version">Version</label>
-        <select id="f-version"><option value="">Toutes les versions</option><option value="v1.3">v1.3</option><option value="v1.2">v1.2</option><option value="v1.1">v1.1</option><option value="v1.0">v1.0</option></select>
+        <select id="f-version"><option value="">Toutes les versions</option><option value="v1.4">v1.4</option><option value="v1.3">v1.3</option><option value="v1.2">v1.2</option><option value="v1.1">v1.1</option><option value="v1.0">v1.0</option></select>
       </div>
       <div>
         <label for="f-texte">Rechercher</label>
@@ -523,6 +531,15 @@
         <td class="nowrap"><span class="tag t-publie">publiée</span></td>
         <td class="nowrap">v1.3</td>
       </tr>
+      <tr id="M08" data-statut="publiee" data-themes="transverse suivi" data-version="v1.4" data-rech="m08 mickael lopes toutes les pages, et cette page de suivi rendre le signalement d&#x27;une remarque immediat pour un relecteur, sans compte, sans outil a installer et sans dependre de ce que son pare-feu autorise. un bouton « signaler un point » est ajoute au pied des neuf modules, des six outils et de l&#x27;accueil : il ouvre la messagerie du relecteur avec l&#x27;objet, le module et l&#x27;etape en cours deja remplis, et un canevas de remarque a completer. il reste utilisable si javascript est bloque, avec le titre de la page seul. l&#x27;adresse de contact du site est portee a mickael@destination-prevention.fr , mentions legales comprises. cette page de suivi est refondue : « ce qui a change » par version, registre filtrable avec une ancre par reference, canevas de remarque, et version imprimable pour les postes qui n&#x27;accedent pas au site. publiee v1.4 tout le parcours documents de suivi">
+        <th scope="row"><a class="ancre" href="#M08" title="Lien direct vers M08">M08</a></th>
+        <td class="nowrap">24/08/2026</td>
+        <td class="dem">Mickaël Lopes</td>
+        <td><p>Rendre le signalement d'une remarque immédiat pour un relecteur, sans compte, sans outil à installer et sans dépendre de ce que son pare-feu autorise.</p><p class="trait"><span class="etiq">Traitement</span> Un bouton « Signaler un point » est ajouté au pied des neuf modules, des six outils et de l'accueil : il ouvre la messagerie du relecteur avec l'objet, le module et l'étape en cours déjà remplis, et un canevas de remarque à compléter. Il reste utilisable si JavaScript est bloqué, avec le titre de la page seul. L'adresse de contact du site est portée à <code>mickael@destination-prevention.fr</code>, mentions légales comprises. Cette page de suivi est refondue : « ce qui a changé » par version, registre filtrable avec une ancre par référence, canevas de remarque, et version imprimable pour les postes qui n'accèdent pas au site.</p></td>
+        <td class="ou">Toutes les pages, et cette page de suivi</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.4</td>
+      </tr>
       <tr id="A01" data-statut="publiee" data-themes="transverse" data-version="v1.0" data-rech="a01 adeline rubben attestation, protection des donnees l&#x27;idsr doit-il saisir son identite pour l&#x27;attestation, et cela constitue-t-il une collecte de donnees personnelles ? reponse apportee par courriel, puis traduite dans le site : page de protection des donnees creee, attestation requalifiee en document declaratif, bouton d&#x27;effacement du nom pour les postes partages. publiee v1.0 tout le parcours">
         <th scope="row"><a class="ancre" href="#A01" title="Lien direct vers A01">A01</a></th>
         <td class="nowrap">30/07/2026</td>
@@ -597,7 +614,7 @@
     <pre class="canevas">Objet : [REGISTRE] remarques sur l&#x27;espace e-learning IDSR
 
 Nom, département :
-Version consultée : v1.3
+Version consultée : v1.4
 
 1. Module / page concernée :
    Étape ou titre de la carte :
