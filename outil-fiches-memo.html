@@ -570,7 +570,39 @@
 </main>
 
 <footer class="site">
-  <div class="wrap">Espace e-learning des Intervenants Départementaux de Sécurité Routière — Préfecture des Hauts-de-France. <a href="index.html">Retour à l'accueil</a> <a href="mentions-legales.html">Mentions légales, confidentialité et accessibilité</a></div>
+  <div class="wrap">Espace e-learning des Intervenants Départementaux de Sécurité Routière — Préfecture des Hauts-de-France. <a href="index.html">Retour à l'accueil</a> <a href="mailto:mickael@destination-prevention.fr?subject=%5BREGISTRE%5D%20Fiches%20m%C3%A9mo%20de%20l%27IDSR&amp;body=Bonjour%2C%0A%0ARemarque%20sur%20%3A%20Fiches%20m%C3%A9mo%20de%20l%27IDSR%0A%C3%89tape%20ou%20partie%20%3A%20%0A%0ACe%20qui%20pose%20probl%C3%A8me%20%3A%20%0A%0ACe%20qu%27il%20faudrait%20%C3%A9crire%20%C3%A0%20la%20place%20%3A%20%0A%0AR%C3%A9f%C3%A9rence%20ou%20source%20%3A%20%0A%0A--%0AEnvoy%C3%A9%20depuis%20l%27espace%20e-learning%20IDSR%0A" id="lien-signaler" style="background:#FECF41;color:#000;padding:.15rem .5rem;border-radius:4px;text-decoration:none;white-space:nowrap;" title="Ouvre votre messagerie avec le module et l'étape déjà remplis">Signaler un point</a>
+        <a href="mentions-legales.html">Mentions légales, confidentialité et accessibilité</a></div>
 </footer>
+
+<script>
+/* Lien « Signaler un point » : prerempli avec le module et l'etape en cours.
+   Sans JavaScript, le lien fonctionne quand meme, avec le titre de la page seul. */
+(function(){
+  "use strict";
+  var lien = document.getElementById("lien-signaler");
+  if(!lien) return;
+  var h1 = document.querySelector("h1");
+  var titre = ((h1 && h1.textContent) || document.title).replace(/\s+/g," ").trim();
+  function etape(){
+    var s = document.querySelector(".etape.active") || document.querySelector(".etape");
+    if(!s) return "";
+    var id = s.getAttribute("aria-labelledby");
+    var h = (id && document.getElementById(id)) || s.querySelector("h2");
+    return h ? h.textContent.replace(/\s+/g," ").trim() : "";
+  }
+  function maj(){
+    var e = etape();
+    var objet = "[REGISTRE] " + titre + (e ? " \u2014 " + e : "");
+    var corps = "Bonjour,\n\nRemarque sur : " + titre
+      + "\n\u00c9tape ou partie : " + e
+      + "\n\nCe qui pose probl\u00e8me : \n\nCe qu'il faudrait \u00e9crire \u00e0 la place : \n\nR\u00e9f\u00e9rence ou source : \n\n--\nEnvoy\u00e9 depuis l'espace e-learning IDSR\n"
+      + window.location.href + "\n";
+    lien.href = "mailto:mickael@destination-prevention.fr?subject=" + encodeURIComponent(objet) + "&body=" + encodeURIComponent(corps);
+  }
+  lien.addEventListener("click", maj);
+  lien.addEventListener("focus", maj);
+  maj();
+}());
+</script>
 </body>
 </html>
