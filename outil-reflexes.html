@@ -47,15 +47,14 @@
   .distraction .consigne .cible{background:var(--noir);color:var(--jaune);border-radius:6px;padding:.1rem .45rem;}
   .distraction .score-p{text-align:center;font-size:.9rem;font-weight:700;color:var(--gris);margin:0 0 .9rem;}
   .panneaux{display:grid;grid-template-columns:repeat(6,1fr);gap:.6rem;}
-  .pan{background:#fff;border:2px solid var(--bordure);border-radius:10px;padding:.6rem .3rem .5rem;
-    cursor:pointer;font:inherit;display:flex;flex-direction:column;align-items:center;gap:.4rem;
+  .pan{background:#fff;border:2px solid var(--bordure);border-radius:10px;padding:.7rem .5rem;
+    cursor:pointer;font:inherit;display:grid;place-items:center;
     transition:border-color .12s linear, background .12s linear, transform .12s ease;}
-  .pan img{width:100%;max-width:74px;height:74px;object-fit:contain;display:block;pointer-events:none;}
-  .pan span{font-size:.74rem;font-weight:700;line-height:1.15;text-align:center;color:var(--gris);}
+  .pan img{width:100%;max-width:88px;height:88px;object-fit:contain;display:block;pointer-events:none;}
   .pan:hover{border-color:var(--jaune-fonce);}
   .pan.bon{border-color:var(--vert);background:#eafaf0;transform:scale(1.04);}
   .pan.mauvais{border-color:var(--rouge);background:#fdeeec;}
-  @media (max-width:640px){ .panneaux{grid-template-columns:repeat(3,1fr);} .pan img{height:60px;} }
+  @media (max-width:640px){ .panneaux{grid-template-columns:repeat(3,1fr);} .pan img{height:72px;} }
   .btn{display:inline-flex;align-items:center;gap:.5rem;border:none;border-radius:999px;padding:.75rem 1.4rem;font:inherit;font-weight:700;cursor:pointer;transition:transform var(--t),background var(--t),opacity var(--t);}
   .btn-primary{background:var(--jaune);color:var(--noir);}
   .btn-primary:hover:not(:disabled){background:var(--jaune-fonce);}
@@ -194,7 +193,7 @@
     <!-- TEST -->
     <section class="panneau" aria-labelledby="tt">
       <h2 id="tt">Le test (2 manches de 5 essais)</h2>
-      <p class="lead"><strong>Manche 1 :</strong> cliquez sur la zone dès qu'elle devient jaune. <strong>Manche 2 :</strong> même chose… mais vous devez en plus retrouver, dans la grille de six panneaux, celui qu'on vous demande. Les panneaux changent de place à chaque fois : c'est la « distraction ».</p>
+      <p class="lead"><strong>Manche 1 :</strong> cliquez sur la zone dès qu'elle devient jaune. <strong>Manche 2 :</strong> même chose… mais vous devez en plus reconnaître, parmi six panneaux, celui qu'on vous nomme. Il n'y a pas de légende sous les vignettes, et la grille est tirée au hasard à chaque question : c'est cette recherche qui fait la « distraction ».</p>
 
       <div class="zone" id="zone" tabindex="0" role="button" aria-label="Zone de test : cliquez ou appuyez sur Espace dès qu'elle devient jaune">
         <span class="gros" id="z-titre">Prêt à tester vos réflexes ?</span>
@@ -235,7 +234,7 @@
       </div>
     </section>
 
-    <p class="source">Repères : <a href="https://www.securite-routiere.gouv.fr/dangers-de-la-route/le-telephone-et-ses-usages-au-volant" target="_blank" rel="noopener">securite-routiere.gouv.fr, Le téléphone au volant</a>. L'inattention est citée chez 13 % des présumés responsables d'accidents mortels en 2025 (ONISR, <em>principaux résultats 2025</em>, données définitives, mai 2026, France métropolitaine). Le test mesure une réaction à un signal visuel attendu : en situation réelle de conduite, les temps sont plus longs (1 à 2 s). Les visuels des six panneaux proviennent de la base Panneaupédia de cet espace : signalisation officielle française, arrêté du 24 novembre 1967 modifié.</p>
+    <p class="source">Repères : <a href="https://www.securite-routiere.gouv.fr/dangers-de-la-route/le-telephone-et-ses-usages-au-volant" target="_blank" rel="noopener">securite-routiere.gouv.fr, Le téléphone au volant</a>. L'inattention est citée chez 13 % des présumés responsables d'accidents mortels en 2025 (ONISR, <em>principaux résultats 2025</em>, données définitives, mai 2026, France métropolitaine). Le test mesure une réaction à un signal visuel attendu : en situation réelle de conduite, les temps sont plus longs (1 à 2 s). Les visuels des panneaux proviennent de la base Panneaupédia de cet espace : signalisation officielle française, arrêté du 24 novembre 1967 modifié. Chaque question tire six panneaux au hasard parmi vingt et un, sans jamais retenir deux panneaux qu'on ne saurait distinguer à cette taille.</p>
   </div>
 </main>
 
@@ -260,19 +259,39 @@
   var temps = {1:[], 2:[]};
   var attente = false, goTime = 0, timer = null, enTest = false;
 
-  /* ---------- distraction : retrouver le bon panneau ----------
-     Six panneaux volontairement très connus, tirés de la base
-     Panneaupédia de cet espace (assets/panneaux). Ils changent de
-     place à chaque question : c'est la recherche visuelle qui
-     distrait, exactement comme chercher une information au volant. */
+  /* ---------- distraction : reconnaitre le bon panneau ----------
+     Vivier de panneaux volontairement parmi les plus connus, tires de
+     la base Panneaupedia de cet espace (assets/panneaux). A chaque
+     question, six panneaux sont tires au hasard : le bon, et cinq
+     autres. Aucune legende sous les vignettes, il faut reconnaitre le
+     panneau. La colonne « famille » evite de mettre dans la meme
+     grille deux panneaux que rien ne distingue a cette taille, par
+     exemple les deux panneaux de stationnement ou les deux panneaux
+     de vitesse : la recherche doit rester loyale. */
   var PANNEAUX = [
-    {code:"AB4",  nom:"STOP"},
-    {code:"AB3a", nom:"Cédez le passage"},
-    {code:"B1",   nom:"Sens interdit"},
-    {code:"A13b", nom:"Passage pour piétons"},
-    {code:"B14",  nom:"Limitation à 50 km/h"},
-    {code:"C1a",  nom:"Parking"}
+    {code:"AB4",  nom:"STOP",                          fam:"stop"},
+    {code:"AB3a", nom:"Cédez le passage",              fam:"cedez"},
+    {code:"AB25", nom:"Rond-point",                    fam:"giratoire"},
+    {code:"B1",   nom:"Sens interdit",                 fam:"sens"},
+    {code:"C12",  nom:"Sens unique",                   fam:"sens"},
+    {code:"B14",  nom:"Limitation à 50 km/h",          fam:"vitesse"},
+    {code:"B30",  nom:"Zone 30",                       fam:"vitesse"},
+    {code:"B3",   nom:"Interdiction de dépasser",      fam:"depassement"},
+    {code:"B2c",  nom:"Demi-tour interdit",            fam:"direction"},
+    {code:"B6a1", nom:"Stationnement interdit",        fam:"stationnement"},
+    {code:"B6d",  nom:"Arrêt et stationnement interdits", fam:"stationnement"},
+    {code:"C1a",  nom:"Parking",                       fam:"parking"},
+    {code:"A13b", nom:"Passage pour piétons",          fam:"pietons"},
+    {code:"A13a", nom:"Attention, enfants",            fam:"enfants"},
+    {code:"A17",  nom:"Feux tricolores",               fam:"feux"},
+    {code:"A7",   nom:"Passage à niveau avec barrières", fam:"passageniveau"},
+    {code:"A14",  nom:"Danger (panneau avec point d'exclamation)", fam:"danger"},
+    {code:"A15b", nom:"Passage d'animaux sauvages",    fam:"animaux"},
+    {code:"A2b",  nom:"Ralentisseur (dos d'âne)",      fam:"ralentisseur"},
+    {code:"B22a", nom:"Piste cyclable obligatoire",    fam:"cyclable"},
+    {code:"C13a", nom:"Impasse",                       fam:"impasse"}
   ];
+  var NB_VIGNETTES = 6;
   var cible = null, trouves = 0;
 
   function melange(t){
@@ -281,15 +300,28 @@
     return a;
   }
 
+  /* tire une grille : le panneau cible, plus cinq autres, jamais deux
+     panneaux d'une meme famille */
+  function tirerGrille(){
+    var grille = [cible], familles = {};
+    familles[cible.fam] = true;
+    melange(PANNEAUX).forEach(function(pan){
+      if(grille.length >= NB_VIGNETTES) return;
+      if(familles[pan.fam]) return;
+      familles[pan.fam] = true;
+      grille.push(pan);
+    });
+    return melange(grille);
+  }
+
   function dessinerPanneaux(){
     elPanneaux.innerHTML = "";
-    melange(PANNEAUX).forEach(function(pan){
+    tirerGrille().forEach(function(pan){
       var b = document.createElement("button");
       b.type = "button";
       b.className = "pan";
       b.setAttribute("aria-label", pan.nom);
-      b.innerHTML = '<img src="assets/panneaux/'+pan.code+'.svg" alt="" />'+
-                    '<span>'+pan.nom+'</span>';
+      b.innerHTML = '<img src="assets/panneaux/'+pan.code+'.svg" alt="" />';
       b.addEventListener("click", function(e){
         e.stopPropagation();
         if(manche!==2 || !enTest) return;
