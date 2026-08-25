@@ -464,9 +464,9 @@
 
     var verdict = document.getElementById("verdict");
     if(m2 > m1){
-      verdict.innerHTML = "📱 Distrait, vous avez mis <strong>"+Math.round(m2-m1)+" ms de plus</strong> à réagir — et encore, ici la distraction était minime : chercher un panneau parmi six, alors que vous <em>attendiez</em> le signal. Au volant, chercher un panneau de direction, une adresse ou un message revient au même geste : les yeux quittent la route. Cinq secondes les yeux ailleurs, à 90 km/h, c'est 125 m parcourus à l'aveugle.";
+      verdict.innerHTML = "📱 Distrait, vous avez mis <strong>"+Math.round(m2-m1)+" ms de plus</strong> à réagir, et encore : ici la distraction était minime, chercher un panneau parmi six, alors que vous <em>attendiez</em> le signal. Au volant, chercher un panneau de direction, une adresse ou un message revient au même geste : les yeux quittent la route. Cinq secondes les yeux ailleurs, à 90 km/h, c'est 125 m parcourus à l'aveugle.";
     } else {
-      verdict.innerHTML = "💪 Étonnant : votre moyenne distraite n'est pas plus lente. C'est rare — et trompeur : dans une vraie voiture, chercher un panneau ou lire un message détourne les yeux de la route plusieurs secondes. Personne n'y échappe, pas même les meilleurs réflexes.";
+      verdict.innerHTML = "💪 Étonnant : votre moyenne distraite n'est pas plus lente. C'est rare, et trompeur : dans une vraie voiture, chercher un panneau ou lire un message détourne les yeux de la route plusieurs secondes. Personne n'y échappe, pas même les meilleurs réflexes.";
     }
     verdict.className = "verdict show";
     panneau.scrollIntoView({behavior:"smooth"});
