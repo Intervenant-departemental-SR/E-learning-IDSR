@@ -38,11 +38,19 @@
     .section-intro{color:var(--gris);margin:0 0 2rem;max-width:760px;}
 
     .grille{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;}
-    .carte{display:flex;flex-direction:column;background:var(--blanc);border:1px solid var(--bordure);border-radius:var(--rayon);overflow:hidden;text-decoration:none;color:var(--noir);transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;}
+    .carte{position:relative;display:flex;flex-direction:column;background:var(--blanc);border:1px solid var(--bordure);border-radius:var(--rayon);overflow:hidden;text-decoration:none;color:var(--noir);transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;}
     .carte:hover,.carte:focus-visible{transform:translateY(-4px);box-shadow:var(--ombre);border-color:var(--jaune);}
     .carte .bandeau{background:var(--jaune);height:8px;}
     .carte .contenu{padding:1.25rem 1.25rem 1.5rem;flex:1;display:flex;flex-direction:column;}
-    .carte .num{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--gris-2);margin-bottom:.4rem;}
+    .carte .num{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--gris-2);margin-bottom:.4rem;padding-right:5.6rem;}
+    .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+    /* pastille de durée, dans le coin de chaque carte */
+    .duree{position:absolute;top:1.15rem;right:.9rem;z-index:2;display:inline-flex;align-items:center;gap:.32rem;
+      background:var(--noir);color:var(--jaune);font-size:.86rem;font-weight:800;line-height:1;
+      border-radius:999px;padding:.34rem .68rem .34rem .55rem;white-space:nowrap;}
+    .duree svg{width:16px;height:16px;flex:none;}
+    .bilan-duree{display:inline-block;background:var(--jaune-clair);border:1px solid var(--jaune);
+      border-radius:999px;padding:.3rem .85rem;font-size:.9rem;font-weight:700;color:var(--noir);margin:0 0 1.6rem;}
     .carte h3{font-size:1.18rem;margin:0 0 .5rem;}
     .carte p{margin:0 0 1rem;color:var(--gris);font-size:.96rem;flex:1;}
     .carte .lien{font-weight:700;font-size:.95rem;display:inline-flex;align-items:center;gap:.4rem;color:var(--noir);}
@@ -164,13 +172,15 @@
 
   <main id="contenu">
     <div class="wrap">
-      <h2 class="section-titre">Modules de formation</h2>
-      <p class="section-intro">Sélectionnez un module pour accéder à son parcours interactif. Les modules reprennent le déroulé de la formation initiale des IDSR : ils peuvent se suivre dans l'ordre ou être consultés librement.</p>
+      <h2 class="section-titre">1 · Préparation de la formation initiale IDSR</h2>
+      <p class="section-intro">Les sept modules à suivre <strong>avant la journée de formation initiale en présentiel</strong>. Ils reprennent le déroulé de cette journée : en les faisant en amont, vous arrivez avec la culture sécurité routière déjà acquise. Le plus simple est de les suivre dans l'ordre, mais rien ne l'impose.</p>
+      <p class="bilan-duree">Environ 3 h 20 au total. Chaque module indique sa durée dans son coin, et votre progression est enregistrée : vous pouvez vous arrêter et reprendre plus tard.</p>
 
       <div class="grille">
 
         <a class="carte" href="module-1-etre-idsr.html">
           <span class="bandeau"></span>
+          <span class="duree" title="Durée estimée du module, à votre rythme et en plusieurs fois si vous le souhaitez"><span class="sr">Durée estimée : </span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 4a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zm0 0V2m-2.6 0h5.2M18.6 5.9l1.6-1.6M12 8.6v4.4l2.8 2"/></svg>20 min</span>
           <span class="contenu">
             <span class="num">Module 1</span>
             <h3>Être IDSR : rôle et fonction</h3>
@@ -181,6 +191,7 @@
 
         <a class="carte" href="module-2-organisation.html">
           <span class="bandeau"></span>
+          <span class="duree" title="Durée estimée du module, à votre rythme et en plusieurs fois si vous le souhaitez"><span class="sr">Durée estimée : </span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 4a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zm0 0V2m-2.6 0h5.2M18.6 5.9l1.6-1.6M12 8.6v4.4l2.8 2"/></svg>35 min</span>
           <span class="contenu">
             <span class="num">Module 2</span>
             <h3>L'organisation de la sécurité routière</h3>
@@ -192,6 +203,7 @@
 
         <a class="carte" href="module-3-posture-idsr.html">
           <span class="bandeau"></span>
+          <span class="duree" title="Durée estimée du module, à votre rythme et en plusieurs fois si vous le souhaitez"><span class="sr">Durée estimée : </span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 4a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zm0 0V2m-2.6 0h5.2M18.6 5.9l1.6-1.6M12 8.6v4.4l2.8 2"/></svg>35 min</span>
           <span class="contenu">
             <span class="num">Module 3</span>
             <h3>La posture de l'IDSR : parler au nom de l'État</h3>
@@ -202,6 +214,7 @@
 
         <a class="carte" href="module-4-enjeux-chiffres.html">
           <span class="bandeau"></span>
+          <span class="duree" title="Durée estimée du module, à votre rythme et en plusieurs fois si vous le souhaitez"><span class="sr">Durée estimée : </span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 4a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zm0 0V2m-2.6 0h5.2M18.6 5.9l1.6-1.6M12 8.6v4.4l2.8 2"/></svg>30 min</span>
           <span class="contenu">
             <span class="num">Module 4</span>
             <h3>Enjeux et chiffres de l'accidentalité</h3>
@@ -212,6 +225,7 @@
 
         <a class="carte" href="module-5-politiques.html">
           <span class="bandeau"></span>
+          <span class="duree" title="Durée estimée du module, à votre rythme et en plusieurs fois si vous le souhaitez"><span class="sr">Durée estimée : </span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 4a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zm0 0V2m-2.6 0h5.2M18.6 5.9l1.6-1.6M12 8.6v4.4l2.8 2"/></svg>25 min</span>
           <span class="contenu">
             <span class="num">Module 5</span>
             <h3>Les politiques de sécurité routière</h3>
@@ -222,6 +236,7 @@
 
         <a class="carte" href="module-6-accident.html">
           <span class="bandeau"></span>
+          <span class="duree" title="Durée estimée du module, à votre rythme et en plusieurs fois si vous le souhaitez"><span class="sr">Durée estimée : </span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 4a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zm0 0V2m-2.6 0h5.2M18.6 5.9l1.6-1.6M12 8.6v4.4l2.8 2"/></svg>25 min</span>
           <span class="contenu">
             <span class="num">Module 6</span>
             <h3>Comprendre l'accident</h3>
@@ -232,6 +247,7 @@
 
         <a class="carte" href="module-7-apports-techniques.html">
           <span class="bandeau"></span>
+          <span class="duree" title="Durée estimée du module, à votre rythme et en plusieurs fois si vous le souhaitez"><span class="sr">Durée estimée : </span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 4a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zm0 0V2m-2.6 0h5.2M18.6 5.9l1.6-1.6M12 8.6v4.4l2.8 2"/></svg>30 min</span>
           <span class="contenu">
             <span class="num">Module 7</span>
             <h3>Les apports techniques</h3>
@@ -240,11 +256,20 @@
           </span>
         </a>
 
+        </div>
+
+      <h2 class="section-titre" style="margin-top:3rem;">2 · Formations complémentaires thématiques</h2>
+      <p class="section-intro">Deux modules qui ne font pas partie de la journée de formation initiale, mais qui outillent l'IDSR dès ses premières actions : le matériel de sensibilisation et la communication d'une part, le risque routier professionnel d'autre part. À suivre quand vous le souhaitez, dans l'ordre qui vous convient.</p>
+      <p class="bilan-duree">Environ 50 minutes pour les deux.</p>
+
+      <div class="grille">
+
         <a class="carte" href="module-8-valise-communication.html">
           <span class="bandeau"></span>
+          <span class="duree" title="Durée estimée du module, à votre rythme et en plusieurs fois si vous le souhaitez"><span class="sr">Durée estimée : </span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 4a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zm0 0V2m-2.6 0h5.2M18.6 5.9l1.6-1.6M12 8.6v4.4l2.8 2"/></svg>25 min</span>
           <span class="contenu">
             <span class="num">Module 8</span>
-            <h3>La valise de l'IDSR & communiquer</h3>
+            <h3>Les outils de l'IDSR &amp; communiquer</h3>
             <p>Les outils de sensibilisation, les principes d'une communication efficace et les actualités réglementaires récentes.</p>
             <span class="lien">Commencer le module</span>
           </span>
@@ -252,6 +277,7 @@
 
         <a class="carte" href="module-9-risque-routier-professionnel.html">
           <span class="bandeau"></span>
+          <span class="duree" title="Durée estimée du module, à votre rythme et en plusieurs fois si vous le souhaitez"><span class="sr">Durée estimée : </span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 4a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zm0 0V2m-2.6 0h5.2M18.6 5.9l1.6-1.6M12 8.6v4.4l2.8 2"/></svg>25 min</span>
           <span class="contenu">
             <span class="num">Module 9</span>
             <h3>Le risque routier professionnel</h3>
@@ -262,13 +288,14 @@
 
         </div>
 
-      <h2 class="section-titre" style="margin-top:3rem;">Outils d'animation grand public</h2>
-      <p class="section-intro">Des simulateurs interactifs à utiliser en stand, en animation ou en formation : le public manipule, le message s'imprime.</p>
+      <h2 class="section-titre" style="margin-top:3rem;">3 · Outils d'animation</h2>
+      <p class="section-intro">Ce ne sont pas des modules à valider, mais des outils à emporter en action : des ateliers que le public manipule sous vos yeux, et deux références à consulter au besoin. Le public manipule, le message s'imprime.</p>
 
       <div class="grille">
 
         <a class="carte" href="outil-simulateur-alcool.html">
           <span class="bandeau"></span>
+          <span class="duree" title="Durée estimée de l’atelier"><span class="sr">Durée estimée : </span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 4a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zm0 0V2m-2.6 0h5.2M18.6 5.9l1.6-1.6M12 8.6v4.4l2.8 2"/></svg>10 min</span>
           <span class="contenu">
             <span class="num">Simulateur · Alcool</span>
             <h3>Simulateur d'alcoolémie</h3>
@@ -279,6 +306,7 @@
 
         <a class="carte" href="outil-distance-arret.html">
           <span class="bandeau"></span>
+          <span class="duree" title="Durée estimée de l’atelier"><span class="sr">Durée estimée : </span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 4a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zm0 0V2m-2.6 0h5.2M18.6 5.9l1.6-1.6M12 8.6v4.4l2.8 2"/></svg>10 min</span>
           <span class="contenu">
             <span class="num">Simulateur · Vitesse</span>
             <h3>Distance d'arrêt</h3>
@@ -289,16 +317,18 @@
 
         <a class="carte" href="outil-reflexes.html">
           <span class="bandeau"></span>
+          <span class="duree" title="Durée estimée de l’atelier"><span class="sr">Durée estimée : </span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 4a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zm0 0V2m-2.6 0h5.2M18.6 5.9l1.6-1.6M12 8.6v4.4l2.8 2"/></svg>10 min</span>
           <span class="contenu">
             <span class="num">Test · Distracteurs</span>
             <h3>Testez vos réflexes</h3>
-            <p>Mesurez votre temps de réaction réel, puis refaites le test en étant distrait : l'effet du téléphone au volant, démontré sur soi-même.</p>
+            <p>Mesurez votre temps de réaction réel, puis refaites le test en devant retrouver un panneau parmi six : l'effet de l'inattention au volant, démontré sur soi-même.</p>
             <span class="lien">Lancer le test</span>
           </span>
         </a>
 
         <a class="carte" href="outil-quiz-panneaux.html">
           <span class="bandeau"></span>
+          <span class="duree" title="Durée estimée de l’atelier"><span class="sr">Durée estimée : </span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 4a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zm0 0V2m-2.6 0h5.2M18.6 5.9l1.6-1.6M12 8.6v4.4l2.8 2"/></svg>15 min</span>
           <span class="contenu">
             <span class="num">Quiz · Signalisation</span>
             <h3>Quiz des panneaux</h3>
@@ -309,8 +339,9 @@
 
         <a class="carte" href="outil-panneaux.html">
           <span class="bandeau"></span>
+          <span class="duree" title="Consultation libre : pas de parcours imposé, on y vient au besoin"><span class="sr">Durée estimée : </span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 4a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zm0 0V2m-2.6 0h5.2M18.6 5.9l1.6-1.6M12 8.6v4.4l2.8 2"/></svg>libre</span>
           <span class="contenu">
-            <span class="num">Référentiel · Signalisation</span>
+            <span class="num">Référentiel</span>
             <h3>Panneaupédia : tous les panneaux</h3>
             <p>L'encyclopédie complète de la signalisation française, classée par thème : le visuel, la règle du code de la route et les sanctions encourues. Pour ne jamais être à court d'arguments en animation.</p>
             <span class="lien">Consulter le référentiel</span>
@@ -319,6 +350,7 @@
 
         <a class="carte" href="outil-fiches-memo.html">
           <span class="bandeau"></span>
+          <span class="duree" title="Consultation libre : pas de parcours imposé, on y vient au besoin"><span class="sr">Durée estimée : </span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 4a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zm0 0V2m-2.6 0h5.2M18.6 5.9l1.6-1.6M12 8.6v4.4l2.8 2"/></svg>libre</span>
           <span class="contenu">
             <span class="num">Mémo · Terrain</span>
             <h3>Fiches mémo de l'IDSR</h3>
