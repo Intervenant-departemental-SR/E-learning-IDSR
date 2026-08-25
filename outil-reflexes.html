@@ -43,8 +43,19 @@
   .zone .chrono{font-size:3rem;font-weight:800;}
   .distraction{margin-top:.9rem;background:var(--jaune-clair);border:2px solid var(--jaune);border-radius:12px;padding:1rem 1.2rem;display:none;}
   .distraction.show{display:block;}
-  .distraction .calc{font-size:1.5rem;font-weight:800;text-align:center;margin:.2rem 0 .8rem;}
-  .distraction .vf{display:flex;gap:.8rem;justify-content:center;}
+  .distraction .consigne{font-size:1.25rem;font-weight:800;text-align:center;margin:.1rem 0 .2rem;}
+  .distraction .consigne .cible{background:var(--noir);color:var(--jaune);border-radius:6px;padding:.1rem .45rem;}
+  .distraction .score-p{text-align:center;font-size:.9rem;font-weight:700;color:var(--gris);margin:0 0 .9rem;}
+  .panneaux{display:grid;grid-template-columns:repeat(6,1fr);gap:.6rem;}
+  .pan{background:#fff;border:2px solid var(--bordure);border-radius:10px;padding:.6rem .3rem .5rem;
+    cursor:pointer;font:inherit;display:flex;flex-direction:column;align-items:center;gap:.4rem;
+    transition:border-color .12s linear, background .12s linear, transform .12s ease;}
+  .pan img{width:100%;max-width:74px;height:74px;object-fit:contain;display:block;pointer-events:none;}
+  .pan span{font-size:.74rem;font-weight:700;line-height:1.15;text-align:center;color:var(--gris);}
+  .pan:hover{border-color:var(--jaune-fonce);}
+  .pan.bon{border-color:var(--vert);background:#eafaf0;transform:scale(1.04);}
+  .pan.mauvais{border-color:var(--rouge);background:#fdeeec;}
+  @media (max-width:640px){ .panneaux{grid-template-columns:repeat(3,1fr);} .pan img{height:60px;} }
   .btn{display:inline-flex;align-items:center;gap:.5rem;border:none;border-radius:999px;padding:.75rem 1.4rem;font:inherit;font-weight:700;cursor:pointer;transition:transform var(--t),background var(--t),opacity var(--t);}
   .btn-primary{background:var(--jaune);color:var(--noir);}
   .btn-primary:hover:not(:disabled){background:var(--jaune-fonce);}
@@ -173,7 +184,7 @@
   <div class="wrap">
     <p class="eyebrow">Outil d'animation · Grand public</p>
     <h1>Vos réflexes au volant… avec et sans téléphone</h1>
-    <p>Mesurez votre vrai temps de réaction. Puis refaites le test en étant « occupé » — comme quand on lit un message au volant. Le résultat parle de lui-même.</p>
+    <p>Mesurez votre vrai temps de réaction. Puis refaites le test en devant chercher un panneau dans une grille, pendant que vous guettez le signal : c'est exactement ce que fait un conducteur qui cherche une information ailleurs que sur la route. Le résultat parle de lui-même.</p>
   </div>
 </section>
 
@@ -183,19 +194,17 @@
     <!-- TEST -->
     <section class="panneau" aria-labelledby="tt">
       <h2 id="tt">Le test (2 manches de 5 essais)</h2>
-      <p class="lead"><strong>Manche 1 :</strong> cliquez sur la zone dès qu'elle devient jaune. <strong>Manche 2 :</strong> même chose… tout en répondant aux petits calculs qui s'affichent (la « distraction »).</p>
+      <p class="lead"><strong>Manche 1 :</strong> cliquez sur la zone dès qu'elle devient jaune. <strong>Manche 2 :</strong> même chose… mais vous devez en plus retrouver, dans la grille de six panneaux, celui qu'on vous demande. Les panneaux changent de place à chaque fois : c'est la « distraction ».</p>
 
       <div class="zone" id="zone" tabindex="0" role="button" aria-label="Zone de test : cliquez ou appuyez sur Espace dès qu'elle devient jaune">
         <span class="gros" id="z-titre">Prêt à tester vos réflexes ?</span>
         <span class="sous" id="z-sous">Cliquez sur « Démarrer la manche 1 ». La zone passera au jaune après un délai imprévisible : cliquez le plus vite possible !</span>
       </div>
 
-      <div class="distraction" id="distraction" aria-live="polite">
-        <div class="calc" id="calc"></div>
-        <div class="vf">
-          <button type="button" class="btn btn-noir" data-rep="1">Vrai</button>
-          <button type="button" class="btn btn-noir" data-rep="0">Faux</button>
-        </div>
+      <div class="distraction" id="distraction">
+        <p class="consigne" id="consigne" role="status" aria-live="polite">Trouvez le panneau : <span class="cible">STOP</span></p>
+        <p class="score-p" id="score-p">Panneaux trouvés : 0</p>
+        <div class="panneaux" id="panneaux"></div>
       </div>
 
       <div class="essais" id="essais" aria-live="polite"></div>
@@ -226,7 +235,7 @@
       </div>
     </section>
 
-    <p class="source">Repères : <a href="https://www.securite-routiere.gouv.fr/dangers-de-la-route/le-telephone-et-ses-usages-au-volant" target="_blank" rel="noopener">securite-routiere.gouv.fr, Le téléphone au volant</a>. L'inattention est citée chez 13 % des présumés responsables d'accidents mortels en 2025 (ONISR, <em>principaux résultats 2025</em>, données définitives, mai 2026, France métropolitaine). Le test mesure une réaction à un signal visuel attendu : en situation réelle de conduite, les temps sont plus longs (1 à 2 s).</p>
+    <p class="source">Repères : <a href="https://www.securite-routiere.gouv.fr/dangers-de-la-route/le-telephone-et-ses-usages-au-volant" target="_blank" rel="noopener">securite-routiere.gouv.fr, Le téléphone au volant</a>. L'inattention est citée chez 13 % des présumés responsables d'accidents mortels en 2025 (ONISR, <em>principaux résultats 2025</em>, données définitives, mai 2026, France métropolitaine). Le test mesure une réaction à un signal visuel attendu : en situation réelle de conduite, les temps sont plus longs (1 à 2 s). Les visuels des six panneaux proviennent de la base Panneaupédia de cet espace : signalisation officielle française, arrêté du 24 novembre 1967 modifié.</p>
   </div>
 </main>
 
@@ -243,27 +252,69 @@
   var btnStart = document.getElementById("demarrer");
   var btnRejouer = document.getElementById("rejouer");
   var distraction = document.getElementById("distraction");
-  var elCalc = document.getElementById("calc");
+  var elConsigne = document.getElementById("consigne");
+  var elPanneaux = document.getElementById("panneaux");
+  var elScoreP = document.getElementById("score-p");
 
   var manche = 0;              /* 1 = attentif, 2 = distrait */
   var temps = {1:[], 2:[]};
   var attente = false, goTime = 0, timer = null, enTest = false;
 
-  /* ---------- distraction : petits calculs vrai/faux ---------- */
-  var calcOK = true;
-  function nouveauCalc(){
-    var a = 2+Math.floor(Math.random()*8), b = 2+Math.floor(Math.random()*8);
-    var vrai = Math.random() < 0.5;
-    var res = a+b + (vrai?0:(Math.random()<0.5?-1:1)*(1+Math.floor(Math.random()*2)));
-    calcOK = (res === a+b);
-    elCalc.textContent = a+" + "+b+" = "+res+" ?";
+  /* ---------- distraction : retrouver le bon panneau ----------
+     Six panneaux volontairement très connus, tirés de la base
+     Panneaupédia de cet espace (assets/panneaux). Ils changent de
+     place à chaque question : c'est la recherche visuelle qui
+     distrait, exactement comme chercher une information au volant. */
+  var PANNEAUX = [
+    {code:"AB4",  nom:"STOP"},
+    {code:"AB3a", nom:"Cédez le passage"},
+    {code:"B1",   nom:"Sens interdit"},
+    {code:"A13b", nom:"Passage pour piétons"},
+    {code:"B14",  nom:"Limitation à 50 km/h"},
+    {code:"C1a",  nom:"Parking"}
+  ];
+  var cible = null, trouves = 0;
+
+  function melange(t){
+    var a = t.slice();
+    for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var x=a[i]; a[i]=a[j]; a[j]=x; }
+    return a;
   }
-  document.querySelectorAll("[data-rep]").forEach(function(b){
-    b.addEventListener("click", function(e){
-      e.stopPropagation();
-      if(manche===2 && enTest) nouveauCalc();
+
+  function dessinerPanneaux(){
+    elPanneaux.innerHTML = "";
+    melange(PANNEAUX).forEach(function(pan){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "pan";
+      b.setAttribute("aria-label", pan.nom);
+      b.innerHTML = '<img src="assets/panneaux/'+pan.code+'.svg" alt="" />'+
+                    '<span>'+pan.nom+'</span>';
+      b.addEventListener("click", function(e){
+        e.stopPropagation();
+        if(manche!==2 || !enTest) return;
+        if(pan.code === cible.code){
+          b.className = "pan bon";
+          trouves++;
+          elScoreP.textContent = "Panneaux trouvés : " + trouves;
+          setTimeout(nouveauPanneau, 260);
+        } else {
+          b.className = "pan mauvais";
+          setTimeout(function(){ b.className = "pan"; }, 500);
+        }
+      });
+      elPanneaux.appendChild(b);
     });
-  });
+  }
+
+  function nouveauPanneau(){
+    var choix = PANNEAUX;
+    if(cible) choix = PANNEAUX.filter(function(x){ return x.code !== cible.code; });
+    cible = choix[Math.floor(Math.random()*choix.length)];
+    elConsigne.innerHTML = 'Trouvez le panneau : <span class="cible">' +
+      cible.nom.replace(/&/g,"&amp;").replace(/</g,"&lt;") + '</span>';
+    dessinerPanneaux();
+  }
 
   /* ---------- affichage essais ---------- */
   function majEssais(){
@@ -284,9 +335,9 @@
   function lancerEssai(){
     enTest = true; attente = true;
     zone.className = "zone pret";
-    zT.textContent = manche===1 ? "Attendez le jaune…" : "Répondez aux calculs… et guettez le jaune !";
+    zT.textContent = manche===1 ? "Attendez le jaune…" : "Cherchez le panneau… et guettez le jaune !";
     zS.textContent = "Essai "+(temps[manche].length+1)+" / "+N;
-    if(manche===2) nouveauCalc();
+    if(manche===2 && !cible) nouveauPanneau();
     var delai = 1500 + Math.random()*3000;
     timer = setTimeout(function(){
       attente = false;
@@ -317,7 +368,7 @@
       if(manche===1){
         zone.className = "zone";
         zT.textContent = "Manche 1 terminée ✔";
-        zS.textContent = "Moyenne : "+Math.round(moyenne(1))+" ms. Maintenant, la même chose… en étant occupé par les calculs.";
+        zS.textContent = "Moyenne : "+Math.round(moyenne(1))+" ms. Maintenant, la même chose… en devant chercher un panneau en même temps.";
         btnStart.textContent = "▶ Démarrer la manche 2 (avec distraction)";
         btnStart.hidden = false;
       } else {
@@ -342,12 +393,17 @@
   btnStart.addEventListener("click", function(){
     manche = (manche===0||temps[1].length<N) ? 1 : 2;
     btnStart.hidden = true;
-    if(manche===2) distraction.className = "distraction show";
+    if(manche===2){
+      distraction.className = "distraction show";
+      trouves = 0; cible = null;
+      elScoreP.textContent = "Panneaux trouvés : 0";
+      nouveauPanneau();
+    }
     majEssais();
     lancerEssai();
   });
   btnRejouer.addEventListener("click", function(){
-    temps = {1:[],2:[]}; manche = 0;
+    temps = {1:[],2:[]}; manche = 0; trouves = 0; cible = null;
     document.getElementById("panneau-res").hidden = true;
     btnRejouer.hidden = true;
     btnStart.textContent = "▶ Démarrer la manche 1";
@@ -379,7 +435,8 @@
       '<div class="res jaune"><b>'+Math.round(m1)+' ms</b><span>réaction moyenne — attentif</span></div>' +
       '<div class="res rouge"><b>'+Math.round(m2)+' ms</b><span>réaction moyenne — distrait</span></div>' +
       '<div class="res'+(ecart>0?" rouge":"")+'"><b>'+(ecart>0?"+ "+ecart+" %":"—")+'</b><span>de temps de réaction en plus une fois distrait</span></div>' +
-      '<div class="res"><b>'+dist(m2-m1,90).toFixed(1).replace(".",",")+' m</b><span>parcourus « en plus » à 90 km/h à cause de la distraction</span></div>';
+      '<div class="res"><b>'+dist(m2-m1,90).toFixed(1).replace(".",",")+' m</b><span>parcourus « en plus » à 90 km/h à cause de la distraction</span></div>' +
+      '<div class="res"><b>'+trouves+'</b><span>panneaux retrouvés pendant la manche 2</span></div>';
 
     /* graphique distances */
     var cmp = document.getElementById("compare");
@@ -407,9 +464,9 @@
 
     var verdict = document.getElementById("verdict");
     if(m2 > m1){
-      verdict.innerHTML = "📱 Distrait, vous avez mis <strong>"+Math.round(m2-m1)+" ms de plus</strong> à réagir — et encore, ici la distraction était minime et vous <em>attendiez</em> le signal. Au volant, lire un vrai message détourne les yeux de la route pendant 5 secondes : à 90 km/h, c'est 125 m parcourus à l'aveugle.";
+      verdict.innerHTML = "📱 Distrait, vous avez mis <strong>"+Math.round(m2-m1)+" ms de plus</strong> à réagir — et encore, ici la distraction était minime : chercher un panneau parmi six, alors que vous <em>attendiez</em> le signal. Au volant, chercher un panneau de direction, une adresse ou un message revient au même geste : les yeux quittent la route. Cinq secondes les yeux ailleurs, à 90 km/h, c'est 125 m parcourus à l'aveugle.";
     } else {
-      verdict.innerHTML = "💪 Étonnant : votre moyenne distraite n'est pas plus lente. C'est rare — et trompeur : dans une vraie voiture, la lecture d'un message détourne les yeux 5 secondes de la route. Personne n'y échappe, pas même les meilleurs réflexes.";
+      verdict.innerHTML = "💪 Étonnant : votre moyenne distraite n'est pas plus lente. C'est rare — et trompeur : dans une vraie voiture, chercher un panneau ou lire un message détourne les yeux de la route plusieurs secondes. Personne n'y échappe, pas même les meilleurs réflexes.";
     }
     verdict.className = "verdict show";
     panneau.scrollIntoView({behavior:"smooth"});
