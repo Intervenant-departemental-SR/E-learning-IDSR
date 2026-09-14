@@ -57,6 +57,9 @@
   function texteNote(et){
     var aExplorer = et.querySelectorAll(".org").length > 0;
     var aQuestion = et.querySelectorAll(".verrou").length > 0;
+    var aVideo = et.querySelectorAll("[data-video-step]").length > 0;
+    if(aVideo && aExplorer) return "Regardez la vidéo jusqu'au bout en répondant à ses questions, puis ouvrez chaque carte pour débloquer l'étape suivante.";
+    if(aVideo) return "Regardez la vidéo jusqu'au bout en répondant à ses questions pour débloquer l'étape suivante.";
     if(aExplorer && aQuestion) return "Ouvrez chaque carte, puis répondez à la question pour débloquer l'étape suivante.";
     if(aQuestion) return "Répondez à la question pour débloquer l'étape suivante.";
     if(aExplorer) return "Ouvrez chaque carte pour débloquer l'étape suivante.";

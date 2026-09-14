@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Module 9 (v2) : le risque routier professionnel en vidéos | E-learning IDSR</title>
+<meta name="description" content="Module e-learning interactif sur le risque routier professionnel, version 2 : cinq vidéos de la Carsat Alsace-Moselle séquencées par des questions réglementaires (organisation des déplacements, véhicule, distracteurs, vitesse, alcool et drogues), accidentologie 2023, obligations de l'employeur et rôle de l'IDSR." />
+<style>
+  :root{
+    --jaune:#FECF41; --jaune-fonce:#E9B400; --jaune-clair:#FFF3CC;
+    --noir:#000; --gris:#3a3a3a; --gris-2:#6b6b6b;
+    --gris-clair:#f4f4f4; --bordure:#e2e2e2; --blanc:#fff;
+    --vert:#1f8a4c; --rouge:#c0392b;
+    --rayon:12px; --ombre:0 4px 18px rgba(0,0,0,.12);
+    --max:1080px; --t:.25s cubic-bezier(.4,0,.2,1);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:"Marianne","Segoe UI",Arial,Helvetica,sans-serif;color:var(--noir);background:var(--gris-clair);line-height:1.55;}
+  img{max-width:100%;display:block;}
+  :focus-visible{outline:3px solid var(--noir);outline-offset:2px;border-radius:4px;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 1.25rem;}
+  .skip{position:absolute;left:-9999px;background:var(--noir);color:var(--jaune);padding:.6rem 1rem;z-index:200;font-weight:700;}
+  .skip:focus{left:0;top:0;}
+  header.site{background:var(--blanc);border-bottom:6px solid var(--jaune);position:sticky;top:0;z-index:50;}
+  .topbar{display:flex;align-items:center;gap:1rem;padding:.7rem 1.25rem;max-width:var(--max);margin:0 auto;flex-wrap:wrap;}
+  .topbar img{width:150px;}
+  .topbar .fil{font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--gris-2);font-weight:700;}
+  .topbar .fil a{color:var(--gris-2);text-decoration:none;}
+  .topbar .fil a:hover{text-decoration:underline;}
+  .progress{height:8px;background:var(--gris-clair);}
+  .progress > span{display:block;height:100%;width:0;background:var(--jaune);transition:width .5s ease;}
+  .module-hero{background:var(--noir);color:var(--blanc);padding:2.2rem 0 2.4rem;}
+  .module-hero .eyebrow{color:var(--jaune);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.8rem;margin:0 0 .5rem;}
+  .module-hero h1{font-size:2rem;line-height:1.15;margin:0 0 .8rem;max-width:780px;}
+  .module-hero p{margin:0;color:#e9e9e9;max-width:720px;}
+  main{padding:2rem 0 4rem;}
+  .layout{display:grid;grid-template-columns:260px 1fr;gap:2rem;align-items:start;}
+  .stepper{position:sticky;top:96px;background:var(--blanc);border:1px solid var(--bordure);border-radius:var(--rayon);padding:.6rem;}
+  .stepper ol{list-style:none;margin:0;padding:0;}
+  .step-item{display:flex;align-items:center;gap:.7rem;width:100%;text-align:left;border:none;background:none;font:inherit;padding:.7rem .6rem;border-radius:8px;cursor:pointer;color:var(--gris);transition:background var(--t);}
+  .step-item:hover:not(:disabled){background:var(--jaune-clair);}
+  .step-item:disabled{cursor:not-allowed;color:var(--gris-2);opacity:.7;}
+  .step-item[aria-current="true"]{background:var(--noir);color:var(--blanc);}
+  .step-item[aria-current="true"] .pastille{background:var(--jaune);color:var(--noir);border-color:var(--jaune);}
+  .pastille{flex:0 0 auto;width:30px;height:30px;border-radius:50%;border:2px solid var(--bordure);display:grid;place-items:center;font-weight:700;font-size:.85rem;background:var(--blanc);color:var(--gris);}
+  .step-item.done .pastille{background:var(--vert);border-color:var(--vert);color:#fff;}
+  .step-lbl{font-size:.92rem;font-weight:600;line-height:1.2;}
+  .step-sub{display:block;font-size:.72rem;font-weight:500;opacity:.8;}
+  .etape{display:none;background:var(--blanc);border:1px solid var(--bordure);border-radius:var(--rayon);box-shadow:var(--ombre);padding:1.8rem;animation:fade .35s ease;}
+  .etape.active{display:block;}
+  @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+  .etape h2{font-size:1.5rem;margin:0 0 .3rem;border-left:8px solid var(--jaune);padding-left:.6rem;}
+  .etape .lead{color:var(--gris);margin:.2rem 0 1.6rem;}
+  .obj{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem;margin:1.5rem 0;}
+  .obj .o{background:var(--gris-clair);border-radius:10px;padding:1.1rem;border-top:4px solid var(--jaune);}
+  .obj .o strong{display:block;margin-bottom:.3rem;}
+  .obj .o span{font-size:.92rem;color:var(--gris);}
+  .org{display:flex;flex-direction:column;gap:.7rem;margin:1.4rem 0;}
+  .cartes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.9rem;}
+  .role{position:relative;text-align:left;border:1px solid var(--bordure);border-left:5px solid var(--jaune);background:var(--blanc);border-radius:10px;padding:1rem;cursor:pointer;transition:transform var(--t),box-shadow var(--t),border-color var(--t);font:inherit;width:100%;}
+  .role:hover{transform:translateY(-3px);box-shadow:var(--ombre);}
+  .role .sigle{font-weight:800;font-size:1.02rem;margin:0 0 .15rem;}
+  .role .nom{font-size:.85rem;color:var(--gris-2);margin:0;}
+  .role .detail{max-height:0;overflow:hidden;transition:max-height var(--t);font-size:.9rem;color:var(--gris);}
+  .role[aria-expanded="true"]{border-left-color:var(--noir);background:var(--jaune-clair);}
+  .role[aria-expanded="true"] .detail{max-height:480px;margin-top:.6rem;}
+  .role .plus{position:absolute;top:.8rem;right:.9rem;font-weight:800;color:var(--jaune-fonce);transition:transform var(--t);}
+  .role[aria-expanded="true"] .plus{transform:rotate(45deg);color:var(--noir);}
+  .hint-explore{font-size:.86rem;color:var(--gris-2);background:var(--jaune-clair);border-radius:8px;padding:.6rem .8rem;margin:0 0 1rem;}
+  .docs{background:var(--noir);color:var(--blanc);border-radius:10px;padding:1.1rem 1.3rem;margin:1.4rem 0;}
+  .docs h3{margin:0 0 .6rem;color:var(--jaune);font-size:1rem;}
+  .docs dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem;font-size:.92rem;}
+  .docs dt{font-weight:800;color:var(--jaune);}
+  .docs dd{margin:0;color:#eaeaea;}
+  .verrou{margin-top:1.6rem;border:2px dashed var(--jaune-fonce);border-radius:12px;padding:1.2rem 1.3rem;background:var(--jaune-clair);}
+  .verrou .v-tag{display:inline-flex;align-items:center;gap:.4rem;font-weight:800;text-transform:uppercase;font-size:.78rem;letter-spacing:.05em;color:var(--gris);margin-bottom:.5rem;}
+  .verrou .q{font-weight:700;margin:.2rem 0 .9rem;font-size:1.05rem;}
+  .opts{display:grid;gap:.55rem;}
+  .opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;background:var(--blanc);border:2px solid var(--bordure);border-radius:9px;padding:.75rem .9rem;cursor:pointer;font:inherit;transition:border-color var(--t),background var(--t);}
+  .opt:hover:not(:disabled){border-color:var(--jaune-fonce);}
+  .opt .mark{flex:0 0 auto;width:22px;height:22px;border-radius:50%;border:2px solid var(--gris-2);display:grid;place-items:center;font-size:.8rem;font-weight:800;}
+  .opt.correct{border-color:var(--vert);background:#eafaf0;}
+  .opt.correct .mark{background:var(--vert);border-color:var(--vert);color:#fff;}
+  .opt.wrong{border-color:var(--rouge);background:#fdeeec;}
+  .opt.wrong .mark{background:var(--rouge);border-color:var(--rouge);color:#fff;}
+  .opt:disabled{cursor:default;}
+  .feedback{margin-top:.8rem;font-weight:600;font-size:.94rem;display:none;}
+  .feedback.show{display:block;}
+  .feedback.ok{color:var(--vert);}
+  .feedback.ko{color:var(--rouge);}
+  .nav-etape{display:flex;justify-content:space-between;gap:1rem;margin-top:1.8rem;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;border:none;border-radius:999px;padding:.8rem 1.5rem;font:inherit;font-weight:700;cursor:pointer;text-decoration:none;transition:transform var(--t),background var(--t),opacity var(--t);}
+  .btn-primary{background:var(--jaune);color:var(--noir);}
+  .btn-primary:hover:not(:disabled){background:var(--jaune-fonce);}
+  .btn-primary:disabled{opacity:.45;cursor:not-allowed;}
+  .btn-ghost{background:transparent;color:var(--gris);border:2px solid var(--bordure);}
+  .btn-ghost:hover{border-color:var(--noir);color:var(--noir);}
+  .fini{text-align:center;padding:1rem 0;}
+  .badge-fin{display:inline-grid;place-items:center;width:96px;height:96px;border-radius:50%;background:var(--jaune);margin:0 auto 1rem;font-size:2.6rem;}
+  .source{font-size:.82rem;color:var(--gris-2);border-top:1px solid var(--bordure);margin-top:2rem;padding-top:1rem;}
+  footer.site{background:var(--blanc);border-top:6px solid var(--jaune);padding:1.6rem 0;font-size:.88rem;color:var(--gris-2);}
+  footer.site a{color:var(--noir);font-weight:700;}
+  /* éléments enrichis */
+  .schema{margin:1.7rem 0;border:1px solid var(--bordure);border-radius:12px;padding:1.3rem;background:#fff;}
+  .schema h4{margin:0 0 1rem;font-size:1.05rem;border-left:6px solid var(--jaune);padding-left:.55rem;}
+  .schema svg{width:100%;height:auto;display:block;overflow:visible;}
+  .schema .src{font-size:.78rem;color:var(--gris-2);margin-top:.45rem;font-style:italic;}
+  .photo{margin:1.4rem 0;}
+  .photo img{width:100%;border-radius:12px;border:1px solid var(--bordure);}
+  .photo figcaption{font-size:.8rem;color:var(--gris-2);margin-top:.5rem;font-style:italic;}
+  .video{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;margin:1.6rem 0;border:1px solid var(--bordure);background:#000;}
+  .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+  .video-cap{font-size:.8rem;color:var(--gris-2);margin:.4rem 0 0;font-style:italic;}
+  .stat-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem;margin:1.3rem 0;}
+  .stat-cards .sc{background:var(--gris-clair);border-radius:10px;padding:1rem;text-align:center;border-bottom:4px solid var(--jaune);}
+  .stat-cards .sc b{display:block;font-size:1.6rem;line-height:1.1;}
+  .stat-cards .sc span{font-size:.8rem;color:var(--gris);}
+  .engage{list-style:none;margin:1.3rem 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:.8rem;counter-reset:eng;}
+  .engage li{display:flex;gap:.8rem;align-items:flex-start;background:var(--gris-clair);border-radius:10px;padding:.9rem 1rem;border-left:5px solid var(--jaune);}
+  .engage li::before{counter-increment:eng;content:counter(eng);flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--noir);color:var(--jaune);font-weight:800;display:grid;place-items:center;}
+  .engage li span{font-size:.95rem;font-weight:600;}
+  @media (max-width:880px){
+    .layout{grid-template-columns:1fr;}
+    .stepper{position:static;}
+    .stepper ol{display:flex;overflow-x:auto;gap:.3rem;}
+    .step-item{flex-direction:column;min-width:96px;text-align:center;gap:.35rem;}
+    .step-sub{display:none;}
+    .module-hero h1{font-size:1.55rem;}
+  }
+
+  /* ============================================================
+     CORRECTIFS TRANSVERSES — audit design du 30 juillet 2026
+     Bloc identique sur toutes les pages, placé en fin de feuille
+     pour surcharger les règles ci-dessus. Il constituera le point
+     de départ du futur socle.css : toute modification doit être
+     reportée sur les autres pages tant que le socle n'existe pas.
+     ============================================================ */
+  :root{
+    --h-header:132px;
+    --jaune-trait:#8A6D00;
+    --gris-400:#8c8c8c;
+    --vert-fort:#14532D;
+  }
+  html{scroll-padding-top:calc(var(--h-header) + 16px);}
+
+  /* B2 · la barre de progression devient lisible (jaune sur gris foncé) */
+  .progress{background:#3a3a3a;}
+  .progress > span{background:var(--jaune,#FECF41);}
+
+  /* B3 · le menu d'étapes ne passe plus sous l'en-tête collant */
+  .stepper{top:calc(var(--h-header) + 12px);z-index:1;}
+  .etape-compteur{margin:.2rem .3rem .5rem;font-size:.78rem;font-weight:700;
+    text-transform:uppercase;letter-spacing:.05em;color:#3a3a3a;}
+
+  /* B6 · le bouton verrouillé est lisible et sa condition est écrite */
+  .btn:disabled,.btn-primary:disabled,.btn-ghost:disabled{
+    opacity:1;background:#f4f4f4;color:#6b6b6b;
+    box-shadow:inset 0 0 0 2px #cfcfcf;cursor:not-allowed;}
+  .lock-note{margin:1.2rem 0 -.6rem;font-size:.88rem;color:#3a3a3a;font-weight:600;}
+  .step-item:disabled{opacity:1;color:#6b6b6b;}
+  .step-item:disabled .pastille{border-color:var(--gris-400);color:#6b6b6b;}
+
+  /* contraste des bordures de contrôles interactifs */
+  .opt{border-color:var(--gris-400);}
+  .role{border-color:#cfcfcf;}
+  .role .plus{color:#000;background:var(--jaune,#FECF41);width:26px;height:26px;
+    border-radius:50%;display:grid;place-items:center;top:.7rem;right:.7rem;
+    font-size:1rem;line-height:1;}
+  .feedback.ok{color:var(--vert-fort);}
+
+  /* B8 · le panneau déplié ne tronque plus le texte */
+  .role .sigle,.role .nom{display:block;margin:0 0 .15rem;}
+  .role .nom{margin-bottom:0;}
+  .role .detail{max-height:none;display:grid;grid-template-rows:0fr;
+    overflow:hidden;transition:grid-template-rows var(--t,.25s ease);}
+  .role .detail > *{min-height:0;}
+  .role[aria-expanded="true"] .detail{max-height:none;grid-template-rows:1fr;}
+
+  /* lisibilité des barres jaunes sur fond blanc, sans toucher aux schémas
+     dont le contour est déjà défini dans le SVG */
+  .schema svg rect[fill="#FECF41"]:not([stroke]){stroke:var(--jaune-trait);stroke-width:.8;}
+
+  /* B10 · les nombres et les unités ne se coupent plus en fin de ligne */
+  .sc b,.chiffre{white-space:nowrap;}
+
+  @media (max-width:640px){
+    /* B5 · l'en-tête mobile n'occupe plus le quart de l'écran */
+    :root{--h-header:92px;}
+    .topbar{padding:.5rem 1rem;gap:.7rem;}
+    .topbar .logo-prefet{height:52px!important;}
+    .topbar img{width:104px;}
+
+    /* B1 · les graphiques redeviennent consultables */
+    .etape{padding:1.1rem;}
+    .schema{padding:.8rem;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .schema svg{min-width:560px;}
+    .schema::after{content:"↔ Faites défiler le graphique horizontalement";
+      display:block;font-size:.8rem;color:#3a3a3a;margin-top:.5rem;font-style:normal;}
+
+    /* menu d'étapes : accrochage au défilement */
+    .stepper ol{scroll-snap-type:x mandatory;}
+    .step-item{scroll-snap-align:start;}
+  }
+
+  /* B4 · mouvement réduit traité en CSS, et non par un script différé */
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;
+      animation-iteration-count:1!important;transition-duration:.01ms!important;
+      scroll-behavior:auto!important;}
+  }
+
+
+  /* ---- spécifique v2 : étapes vidéo ---- */
+  .ytv{margin:1.4rem 0 .4rem;}
+  .resume-video{margin:1rem 0 1.4rem;border:1px solid var(--bordure);border-radius:10px;background:var(--gris-clair);}
+  .resume-video summary{cursor:pointer;font-weight:700;padding:.8rem 1rem;list-style:none;display:flex;align-items:center;gap:.6rem;}
+  .resume-video summary::-webkit-details-marker{display:none;}
+  .resume-video summary::before{content:"+";display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--jaune);color:#000;font-weight:800;flex:0 0 auto;}
+  .resume-video[open] summary::before{content:"\2013";}
+  .resume-video .corps{padding:0 1rem 1rem;font-size:.93rem;color:var(--gris);}
+  .resume-video .corps p{margin:.4rem 0;}
+  .a-retenir{margin:1.4rem 0;border-left:8px solid var(--noir);background:var(--jaune-clair);border-radius:0 12px 12px 0;padding:1rem 1.2rem;}
+  .a-retenir h3{margin:0 0 .5rem;font-size:1rem;text-transform:uppercase;letter-spacing:.04em;}
+  .a-retenir ul{margin:0;padding-left:1.1rem;font-size:.95rem;}
+  .a-retenir li{margin:.3rem 0;}
+  .a-retenir li strong{font-weight:800;}
+  .mode-emploi{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.9rem;margin:1.4rem 0;counter-reset:me;}
+  .mode-emploi .m{background:var(--blanc);border:1px solid var(--bordure);border-radius:10px;padding:1rem 1rem 1rem 3.3rem;position:relative;font-size:.92rem;}
+  .mode-emploi .m::before{counter-increment:me;content:counter(me);position:absolute;left:.9rem;top:.9rem;width:32px;height:32px;border-radius:50%;background:var(--noir);color:var(--jaune);font-weight:800;display:grid;place-items:center;}
+  .mode-emploi .m strong{display:block;margin-bottom:.2rem;}
+  .fiab{width:100%;border-collapse:collapse;font-size:.84rem;margin:1rem 0;}
+  .fiab th,.fiab td{border:1px solid var(--bordure);padding:.5rem .6rem;text-align:left;vertical-align:top;}
+  .fiab th{background:var(--gris-clair);}
+  .fiab td:first-child{white-space:nowrap;font-weight:700;}
+  .fiab a{color:var(--noir);}
+  .pastille-fiab{display:inline-block;border-radius:999px;padding:.1rem .55rem;font-weight:800;font-size:.75rem;white-space:nowrap;}
+  .pastille-fiab.a{background:#eafaf0;color:var(--vert-fort);border:1px solid var(--vert-fort);}
+  .pastille-fiab.b{background:var(--jaune-clair);color:var(--jaune-trait);border:1px solid var(--jaune-trait);}
+  .tableau-scroll{overflow-x:auto;}
+  .credit-video{font-size:.8rem;color:var(--gris-2);font-style:italic;margin:.4rem 0 0;}
+  .credit-video a{color:var(--gris-2);}
+</style>
+</head>
+<body data-module="m9v2">
+<a class="skip" href="#contenu">Aller au contenu principal</a>
+
+<header class="site">
+  <div class="topbar">
+    <img src="assets/logo-prefet-hdf.png" alt="Préfet de la région Hauts-de-France" class="logo-prefet" style="width:auto;height:96px" />
+    <img src="assets/logo-securite-routiere.png" alt="Sécurité routière, Vivre, Ensemble" />
+    <span class="fil"><a href="index.html">Accueil e-learning</a> › Module 9 · v2</span>
+  </div>
+  <div class="progress" role="progressbar" aria-label="Progression du module" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="barre"></span></div>
+</header>
+
+<section class="module-hero">
+  <div class="wrap">
+    <p class="eyebrow">Module 9 · Formation complémentaire thématique · version 2</p>
+    <h1>Le risque routier professionnel</h1>
+    <p>Cinq courtes vidéos de la Carsat Alsace-Moselle mettent en scène des situations d'entreprise. Chaque vidéo s'arrête plusieurs fois pour vous poser une question dont la réponse est vérifiée dans les textes en vigueur : ce que dit la loi, ce que peut faire l'employeur, ce que l'IDSR peut apporter.</p>
+  </div>
+</section>
+
+<main id="contenu">
+  <div class="wrap layout">
+    <nav class="stepper" aria-label="Étapes du module">
+      <ol>
+        <li><button class="step-item" data-go="0"><span class="pastille">1</span><span class="step-lbl">Introduction<span class="step-sub">Enjeu et mode d'emploi</span></span></button></li>
+        <li><button class="step-item" data-go="1" disabled><span class="pastille">2</span><span class="step-lbl">Organiser les déplacements<span class="step-sub">Vidéo 1 · 3 questions</span></span></button></li>
+        <li><button class="step-item" data-go="2" disabled><span class="pastille">3</span><span class="step-lbl">Préparer le véhicule<span class="step-sub">Vidéo 2 · 4 questions</span></span></button></li>
+        <li><button class="step-item" data-go="3" disabled><span class="pastille">4</span><span class="step-lbl">Les distracteurs<span class="step-sub">Vidéo 3 · 3 questions</span></span></button></li>
+        <li><button class="step-item" data-go="4" disabled><span class="pastille">5</span><span class="step-lbl">La vitesse<span class="step-sub">Vidéo 4 · 5 questions</span></span></button></li>
+        <li><button class="step-item" data-go="5" disabled><span class="pastille">6</span><span class="step-lbl">Alcool, drogues, médicaments<span class="step-sub">Vidéo 5 · 2 questions</span></span></button></li>
+        <li><button class="step-item" data-go="6" disabled><span class="pastille">7</span><span class="step-lbl">Synthèse<span class="step-sub">Les 7 engagements et quiz</span></span></button></li>
+      </ol>
+    </nav>
+
+    <div>
+      <!-- ETAPE 0 : INTRODUCTION -->
+      <section class="etape active" data-etape="0" aria-labelledby="t0">
+        <h2 id="t0">Introduction</h2>
+        <p class="lead">Se déplacer fait partie de très nombreux métiers. Le risque routier est la première cause d'accident mortel au travail. L'employeur a un rôle central à jouer, et l'IDSR peut l'accompagner : ce module vous donne les repères réglementaires pour le faire sans approximation.</p>
+
+        <div class="stat-cards">
+          <div class="sc"><b>440</b><span>personnes tuées en 2023 dans un déplacement lié au travail (296 en trajet, 144 en mission)</span></div>
+          <div class="sc"><b>30 %</b><span>des accidents du travail mortels sont des accidents de la route</span></div>
+          <div class="sc"><b>1,2</b><span>décès par jour en moyenne, soit environ 1,7 par jour ouvré</span></div>
+          <div class="sc"><b>~5 M</b><span>de journées de travail perdues par an</span></div>
+        </div>
+
+        <figure class="schema">
+          <h4>Mortalité liée au travail selon le type de trajet (2023)</h4>
+          <svg viewBox="0 0 720 210" role="img" aria-labelledby="m9g1t m9g1d">
+            <title id="m9g1t">Personnes tuées en 2023 selon le type de déplacement</title>
+            <desc id="m9g1d">Trajet domicile-travail : 296 ; mission : 144 ; total 440.</desc>
+            <g font-family="Marianne,Segoe UI,Arial,sans-serif" font-size="13">
+              <text x="220" y="55" text-anchor="end" font-weight="700">Trajet domicile-travail</text>
+              <rect x="230" y="40" width="430" height="30" rx="4" fill="#FECF41"/><text x="668" y="62" font-weight="800">296</text>
+              <text x="220" y="115" text-anchor="end" font-weight="700">Mission</text>
+              <rect x="230" y="100" width="209" height="30" rx="4" fill="#000"/><text x="447" y="122" font-weight="800">144</text>
+              <text x="230" y="170" font-size="14" font-weight="800">Total : 440 personnes tuées en 2023</text>
+            </g>
+          </svg>
+          <p class="src">Source : ONISR et CNAM-MSA, <em>L'essentiel du risque routier professionnel</em>, chiffres 2023, dernières données consolidées disponibles pour le risque routier professionnel.</p>
+        </figure>
+
+        <div class="obj">
+          <div class="o"><strong>Objectif 1</strong><span>Repérer, dans cinq situations d'entreprise, les décisions qui exposent les salariés sur la route.</span></div>
+          <div class="o"><strong>Objectif 2</strong><span>Connaître les règles exactes du code de la route et du code du travail derrière chaque situation, et corriger les approximations courantes.</span></div>
+          <div class="o"><strong>Objectif 3</strong><span>Savoir ce que l'employeur peut décider, et comment l'IDSR l'accompagne avec les 7 engagements.</span></div>
+        </div>
+
+        <h3 style="margin:1.6rem 0 .4rem;">Comment fonctionne ce module</h3>
+        <div class="mode-emploi">
+          <div class="m"><strong>Lancez la vidéo</strong>Chaque étape s'ouvre sur une saynète de 1 à 5 minutes. Un résumé écrit est disponible sous le lecteur.</div>
+          <div class="m"><strong>La vidéo s'arrête</strong>À des moments précis, une question s'affiche par-dessus l'image. La lecture reprend après la bonne réponse.</div>
+          <div class="m"><strong>Lisez la correction</strong>Chaque réponse cite l'article exact et signale quand la vidéo simplifie ou se trompe.</div>
+          <div class="m"><strong>Ouvrez les cartes</strong>Sous chaque vidéo, des cartes complètent le sujet. Cartes lues et vidéo terminée déverrouillent l'étape suivante.</div>
+        </div>
+        <p class="hint-explore">L'avance rapide est bloquée lors du premier visionnage. Votre progression est conservée dans votre navigateur : vous pouvez suivre le module en plusieurs fois.</p>
+        <p class="credit-video">Vidéos : série « Risque routier professionnel » de la Carsat Alsace-Moselle, diffusée sur sa chaîne YouTube. Lecture en mode de confidentialité avancée (youtube-nocookie.com). Un accès à YouTube est nécessaire ; si votre réseau le bloque, les questions vous sont posées à la suite, avec un lien vers la vidéo.</p>
+        <div class="nav-etape"><span></span><button class="btn btn-primary" data-next>Commencer le parcours →</button></div>
+      </section>
+
+      <!-- ETAPE 1 : ORGANISER LES DEPLACEMENTS -->
+      <section class="etape" data-etape="1" aria-labelledby="t1">
+        <h2 id="t1">Organiser les déplacements</h2>
+        <p class="lead">Bernard a une réunion à Reims à 9 h 30. Il part à 6 h en voiture, rentrera vers 22 h. Sa collègue Sonia lui fait remarquer que tout cela aurait pu s'anticiper. Trois questions rythment la vidéo.</p>
+        <div class="ytv" id="video-1" data-video-step="video-1"></div>
+        <p class="credit-video">Vidéo 1 « Organiser ses déplacements », Carsat Alsace-Moselle (2 min 12).</p>
+        <details class="resume-video">
+          <summary>Résumé écrit de la vidéo (accessibilité)</summary>
+          <div class="corps">
+            <p>Bernard, au volant dans les bouchons, s'inquiète d'arriver en retard à sa réunion de 9 h 30 ; levé à 6 h, il est déjà fatigué. La veille, dans les locaux de l'entreprise, Sonia lui avait fait remarquer que partir le matin même lui imposait une amplitude de 16 heures, avec 7 heures de route, et qu'il rentrerait épuisé : sur la route, c'est dangereux. Elle rappelle qu'un trajet de 3 h 30 annoncé par le GPS en fait 4 avec les bouchons, qu'une pause toutes les deux heures s'impose, qu'un déplacement se prépare, et que le train (2 heures, arrivée en centre-ville, possibilité de travailler ou de dormir) était une option. Bernard préfère la voiture, « il se sent plus libre ». Trois heures trente plus tard, toujours dans les bouchons, il se dit que cette réunion aurait pu se faire en visioconférence.</p>
+          </div>
+        </details>
+
+        <div class="a-retenir">
+          <h3>À retenir</h3>
+          <ul>
+            <li><strong>Le déplacement est une décision d'organisation</strong> : mode de transport, horaire de départ, nuit sur place, visioconférence. Ces choix relèvent de l'employeur au titre de son obligation de sécurité (article L. 4121-1 du code du travail).</li>
+            <li><strong>Repos quotidien de 11 heures consécutives</strong> pour tout salarié (article L. 3131-1 du code du travail) : une journée de 16 heures avec 7 heures de route l'entame.</li>
+            <li><strong>Mission ou trajet</strong> : l'accident du salarié en mission est un accident du travail (article L. 411-1 du code de la sécurité sociale) ; l'accident de trajet (article L. 411-2) ne vise que le parcours domicile / travail ou travail / lieu de repas.</li>
+          </ul>
+        </div>
+
+        <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
+        <div class="org" data-explore="1">
+          <div class="cartes">
+            <button class="role" aria-expanded="false"><span class="sigle">Trajet ou mission ?</span><span class="nom">Deux situations, un même risque</span><span class="plus">+</span><span class="detail"><span>Le risque routier professionnel recouvre les trajets domicile-travail et les déplacements en mission, sous l'autorité de l'employeur. En 2023, sur 440 personnes tuées : 296 en trajet et 144 en mission. Les accidents de mission représentent 30 % de l'ensemble des accidents mortels liés au travail.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Le temps de déplacement</span><span class="nom">Ce que dit le code du travail</span><span class="plus">+</span><span class="detail"><span>Le temps de déplacement pour se rendre sur le lieu d'exécution du contrat n'est pas du temps de travail effectif, mais s'il dépasse le temps normal de trajet domicile / lieu habituel de travail, il donne lieu à une contrepartie en repos ou financière (article L. 3121-4 du code du travail). Sept heures de route dans la journée ne sont donc jamais « gratuites » pour l'entreprise, et encore moins pour la sécurité du conducteur.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Qui est tué en trajet ?</span><span class="nom">Chiffres 2023</span><span class="plus">+</span><span class="detail"><span>Les hommes représentent 81 % des tués en trajet domicile-travail et 95 % en mission. Sur les trajets domicile-travail, les moins de 35 ans forment la part la plus élevée (45 %). Les deux-roues motorisés représentent 38 % des tués en trajet alors qu'ils ne sont utilisés que pour 2 % des trajets. Premières causes attribuées aux présumés responsables : vitesse excessive ou inadaptée (28 %) et inattention (27 %).</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Organiser les déplacements</span><span class="nom">Axe de management n° 1</span><span class="plus">+</span><span class="detail"><span>Adapter l'organisation du travail, prévoir le temps nécessaire (pauses comprises), définir le mode de transport le plus adapté (train, visioconférence, covoiturage), grouper les rendez-vous, éviter les départs très matinaux et les retours tardifs. C'est l'engagement n° 5 de l'appel des employeurs : intégrer des moments de repos dans le calcul des temps de trajet. L'IDSR peut aider l'entreprise à écrire une règle simple : au-delà de X heures de route, nuit sur place ou train.</span></span></button>
+          </div>
+        </div>
+        <div class="nav-etape"><button class="btn btn-ghost" data-prev>← Précédent</button><button class="btn btn-primary" data-next disabled>Étape suivante →</button></div>
+      </section>
+
+      <!-- ETAPE 2 : PREPARER LE VEHICULE -->
+      <section class="etape" data-etape="2" aria-labelledby="t2">
+        <h2 id="t2">Préparer le véhicule</h2>
+        <p class="lead">Carnet d'entretien oublié, camionnette prise par une salariée qui n'y est pas assurée, voiture personnelle utilisée en mission, matériel non arrimé, surcharge : le chef d'entreprise passe en revue les habitudes de son équipe. Quatre questions rythment la vidéo.</p>
+        <div class="ytv" id="video-2" data-video-step="video-2"></div>
+        <p class="credit-video">Vidéo 2 « Préparation du véhicule », Carsat Alsace-Moselle (2 min 35).</p>
+        <details class="resume-video">
+          <summary>Résumé écrit de la vidéo (accessibilité)</summary>
+          <div class="corps">
+            <p>Le chef reproche à Benjamin de ne jamais tenir à jour le carnet d'entretien de la camionnette : en cas d'accident avec un véhicule non entretenu, dit-il, l'entreprise et son dirigeant sont responsables. Benjamin objecte que Jeannette prend aussi la camionnette chaque matin pour aller à la poste. Le chef lui demande d'utiliser plutôt la citadine, car elle n'est pas assurée pour la camionnette, et rappelle à Jeanne de ne pas utiliser sa voiture personnelle pour des missions sans démarche auprès de son assureur. Pour le chantier du lendemain, il demande à Benjamin de vérifier tout le matériel avant de partir (un collègue a fait trois allers-retours la semaine passée), de tout arrimer pour qu'aucun objet ne se déplace en cas de freinage ou d'accident, et il évoque la surcharge : Eric laisse ses outils dans la cabine. Il décide de faire la révision et d'installer un témoin de charge, car un véhicule surchargé freine plus long et est moins stable.</p>
+          </div>
+        </details>
+
+        <div class="a-retenir">
+          <h3>À retenir</h3>
+          <ul>
+            <li><strong>Le véhicule est un équipement de travail</strong> : l'employeur le fournit, l'entretient et le maintient en état (articles L. 4121-1 et L. 4321-1 du code du travail). Le conducteur reste pénalement responsable de ses infractions au volant (article L. 121-1 du code de la route).</li>
+            <li><strong>Véhicule personnel en mission</strong> : usage à déclarer à l'assureur (article L. 113-2 du code des assurances), à autoriser par l'employeur, permis et assurance à vérifier.</li>
+            <li><strong>Chargement</strong> : arrimé (article R. 312-19 du code de la route) et dans la limite du PTAC (article R. 312-2).</li>
+          </ul>
+        </div>
+
+        <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
+        <div class="org" data-explore="1">
+          <div class="cartes">
+            <button class="role" aria-expanded="false"><span class="sigle">DUERP</span><span class="nom">Identifier le risque routier</span><span class="plus">+</span><span class="detail"><span>Le document unique d'évaluation des risques professionnels répertorie l'ensemble des risques auxquels sont exposés les travailleurs (article L. 4121-3-1 du code du travail) ; l'employeur y transcrit et met à jour l'évaluation des risques par unité de travail (article R. 4121-1). Il est dû dès le premier salarié. Le risque routier y a sa place : qui conduit, combien de kilomètres, avec quels véhicules, à quelles heures.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Programme de prévention</span><span class="nom">Passer de l'évaluation à l'action</span><span class="plus">+</span><span class="detail"><span>À partir de 50 salariés, l'évaluation débouche sur un programme annuel de prévention des risques professionnels et d'amélioration des conditions de travail (mesures, conditions d'exécution, indicateurs, coût, calendrier) ; en dessous de 50 salariés, sur une liste d'actions consignée dans le DUERP (article L. 4121-3-1, III du code du travail). Entretien planifié des véhicules, témoins de charge, aménagements de rangement : autant d'actions à y inscrire.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Règlement intérieur</span><span class="nom">Créer des règles opposables</span><span class="plus">+</span><span class="detail"><span>Obligatoire dans les entreprises d'au moins 50 salariés (article L. 1311-2 du code du travail), il rend les règles opposables et permet la sanction disciplinaire : tenue du carnet d'entretien, interdiction d'utiliser un véhicule sans y être autorisé, contrôle du chargement avant départ. En dessous de 50 salariés, une note de service joue ce rôle.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Entretenir et aménager</span><span class="nom">Axe de management n° 2</span><span class="plus">+</span><span class="detail"><span>Adapter le véhicule au travail à réaliser et l'aménager pour le transport de charges et d'outils (cloison de séparation, rangements fixés, points d'arrimage). Planifier l'entretien et le contrôle technique, désigner un responsable du parc, prévoir une fiche de vérification avant départ (pneus, éclairage, niveaux, chargement). L'IDSR peut proposer une liste de contrôle simple à afficher dans chaque véhicule.</span></span></button>
+          </div>
+        </div>
+        <div class="docs">
+          <h3>Les 3 documents indispensables</h3>
+          <dl>
+            <dt>DUERP</dt><dd>Identifier et évaluer les risques, dont le risque routier (dès le premier salarié).</dd>
+            <dt>Programme</dt><dd>Programmer les actions de prévention dans le temps (programme annuel à partir de 50 salariés, liste d'actions en dessous).</dd>
+            <dt>R. intérieur</dt><dd>Créer des règles opposables et permettre la sanction (obligatoire à partir de 50 salariés).</dd>
+          </dl>
+        </div>
+        <div class="nav-etape"><button class="btn btn-ghost" data-prev>← Précédent</button><button class="btn btn-primary" data-next disabled>Étape suivante →</button></div>
+      </section>
+
+      <!-- ETAPE 3 : LES DISTRACTEURS -->
+      <section class="etape" data-etape="3" aria-labelledby="t3">
+        <h2 id="t3">Les distracteurs</h2>
+        <p class="lead">Un collègue veut appeler Abdel, qui roule vers un client. Jérôme s'y oppose : la note de service interdit d'appeler un salarié au volant. Kit mains libres, Bluetooth, musique, GPS : la discussion fait le tour des distracteurs, avec quelques approximations que les questions vont corriger.</p>
+        <div class="ytv" id="video-3" data-video-step="video-3"></div>
+        <p class="credit-video">Vidéo 4 « Les distracteurs », Carsat Alsace-Moselle (2 min 17).</p>
+        <details class="resume-video">
+          <summary>Résumé écrit de la vidéo (accessibilité)</summary>
+          <div class="corps">
+            <p>Un collègue propose d'appeler Abdel, en voiture vers un client, pour le dossier Europa Park. Jérôme refuse : la note de service sur les déplacements interdit d'appeler un salarié que l'on sait au volant ; c'est dangereux, et la responsabilité pénale du chef d'entreprise et du chef d'équipe est en jeu. Il cite un dirigeant poursuivi après l'accident d'un employé qui était au téléphone avec lui. Interrogé sur le kit mains libres et le Bluetooth, Jérôme les déclare « illégaux » et rappelle que même en Bluetooth on est distrait, contrairement à une conversation avec un passager, qui garde les yeux sur la route. La musique, elle, est un passe-temps passif. Enfin, le GPS se règle à l'arrêt et avant le départ, d'autant plus quand on ne connaît pas le véhicule de l'entreprise. La scène se termine sur l'annonce d'une présentation des nouveaux véhicules à l'équipe.</p>
+          </div>
+        </details>
+
+        <div class="a-retenir">
+          <h3>À retenir</h3>
+          <ul>
+            <li><strong>Téléphone tenu en main et tout dispositif porté à l'oreille</strong> (oreillette, casque, écouteurs) : interdits, 135 €, 3 points, suspension possible (article R. 412-6-1 du code de la route).</li>
+            <li><strong>Le dispositif intégré au véhicule</strong> n'est pas interdit par le code de la route, mais il détourne l'attention : l'employeur peut l'interdire par règlement intérieur ou note de service. La vidéo va trop loin en le disant « illégal ».</li>
+            <li><strong>Écran hors aide à la conduite dans le champ de vision</strong> : 5e classe, 3 points, confiscation (article R. 412-6-2 du code de la route).</li>
+          </ul>
+        </div>
+
+        <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
+        <div class="org" data-explore="1">
+          <div class="cartes">
+            <button class="role" aria-expanded="false"><span class="sigle">Pourquoi c'est dangereux</span><span class="nom">L'attention, pas les mains</span><span class="plus">+</span><span class="detail"><span>Téléphoner au volant multiplie par trois environ le risque d'accident selon la Sécurité routière ; lire ou écrire un message détourne les yeux de la route plusieurs secondes, soit plusieurs dizaines de mètres parcourus à l'aveugle. Le danger tient à la charge mentale de la conversation autant qu'au geste : un kit intégré ne supprime pas la distraction. Un passager, lui, voit la route et adapte la conversation.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">La responsabilité de l'employeur</span><span class="nom">Appeler un salarié au volant</span><span class="plus">+</span><span class="detail"><span>Aucun article ne sanctionne directement celui qui appelle. Mais l'employeur doit prendre les mesures nécessaires pour assurer la sécurité des travailleurs (article L. 4121-1 du code du travail) : organiser le travail pour que le salarié n'ait pas à répondre en roulant fait partie de ces mesures. En cas d'accident, l'enquête examine qui appelait, pourquoi, et quelle règle l'entreprise avait fixée. D'où l'intérêt d'une note de service écrite : pas d'appel vers un salarié qui conduit, messagerie et rappel à l'arrêt.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">L'engagement n° 1</span><span class="nom">Limiter aux cas d'urgence</span><span class="plus">+</span><span class="detail"><span>Premier des 7 engagements de l'appel des employeurs : limiter aux cas d'urgence les conversations téléphoniques au volant. Concrètement : mettre le téléphone en mode conduite, laisser la messagerie répondre, prévoir des créneaux d'appel à l'arrêt, et former les managers à ne pas exiger de réponse immédiate d'un salarié en déplacement.</span></span></button>
+          </div>
+        </div>
+        <div class="nav-etape"><button class="btn btn-ghost" data-prev>← Précédent</button><button class="btn btn-primary" data-next disabled>Étape suivante →</button></div>
+      </section>
+
+      <!-- ETAPE 4 : LA VITESSE -->
+      <section class="etape" data-etape="4" aria-labelledby="t4">
+        <h2 id="t4">La vitesse</h2>
+        <p class="lead">Lucas revient transformé de son stage de récupération de points. Un animateur interroge le public : temps de réaction, distance parcourue par seconde, chances de survie d'un piéton, temps réellement gagné en roulant plus vite. Puis un véhicule de société se fait flasher. Cinq questions rythment la vidéo.</p>
+        <div class="ytv" id="video-4" data-video-step="video-4"></div>
+        <p class="credit-video">Vidéo 3 « La vitesse », Carsat Alsace-Moselle (5 min 05).</p>
+        <details class="resume-video">
+          <summary>Résumé écrit de la vidéo (accessibilité)</summary>
+          <div class="corps">
+            <p>Deux collègues parlent de Lucas, transformé par son stage de récupération de points : il répète « hippopotame », le mot qu'il faut une à deux secondes pour prononcer, soit le temps de réaction avant d'appuyer sur le frein. Un animateur interroge ensuite la salle. Distance de freinage à 130 km/h : 93 mètres selon la vidéo. Distance parcourue en une seconde à 130 km/h : 36 mètres, soit une file de neuf voitures. Un piéton percuté à 110 km/h subit un choc comparable à une chute de plusieurs étages. Heurté à 40 km/h, un piéton a environ 70 % de chances de survivre ; à 60 km/h, environ 15 %. Écrire un message multiplie le risque d'accident par 23, téléphoner par 3, dit l'animateur. Passer de 130 à 150 km/h fait gagner 6 minutes sur 100 km. Trois secondes d'inattention à 130 km/h, c'est plus de 100 mètres parcourus sans regarder, la longueur d'un terrain de football. Retour à la saynète : lorsqu'un véhicule de la société est flashé, la contravention arrive à l'entreprise, mais l'amende et les points sont pour le salarié ; à l'entreprise de prévoir le déplacement et d'aider le collaborateur à l'organiser. Lucas, ému, commet un excès de vitesse en agglomération.</p>
+          </div>
+        </details>
+
+        <div class="a-retenir">
+          <h3>À retenir</h3>
+          <ul>
+            <li><strong>Distance de sécurité : au moins 2 secondes</strong> (article R. 412-12 du code de la route), 135 € et 3 points.</li>
+            <li><strong>Limites</strong> : 130 km/h sur autoroute (110 sous la pluie), 110 sur routes à chaussées séparées (100 sous la pluie), 80 sur les autres routes, 90 sur les sections à deux voies dans le même sens (article R. 413-2) ; 50 km/h en agglomération (article R. 413-3).</li>
+            <li><strong>Sanctions</strong> : de 1 à 4 points selon le dépassement (article R. 413-14) ; à partir de 50 km/h, délit dès la première infraction (article L. 413-1, depuis le 31 décembre 2025).</li>
+            <li><strong>Véhicule de société flashé</strong> : désignation du conducteur dans les 45 jours (article L. 121-6), sinon amende quintuplée pour l'entreprise.</li>
+          </ul>
+        </div>
+
+        <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
+        <div class="org" data-explore="1">
+          <div class="cartes">
+            <button class="role" aria-expanded="false"><span class="sigle">La vitesse dans les chiffres</span><span class="nom">Facteur n° 1</span><span class="plus">+</span><span class="detail"><span>En 2025, la vitesse excessive ou inadaptée est le premier facteur relevé chez les conducteurs présumés responsables d'accidents mortels : 29 % (ONISR, bilan 2025, France métropolitaine). Pour les accidents mortels en trajet domicile-travail en 2023, la vitesse arrive aussi en tête (28 %), devant l'inattention (27 %).</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">La pression du planning</span><span class="nom">Le vrai moteur de l'excès</span><span class="plus">+</span><span class="detail"><span>On ne roule pas vite par plaisir en mission : on roule vite parce qu'on est en retard, parce que le planning a oublié les bouchons, le chargement, la pause. Passer de 130 à 150 km/h fait gagner 6 minutes sur 100 km : le gain est dérisoire face au risque et aux sanctions. L'engagement n° 4 de l'appel des employeurs, ne pas accepter le dépassement des vitesses autorisées, se traduit par des plannings réalistes et par une règle claire : mieux vaut prévenir un client d'un retard qu'arriver à l'heure en infraction.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Le barème des points</span><span class="nom">Article R. 413-14 et L. 413-1</span><span class="plus">+</span><span class="detail"><span>Dépassement de moins de 20 km/h : 1 point (aucun retrait sous 5 km/h depuis le 1er janvier 2024), 68 € si la limite dépasse 50 km/h, 135 € sinon. De 20 à moins de 30 km/h : 2 points, 135 €. De 30 à moins de 40 : 3 points, suspension possible. De 40 à moins de 50 : 4 points, suspension possible. 50 km/h et plus : délit (article L. 413-1), 3 mois d'emprisonnement, 3 750 € d'amende, 6 points, suspension jusqu'à 3 ans, confiscation possible du véhicule.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Le rôle de l'IDSR</span><span class="nom">Faire vivre les ordres de grandeur</span><span class="plus">+</span><span class="detail"><span>Les questions de l'animateur de la vidéo sont exactement celles qu'un IDSR peut poser en entreprise : combien de mètres en une seconde, combien de temps gagné, quelles chances pour le piéton. Le simulateur de distance d'arrêt et le test de réflexes de cet espace e-learning donnent ces ordres de grandeur en direct, sans chiffre à apprendre par cœur.</span></span></button>
+          </div>
+        </div>
+        <div class="nav-etape"><button class="btn btn-ghost" data-prev>← Précédent</button><button class="btn btn-primary" data-next disabled>Étape suivante →</button></div>
+      </section>
+
+      <!-- ETAPE 5 : ALCOOL, DROGUES, MEDICAMENTS -->
+      <section class="etape" data-etape="5" aria-labelledby="t5">
+        <h2 id="t5">Alcool, drogues et médicaments</h2>
+        <p class="lead">Un contrat signé, un repas d'affaires, un supérieur qui commande une troisième bouteille. Michel réalise qu'il ne pourra pas reprendre le volant, et son responsable se demande ce qu'il aurait dû décider. Deux questions rythment la vidéo ; les stupéfiants et les médicaments sont traités dans les cartes.</p>
+        <div class="ytv" id="video-5" data-video-step="video-5"></div>
+        <p class="credit-video">Vidéo 5 « Drogue, alcool et médicaments », Carsat Alsace-Moselle (1 min 25).</p>
+        <details class="resume-video">
+          <summary>Résumé écrit de la vidéo (accessibilité)</summary>
+          <div class="corps">
+            <p>Au restaurant, on félicite Michel pour un contrat. Son supérieur commande la meilleure bouteille, puis une troisième. En voix intérieure, Michel réalise qu'en acceptant ce troisième verre il va dépasser 0,5 g d'alcool par litre de sang et ne pourra normalement pas reprendre son véhicule ; il croit que conduire « devient un délit », que son assurance ne le couvrirait pas pour ses propres dommages, qu'il pourrait être poursuivi et payer des indemnités toute sa vie, et vivre avec la mort de quelqu'un sur la conscience. Le supérieur, de son côté, admet qu'il n'était pas censé proposer de l'alcool, que l'alcool devrait être exclu des repas d'affaires et des pots de départ, et que le dirigeant peut être tenu responsable des accidents impliquant de l'alcool après ces occasions. La politique de l'entreprise ne rembourse pas l'alcool des repas d'affaires : la bouteille sera pour sa poche.</p>
+          </div>
+        </details>
+
+        <div class="a-retenir">
+          <h3>À retenir</h3>
+          <ul>
+            <li><strong>Alcool</strong> : de 0,5 à moins de 0,8 g/L de sang, contravention, 135 € et 6 points (article R. 234-1 du code de la route) ; 0,2 g/L en permis probatoire et pour les conducteurs de transport en commun ; à partir de 0,8 g/L, délit, 3 ans et 9 000 € (article L. 234-1, loi n° 2026-798 du 18 août 2026). La vidéo confond les deux seuils.</li>
+            <li><strong>Stupéfiants</strong> : délit, 3 ans et 9 000 € ; 5 ans et 15 000 € avec alcool (article L. 235-1 du code de la route, même loi).</li>
+            <li><strong>L'employeur peut limiter ou interdire l'alcool</strong> par règlement intérieur ou note de service, de façon proportionnée (article R. 4228-20 du code du travail).</li>
+          </ul>
+        </div>
+
+        <p class="hint-explore">Cliquez sur chaque carte pour en savoir plus.</p>
+        <div class="org" data-explore="1">
+          <div class="cartes">
+            <button class="role" aria-expanded="false"><span class="sigle">Stupéfiants</span><span class="nom">Article L. 235-1 du code de la route</span><span class="plus">+</span><span class="detail"><span>Conduire alors qu'une analyse sanguine ou salivaire révèle l'usage de stupéfiants est puni de 3 ans d'emprisonnement et 9 000 € d'amende, avec retrait de 6 points ; si le conducteur est aussi sous l'empire d'un état alcoolique, 5 ans et 15 000 €, retrait de 9 points et confiscation obligatoire du véhicule (article L. 235-1 du code de la route, rédaction issue de la loi n° 2026-798 du 18 août 2026). Le cannabis reste détectable plusieurs heures, parfois plusieurs jours, après la consommation : « je consomme chez moi, ça ne concerne que moi » ne tient pas sur la route.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Médicaments</span><span class="nom">Les trois pictogrammes</span><span class="plus">+</span><span class="detail"><span>Lorsqu'un médicament a des effets sur la capacité à conduire, sa boîte porte un pictogramme (article R. 5121-139 du code de la santé publique, arrêté du 8 août 2008). Niveau 1, jaune : soyez prudent, lisez la notice. Niveau 2, orange : soyez très prudent, ne conduisez pas sans l'avis d'un professionnel de santé. Niveau 3, rouge : attention danger, ne pas conduire ; l'avis du médecin est nécessaire pour reprendre le volant. Somnifères, anxiolytiques, certains antidouleurs et antiallergiques sont concernés : « les médicaments, ce n'est pas de la drogue » est une idée reçue à lever.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">La démarche en 4 étapes</span><span class="nom">Conduites addictives en entreprise</span><span class="plus">+</span><span class="detail"><span>Adapter le règlement intérieur (ou la note de service) ; informer et associer les acteurs (CSE, service de prévention et de santé au travail, inspection du travail) ; organiser les contrôles de façon progressive et encadrée (postes de sécurité définis, matériel étalonné, confidentialité, contre-expertise possible) ; prévoir l'accompagnement. L'employeur peut limiter ou interdire l'alcool sur le lieu de travail lorsque la sécurité l'exige (article R. 4228-20 du code du travail).</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Gérer un cas positif</span><span class="nom">Sécuriser, puis accompagner</span><span class="plus">+</span><span class="detail"><span>Retrait immédiat du poste de conduite, ne jamais laisser la personne repartir seule au volant, contre-expertise possible, rendez-vous avec le service de prévention et de santé au travail, procédure écrite connue de tous. Ne jamais banaliser, ne jamais improviser : c'est la procédure, décidée à froid, qui protège le salarié, ses collègues et l'entreprise.</span></span></button>
+            <button class="role" aria-expanded="false"><span class="sigle">Le rôle de l'IDSR</span><span class="nom">Sensibiliser et orienter</span><span class="plus">+</span><span class="detail"><span>L'IDSR ne contrôle pas et ne sanctionne pas. Il lève les idées reçues (« un café et ça passe », « je connais mes limites ») avec le simulateur d'alcoolémie et la valise alcool, et il oriente : les salariés vers le service de prévention et de santé au travail, le médecin traitant et les associations ; les employeurs vers ce même service, la Carsat, la Dreets et l'INRS. L'engagement n° 2 de l'appel des employeurs : prescrire la sobriété sur la route.</span></span></button>
+          </div>
+        </div>
+        <div class="nav-etape"><button class="btn btn-ghost" data-prev>← Précédent</button><button class="btn btn-primary" data-next disabled>Étape suivante →</button></div>
+      </section>
+
+      <!-- ETAPE 6 : SYNTHESE -->
+      <section class="etape" data-etape="6" data-last="1" aria-labelledby="t6">
+        <h2 id="t6">Synthèse : les 7 engagements et vos acquis</h2>
+        <p class="lead">Les cinq vidéos renvoient toutes au même levier : l'organisation décidée par l'employeur. La Sécurité routière la formalise dans l'appel des employeurs, autour de 7 engagements que l'IDSR peut présenter à toute entreprise.</p>
+        <ul class="engage">
+          <li><span>Limiter aux cas d'urgence les conversations téléphoniques au volant.</span></li>
+          <li><span>Prescrire la sobriété sur la route.</span></li>
+          <li><span>Exiger le port de la ceinture de sécurité.</span></li>
+          <li><span>Ne pas accepter le dépassement des vitesses autorisées.</span></li>
+          <li><span>Intégrer des moments de repos dans le calcul des temps de trajet.</span></li>
+          <li><span>Favoriser la formation à la sécurité routière.</span></li>
+          <li><span>Encourager les conducteurs de deux-roues motorisés et les cyclistes à mieux s'équiper.</span></li>
+        </ul>
+        <p class="hint-explore">Tout employeur peut rejoindre la démarche sur <a href="https://www.securite-routiere.gouv.fr/employeurs-engages" target="_blank" rel="noopener">securite-routiere.gouv.fr/employeurs-engages</a> et afficher publiquement son engagement. Plus de 4 000 employeurs l'ont déjà signé.</p>
+
+        <div class="verrou" data-quiz="1">
+          <span class="v-tag">🔒 Question 1</span>
+          <p class="q">Conduire après usage de stupéfiants (article L. 235-1 du code de la route) est puni de :</p>
+          <div class="opts">
+            <button class="opt" data-ok="0"><span class="mark"></span> Une amende forfaitaire de 135 € et 3 points</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> 3 ans d'emprisonnement et 9 000 € d'amende (5 ans et 15 000 € si le conducteur a aussi bu)</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> Un simple avertissement à la première infraction</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+        <div class="verrou" data-quiz="2">
+          <span class="v-tag">🔒 Question 2</span>
+          <p class="q">Quel document, dû dès le premier salarié, doit répertorier le risque routier parmi les risques professionnels de l'entreprise ?</p>
+          <div class="opts">
+            <button class="opt" data-ok="1"><span class="mark"></span> Le document unique d'évaluation des risques professionnels (DUERP)</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> Le règlement intérieur</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> Le carnet d'entretien du véhicule</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+        <div class="verrou" data-quiz="3">
+          <span class="v-tag">🔒 Question 3</span>
+          <p class="q">Un salarié est envoyé chez un client par son employeur et a un accident sur la route. Il s'agit :</p>
+          <div class="opts">
+            <button class="opt" data-ok="0"><span class="mark"></span> D'un accident de trajet (article L. 411-2 du code de la sécurité sociale)</button>
+            <button class="opt" data-ok="1"><span class="mark"></span> D'un accident du travail, car il est en mission (article L. 411-1 du code de la sécurité sociale)</button>
+            <button class="opt" data-ok="0"><span class="mark"></span> D'un accident privé, sans lien avec l'entreprise</button>
+          </div>
+          <p class="feedback"></p>
+        </div>
+
+        <div id="bloc-fin" style="display:none;">
+          <div class="fini">
+            <div class="badge-fin" aria-hidden="true">✓</div>
+            <h3>Module terminé</h3>
+            <p>Vous avez vu les cinq situations, répondu aux dix-sept questions de la vidéo et aux trois questions de synthèse. Vous savez ce que le droit impose au conducteur, ce que l'employeur peut décider, et ce que l'IDSR peut apporter à une entreprise.</p>
+            <p style="margin-top:1rem;"><strong>Vous pouvez générer votre attestation de suivi ci-dessous.</strong></p>
+          </div>
+        </div>
+
+        <h3 style="margin:2.2rem 0 .4rem;">Références et fiabilité des réponses</h3>
+        <p style="font-size:.9rem;color:var(--gris);margin:0 0 .6rem;">Chaque réponse du module repose sur un texte lu directement sur Légifrance le 14 septembre 2026, dans sa version en vigueur. Les articles L. 234-1 et L. 235-1 du code de la route ont été modifiés par la loi n° 2026-798 du 18 août 2026 (JORF du 19 août 2026) : les peines indiquées sont celles en vigueur depuis le 20 août 2026.</p>
+        <div class="tableau-scroll">
+        <table class="fiab">
+          <thead><tr><th scope="col">Référence</th><th scope="col">Ce qu'elle établit dans le module</th><th scope="col">Vérification</th><th scope="col">Fiabilité</th></tr></thead>
+          <tbody>
+            <tr><td><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000041910422" target="_blank" rel="noopener">R. 412-6-1</a> (code de la route)</td><td>Téléphone tenu en main et dispositif porté à l'oreille : 4e classe, 3 points, suspension possible</td><td>Légifrance, en vigueur depuis le 22/05/2020</td><td><span class="pastille-fiab a">A · texte vérifié</span></td></tr>
+            <tr><td><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000025111520" target="_blank" rel="noopener">R. 412-6-2</a> (code de la route)</td><td>Écran hors aide à la conduite dans le champ de vision : 5e classe, 3 points, confiscation</td><td>Légifrance, en vigueur depuis le 05/01/2012</td><td><span class="pastille-fiab a">A · texte vérifié</span></td></tr>
+            <tr><td><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000051682619" target="_blank" rel="noopener">R. 412-12</a> (code de la route)</td><td>Distance de sécurité d'au moins 2 secondes ; 4e classe, 3 points</td><td>Légifrance, en vigueur depuis le 04/06/2025</td><td><span class="pastille-fiab a">A · texte vérifié</span></td></tr>
+            <tr><td><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000042240048" target="_blank" rel="noopener">R. 413-2</a> et <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000028436430" target="_blank" rel="noopener">R. 413-3</a> (code de la route)</td><td>Vitesses maximales hors et en agglomération, réductions par temps de pluie</td><td>Légifrance, en vigueur (16/08/2020 et 10/01/2014)</td><td><span class="pastille-fiab a">A · texte vérifié</span></td></tr>
+            <tr><td><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000048533039" target="_blank" rel="noopener">R. 413-14</a> (code de la route)</td><td>Excès de moins de 50 km/h : classes d'amende et barème de points</td><td>Légifrance, en vigueur depuis le 01/01/2024</td><td><span class="pastille-fiab a">A · texte vérifié</span></td></tr>
+            <tr><td><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000051877176" target="_blank" rel="noopener">L. 413-1</a> (code de la route)</td><td>Grand excès de vitesse (50 km/h et plus) : délit dès la première infraction</td><td>Légifrance, en vigueur depuis le 31/12/2025 (loi n° 2025-622)</td><td><span class="pastille-fiab a">A · texte vérifié</span></td></tr>
+            <tr><td><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000051877187" target="_blank" rel="noopener">L. 121-6</a> (code de la route)</td><td>Désignation du conducteur par la personne morale dans les 45 jours ; 4e classe à défaut</td><td>Légifrance, en vigueur depuis le 31/12/2025</td><td><span class="pastille-fiab a">A · texte vérifié</span></td></tr>
+            <tr><td><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006417342" target="_blank" rel="noopener">131-41</a> et <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006417259" target="_blank" rel="noopener">131-13</a> (code pénal)</td><td>Amende quintuplée pour les personnes morales ; montants maximaux par classe de contravention</td><td>Légifrance, en vigueur</td><td><span class="pastille-fiab a">A · texte vérifié</span></td></tr>
+            <tr><td><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006840868" target="_blank" rel="noopener">L. 121-1</a> (code de la route)</td><td>Responsabilité pénale du conducteur pour ses infractions</td><td>Légifrance, en vigueur depuis le 01/06/2001</td><td><span class="pastille-fiab a">A · texte vérifié</span></td></tr>
+            <tr><td><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038954545" target="_blank" rel="noopener">R. 234-1</a> (code de la route)</td><td>Alcool de 0,5 g/L (0,2 g/L probatoire et transport en commun) à moins de 0,8 g/L : 4e classe, 6 points</td><td>Légifrance, en vigueur depuis le 24/08/2019</td><td><span class="pastille-fiab a">A · texte vérifié</span></td></tr>
+            <tr><td><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000054724895" target="_blank" rel="noopener">L. 234-1</a> (code de la route)</td><td>Alcool à partir de 0,8 g/L : délit, 3 ans et 9 000 €, 6 points</td><td>Légifrance, en vigueur depuis le 20/08/2026 (loi n° 2026-798)</td><td><span class="pastille-fiab a">A · texte vérifié</span></td></tr>
+            <tr><td><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000054724851" target="_blank" rel="noopener">L. 235-1</a> (code de la route)</td><td>Stupéfiants : 3 ans et 9 000 € ; 5 ans et 15 000 € avec alcool</td><td>Légifrance, en vigueur depuis le 20/08/2026 (loi n° 2026-798)</td><td><span class="pastille-fiab a">A · texte vérifié</span></td></tr>
+            <tr><td><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000042266036" target="_blank" rel="noopener">R. 312-19</a> et <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000032401231" target="_blank" rel="noopener">R. 312-2</a> (code de la route)</td><td>Chargement sans danger et arrimé ; interdiction de dépasser le PTAC, amende par tranche de 0,5 t</td><td>Légifrance, en vigueur (27/08/2020 et 15/04/2016)</td><td><span class="pastille-fiab a">A · texte vérifié</span></td></tr>
+            <tr><td><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000035640828" target="_blank" rel="noopener">L. 4121-1</a>, <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043893919" target="_blank" rel="noopener">L. 4121-3-1</a>, <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000023795562" target="_blank" rel="noopener">R. 4121-1</a>, <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006903209" target="_blank" rel="noopener">L. 4321-1</a> (code du travail)</td><td>Obligation de sécurité, DUERP et programme de prévention, maintien des équipements de travail</td><td>Légifrance, en vigueur</td><td><span class="pastille-fiab a">A · texte vérifié</span></td></tr>
+            <tr><td><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038610176" target="_blank" rel="noopener">L. 1311-2</a>, <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000033020918" target="_blank" rel="noopener">L. 3131-1</a>, <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000033020507" target="_blank" rel="noopener">L. 3121-4</a>, <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000029184975" target="_blank" rel="noopener">R. 4228-20</a> (code du travail)</td><td>Règlement intérieur dès 50 salariés ; repos quotidien de 11 h ; temps de déplacement ; alcool sur le lieu de travail</td><td>Légifrance, en vigueur</td><td><span class="pastille-fiab a">A · texte vérifié</span></td></tr>
+            <tr><td><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000047452603" target="_blank" rel="noopener">L. 411-1</a> et <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006743008" target="_blank" rel="noopener">L. 411-2</a> (code de la sécurité sociale)</td><td>Accident du travail (mission) et accident de trajet</td><td>Légifrance, en vigueur (01/09/2023 et 18/07/2001)</td><td><span class="pastille-fiab a">A · texte vérifié</span></td></tr>
+            <tr><td><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000035731302" target="_blank" rel="noopener">L. 113-2</a>, <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006792058" target="_blank" rel="noopener">L. 113-8</a>, <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006792066" target="_blank" rel="noopener">L. 113-9</a> (code des assurances)</td><td>Déclaration des circonstances aggravant le risque ; nullité en cas de fausse déclaration intentionnelle ; réduction de l'indemnité sinon</td><td>Légifrance, en vigueur</td><td><span class="pastille-fiab a">A · texte vérifié</span></td></tr>
+            <tr><td><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000034432960" target="_blank" rel="noopener">R. 5121-139</a> (code de la santé publique)</td><td>Pictogramme sur les médicaments ayant un effet sur la conduite ; les trois niveaux sont fixés par l'arrêté du 8 août 2008</td><td>Article vérifié sur Légifrance ; contenu des trois niveaux non relu ce jour dans l'arrêté</td><td><span class="pastille-fiab b">B · arrêté non relu</span></td></tr>
+            <tr><td>Statistiques</td><td>Chiffres 2023 du risque routier professionnel (ONISR, CNAM-MSA) ; facteur vitesse 2025 (ONISR, bilan 2025, France métropolitaine) ; risque téléphone multiplié par trois (Sécurité routière)</td><td>Sources publiques citées ; les chiffres de survie du piéton et les distances de freinage énoncés dans la vidéo 4 sont ceux de la vidéo, non repris dans les corrections</td><td><span class="pastille-fiab b">B · sources secondaires</span></td></tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="nav-etape"><button class="btn btn-ghost" data-prev>← Précédent</button><a class="btn btn-ghost" href="index.html">Retour à l'accueil ↩</a></div>
+      </section>
+
+      <p class="source">Sources : vidéos « Risque routier professionnel » de la Carsat Alsace-Moselle (chaîne YouTube « Risques professionnels Carsat Alsace-Moselle ») ; ONISR et CNAM-MSA, <em>L'essentiel du risque routier professionnel</em>, chiffres 2023 ; ONISR, <em>L'accidentalité routière en France, principaux résultats 2025</em>, données définitives, mai 2026 ; <a href="https://www.securite-routiere.gouv.fr/employeurs-engages" target="_blank" rel="noopener">securite-routiere.gouv.fr/employeurs-engages</a> (les 7 engagements) ; textes cités : code de la route, code du travail, code de la sécurité sociale, code des assurances, code de la santé publique, code pénal, lus sur Légifrance le 14 septembre 2026. Les corrections signalent explicitement les passages où les vidéos simplifient ou se trompent (seuil du délit d'alcoolémie, kit mains libres).</p>
+    </div>
+  </div>
+</main>
+
+<footer class="site"><div class="wrap">Espace e-learning des Intervenants Départementaux de Sécurité Routière, Préfecture des Hauts-de-France. <a href="index.html">Retour à l'accueil</a> <a href="mailto:mickael@destination-prevention.fr?subject=%5BREGISTRE%5D%20Le%20risque%20routier%20professionnel%20v2&amp;body=Bonjour%2C%0A%0ARemarque%20sur%20%3A%20Le%20risque%20routier%20professionnel%20v2%0A%C3%89tape%20ou%20partie%20%3A%20%0A%0ACe%20qui%20pose%20probl%C3%A8me%20%3A%20%0A%0ACe%20qu%27il%20faudrait%20%C3%A9crire%20%C3%A0%20la%20place%20%3A%20%0A%0AR%C3%A9f%C3%A9rence%20ou%20source%20%3A%20%0A%0A--%0AEnvoy%C3%A9%20depuis%20l%27espace%20e-learning%20IDSR%0A" id="lien-signaler" style="background:#FECF41;color:#000;padding:.15rem .5rem;border-radius:4px;text-decoration:none;white-space:nowrap;" title="Ouvre votre messagerie avec le module et l'étape déjà remplis">Signaler un point</a>
+        <a href="mentions-legales.html">Mentions légales, confidentialité et accessibilité</a></div></footer>
+
+<script>
+(function(){
+  "use strict";
+  var etapes=[].slice.call(document.querySelectorAll(".etape"));
+  var TOTAL=etapes.length;
+  var stepBtns=[].slice.call(document.querySelectorAll(".step-item"));
+  var barre=document.getElementById("barre");
+  var STORE="elearning_idsr_"+((document.body.dataset.module)||"x");
+  var state={unlocked:0,explored:{},quiz:{},video:{}};
+  try{var s=JSON.parse(localStorage.getItem(STORE)||"{}");if(typeof s.unlocked==="number"){state=s;state.explored=state.explored||{};state.quiz=state.quiz||{};state.video=state.video||{};}}catch(e){}
+  function save(){try{localStorage.setItem(STORE,JSON.stringify(state));}catch(e){}}
+  var current=0;
+  function show(i){
+    if(i>state.unlocked)return; current=i;
+    etapes.forEach(function(el){el.classList.toggle("active",+el.dataset.etape===i);});
+    stepBtns.forEach(function(b){var idx=+b.dataset.go;b.setAttribute("aria-current",idx===i?"true":"false");b.disabled=idx>state.unlocked;b.classList.toggle("done",idx<state.unlocked);});
+    updateBar(); window.scrollTo({top:0,behavior:"smooth"});
+  }
+  function updateBar(){var pct=TOTAL>1?Math.round((state.unlocked/(TOTAL-1))*100):100;if(pct>100)pct=100;barre.style.width=pct+"%";barre.parentElement.setAttribute("aria-valuenow",pct);}
+  function unlock(i){if(i>state.unlocked)state.unlocked=i;save();}
+  etapes.forEach(function(et){
+    [].slice.call(et.querySelectorAll(".org")).forEach(function(org){
+      var key=et.dataset.etape+"_"+(org.dataset.explore||"g");
+      var roles=[].slice.call(org.querySelectorAll(".role"));
+      roles.forEach(function(r){
+        r.addEventListener("click",function(){
+          var open=r.getAttribute("aria-expanded")==="true";
+          r.setAttribute("aria-expanded",open?"false":"true");
+          if(!open){r.dataset.seen="1";if(roles.every(function(x){return x.dataset.seen==="1";})){state.explored[key]=true;save();refresh(et);}}
+        });
+      });
+      if(state.explored[key])roles.forEach(function(r){r.dataset.seen="1";});
+    });
+    [].slice.call(et.querySelectorAll(".verrou")).forEach(function(v){
+      var key=et.dataset.etape+"_q"+(v.dataset.quiz||"1");
+      var fb=v.querySelector(".feedback");
+      var opts=[].slice.call(v.querySelectorAll(".opt"));
+      if(state.quiz[key]){opts.forEach(function(o){o.disabled=true;if(o.dataset.ok==="1"){o.classList.add("correct");o.querySelector(".mark").textContent="✓";}});if(fb){fb.textContent="Bonne réponse.";fb.className="feedback show ok";}}
+      opts.forEach(function(opt){
+        opt.addEventListener("click",function(){
+          if(state.quiz[key])return;
+          if(opt.dataset.ok==="1"){
+            opt.classList.add("correct");opt.querySelector(".mark").textContent="✓";
+            opts.forEach(function(o){o.disabled=true;});
+            if(fb){fb.textContent="Bonne réponse.";fb.className="feedback show ok";}
+            state.quiz[key]=true;save();refresh(et);
+          }else{
+            opt.classList.add("wrong");opt.querySelector(".mark").textContent="✗";
+            if(fb){fb.textContent="Ce n'est pas la bonne réponse. Relisez le contenu ci-dessus et réessayez.";fb.className="feedback show ko";}
+            setTimeout(function(){opt.classList.remove("wrong");opt.querySelector(".mark").textContent="";},1400);
+          }
+        });
+      });
+    });
+  });
+  function etapeComplete(et){
+    var okExp=[].slice.call(et.querySelectorAll(".org")).every(function(org){return state.explored[et.dataset.etape+"_"+(org.dataset.explore||"g")]===true;});
+    var okQ=[].slice.call(et.querySelectorAll(".verrou")).every(function(v){return state.quiz[et.dataset.etape+"_q"+(v.dataset.quiz||"1")]===true;});
+    var okV=[].slice.call(et.querySelectorAll("[data-video-step]")).every(function(v){return state.video[v.dataset.videoStep]===true;});
+    return okExp&&okQ&&okV;
+  }
+  function refresh(et){
+    if(!etapeComplete(et))return;
+    var nb=et.querySelector("[data-next]");if(nb)nb.disabled=false;
+    if(et.dataset.last==="1"){
+      var fin=document.getElementById("bloc-fin");
+      if(fin&&fin.style.display==="none"){fin.style.display="block";state.unlocked=TOTAL;updateBar();stepBtns.forEach(function(b){b.classList.add("done");});save();fin.scrollIntoView({behavior:"smooth"});}
+    }
+  }
+  /* fin de vidéo : appelée par le lecteur interactif */
+  window.videoTerminee=function(id){
+    state.video[id]=true;save();
+    var mount=document.getElementById(id);
+    var et=mount&&mount.closest(".etape");
+    if(et)refresh(et);
+  };
+  stepBtns.forEach(function(b){b.addEventListener("click",function(){show(+b.dataset.go);});});
+  document.querySelectorAll("[data-next]").forEach(function(b){b.addEventListener("click",function(){var n=current+1;if(n<TOTAL){unlock(n);show(n);}});});
+  document.querySelectorAll("[data-prev]").forEach(function(b){b.addEventListener("click",function(){if(current>0)show(current-1);});});
+  etapes.forEach(function(et){refresh(et);});
+  show(0);
+})();
+</script>
+
+<script>
+/* ---- Les cinq vidéos et leurs questions ----
+   Les secondes (t) correspondent à la fin de la réplique concernée
+   dans chaque vidéo (relevées sur la transcription). ok:true marque
+   la bonne réponse ; fb est la correction affichée. */
+window.VIDEOS_INTERACTIVES = {
+  "video-1": {
+    videoId: "Qd9AWZ_MdMI", titre: "Organiser ses déplacements",
+    onComplete: function(id){ window.videoTerminee(id); },
+    cues: [
+      { t: 69, q: "Bernard part à 6 h, sera en réunion jusqu'à 17 h 30 et rentrera vers 22 h, avant de retravailler le lendemain matin. Quel repos quotidien minimal le code du travail garantit-il à tout salarié ?",
+        options: [
+          { txt: "8 heures consécutives", fb: "Non. Le repos quotidien légal est de 11 heures consécutives (article L. 3131-1 du code du travail). Une journée de ce type, avec 7 heures de route, empiète sur ce repos et fatigue le conducteur." },
+          { txt: "11 heures consécutives", ok: true, fb: "Exact : article L. 3131-1 (code du travail). Tout salarié bénéficie d'un repos quotidien d'au moins 11 heures consécutives, sauf dérogations prévues par accord ou en cas d'urgence. Un déplacement mal organisé est souvent la première atteinte à cette règle, et la fatigue au volant en est la conséquence directe." },
+          { txt: "Aucune durée légale : cela dépend du contrat de travail", fb: "Non, c'est une règle d'ordre public : 11 heures consécutives (article L. 3131-1 du code du travail), quel que soit le contrat." }
+        ] },
+      { t: 86, q: "Sonia rappelle la pause toutes les deux heures. Pour un salarié qui conduit une voiture ou un utilitaire léger, cette pause est :",
+        options: [
+          { txt: "Une recommandation de la Sécurité routière, pas une obligation du code de la route", ok: true, fb: "Exact. Le code de la route n'impose aucune pause aux conducteurs de véhicules légers : la pause toutes les deux heures est la recommandation de la Sécurité routière contre la somnolence. Seuls les conducteurs de poids lourds et d'autocars sont soumis à des temps de conduite réglementés (réglementation européenne des temps de conduite et de repos). Pour l'entreprise, la pause devient une règle en l'inscrivant dans l'organisation des déplacements : c'est l'engagement n° 5 de l'appel des employeurs, intégrer des moments de repos dans le calcul des temps de trajet." },
+          { txt: "Une obligation du code de la route, sanctionnée de 135 €", fb: "Non. Aucun article du code de la route n'impose de pause aux conducteurs de véhicules légers. C'est une recommandation de la Sécurité routière, que l'employeur peut rendre obligatoire dans son organisation." },
+          { txt: "Une règle qui ne concerne que la conduite de nuit", fb: "Non. La somnolence menace à toute heure, en particulier en début d'après-midi et en fin de nuit. La pause toutes les deux heures est recommandée pour tout long trajet." }
+        ] },
+      { t: 113, q: "Si Bernard a un accident sur la route de Reims, où il se rend à la demande de son employeur, de quel régime relève-t-il ?",
+        options: [
+          { txt: "Un accident du travail : il est en mission", ok: true, fb: "Exact. L'accident survenu par le fait ou à l'occasion du travail est un accident du travail (article L. 411-1 du code de la sécurité sociale) : le salarié en mission est protégé pendant tout le temps de la mission, trajet compris. L'accident de trajet (article L. 411-2) ne vise que le parcours entre la résidence et le lieu de travail, ou entre le lieu de travail et le lieu du repas." },
+          { txt: "Un accident de trajet, comme entre son domicile et son bureau", fb: "Non. L'accident de trajet (article L. 411-2 du code de la sécurité sociale) concerne le parcours résidence / lieu de travail ou lieu de travail / lieu de repas. Un déplacement effectué pour l'employeur est une mission : c'est un accident du travail (article L. 411-1)." },
+          { txt: "Un accident de la vie privée, sans lien avec l'entreprise", fb: "Non. Le déplacement est demandé par l'employeur : c'est une mission, et l'accident relève de l'accident du travail (article L. 411-1 du code de la sécurité sociale)." }
+        ] }
+    ]
+  },
+  "video-2": {
+    videoId: "cypsIZIm27w", titre: "Préparation du véhicule",
+    onComplete: function(id){ window.videoTerminee(id); },
+    cues: [
+      { t: 29, q: "Le chef reproche à Benjamin de ne pas tenir le carnet d'entretien et affirme qu'en cas d'accident, l'entreprise est responsable « à 100 % ». Que dit le droit ?",
+        options: [
+          { txt: "L'employeur doit fournir et maintenir des véhicules en bon état au titre de son obligation de sécurité ; le conducteur reste responsable de ses propres infractions", ok: true, fb: "Exact. L'employeur prend les mesures nécessaires pour assurer la sécurité des travailleurs (article L. 4121-1 du code du travail) et les équipements de travail doivent être maintenus de manière à préserver leur santé et leur sécurité (article L. 4321-1 du code du travail) : un véhicule mal entretenu engage donc sa responsabilité. Mais elle s'apprécie au cas par cas, et le conducteur reste pénalement responsable des infractions qu'il commet au volant (article L. 121-1 du code de la route). Le « 100 % » de la vidéo est un raccourci." },
+          { txt: "Aucune règle : l'entretien relève du seul conducteur qui utilise le véhicule", fb: "Non. L'employeur a une obligation de sécurité (article L. 4121-1 du code du travail) et doit maintenir les équipements de travail en état (article L. 4321-1). Le suivi de l'entretien fait partie de son organisation." },
+          { txt: "Seul l'assureur peut être tenu responsable", fb: "Non. L'assureur indemnise ; il ne se substitue ni à la responsabilité de l'employeur (articles L. 4121-1 et L. 4321-1 du code du travail) ni à celle du conducteur (article L. 121-1 du code de la route)." }
+        ] },
+      { t: 75, q: "Jeanne utilise sa voiture personnelle pour des missions sans l'avoir déclaré à son assureur. Quelle est la règle ?",
+        options: [
+          { txt: "Elle doit déclarer cet usage professionnel à son assureur ; sinon l'indemnité peut être réduite en cas de sinistre", ok: true, fb: "Exact. L'assuré doit déclarer en cours de contrat, dans les 15 jours et par lettre recommandée, les circonstances nouvelles qui aggravent le risque (article L. 113-2, 3° du code des assurances). Sans mauvaise foi, l'omission entraîne une réduction proportionnelle de l'indemnité (article L. 113-9) ; une fausse déclaration intentionnelle entraîne la nullité du contrat (article L. 113-8). Côté employeur : l'usage d'un véhicule personnel en mission doit être autorisé (ordre de mission), et l'entreprise vérifie permis et assurance." },
+          { txt: "Rien : le contrat personnel couvre automatiquement tout usage, y compris professionnel", fb: "Non. L'usage professionnel est une circonstance qui aggrave le risque et doit être déclarée à l'assureur (article L. 113-2 du code des assurances)." },
+          { txt: "Seul l'employeur doit souscrire une assurance pour ce véhicule", fb: "Non. Le contrat est celui de la propriétaire, qui doit déclarer l'usage professionnel (article L. 113-2 du code des assurances). L'employeur peut souscrire une assurance « mission » complémentaire, mais elle ne remplace pas cette déclaration." }
+        ] },
+      { t: 131, q: "Le chef insiste : tout doit être « arrimé » pour qu'aucun objet ne se déplace en cas de freinage. Que prévoit le code de la route ?",
+        options: [
+          { txt: "Toutes précautions doivent être prises pour que le chargement ne soit pas une cause de dommage ou de danger ; un chargement débordant mal amarré est une contravention", ok: true, fb: "Exact : article R. 312-19 (code de la route). Le chargement ne doit pas pouvoir être une cause de dommage ou de danger, et tout chargement débordant doit être solidement amarré (contravention de 3e classe, 68 € d'amende forfaitaire, immobilisation possible du véhicule). Dans l'habitacle, un outil de 20 kg non fixé devient un projectile à la moindre collision." },
+          { txt: "Rien : l'intérieur du véhicule est libre, seul le toit est réglementé", fb: "Non. L'article R. 312-19 (code de la route) impose toutes précautions utiles pour que le chargement ne soit pas une cause de dommage ou de danger, où qu'il se trouve." },
+          { txt: "Une obligation qui ne concerne que les poids lourds", fb: "Non. L'article R. 312-19 (code de la route) s'applique à tout véhicule, camionnette et voiture comprises." }
+        ] },
+      { t: 151.5, q: "La camionnette (PTAC de 3,5 t au plus) roule en surcharge. Quelle est la sanction prévue par le code de la route ?",
+        options: [
+          { txt: "Contravention de 4e classe (135 €) par tranche de 0,5 t de dépassement, et immobilisation possible au-delà de 5 % de dépassement", ok: true, fb: "Exact : article R. 312-2 (code de la route). Il est interdit de faire circuler un véhicule dont le poids réel excède le PTAC inscrit sur le certificat d'immatriculation. Pour un véhicule de 3,5 t au plus : amende de 4e classe jusqu'à 0,5 t de dépassement, puis autant d'amendes que de tranches de 0,5 t ; au-delà de 5 % de dépassement, l'immobilisation peut être prescrite. Un véhicule surchargé freine plus long et se déséquilibre : le témoin de charge de la vidéo est un vrai outil de prévention." },
+          { txt: "Aucune sanction tant que le véhicule roule normalement", fb: "Non. La surcharge est interdite et sanctionnée par l'article R. 312-2 (code de la route), même sans accident." },
+          { txt: "Un simple avertissement, la surcharge n'étant contrôlée que sur les poids lourds", fb: "Non. L'article R. 312-2 (code de la route) prévoit expressément le cas des véhicules de 3,5 t au plus : amende de 4e classe par tranche de 0,5 t." }
+        ] }
+    ]
+  },
+  "video-3": {
+    videoId: "_YiwYJeCW7M", titre: "Les distracteurs",
+    onComplete: function(id){ window.videoTerminee(id); },
+    cues: [
+      { t: 33, q: "Jérôme rappelle qu'on n'appelle pas un salarié qu'on sait au volant. Pour le conducteur, que prévoit le code de la route sur le téléphone tenu en main ?",
+        options: [
+          { txt: "Interdit : amende de 4e classe (135 €), retrait de 3 points, suspension du permis possible jusqu'à 3 ans", ok: true, fb: "Exact : article R. 412-6-1 (code de la route). L'usage d'un téléphone tenu en main par le conducteur d'un véhicule en circulation est interdit : contravention de 4e classe (135 € forfaitaire), retrait de 3 points, et peine complémentaire possible de suspension du permis jusqu'à 3 ans. Côté entreprise, l'employeur qui appelle un salarié qu'il sait au volant s'expose à voir sa responsabilité recherchée au titre de son obligation de sécurité (article L. 4121-1 du code du travail) : d'où la note de service." },
+          { txt: "Toléré si l'appel est bref et professionnel", fb: "Non. Aucune tolérance : l'usage d'un téléphone tenu en main est interdit (article R. 412-6-1 du code de la route), quel que soit le motif de l'appel." },
+          { txt: "Interdit : amende de 35 € et retrait d'un point", fb: "Non. La sanction est plus lourde : 135 € et 3 points (article R. 412-6-1 du code de la route)." }
+        ] },
+      { t: 63.5, q: "Jérôme affirme que le kit mains libres est « illégal ». Qu'en est-il exactement ?",
+        options: [
+          { txt: "Oreillettes, casques et écouteurs sont interdits ; le dispositif intégré au véhicule n'est pas interdit par le code de la route, mais il reste dangereux et l'employeur peut l'interdire", ok: true, fb: "Exact. L'article R. 412-6-1 (code de la route) interdit le port à l'oreille de tout dispositif susceptible d'émettre du son (oreillette, casque, écouteurs) : 135 € et 3 points, comme le téléphone tenu en main. Le dispositif intégré au véhicule (haut-parleur et micro reliés en Bluetooth) n'est pas visé par le code. Il n'en reste pas moins dangereux : la conversation détourne l'attention et le risque d'accident est multiplié par trois environ selon la Sécurité routière. L'employeur peut donc l'interdire par le règlement intérieur ou une note de service : c'est l'engagement n° 1 de l'appel des employeurs, limiter aux cas d'urgence les conversations téléphoniques au volant." },
+          { txt: "Exact : toute conversation téléphonique au volant, même par le système du véhicule, est interdite par le code de la route", fb: "Pas tout à fait. Le code de la route (article R. 412-6-1) interdit le téléphone tenu en main et tout dispositif porté à l'oreille. Le système intégré au véhicule n'est pas interdit par le code, même s'il reste dangereux et que l'employeur peut l'interdire." },
+          { txt: "Faux : le kit mains libres est au contraire obligatoire pour téléphoner en conduisant", fb: "Non. Rien n'oblige à téléphoner en conduisant, et les oreillettes sont interdites (article R. 412-6-1 du code de la route). La règle de prudence est simple : on ne téléphone pas au volant." }
+        ] },
+      { t: 110.5, q: "Le GPS « se règle à l'arrêt et avant le départ ». Et si le conducteur place dans son champ de vision un écran qui n'est pas une aide à la conduite (série, tablette, téléphone en vidéo) ?",
+        options: [
+          { txt: "Contravention de 5e classe (jusqu'à 1 500 €), retrait de 3 points, saisie et confiscation de l'appareil", ok: true, fb: "Exact : article R. 412-6-2 (code de la route). Placer dans le champ de vision du conducteur un appareil en fonctionnement doté d'un écran et ne constituant pas une aide à la conduite ou à la navigation est interdit : contravention de 5e classe, retrait de 3 points, saisie de l'appareil et confiscation. Le GPS est autorisé parce qu'il aide à la navigation ; c'est sa manipulation en roulant qui détourne le regard, d'où le réglage à l'arrêt." },
+          { txt: "Rien de particulier : seul le téléphone tenu en main est réglementé", fb: "Non. L'écran sans lien avec la conduite dans le champ de vision est une contravention de 5e classe avec retrait de 3 points (article R. 412-6-2 du code de la route)." },
+          { txt: "Interdit uniquement pour les conducteurs novices", fb: "Non. L'interdiction de l'article R. 412-6-2 (code de la route) vise tout conducteur." }
+        ] }
+    ]
+  },
+  "video-4": {
+    videoId: "e0pBNTPCZOI", titre: "La vitesse",
+    onComplete: function(id){ window.videoTerminee(id); },
+    cues: [
+      { t: 40, q: "Il faut une à deux secondes pour réagir et appuyer sur le frein. Le code de la route traduit ce temps en une règle de distance de sécurité : laquelle ?",
+        options: [
+          { txt: "Au moins 2 secondes entre deux véhicules ; sinon 135 € et 3 points", ok: true, fb: "Exact : article R. 412-12 (code de la route). La distance de sécurité correspond à la distance parcourue pendant un délai d'au moins deux secondes. Hors agglomération, elle est d'au moins 50 mètres entre véhicules de plus de 3,5 t ou de plus de 7 m qui se suivent. Contravention de 4e classe (135 €), retrait de 3 points, suspension possible." },
+          { txt: "Au moins 1 seconde, ce qui suffit pour réagir", fb: "Non. La règle est d'au moins 2 secondes (article R. 412-12 du code de la route) : une pour réagir, une pour commencer à freiner." },
+          { txt: "Aucune règle chiffrée : chacun apprécie", fb: "Non. Le code fixe un délai d'au moins deux secondes (article R. 412-12 du code de la route), sanctionné de 135 € et 3 points." }
+        ] },
+      { t: 120, q: "À 130 km/h, on parcourt 36 mètres chaque seconde. Sur autoroute, à quelle vitesse ce conducteur doit-il se limiter s'il pleut ?",
+        options: [
+          { txt: "110 km/h", ok: true, fb: "Exact : article R. 413-2 (code de la route). En cas de pluie ou d'autres précipitations, la limite passe de 130 à 110 km/h sur autoroute, de 110 à 100 km/h sur les routes à chaussées séparées, et reste à 80 km/h sur les autres routes. Sur sol mouillé, la distance de freinage s'allonge nettement." },
+          { txt: "130 km/h : la limite ne change pas", fb: "Non. La pluie abaisse la limite à 110 km/h sur autoroute (article R. 413-2 du code de la route)." },
+          { txt: "90 km/h", fb: "Non. Sur autoroute par temps de pluie, la limite est de 110 km/h (article R. 413-2 du code de la route)." }
+        ] },
+      { t: 182, q: "Heurté à 40 km/h, un piéton a environ 70 % de chances de survivre ; à 60 km/h, 15 % environ. En agglomération, quelle est la vitesse maximale fixée par le code de la route en l'absence de panneau ?",
+        options: [
+          { txt: "50 km/h", ok: true, fb: "Exact : article R. 413-3 (code de la route). En agglomération, la vitesse est limitée à 50 km/h. L'autorité de police peut la relever à 70 km/h sur certaines sections protégées, ou l'abaisser (zones 30, villes à 30 km/h) par arrêté. Les chances de survie du piéton expliquent la généralisation du 30 km/h en ville." },
+          { txt: "30 km/h", fb: "Non. Le 30 km/h résulte d'un arrêté local (zone 30 ou ville à 30) ; la règle générale du code est 50 km/h (article R. 413-3 du code de la route)." },
+          { txt: "70 km/h", fb: "Non. 70 km/h n'est possible que sur certaines sections, par arrêté ; la limite générale est 50 km/h (article R. 413-3 du code de la route)." }
+        ] },
+      { t: 229, q: "Rouler à 150 km/h au lieu de 130 fait gagner 6 minutes sur 100 km. Que coûte cet excès de 20 km/h au conducteur ?",
+        options: [
+          { txt: "135 € d'amende (4e classe) et retrait de 2 points", ok: true, fb: "Exact : article R. 413-14 (code de la route). Barème des points : moins de 20 km/h, 1 point (aucun retrait sous 5 km/h depuis le 1er janvier 2024) ; de 20 à moins de 30 km/h, 2 points ; de 30 à moins de 40, 3 points ; de 40 à moins de 50, 4 points, avec suspension possible à partir de 30 km/h. À partir de 50 km/h de dépassement, c'est un délit dès la première infraction depuis le 31 décembre 2025 (article L. 413-1 : 3 mois d'emprisonnement, 3 750 € d'amende, 6 points, suspension jusqu'à 3 ans)." },
+          { txt: "68 € et 1 point", fb: "Non. 68 € et 1 point correspondent à un dépassement de moins de 20 km/h sur une route limitée à plus de 50 km/h. À 20 km/h de dépassement, c'est 135 € et 2 points (article R. 413-14 du code de la route)." },
+          { txt: "1 500 € et 6 points", fb: "Non. Le retrait de 6 points est réservé au grand excès de vitesse, 50 km/h et plus, devenu un délit (article L. 413-1 du code de la route). Ici : 135 € et 2 points (article R. 413-14)." }
+        ] },
+      { t: 292.5, q: "Le véhicule de la société est flashé. L'avis de contravention arrive à l'entreprise. Que doit faire son représentant légal ?",
+        options: [
+          { txt: "Désigner le conducteur dans les 45 jours (lettre recommandée ou en ligne) ; sinon, l'entreprise est elle-même sanctionnée", ok: true, fb: "Exact : article L. 121-6 (code de la route). Le représentant légal de la personne morale doit indiquer, dans un délai de 45 jours, l'identité et l'adresse du conducteur, sauf vol, usurpation de plaque ou force majeure. À défaut, la non-désignation est une contravention de 4e classe, dont le montant est quintuplé pour une personne morale (article 131-41 du code pénal), soit 675 € d'amende forfaitaire. Le salarié désigné paie l'amende et perd les points : comme le dit la vidéo, c'est à l'entreprise d'organiser des déplacements qui ne poussent pas à l'excès de vitesse." },
+          { txt: "Payer l'amende pour le compte du salarié, sans autre formalité", fb: "Non. L'entreprise doit désigner le conducteur dans les 45 jours (article L. 121-6 du code de la route). Payer sans désigner ne fait pas disparaître l'obligation." },
+          { txt: "Rien : sans photo du conducteur, l'avis est sans suite", fb: "Non. La désignation du conducteur dans les 45 jours est obligatoire (article L. 121-6 du code de la route) ; à défaut, l'entreprise est sanctionnée d'une amende quintuplée." }
+        ] }
+    ]
+  },
+  "video-5": {
+    videoId: "zOhcPI5hkus", titre: "Drogue, alcool et médicaments",
+    onComplete: function(id){ window.videoTerminee(id); },
+    cues: [
+      { t: 42, q: "Michel dépasse 0,5 g d'alcool par litre de sang et dit que « conduire devenait un délit ». Est-ce exact ?",
+        options: [
+          { txt: "Non : entre 0,5 et moins de 0,8 g/L, c'est une contravention ; le délit commence à 0,8 g/L. Dans les deux cas, il ne peut pas reprendre le volant", ok: true, fb: "Exact. De 0,5 g/L de sang (0,25 mg/L d'air expiré) à moins de 0,8 g/L : contravention de 4e classe, 135 €, retrait de 6 points, suspension possible jusqu'à 3 ans (article R. 234-1 du code de la route) ; le seuil est abaissé à 0,2 g/L pour les permis probatoires et les conducteurs de transport en commun. À partir de 0,8 g/L (0,40 mg/L d'air) : délit puni de 3 ans d'emprisonnement et 9 000 € d'amende, retrait de 6 points (article L. 234-1, rédaction issue de la loi n° 2026-798 du 18 août 2026). La vidéo confond les deux seuils, mais sa conclusion reste juste : au troisième verre, Michel ne conduit plus." },
+          { txt: "Oui : dès 0,5 g/L, conduire est un délit", fb: "Non. De 0,5 à moins de 0,8 g/L, c'est une contravention (article R. 234-1 du code de la route) ; le délit commence à 0,8 g/L (article L. 234-1)." },
+          { txt: "Non : rien n'est interdit avant 0,8 g/L", fb: "Non. La conduite est interdite dès 0,5 g/L (contravention, article R. 234-1 du code de la route), et dès 0,2 g/L en permis probatoire." }
+        ] },
+      { t: 72, q: "Le supérieur de Michel se demande s'il aurait dû exclure l'alcool des repas d'affaires et des pots de départ. Que permet le code du travail ?",
+        options: [
+          { txt: "L'employeur peut limiter ou interdire l'alcool par le règlement intérieur ou une note de service, si la sécurité l'exige et de façon proportionnée", ok: true, fb: "Exact : article R. 4228-20 (code du travail). Seuls le vin, la bière, le cidre et le poiré sont admis sur le lieu de travail. Lorsque leur consommation est susceptible de porter atteinte à la sécurité et à la santé des travailleurs, l'employeur prévoit, dans le règlement intérieur ou à défaut par note de service, des mesures de limitation voire d'interdiction, proportionnées au but recherché. Pour des salariés qui reprennent le volant, l'interdiction est justifiée. C'est l'engagement n° 2 de l'appel des employeurs : prescrire la sobriété sur la route." },
+          { txt: "Rien : ce qui se passe hors des locaux ne relève pas de l'employeur", fb: "Non. Le repas d'affaires est un temps professionnel et le salarié reprend un véhicule : l'employeur peut encadrer la consommation d'alcool (article R. 4228-20 du code du travail) au titre de son obligation de sécurité (article L. 4121-1)." },
+          { txt: "Rien à décider : l'alcool est déjà totalement interdit par la loi en entreprise", fb: "Non. Le vin, la bière, le cidre et le poiré sont autorisés par défaut sur le lieu de travail ; c'est à l'employeur de limiter ou d'interdire lorsque la sécurité l'exige (article R. 4228-20 du code du travail)." }
+        ] }
+    ]
+  }
+};
+</script>
+<script src="assets/js/video-youtube-interactive.js"></script>
+<script src="assets/js/quiz-extras.js" defer></script>
+<script src="assets/js/ui-parcours.js" defer></script>
+<script src="assets/js/attestation.js" defer></script>
+
+<script>
+/* Lien « Signaler un point » : prerempli avec le module et l'etape en cours. */
+(function(){
+  "use strict";
+  var lien = document.getElementById("lien-signaler");
+  if(!lien) return;
+  var h1 = document.querySelector("h1");
+  var titre = ((h1 && h1.textContent) || document.title).replace(/\s+/g," ").trim() + " (v2)";
+  function etape(){
+    var s = document.querySelector(".etape.active") || document.querySelector(".etape");
+    if(!s) return "";
+    var id = s.getAttribute("aria-labelledby");
+    var h = (id && document.getElementById(id)) || s.querySelector("h2");
+    return h ? h.textContent.replace(/\s+/g," ").trim() : "";
+  }
+  function maj(){
+    var e = etape();
+    var objet = "[REGISTRE] " + titre + (e ? " : " + e : "");
+    var corps = "Bonjour,\n\nRemarque sur : " + titre
+      + "\nÉtape ou partie : " + e
+      + "\n\nCe qui pose problème : \n\nCe qu'il faudrait écrire à la place : \n\nRéférence ou source : \n\n--\nEnvoyé depuis l'espace e-learning IDSR\n"
+      + window.location.href + "\n";
+    lien.href = "mailto:mickael@destination-prevention.fr?subject=" + encodeURIComponent(objet) + "&body=" + encodeURIComponent(corps);
+  }
+  lien.addEventListener("click", maj);
+  lien.addEventListener("focus", maj);
+  maj();
+}());
+</script>
+</body>
+</html>
