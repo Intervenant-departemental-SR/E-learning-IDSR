@@ -144,9 +144,9 @@
     <h1>Suivi du projet — espace e-learning IDSR</h1>
     <p>Cette page dit exactement où en est le projet : ce qui a changé à chaque version, et ce qu'il est advenu de chaque remarque reçue. Une remarque qui n'y figure pas n'a pas été enregistrée : signalez-le, elle sera ajoutée.</p>
     <p class="etat">
-      <span>Version en ligne <b>v1.6</b></span>
-      <span>Mise à jour du <b>17 septembre 2026</b></span>
-      <span><b>51</b> remarques enregistrées</span>
+      <span>Version en ligne <b>v1.7</b></span>
+      <span>Mise à jour du <b>2 novembre 2026</b></span>
+      <span><b>53</b> remarques enregistrées</span>
     </p>
     <nav class="sommaire" aria-label="Sommaire">
       <a href="#changements">Ce qui a changé</a>
@@ -165,14 +165,15 @@
     <p class="intro">Les versions sont présentées de la plus récente à la plus ancienne. Chaque version indique les remarques qui y sont parties : cliquez sur une référence pour aller directement à la ligne correspondante du registre.</p>
 
     <div class="kpis">
-      <div class="kpi"><b>51</b><span>remarques enregistrées</span></div>
-      <div class="kpi"><b>48</b><span>traitées et en ligne</span></div>
+      <div class="kpi"><b>53</b><span>remarques enregistrées</span></div>
+      <div class="kpi"><b>51</b><span>traitées et en ligne</span></div>
       <div class="kpi"><b>0</b><span>partiellement traitées, en attente d'une pièce</span></div>
-      <div class="kpi"><b>2</b><span>en attente d'arbitrage</span></div>
+      <div class="kpi"><b>1</b><span>en attente d'arbitrage</span></div>
     </div>
 
     <div class="pastilles" id="pastilles-version" hidden>
         <button type="button" class="pastille actif" data-vue="tout">Tout l'historique</button>
+        <button type="button" class="pastille" data-vue="v1.7">v1.7</button>
         <button type="button" class="pastille" data-vue="v1.6">v1.6</button>
         <button type="button" class="pastille" data-vue="v1.5">v1.5</button>
         <button type="button" class="pastille" data-vue="v1.4">v1.4</button>
@@ -182,8 +183,15 @@
         <button type="button" class="pastille" data-vue="v1.0">v1.0</button>
     </div>
 
+    <section class="bloc-version" data-version="v1.7" id="version-v1.7">
+      <h3>v1.7 — 02/11/2026 <span class="tag t-publie">version en ligne</span></h3>
+      <p class="chapo-v">Le parcours mis à jour de la loi RIPOST, avant la session de formation initiale du 17 novembre 2026.</p>
+      <p>Premier retour de la coordination du Pas-de-Calais sur le parcours diffusé aux futurs IDSR. La carte du module 7 sur le cadre légal du protoxyde d'azote est réécrite : la loi n° 2026-798 du 18 août 2026 est en vigueur, l'inhalation de protoxyde devient un délit en soi (article L. 3611-4 du code de la santé publique), et le nouveau délit de conduite après consommation de substances psychoactives (article L. 237-1 du code de la route) attend le décret qui fixera la liste des substances visées. La carte sur le téléphone ajoute la suspension administrative du permis par le préfet, six mois au plus, généralisée par une instruction ministérielle du 29 septembre 2026. Les peines de l'alcool au volant sont mises à jour partout où elles restaient anciennes : module 7, fiche mémo alcool, simulateur d'alcoolémie. Tous les articles cités ont été relus sur Légifrance le 2 novembre 2026.</p>
+      <p class="refs"><span class="etiq">Demandes parties dans cette version</span> <a class="puce" href="#C22">C22</a> <a class="puce" href="#C23">C23</a> <a class="puce" href="#M21">M21</a></p>
+      <p class="etiquette">Étiquette de restauration : <code>v1.7-loi-ripost</code></p>
+    </section>
     <section class="bloc-version" data-version="v1.6" id="version-v1.6">
-      <h3>v1.6 — 17/09/2026 <span class="tag t-publie">version en ligne</span></h3>
+      <h3>v1.6 — 17/09/2026</h3>
       <p class="chapo-v">Le module 9 refait autour des cinq vidéos Carsat, séquencées par dix-sept questions vérifiées sur Légifrance.</p>
       <p>Le module 9 sur le risque routier professionnel change de forme : cinq saynètes d'entreprise de la Carsat Alsace-Moselle (organiser ses déplacements, préparer le véhicule, les distracteurs, la vitesse, alcool, drogues et médicaments) s'arrêtent à des moments précis pour poser une question, et reprennent après la bonne réponse. Dix-sept questions rythment les vidéos, trois autres closent la synthèse ; chaque réponse cite l'article exact et son code, relus sur Légifrance le 14 septembre 2026, et un tableau de fiabilité avec les liens ferme le module. Les approximations des vidéos sont corrigées dans les réponses plutôt que passées sous silence. Le contenu de la version précédente (accidentologie 2023, obligations de l'employeur, trois documents, rôle de l'IDSR, 7 engagements) est conservé dans les cartes et la synthèse, et un résumé écrit de chaque vidéo est disponible pour l'accessibilité. Un lecteur vidéo interactif commun est ajouté au site, réutilisable pour d'autres modules. La vérification des textes a fait apparaître la loi n° 2026-798 du 18 août 2026, qui durcit les peines pour alcool et stupéfiants : le module 9 en tient compte, la fiche mémo et le simulateur d'alcoolémie restent à mettre à jour (M21).</p>
       <p class="refs"><span class="etiq">Demandes parties dans cette version</span> <a class="puce" href="#A03">A03</a></p>
@@ -246,7 +254,7 @@
       </div>
       <div>
         <label for="f-version">Version</label>
-        <select id="f-version"><option value="">Toutes les versions</option><option value="v1.6">v1.6</option><option value="v1.5">v1.5</option><option value="v1.4">v1.4</option><option value="v1.3">v1.3</option><option value="v1.2">v1.2</option><option value="v1.1">v1.1</option><option value="v1.0">v1.0</option></select>
+        <select id="f-version"><option value="">Toutes les versions</option><option value="v1.7">v1.7</option><option value="v1.6">v1.6</option><option value="v1.5">v1.5</option><option value="v1.4">v1.4</option><option value="v1.3">v1.3</option><option value="v1.2">v1.2</option><option value="v1.1">v1.1</option><option value="v1.0">v1.0</option></select>
       </div>
       <div>
         <label for="f-texte">Rechercher</label>
@@ -718,14 +726,32 @@
         <td class="nowrap"><span class="tag t-publie">publiée</span></td>
         <td class="nowrap">v1.6</td>
       </tr>
-      <tr id="M21" data-statut="arbitrer" data-themes="m7 memo transverse" data-version="–" data-rech="m21 mickael lopes peines pour alcool et stupefiants point releve en verifiant les textes du module 9. la loi n° 2026-798 du 18 aout 2026 (jorf du 19 aout), en vigueur depuis le 20 aout 2026, a porte les peines de l&#x27;article l. 234-1 du code de la route (alcool a partir de 0,8 g/l) et de l&#x27;article l. 235-1 (stupefiants) a trois ans d&#x27;emprisonnement et 9 000 € d&#x27;amende, et a cinq ans et 15 000 € en cas de cumul alcool et stupefiants. le module 9 est a jour. la fiche memo alcool et le simulateur d&#x27;alcoolemie indiquent encore « jusqu&#x27;a 4 500 € » pour le delit : a corriger dans la prochaine publication, avec la mention de la loi. le module 7 est a relire sur le meme point. a arbitrer – module 7 · apports techniques fiches memo tout le parcours">
+      <tr id="M21" data-statut="publiee" data-themes="m7 memo transverse" data-version="v1.7" data-rech="m21 mickael lopes peines pour alcool et stupefiants point releve en verifiant les textes du module 9. la loi n° 2026-798 du 18 aout 2026 (jorf du 19 aout), en vigueur depuis le 20 aout 2026, a porte les peines de l&#x27;article l. 234-1 du code de la route (alcool a partir de 0,8 g/l) et de l&#x27;article l. 235-1 (stupefiants) a trois ans d&#x27;emprisonnement et 9 000 € d&#x27;amende, et a cinq ans et 15 000 € en cas de cumul alcool et stupefiants. le module 9 etait deja a jour. corrige le 2 novembre 2026, a l&#x27;occasion de c22 qui porte sur la meme loi : la carte « sanctions » de l&#x27;alcool du module 7, la fiche memo alcool (delit d&#x27;alcoolemie, refus de depistage, cumul alcool et stupefiants) et le message du simulateur d&#x27;alcoolemie n&#x27;indiquent plus « jusqu&#x27;a 4 500 € » mais trois ans et 9 000 €, avec la reference des articles l. 234-1, l. 234-8 et l. 235-1 du code de la route, relus sur legifrance le meme jour. publiee v1.7 module 7 · apports techniques fiches memo tout le parcours">
         <th scope="row"><a class="ancre" href="#M21" title="Lien direct vers M21">M21</a></th>
         <td class="nowrap">14/09/2026</td>
         <td class="dem">Mickaël Lopes</td>
-        <td><p>Point relevé en vérifiant les textes du module 9. La loi n° 2026-798 du 18 août 2026 (JORF du 19 août), en vigueur depuis le 20 août 2026, a porté les peines de l'article L. 234-1 du code de la route (alcool à partir de 0,8 g/L) et de l'article L. 235-1 (stupéfiants) à trois ans d'emprisonnement et 9 000 € d'amende, et à cinq ans et 15 000 € en cas de cumul alcool et stupéfiants.</p><p class="trait"><span class="etiq">Traitement</span> Le module 9 est à jour. La fiche mémo alcool et le simulateur d'alcoolémie indiquent encore « jusqu'à 4 500 € » pour le délit : à corriger dans la prochaine publication, avec la mention de la loi. Le module 7 est à relire sur le même point.</p></td>
+        <td><p>Point relevé en vérifiant les textes du module 9. La loi n° 2026-798 du 18 août 2026 (JORF du 19 août), en vigueur depuis le 20 août 2026, a porté les peines de l'article L. 234-1 du code de la route (alcool à partir de 0,8 g/L) et de l'article L. 235-1 (stupéfiants) à trois ans d'emprisonnement et 9 000 € d'amende, et à cinq ans et 15 000 € en cas de cumul alcool et stupéfiants.</p><p class="trait"><span class="etiq">Traitement</span> Le module 9 était déjà à jour. Corrigé le 2 novembre 2026, à l'occasion de C22 qui porte sur la même loi : la carte « Sanctions » de l'alcool du module 7, la fiche mémo alcool (délit d'alcoolémie, refus de dépistage, cumul alcool et stupéfiants) et le message du simulateur d'alcoolémie n'indiquent plus « jusqu'à 4 500 € » mais trois ans et 9 000 €, avec la référence des articles L. 234-1, L. 234-8 et L. 235-1 du code de la route, relus sur Légifrance le même jour.</p></td>
         <td class="ou">Peines pour alcool et stupéfiants</td>
-        <td class="nowrap"><span class="tag t-cours">à arbitrer</span></td>
-        <td class="nowrap">–</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.7</td>
+      </tr>
+      <tr id="C22" data-statut="publiee" data-themes="m7 m8" data-version="v1.7" data-rech="c22 laetitia bouttemy, coordination du pas-de-calais (transmis par adeline rubben) module 7, etape 2 · stupefiants et protoxyde ; module 8, actualite n° 6 module « stupefiants, protoxyde » : une mise a jour est necessaire avec la promulgation de la loi ripost. verifie sur legifrance le 2 novembre 2026. la loi ripost est la loi n° 2026-798 du 18 aout 2026 (jorf du 19 aout), en vigueur depuis le 20 aout 2026. la carte « protoxyde : le cadre legal » du module 7 la presentait encore comme votee et non promulguee. elle est reecrite en deux points. d&#x27;abord, l&#x27;inhalation de protoxyde hors acte medical devient un delit en soi, au volant ou non : un an et 3 750 €, amende forfaitaire de 500 € (article l. 3611-4 du code de la sante publique ). ensuite, le nouveau delit de conduite apres consommation manifeste de substances psychoactives (article l. 237-1 du code de la route , trois ans et 9 000 €, moitie des points) ne s&#x27;applique qu&#x27;aux substances inscrites sur une liste fixee par decret en conseil d&#x27;etat, non publie au 2 novembre 2026 : il ne vise donc pas encore le protoxyde, ce qui est ecrit en clair, avec une formulation d&#x27;animation adaptee. l&#x27;actualite n° 6 du module 8, qui prenait ce texte pour exemple de loi « votee mais pas encore en vigueur », est mise a jour dans le meme sens. point a surveiller : la publication du decret fixant la liste, qui rendra le delit routier applicable au protoxyde et appellera une nouvelle mise a jour. publiee v1.7 module 7 · apports techniques module 8 · valise et communication">
+        <th scope="row"><a class="ancre" href="#C22" title="Lien direct vers C22">C22</a></th>
+        <td class="nowrap">27/10/2026</td>
+        <td class="dem">Laetitia Bouttemy, coordination du Pas-de-Calais (transmis par Adeline Rubben)</td>
+        <td><p>Module « stupéfiants, protoxyde » : une mise à jour est nécessaire avec la promulgation de la loi RIPOST.</p><p class="trait"><span class="etiq">Traitement</span> Vérifié sur Légifrance le 2 novembre 2026. La loi RIPOST est la <strong>loi n° 2026-798 du 18 août 2026</strong> (JORF du 19 août), en vigueur depuis le 20 août 2026. La carte « Protoxyde : le cadre légal » du module 7 la présentait encore comme votée et non promulguée. Elle est réécrite en deux points. D'abord, l'inhalation de protoxyde hors acte médical devient un délit en soi, au volant ou non : un an et 3 750 €, amende forfaitaire de 500 € (article <strong>L. 3611-4 du code de la santé publique</strong>). Ensuite, le nouveau délit de conduite après consommation manifeste de substances psychoactives (article <strong>L. 237-1 du code de la route</strong>, trois ans et 9 000 €, moitié des points) ne s'applique qu'aux substances inscrites sur une liste fixée par décret en Conseil d'État, <strong>non publié au 2 novembre 2026</strong> : il ne vise donc pas encore le protoxyde, ce qui est écrit en clair, avec une formulation d'animation adaptée. L'actualité n° 6 du module 8, qui prenait ce texte pour exemple de loi « votée mais pas encore en vigueur », est mise à jour dans le même sens. Point à surveiller : la publication du décret fixant la liste, qui rendra le délit routier applicable au protoxyde et appellera une nouvelle mise à jour.</p></td>
+        <td class="ou">Module 7, étape 2 · Stupéfiants et protoxyde ; module 8, actualité n° 6</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.7</td>
+      </tr>
+      <tr id="C23" data-statut="publiee" data-themes="m7" data-version="v1.7" data-rech="c23 laetitia bouttemy, coordination du pas-de-calais (transmis par adeline rubben) module 7, etape 5 · telephone et distracteurs dans la partie distracteurs, ajouter que l&#x27;usage du telephone tenu en main entraine une suspension du permis de conduire. suspension administrative decidee par le prefet pour une duree maximale de six mois (souvent entre 15 jours et un mois). une instruction ministerielle generalise cette possibilite sur l&#x27;ensemble du territoire. la carte « telephone et distracteurs » du module 7 est completee. l&#x27;infraction de l&#x27;article r. 412-6-1 du code de la route (135 €, 3 points) est punie de la peine complementaire de suspension du permis : le prefet peut donc prononcer une suspension administrative a titre provisoire, six mois au plus (articles l. 224-7 et l. 224-8 du code de la route , relus sur legifrance le 2 novembre 2026). la carte cite l&#x27;instruction ministerielle du 29 septembre 2026 qui demande aux prefets d&#x27;etudier systematiquement cette suspension ; cette instruction n&#x27;a pas ete lue dans le texte, sa date et son contenu proviennent de la presse specialisee, et une copie reste utile au dossier. la carte distingue aussi le cas du telephone tenu en main combine a une autre infraction, ou le permis est retenu sur place puis peut etre suspendu dans les 72 heures (articles l. 224-1 et l. 224-2 du meme code). publiee v1.7 module 7 · apports techniques">
+        <th scope="row"><a class="ancre" href="#C23" title="Lien direct vers C23">C23</a></th>
+        <td class="nowrap">27/10/2026</td>
+        <td class="dem">Laetitia Bouttemy, coordination du Pas-de-Calais (transmis par Adeline Rubben)</td>
+        <td><p>Dans la partie distracteurs, ajouter que l'usage du téléphone tenu en main entraîne une suspension du permis de conduire. Suspension administrative décidée par le préfet pour une durée maximale de six mois (souvent entre 15 jours et un mois). Une instruction ministérielle généralise cette possibilité sur l'ensemble du territoire.</p><p class="trait"><span class="etiq">Traitement</span> La carte « Téléphone et distracteurs » du module 7 est complétée. L'infraction de l'article <strong>R. 412-6-1 du code de la route</strong> (135 €, 3 points) est punie de la peine complémentaire de suspension du permis : le préfet peut donc prononcer une suspension administrative à titre provisoire, <strong>six mois au plus</strong> (articles <strong>L. 224-7 et L. 224-8 du code de la route</strong>, relus sur Légifrance le 2 novembre 2026). La carte cite l'instruction ministérielle du 29 septembre 2026 qui demande aux préfets d'étudier systématiquement cette suspension ; cette instruction n'a pas été lue dans le texte, sa date et son contenu proviennent de la presse spécialisée, et une copie reste utile au dossier. La carte distingue aussi le cas du téléphone tenu en main combiné à une autre infraction, où le permis est retenu sur place puis peut être suspendu dans les 72 heures (articles L. 224-1 et L. 224-2 du même code).</p></td>
+        <td class="ou">Module 7, étape 5 · Téléphone et distracteurs</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.7</td>
       </tr>
       </tbody>
     </table>
@@ -756,7 +782,7 @@
     <pre class="canevas">Objet : [REGISTRE] remarques sur l&#x27;espace e-learning IDSR
 
 Nom, département :
-Version consultée : v1.6
+Version consultée : v1.7
 
 1. Module / page concernée :
    Étape ou titre de la carte :
@@ -796,7 +822,7 @@ Version consultée : v1.6
 
 <footer class="doc">
   <div class="wrap">
-    <p>Suivi du projet de l'espace e-learning des Intervenants Départementaux de Sécurité Routière — Préfecture des Hauts-de-France, réseau IDSR. Page mise à jour le 17 septembre 2026.</p>
+    <p>Suivi du projet de l'espace e-learning des Intervenants Départementaux de Sécurité Routière — Préfecture des Hauts-de-France, réseau IDSR. Page mise à jour le 2 novembre 2026.</p>
     <p>Adresse de cette page : <code>https://intervenant-departemental-sr.github.io/E-learning-IDSR/suivi/</code> — contact technique : mickael@destination-prevention.fr.
        <a href="../index.html">Accéder à l'espace e-learning</a> · <a href="../mentions-legales.html">Mentions légales</a></p>
   </div>
