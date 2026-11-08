@@ -144,9 +144,9 @@
     <h1>Suivi du projet — espace e-learning IDSR</h1>
     <p>Cette page dit exactement où en est le projet : ce qui a changé à chaque version, et ce qu'il est advenu de chaque remarque reçue. Une remarque qui n'y figure pas n'a pas été enregistrée : signalez-le, elle sera ajoutée.</p>
     <p class="etat">
-      <span>Version en ligne <b>v1.7</b></span>
-      <span>Mise à jour du <b>2 novembre 2026</b></span>
-      <span><b>53</b> remarques enregistrées</span>
+      <span>Version en ligne <b>v1.8</b></span>
+      <span>Mise à jour du <b>8 novembre 2026</b></span>
+      <span><b>54</b> remarques enregistrées</span>
     </p>
     <nav class="sommaire" aria-label="Sommaire">
       <a href="#changements">Ce qui a changé</a>
@@ -165,14 +165,15 @@
     <p class="intro">Les versions sont présentées de la plus récente à la plus ancienne. Chaque version indique les remarques qui y sont parties : cliquez sur une référence pour aller directement à la ligne correspondante du registre.</p>
 
     <div class="kpis">
-      <div class="kpi"><b>53</b><span>remarques enregistrées</span></div>
-      <div class="kpi"><b>51</b><span>traitées et en ligne</span></div>
+      <div class="kpi"><b>54</b><span>remarques enregistrées</span></div>
+      <div class="kpi"><b>52</b><span>traitées et en ligne</span></div>
       <div class="kpi"><b>0</b><span>partiellement traitées, en attente d'une pièce</span></div>
       <div class="kpi"><b>1</b><span>en attente d'arbitrage</span></div>
     </div>
 
     <div class="pastilles" id="pastilles-version" hidden>
         <button type="button" class="pastille actif" data-vue="tout">Tout l'historique</button>
+        <button type="button" class="pastille" data-vue="v1.8">v1.8</button>
         <button type="button" class="pastille" data-vue="v1.7">v1.7</button>
         <button type="button" class="pastille" data-vue="v1.6">v1.6</button>
         <button type="button" class="pastille" data-vue="v1.5">v1.5</button>
@@ -183,11 +184,18 @@
         <button type="button" class="pastille" data-vue="v1.0">v1.0</button>
     </div>
 
+    <section class="bloc-version" data-version="v1.8" id="version-v1.8">
+      <h3>v1.8 — 08/11/2026 <span class="tag t-publie">version en ligne</span></h3>
+      <p class="chapo-v">L'humilité intégrée à la posture de l'IDSR dans le module 3.</p>
+      <p>Le module 3 sur la posture de l'IDSR ajoute un cinquième pilier, l'humilité : l'IDSR peut témoigner brièvement d'un écart léger déjà vécu, comme rouler un peu trop vite, à condition de ne jamais le banaliser ni d'évoquer un comportement grave. Le témoignage devient une bonne réponse dans le jeu « Dire ou s'abstenir », et une nouvelle situation du jeu « Face au public » entraîne à répondre à la question « Et vous, vous n'avez jamais dépassé ? ». Le barème sur 100 points est inchangé.</p>
+      <p class="refs"><span class="etiq">Demandes parties dans cette version</span> <a class="puce" href="#M24">M24</a></p>
+      <p class="etiquette">Étiquette de restauration : <code>v1.8-humilite-posture</code></p>
+    </section>
     <section class="bloc-version" data-version="v1.7" id="version-v1.7">
-      <h3>v1.7 — 02/11/2026 <span class="tag t-publie">version en ligne</span></h3>
+      <h3>v1.7 — 02/11/2026</h3>
       <p class="chapo-v">Le parcours mis à jour de la loi RIPOST, avant la session de formation initiale du 17 novembre 2026.</p>
       <p>Premier retour de la coordination du Pas-de-Calais sur le parcours diffusé aux futurs IDSR. La carte du module 7 sur le cadre légal du protoxyde d'azote est réécrite : la loi n° 2026-798 du 18 août 2026 est en vigueur, l'inhalation de protoxyde devient un délit en soi (article L. 3611-4 du code de la santé publique), et le nouveau délit de conduite après consommation de substances psychoactives (article L. 237-1 du code de la route) attend le décret qui fixera la liste des substances visées. La carte sur le téléphone ajoute la suspension administrative du permis par le préfet, six mois au plus, généralisée par une instruction ministérielle du 29 septembre 2026. Les peines de l'alcool au volant sont mises à jour partout où elles restaient anciennes : module 7, fiche mémo alcool, simulateur d'alcoolémie. Tous les articles cités ont été relus sur Légifrance le 2 novembre 2026.</p>
-      <p class="refs"><span class="etiq">Demandes parties dans cette version</span> <a class="puce" href="#C22">C22</a> <a class="puce" href="#C23">C23</a> <a class="puce" href="#M21">M21</a></p>
+      <p class="refs"><span class="etiq">Demandes parties dans cette version</span> <a class="puce" href="#M21">M21</a> <a class="puce" href="#C22">C22</a> <a class="puce" href="#C23">C23</a></p>
       <p class="etiquette">Étiquette de restauration : <code>v1.7-loi-ripost</code></p>
     </section>
     <section class="bloc-version" data-version="v1.6" id="version-v1.6">
@@ -254,7 +262,7 @@
       </div>
       <div>
         <label for="f-version">Version</label>
-        <select id="f-version"><option value="">Toutes les versions</option><option value="v1.7">v1.7</option><option value="v1.6">v1.6</option><option value="v1.5">v1.5</option><option value="v1.4">v1.4</option><option value="v1.3">v1.3</option><option value="v1.2">v1.2</option><option value="v1.1">v1.1</option><option value="v1.0">v1.0</option></select>
+        <select id="f-version"><option value="">Toutes les versions</option><option value="v1.8">v1.8</option><option value="v1.7">v1.7</option><option value="v1.6">v1.6</option><option value="v1.5">v1.5</option><option value="v1.4">v1.4</option><option value="v1.3">v1.3</option><option value="v1.2">v1.2</option><option value="v1.1">v1.1</option><option value="v1.0">v1.0</option></select>
       </div>
       <div>
         <label for="f-texte">Rechercher</label>
@@ -753,6 +761,15 @@
         <td class="nowrap"><span class="tag t-publie">publiée</span></td>
         <td class="nowrap">v1.7</td>
       </tr>
+      <tr id="M24" data-statut="publiee" data-themes="m3" data-version="v1.8" data-rech="m24 mickael lopes module 3 · l&#x27;humilite dans la posture de l&#x27;idsr integrer l&#x27;humilite comme posture : l&#x27;idsr doit pouvoir temoigner de son experience, par exemple reconnaitre qu&#x27;il lui arrive de rouler un peu trop vite, avec des elements legers. ce temoignage doit etre accepte comme une bonne reponse dans les jeux du module. l&#x27;humilite devient le cinquieme pilier de la posture (« un conducteur parmi les autres, pas un donneur de lecons ») : reconnaitre un ecart leger deja vecu et dire ce qui a change depuis rend le message credible, avec deux limites, ne jamais banaliser (« comme tout le monde ») et ne jamais temoigner d&#x27;un comportement grave (alcool, stupefiants, grand exces de vitesse). dans le jeu « dire ou s&#x27;abstenir », la phrase de temoignage passe de mauvaise a bonne reponse. dans le jeu « face au public », une situation nouvelle (« et vous, vous n&#x27;avez jamais depasse la vitesse ? ») remplace celle de l&#x27;elu local : le temoignage bref qui ramene a la regle vaut 8 points, la posture de conducteur parfait 4 points, la banalisation 0. le pilier neutralite precise qu&#x27;elle porte sur les opinions, pas sur le vecu, et la carte « un acte d&#x27;engagement » rappelle que l&#x27;engagement n&#x27;exige pas d&#x27;etre parfait mais de ne jamais banaliser un ecart. le bareme sur 100 points est inchange. publiee v1.8 module 3 · posture">
+        <th scope="row"><a class="ancre" href="#M24" title="Lien direct vers M24">M24</a></th>
+        <td class="nowrap">08/11/2026</td>
+        <td class="dem">Mickaël Lopes</td>
+        <td><p>Intégrer l'humilité comme posture : l'IDSR doit pouvoir témoigner de son expérience, par exemple reconnaître qu'il lui arrive de rouler un peu trop vite, avec des éléments légers. Ce témoignage doit être accepté comme une bonne réponse dans les jeux du module.</p><p class="trait"><span class="etiq">Traitement</span> L'humilité devient le cinquième pilier de la posture (« Un conducteur parmi les autres, pas un donneur de leçons ») : reconnaître un écart léger déjà vécu et dire ce qui a changé depuis rend le message crédible, avec deux limites, ne jamais banaliser (« comme tout le monde ») et ne jamais témoigner d'un comportement grave (alcool, stupéfiants, grand excès de vitesse). Dans le jeu « Dire ou s'abstenir », la phrase de témoignage passe de mauvaise à bonne réponse. Dans le jeu « Face au public », une situation nouvelle (« Et vous, vous n'avez jamais dépassé la vitesse ? ») remplace celle de l'élu local : le témoignage bref qui ramène à la règle vaut 8 points, la posture de conducteur parfait 4 points, la banalisation 0. Le pilier Neutralité précise qu'elle porte sur les opinions, pas sur le vécu, et la carte « Un acte d'engagement » rappelle que l'engagement n'exige pas d'être parfait mais de ne jamais banaliser un écart. Le barème sur 100 points est inchangé.</p></td>
+        <td class="ou">Module 3 · L'humilité dans la posture de l'IDSR</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.8</td>
+      </tr>
       </tbody>
     </table>
     </div>
@@ -782,7 +799,7 @@
     <pre class="canevas">Objet : [REGISTRE] remarques sur l&#x27;espace e-learning IDSR
 
 Nom, département :
-Version consultée : v1.7
+Version consultée : v1.8
 
 1. Module / page concernée :
    Étape ou titre de la carte :
@@ -822,7 +839,7 @@ Version consultée : v1.7
 
 <footer class="doc">
   <div class="wrap">
-    <p>Suivi du projet de l'espace e-learning des Intervenants Départementaux de Sécurité Routière — Préfecture des Hauts-de-France, réseau IDSR. Page mise à jour le 2 novembre 2026.</p>
+    <p>Suivi du projet de l'espace e-learning des Intervenants Départementaux de Sécurité Routière — Préfecture des Hauts-de-France, réseau IDSR. Page mise à jour le 8 novembre 2026.</p>
     <p>Adresse de cette page : <code>https://intervenant-departemental-sr.github.io/E-learning-IDSR/suivi/</code> — contact technique : mickael@destination-prevention.fr.
        <a href="../index.html">Accéder à l'espace e-learning</a> · <a href="../mentions-legales.html">Mentions légales</a></p>
   </div>
