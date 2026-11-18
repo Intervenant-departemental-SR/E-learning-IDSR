@@ -144,9 +144,9 @@
     <h1>Suivi du projet — espace e-learning IDSR</h1>
     <p>Cette page dit exactement où en est le projet : ce qui a changé à chaque version, et ce qu'il est advenu de chaque remarque reçue. Une remarque qui n'y figure pas n'a pas été enregistrée : signalez-le, elle sera ajoutée.</p>
     <p class="etat">
-      <span>Version en ligne <b>v1.8</b></span>
-      <span>Mise à jour du <b>8 novembre 2026</b></span>
-      <span><b>54</b> remarques enregistrées</span>
+      <span>Version en ligne <b>v1.9</b></span>
+      <span>Mise à jour du <b>18 novembre 2026</b></span>
+      <span><b>57</b> remarques enregistrées</span>
     </p>
     <nav class="sommaire" aria-label="Sommaire">
       <a href="#changements">Ce qui a changé</a>
@@ -165,14 +165,15 @@
     <p class="intro">Les versions sont présentées de la plus récente à la plus ancienne. Chaque version indique les remarques qui y sont parties : cliquez sur une référence pour aller directement à la ligne correspondante du registre.</p>
 
     <div class="kpis">
-      <div class="kpi"><b>54</b><span>remarques enregistrées</span></div>
-      <div class="kpi"><b>52</b><span>traitées et en ligne</span></div>
+      <div class="kpi"><b>57</b><span>remarques enregistrées</span></div>
+      <div class="kpi"><b>55</b><span>traitées et en ligne</span></div>
       <div class="kpi"><b>0</b><span>partiellement traitées, en attente d'une pièce</span></div>
       <div class="kpi"><b>1</b><span>en attente d'arbitrage</span></div>
     </div>
 
     <div class="pastilles" id="pastilles-version" hidden>
         <button type="button" class="pastille actif" data-vue="tout">Tout l'historique</button>
+        <button type="button" class="pastille" data-vue="v1.9">v1.9</button>
         <button type="button" class="pastille" data-vue="v1.8">v1.8</button>
         <button type="button" class="pastille" data-vue="v1.7">v1.7</button>
         <button type="button" class="pastille" data-vue="v1.6">v1.6</button>
@@ -184,8 +185,15 @@
         <button type="button" class="pastille" data-vue="v1.0">v1.0</button>
     </div>
 
+    <section class="bloc-version" data-version="v1.9" id="version-v1.9">
+      <h3>v1.9 — 18/11/2026 <span class="tag t-publie">version en ligne</span></h3>
+      <p class="chapo-v">Une attestation unique en fin de parcours, un lexique des sigles et une partie statistiques, après les premiers retours de la formation initiale.</p>
+      <p>Les attestations de fin de module disparaissent au profit d'un module final, ouvert lorsque les modules 1 à 7 sont validés : un questionnaire des acquis de quatorze questions, deux par module, reprises des questions de contrôle déjà validées, puis la génération d'une attestation déclarative unique qui liste les sept modules, avec les mêmes règles qu'auparavant (document déclaratif, choix du département, envoi préparé vers la coordination, effacement du nom). Un onglet « Lexique des sigles » est présent sur toutes les pages du parcours, avec une recherche instantanée et une fiche PDF téléchargeable de 42 sigles. Une section « Statistiques de l'accidentalité » ouvre une carte cliquable des Hauts-de-France qui mène aux statistiques régionales et départementales, dont les pages sont en préparation. Correction associée : les badges « Terminé » de l'accueil s'appuyaient sur un nombre d'étapes erroné pour les modules 3, 4, 6, 7 et 8.</p>
+      <p class="refs"><span class="etiq">Demandes parties dans cette version</span> <a class="puce" href="#M25">M25</a> <a class="puce" href="#M26">M26</a> <a class="puce" href="#M27">M27</a></p>
+      <p class="etiquette">Étiquette de restauration : <code>v1.9-attestation-finale-lexique-statistiques</code></p>
+    </section>
     <section class="bloc-version" data-version="v1.8" id="version-v1.8">
-      <h3>v1.8 — 08/11/2026 <span class="tag t-publie">version en ligne</span></h3>
+      <h3>v1.8 — 08/11/2026</h3>
       <p class="chapo-v">L'humilité intégrée à la posture de l'IDSR dans le module 3.</p>
       <p>Le module 3 sur la posture de l'IDSR ajoute un cinquième pilier, l'humilité : l'IDSR peut témoigner brièvement d'un écart léger déjà vécu, comme rouler un peu trop vite, à condition de ne jamais le banaliser ni d'évoquer un comportement grave. Le témoignage devient une bonne réponse dans le jeu « Dire ou s'abstenir », et une nouvelle situation du jeu « Face au public » entraîne à répondre à la question « Et vous, vous n'avez jamais dépassé ? ». Le barème sur 100 points est inchangé.</p>
       <p class="refs"><span class="etiq">Demandes parties dans cette version</span> <a class="puce" href="#M24">M24</a></p>
@@ -262,7 +270,7 @@
       </div>
       <div>
         <label for="f-version">Version</label>
-        <select id="f-version"><option value="">Toutes les versions</option><option value="v1.8">v1.8</option><option value="v1.7">v1.7</option><option value="v1.6">v1.6</option><option value="v1.5">v1.5</option><option value="v1.4">v1.4</option><option value="v1.3">v1.3</option><option value="v1.2">v1.2</option><option value="v1.1">v1.1</option><option value="v1.0">v1.0</option></select>
+        <select id="f-version"><option value="">Toutes les versions</option><option value="v1.9">v1.9</option><option value="v1.8">v1.8</option><option value="v1.7">v1.7</option><option value="v1.6">v1.6</option><option value="v1.5">v1.5</option><option value="v1.4">v1.4</option><option value="v1.3">v1.3</option><option value="v1.2">v1.2</option><option value="v1.1">v1.1</option><option value="v1.0">v1.0</option></select>
       </div>
       <div>
         <label for="f-texte">Rechercher</label>
@@ -770,6 +778,33 @@
         <td class="nowrap"><span class="tag t-publie">publiée</span></td>
         <td class="nowrap">v1.8</td>
       </tr>
+      <tr id="M25" data-statut="publiee" data-themes="transverse" data-version="v1.9" data-rech="m25 mickael lopes lexique des sigles ajouter dans l&#x27;espace une fiche lexique avec tous les sigles : une fiche telechargeable, une barre de recherche et un petit onglet amovible. un onglet « lexique des sigles » est fixe au bord droit de l&#x27;ecran sur l&#x27;accueil, les neuf modules, le module final, les fiches memo, le panneaupedia, les mentions legales et les pages statistiques. il ouvre un panneau avec une recherche instantanee, sur le sigle ou sur un mot de la definition, accents ignores, et un bouton de telechargement de la fiche pdf. le lexique compte 42 sigles, chacun avec sa signification, une courte definition reprise des modules et les modules ou il apparait. il remplace l&#x27;ancien encadre de huit sigles en bas de l&#x27;accueil. il n&#x27;est pas place sur les simulateurs, le test de reflexes ni le quiz des panneaux, projetes devant le public. le sigle smdc, cite comme source du support « agir », reste a definir avant d&#x27;etre ajoute. publiee v1.9 tout le parcours">
+        <th scope="row"><a class="ancre" href="#M25" title="Lien direct vers M25">M25</a></th>
+        <td class="nowrap">18/11/2026</td>
+        <td class="dem">Mickaël Lopes</td>
+        <td><p>Ajouter dans l'espace une fiche lexique avec tous les sigles : une fiche téléchargeable, une barre de recherche et un petit onglet amovible.</p><p class="trait"><span class="etiq">Traitement</span> Un onglet « Lexique des sigles » est fixé au bord droit de l'écran sur l'accueil, les neuf modules, le module final, les fiches mémo, le Panneaupédia, les mentions légales et les pages statistiques. Il ouvre un panneau avec une recherche instantanée, sur le sigle ou sur un mot de la définition, accents ignorés, et un bouton de téléchargement de la fiche PDF. Le lexique compte 42 sigles, chacun avec sa signification, une courte définition reprise des modules et les modules où il apparaît. Il remplace l'ancien encadré de huit sigles en bas de l'accueil. Il n'est pas placé sur les simulateurs, le test de réflexes ni le quiz des panneaux, projetés devant le public. Le sigle SMDC, cité comme source du support « Agir », reste à définir avant d'être ajouté.</p></td>
+        <td class="ou">Tout le parcours</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.9</td>
+      </tr>
+      <tr id="M26" data-statut="publiee" data-themes="transverse" data-version="v1.9" data-rech="m26 mickael lopes attestation finale supprimer les attestations de fin de module et les remplacer par une attestation finale : un dernier module qui s&#x27;ouvre des que les modules de la premiere partie sont valides, avec un questionnaire des acquis tres simple de deux questions par module, puis la generation de l&#x27;attestation avec les memes regles qu&#x27;auparavant. les neuf modules ne proposent plus d&#x27;attestation. le module final (module-final-acquis.html) affiche l&#x27;etat des sept modules et ne s&#x27;ouvre qu&#x27;une fois les sept valides. le questionnaire compte quatorze questions, deux par module, reprises des questions de controle deja validees dans chaque module ; une erreur se corrige autant de fois que necessaire, avec un lien vers le module a revoir. les quatorze questions reussies, l&#x27;attestation declarative se genere avec les regles inchangees : nom saisi, departement de nomination, envoi prepare vers la coordination, effacement du nom. le pdf liste les sept modules et le questionnaire. la fin de chaque module 1 a 7 affiche l&#x27;avancement du parcours et, a sept sur sept, le bouton du module final ; l&#x27;accueil presente une carte « module final » avec son etat. les mentions legales sont mises a jour. une progression du module 3 anterieure a la v1.8 (six etapes) n&#x27;est pas comptee comme validee : l&#x27;etape ajoutee en v1.8 reste a suivre. publiee v1.9 modules 1 a 9, module final, accueil, mentions legales">
+        <th scope="row"><a class="ancre" href="#M26" title="Lien direct vers M26">M26</a></th>
+        <td class="nowrap">18/11/2026</td>
+        <td class="dem">Mickaël Lopes</td>
+        <td><p>Supprimer les attestations de fin de module et les remplacer par une attestation finale : un dernier module qui s'ouvre dès que les modules de la première partie sont validés, avec un questionnaire des acquis très simple de deux questions par module, puis la génération de l'attestation avec les mêmes règles qu'auparavant.</p><p class="trait"><span class="etiq">Traitement</span> Les neuf modules ne proposent plus d'attestation. Le module final (module-final-acquis.html) affiche l'état des sept modules et ne s'ouvre qu'une fois les sept validés. Le questionnaire compte quatorze questions, deux par module, reprises des questions de contrôle déjà validées dans chaque module ; une erreur se corrige autant de fois que nécessaire, avec un lien vers le module à revoir. Les quatorze questions réussies, l'attestation déclarative se génère avec les règles inchangées : nom saisi, département de nomination, envoi préparé vers la coordination, effacement du nom. Le PDF liste les sept modules et le questionnaire. La fin de chaque module 1 à 7 affiche l'avancement du parcours et, à sept sur sept, le bouton du module final ; l'accueil présente une carte « Module final » avec son état. Les mentions légales sont mises à jour. Une progression du module 3 antérieure à la v1.8 (six étapes) n'est pas comptée comme validée : l'étape ajoutée en v1.8 reste à suivre.</p></td>
+        <td class="ou">Modules 1 à 9, module final, accueil, mentions légales</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.9</td>
+      </tr>
+      <tr id="M27" data-statut="publiee" data-themes="transverse" data-version="v1.9" data-rech="m27 mickael lopes partie statistiques creer l&#x27;onglet de la partie statistiques, dont les contenus seront produits par la maitrise d&#x27;œuvre : une carte des hauts-de-france avec des departements cliquables, un lien vers les statistiques regionales et un lien vers les statistiques du departement selectionne. une section 4 « statistiques de l&#x27;accidentalite » est ajoutee a l&#x27;accueil. la page statistiques.html presente la carte des cinq departements, tracee a partir de leurs contours reels ; un clic sur un departement affiche le lien vers ses statistiques, et le lien vers les statistiques regionales reste visible en permanence. une liste de boutons offre la meme selection au clavier et sur mobile ; le departement choisi est memorise dans le navigateur. les six pages de destination (region et cinq departements, dossier statistiques/) sont creees en page d&#x27;attente, avec un emplacement repere pour integrer les contenus. publiee v1.9 accueil, page statistiques">
+        <th scope="row"><a class="ancre" href="#M27" title="Lien direct vers M27">M27</a></th>
+        <td class="nowrap">18/11/2026</td>
+        <td class="dem">Mickaël Lopes</td>
+        <td><p>Créer l'onglet de la partie statistiques, dont les contenus seront produits par la maîtrise d'œuvre : une carte des Hauts-de-France avec des départements cliquables, un lien vers les statistiques régionales et un lien vers les statistiques du département sélectionné.</p><p class="trait"><span class="etiq">Traitement</span> Une section 4 « Statistiques de l'accidentalité » est ajoutée à l'accueil. La page statistiques.html présente la carte des cinq départements, tracée à partir de leurs contours réels ; un clic sur un département affiche le lien vers ses statistiques, et le lien vers les statistiques régionales reste visible en permanence. Une liste de boutons offre la même sélection au clavier et sur mobile ; le département choisi est mémorisé dans le navigateur. Les six pages de destination (région et cinq départements, dossier statistiques/) sont créées en page d'attente, avec un emplacement repéré pour intégrer les contenus.</p></td>
+        <td class="ou">Accueil, page statistiques</td>
+        <td class="nowrap"><span class="tag t-publie">publiée</span></td>
+        <td class="nowrap">v1.9</td>
+      </tr>
       </tbody>
     </table>
     </div>
@@ -799,7 +834,7 @@
     <pre class="canevas">Objet : [REGISTRE] remarques sur l&#x27;espace e-learning IDSR
 
 Nom, département :
-Version consultée : v1.8
+Version consultée : v1.9
 
 1. Module / page concernée :
    Étape ou titre de la carte :

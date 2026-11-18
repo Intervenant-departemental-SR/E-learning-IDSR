@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module final : questionnaire des acquis et attestation | E-learning IDSR</title>
+<meta name="description" content="Module final du parcours de préparation à la formation initiale des IDSR : questionnaire des acquis (deux questions par module) et attestation déclarative de suivi.">
+<style>
+  :root{
+    --jaune:#FECF41; --jaune-fonce:#E9B400; --jaune-clair:#FFF3CC;
+    --noir:#000; --gris:#3a3a3a; --gris-2:#6b6b6b;
+    --gris-clair:#f4f4f4; --bordure:#e2e2e2; --blanc:#fff;
+    --vert:#1f8a4c; --rouge:#c0392b;
+    --rayon:12px; --ombre:0 4px 18px rgba(0,0,0,.12);
+    --max:1080px; --t:.25s cubic-bezier(.4,0,.2,1);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:"Marianne","Segoe UI",Arial,Helvetica,sans-serif;color:var(--noir);background:var(--gris-clair);line-height:1.55;}
+  img{max-width:100%;display:block;}
+  :focus-visible{outline:3px solid var(--noir);outline-offset:2px;border-radius:4px;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 1.25rem;}
+  .skip{position:absolute;left:-9999px;background:var(--noir);color:var(--jaune);padding:.6rem 1rem;z-index:200;font-weight:700;}
+  .skip:focus{left:0;top:0;}
+  header.site{background:var(--blanc);border-bottom:6px solid var(--jaune);position:sticky;top:0;z-index:50;}
+  .topbar{display:flex;align-items:center;gap:1rem;padding:.7rem 1.25rem;max-width:var(--max);margin:0 auto;flex-wrap:wrap;}
+  .topbar img{width:150px;}
+  .topbar .fil{font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--gris-2);font-weight:700;}
+  .topbar .fil a{color:var(--gris-2);text-decoration:none;}
+  .topbar .fil a:hover{text-decoration:underline;}
+  .progress{height:8px;background:var(--gris-clair);}
+  .progress > span{display:block;height:100%;width:0;background:var(--jaune);transition:width .5s ease;}
+  .module-hero{background:var(--noir);color:var(--blanc);padding:2.2rem 0 2.4rem;}
+  .module-hero .eyebrow{color:var(--jaune);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.8rem;margin:0 0 .5rem;}
+  .module-hero h1{font-size:2rem;line-height:1.15;margin:0 0 .8rem;max-width:780px;}
+  .module-hero p{margin:0;color:#e9e9e9;max-width:720px;}
+  main{padding:2rem 0 4rem;}
+  .layout{display:grid;grid-template-columns:260px 1fr;gap:2rem;align-items:start;}
+  .stepper{position:sticky;top:96px;background:var(--blanc);border:1px solid var(--bordure);border-radius:var(--rayon);padding:.6rem;}
+  .stepper ol{list-style:none;margin:0;padding:0;}
+  .step-item{display:flex;align-items:center;gap:.7rem;width:100%;text-align:left;border:none;background:none;font:inherit;padding:.7rem .6rem;border-radius:8px;cursor:pointer;color:var(--gris);transition:background var(--t);}
+  .step-item:hover:not(:disabled){background:var(--jaune-clair);}
+  .step-item:disabled{cursor:not-allowed;color:var(--gris-2);opacity:.7;}
+  .step-item[aria-current="true"]{background:var(--noir);color:var(--blanc);}
+  .step-item[aria-current="true"] .pastille{background:var(--jaune);color:var(--noir);border-color:var(--jaune);}
+  .pastille{flex:0 0 auto;width:30px;height:30px;border-radius:50%;border:2px solid var(--bordure);display:grid;place-items:center;font-weight:700;font-size:.85rem;background:var(--blanc);color:var(--gris);}
+  .step-item.done .pastille{background:var(--vert);border-color:var(--vert);color:#fff;}
+  .step-lbl{font-size:.92rem;font-weight:600;line-height:1.2;}
+  .step-sub{display:block;font-size:.72rem;font-weight:500;opacity:.8;}
+  .etape{display:none;background:var(--blanc);border:1px solid var(--bordure);border-radius:var(--rayon);box-shadow:var(--ombre);padding:1.8rem;animation:fade .35s ease;}
+  .etape.active{display:block;}
+  @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+  .etape h2{font-size:1.5rem;margin:0 0 .3rem;border-left:8px solid var(--jaune);padding-left:.6rem;}
+  .etape .lead{color:var(--gris);margin:.2rem 0 1.6rem;}
+  .obj{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem;margin:1.5rem 0;}
+  .obj .o{background:var(--gris-clair);border-radius:10px;padding:1.1rem;border-top:4px solid var(--jaune);}
+  .obj .o strong{display:block;margin-bottom:.3rem;}
+  .obj .o span{font-size:.92rem;color:var(--gris);}
+  .org{display:flex;flex-direction:column;gap:.7rem;margin:1.4rem 0;}
+  .cartes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.9rem;}
+  .role{position:relative;text-align:left;border:1px solid var(--bordure);border-left:5px solid var(--jaune);background:var(--blanc);border-radius:10px;padding:1rem;cursor:pointer;transition:transform var(--t),box-shadow var(--t),border-color var(--t);font:inherit;width:100%;}
+  .role:hover{transform:translateY(-3px);box-shadow:var(--ombre);}
+  .role .sigle{font-weight:800;font-size:1.02rem;margin:0 0 .15rem;}
+  .role .nom{font-size:.85rem;color:var(--gris-2);margin:0;}
+  .role .detail{max-height:0;overflow:hidden;transition:max-height var(--t);font-size:.9rem;color:var(--gris);}
+  .role[aria-expanded="true"]{border-left-color:var(--noir);background:var(--jaune-clair);}
+  .role[aria-expanded="true"] .detail{max-height:420px;margin-top:.6rem;}
+  .role .plus{position:absolute;top:.8rem;right:.9rem;font-weight:800;color:var(--jaune-fonce);transition:transform var(--t);}
+  .role[aria-expanded="true"] .plus{transform:rotate(45deg);color:var(--noir);}
+  .hint-explore{font-size:.86rem;color:var(--gris-2);background:var(--jaune-clair);border-radius:8px;padding:.6rem .8rem;margin:0 0 1rem;}
+  .docs{background:var(--noir);color:var(--blanc);border-radius:10px;padding:1.1rem 1.3rem;margin:1.4rem 0;}
+  .docs h3{margin:0 0 .6rem;color:var(--jaune);font-size:1rem;}
+  .docs dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem;font-size:.92rem;}
+  .docs dt{font-weight:800;color:var(--jaune);}
+  .docs dd{margin:0;color:#eaeaea;}
+  .verrou{margin-top:1.6rem;border:2px dashed var(--jaune-fonce);border-radius:12px;padding:1.2rem 1.3rem;background:var(--jaune-clair);}
+  .verrou .v-tag{display:inline-flex;align-items:center;gap:.4rem;font-weight:800;text-transform:uppercase;font-size:.78rem;letter-spacing:.05em;color:var(--gris);margin-bottom:.5rem;}
+  .verrou .q{font-weight:700;margin:.2rem 0 .9rem;font-size:1.05rem;}
+  .opts{display:grid;gap:.55rem;}
+  .opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;background:var(--blanc);border:2px solid var(--bordure);border-radius:9px;padding:.75rem .9rem;cursor:pointer;font:inherit;transition:border-color var(--t),background var(--t);}
+  .opt:hover:not(:disabled){border-color:var(--jaune-fonce);}
+  .opt .mark{flex:0 0 auto;width:22px;height:22px;border-radius:50%;border:2px solid var(--gris-2);display:grid;place-items:center;font-size:.8rem;font-weight:800;}
+  .opt.correct{border-color:var(--vert);background:#eafaf0;}
+  .opt.correct .mark{background:var(--vert);border-color:var(--vert);color:#fff;}
+  .opt.wrong{border-color:var(--rouge);background:#fdeeec;}
+  .opt.wrong .mark{background:var(--rouge);border-color:var(--rouge);color:#fff;}
+  .opt:disabled{cursor:default;}
+  .feedback{margin-top:.8rem;font-weight:600;font-size:.94rem;display:none;}
+  .feedback.show{display:block;}
+  .feedback.ok{color:var(--vert);}
+  .feedback.ko{color:var(--rouge);}
+  .nav-etape{display:flex;justify-content:space-between;gap:1rem;margin-top:1.8rem;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;border:none;border-radius:999px;padding:.8rem 1.5rem;font:inherit;font-weight:700;cursor:pointer;text-decoration:none;transition:transform var(--t),background var(--t),opacity var(--t);}
+  .btn-primary{background:var(--jaune);color:var(--noir);}
+  .btn-primary:hover:not(:disabled){background:var(--jaune-fonce);}
+  .btn-primary:disabled{opacity:.45;cursor:not-allowed;}
+  .btn-ghost{background:transparent;color:var(--gris);border:2px solid var(--bordure);}
+  .btn-ghost:hover{border-color:var(--noir);color:var(--noir);}
+  .fini{text-align:center;padding:1rem 0;}
+  .badge-fin{display:inline-grid;place-items:center;width:96px;height:96px;border-radius:50%;background:var(--jaune);margin:0 auto 1rem;font-size:2.6rem;}
+  .source{font-size:.82rem;color:var(--gris-2);border-top:1px solid var(--bordure);margin-top:2rem;padding-top:1rem;}
+  footer.site{background:var(--blanc);border-top:6px solid var(--jaune);padding:1.6rem 0;font-size:.88rem;color:var(--gris-2);}
+  footer.site a{color:var(--noir);font-weight:700;}
+  .schema{margin:1.7rem 0;border:1px solid var(--bordure);border-radius:12px;padding:1.3rem;background:#fff;}
+  .schema h4{margin:0 0 1rem;font-size:1.05rem;border-left:6px solid var(--jaune);padding-left:.55rem;}
+  .schema svg{width:100%;height:auto;display:block;overflow:visible;}
+  .schema .src{font-size:.78rem;color:var(--gris-2);margin-top:.45rem;font-style:italic;}
+  @media (max-width:880px){
+    .layout{grid-template-columns:1fr;}
+    .stepper{position:static;}
+    .stepper ol{display:flex;overflow-x:auto;gap:.3rem;}
+    .step-item{flex-direction:column;min-width:92px;text-align:center;gap:.35rem;}
+    .step-sub{display:none;}
+    .module-hero h1{font-size:1.55rem;}
+  }
+
+  /* ============================================================
+     CORRECTIFS TRANSVERSES — audit design du 30 juillet 2026
+     Bloc identique sur toutes les pages, placé en fin de feuille
+     pour surcharger les règles ci-dessus. Il constituera le point
+     de départ du futur socle.css : toute modification doit être
+     reportée sur les autres pages tant que le socle n'existe pas.
+     ============================================================ */
+  :root{
+    --h-header:132px;
+    --jaune-trait:#8A6D00;
+    --gris-400:#8c8c8c;
+    --vert-fort:#14532D;
+  }
+  html{scroll-padding-top:calc(var(--h-header) + 16px);}
+
+  /* B2 · la barre de progression devient lisible (jaune sur gris foncé) */
+  .progress{background:#3a3a3a;}
+  .progress > span{background:var(--jaune,#FECF41);}
+
+  /* B3 · le menu d'étapes ne passe plus sous l'en-tête collant */
+  .stepper{top:calc(var(--h-header) + 12px);z-index:1;}
+  .etape-compteur{margin:.2rem .3rem .5rem;font-size:.78rem;font-weight:700;
+    text-transform:uppercase;letter-spacing:.05em;color:#3a3a3a;}
+
+  /* B6 · le bouton verrouillé est lisible et sa condition est écrite */
+  .btn:disabled,.btn-primary:disabled,.btn-ghost:disabled{
+    opacity:1;background:#f4f4f4;color:#6b6b6b;
+    box-shadow:inset 0 0 0 2px #cfcfcf;cursor:not-allowed;}
+  .lock-note{margin:1.2rem 0 -.6rem;font-size:.88rem;color:#3a3a3a;font-weight:600;}
+  .step-item:disabled{opacity:1;color:#6b6b6b;}
+  .step-item:disabled .pastille{border-color:var(--gris-400);color:#6b6b6b;}
+
+  /* contraste des bordures de contrôles interactifs */
+  .opt{border-color:var(--gris-400);}
+  .role{border-color:#cfcfcf;}
+  .role .plus{color:#000;background:var(--jaune,#FECF41);width:26px;height:26px;
+    border-radius:50%;display:grid;place-items:center;top:.7rem;right:.7rem;
+    font-size:1rem;line-height:1;}
+  .feedback.ok{color:var(--vert-fort);}
+
+  /* B8 · le panneau déplié ne tronque plus le texte */
+  .role .sigle,.role .nom{display:block;margin:0 0 .15rem;}
+  .role .nom{margin-bottom:0;}
+  .role .detail{max-height:none;display:grid;grid-template-rows:0fr;
+    overflow:hidden;transition:grid-template-rows var(--t,.25s ease);}
+  .role .detail > *{min-height:0;}
+  .role[aria-expanded="true"] .detail{max-height:none;grid-template-rows:1fr;}
+
+  /* lisibilité des barres jaunes sur fond blanc, sans toucher aux schémas
+     dont le contour est déjà défini dans le SVG */
+  .schema svg rect[fill="#FECF41"]:not([stroke]){stroke:var(--jaune-trait);stroke-width:.8;}
+
+  /* B10 · les nombres et les unités ne se coupent plus en fin de ligne */
+  .sc b,.chiffre{white-space:nowrap;}
+
+  @media (max-width:640px){
+    /* B5 · l'en-tête mobile n'occupe plus le quart de l'écran */
+    :root{--h-header:92px;}
+    .topbar{padding:.5rem 1rem;gap:.7rem;}
+    .topbar .logo-prefet{height:52px!important;}
+    .topbar img{width:104px;}
+
+    /* B1 · les graphiques redeviennent consultables */
+    .etape{padding:1.1rem;}
+    .schema{padding:.8rem;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .schema svg{min-width:560px;}
+    .schema::after{content:"↔ Faites défiler le graphique horizontalement";
+      display:block;font-size:.8rem;color:#3a3a3a;margin-top:.5rem;font-style:normal;}
+
+    /* menu d'étapes : accrochage au défilement */
+    .stepper ol{scroll-snap-type:x mandatory;}
+    .step-item{scroll-snap-align:start;}
+  }
+
+  /* B4 · mouvement réduit traité en CSS, et non par un script différé */
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;
+      animation-iteration-count:1!important;transition-duration:.01ms!important;
+      scroll-behavior:auto!important;}
+  }
+</style>
+<style>
+  /* Module final — v1.9 */
+  .bloc{background:var(--blanc);border:1px solid var(--bordure);border-radius:var(--rayon);box-shadow:var(--ombre);padding:1.8rem;margin-bottom:1.5rem;}
+  .bloc h2{font-size:1.45rem;margin:0 0 .4rem;border-left:8px solid var(--jaune);padding-left:.6rem;}
+  .bloc .lead{color:var(--gris);margin:.2rem 0 1.4rem;}
+  .etat-mods{list-style:none;margin:0;padding:0;display:grid;gap:.6rem;}
+  .etat-mods li{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;border:1px solid var(--bordure);border-radius:10px;padding:.75rem .9rem;}
+  .etat-mods .pt{flex:none;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;font-weight:800;font-size:.85rem;}
+  .etat-mods .ok .pt{background:var(--vert);color:#fff;}
+  .etat-mods .ko .pt{background:#fff;color:#6b6b6b;border:2px solid #8c8c8c;}
+  .etat-mods .lib{flex:1;min-width:200px;font-weight:600;}
+  .etat-mods .st{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;}
+  .etat-mods .ok .st{color:var(--vert-fort);}
+  .etat-mods .ko .st{color:#6b6b6b;}
+  .etat-mods a{font-weight:700;color:#000;font-size:.9rem;}
+  .compteur-q{position:sticky;top:calc(var(--h-header) + 8px);z-index:2;background:#000;color:#fff;border-radius:999px;padding:.55rem 1rem;font-weight:700;font-size:.9rem;display:inline-flex;gap:.6rem;align-items:center;margin:0 0 .4rem;}
+  .compteur-q b{color:var(--jaune);}
+  .groupe-mod{margin-top:2rem;}
+  .groupe-mod h3{font-size:1rem;text-transform:uppercase;letter-spacing:.05em;color:var(--gris);margin:0 0 -.6rem;}
+  .feedback a{color:inherit;font-weight:800;}
+  .reussite{text-align:center;padding:.5rem 0 0;}
+  .regles{background:var(--gris-clair);border-radius:10px;padding:1rem 1.2rem;font-size:.92rem;color:var(--gris);margin:0 0 1.2rem;}
+  .regles p{margin:.3rem 0;}
+</style>
+</head>
+<body data-module="mfinal">
+<a class="skip" href="#contenu">Aller au contenu principal</a>
+
+<header class="site">
+  <div class="topbar">
+    <img src="assets/logo-prefet-hdf.png" alt="Préfet de la région Hauts-de-France" class="logo-prefet" style="width:auto;height:96px" />
+    <img src="assets/logo-securite-routiere.png" alt="Sécurité routière — Vivre, Ensemble" />
+    <span class="fil"><a href="index.html">Accueil e-learning</a> › Module final</span>
+  </div>
+  <div class="progress" role="progressbar" aria-label="Questions réussies" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="barre"></span></div>
+</header>
+
+<section class="module-hero">
+  <div class="wrap">
+    <p class="eyebrow">Module final · Formation initiale IDSR</p>
+    <h1>Questionnaire des acquis et attestation de suivi</h1>
+    <p>Dernière étape du parcours de préparation : quatorze questions, deux par module, puis la génération de l'attestation déclarative de suivi des sept modules.</p>
+  </div>
+</section>
+
+<main id="contenu">
+  <div class="wrap">
+
+    <section class="bloc" id="bloc-acces" aria-labelledby="t-acces">
+      <h2 id="t-acces">Accès au module final</h2>
+      <p class="lead" id="acces-texte">Le module final s'ouvre lorsque les sept modules de préparation sont validés.</p>
+      <ul class="etat-mods" id="etat-mods"></ul>
+      <p class="source" style="border:none;margin-top:1.2rem;padding:0;">La progression est enregistrée dans ce navigateur : les modules doivent être suivis sur le même appareil et avec le même navigateur que le module final.</p>
+    </section>
+
+    <section class="bloc" id="bloc-questionnaire" aria-labelledby="t-quiz" hidden>
+      <h2 id="t-quiz">Questionnaire des acquis</h2>
+      <p class="lead">Deux questions par module, sur les notions essentielles de la préparation.</p>
+      <div class="regles">
+        <p>Chaque question est validée par la bonne réponse. Une réponse erronée peut être corrigée autant de fois que nécessaire : un lien permet de revoir le module concerné.</p>
+        <p>L'attestation se génère une fois les quatorze questions réussies. Les réponses sont conservées dans ce navigateur.</p>
+      </div>
+      <p class="compteur-q" role="status" aria-live="polite"><span>Questions réussies</span> <b id="nb-ok">0</b><span>/ 14</span></p>
+      <div id="questions"></div>
+    </section>
+
+    <section class="bloc" id="bloc-attestation" aria-labelledby="t-att" hidden>
+      <div class="reussite">
+        <div class="badge-fin" aria-hidden="true">✓</div>
+        <h2 id="t-att" style="border:none;padding:0;">Parcours de préparation validé</h2>
+        <p class="lead" style="max-width:620px;margin:.4rem auto 0;">Les sept modules et le questionnaire des acquis sont validés. L'attestation déclarative de suivi peut être générée ci-dessous, puis conservée ou adressée à la coordination sécurité routière du département.</p>
+      </div>
+      <div id="attestation-finale"></div>
+      <div class="nav-etape" style="justify-content:center;"><a class="btn btn-ghost" href="index.html">Retour à l'accueil ↩</a></div>
+    </section>
+
+    <p class="source">Questions issues des questions de contrôle des modules 1 à 7, elles-mêmes établies à partir de la documentation du programme IDSR (Pôle d'appui régional de la sécurité routière, DREAL Hauts-de-France), des publications de l'ONISR et des textes en vigueur.</p>
+  </div>
+</main>
+
+<footer class="site"><div class="wrap">Espace e-learning des Intervenants Départementaux de Sécurité Routière — Préfecture des Hauts-de-France. <a href="index.html">Retour à l'accueil</a> <a href="mailto:mickael@destination-prevention.fr?subject=%5BREGISTRE%5D%20Module%20final%20%3A%20questionnaire%20des%20acquis%20et%20attestation" id="lien-signaler" style="background:#FECF41;color:#000;padding:.15rem .5rem;border-radius:4px;text-decoration:none;white-space:nowrap;" title="Ouvre votre messagerie avec le module déjà rempli">Signaler un point</a>
+        <a href="mentions-legales.html">Mentions légales, confidentialité et accessibilité</a></div></footer>
+
+<script src="assets/js/parcours.js"></script>
+<script>
+(function(){
+  "use strict";
+  /* Deux questions par module, reprises des questions de contrôle
+     validées dans chaque module (même formulation, même réponse). */
+  var QUESTIONS = [
+    {mod:1, q:"Comment l'IDSR est-il nommé ?", r:["Par arrêté du préfet de département, pour un an au minimum","Par la DREAL, pour six mois","Par le maire de sa commune"]},
+    {mod:1, q:"L'IDSR est-il rémunéré pour ses missions ?", r:["Non : c'est du bénévolat, seuls les frais sont remboursés","Oui, il perçoit un salaire","Oui, une vacation par intervention"]},
+    {mod:2, q:"Quelle structure recueille, analyse et diffuse les données nationales d'accidentalité ?", r:["L'ONISR","La DREAL","Le PDASR","Les IDSR"]},
+    {mod:2, q:"Qui est l'interlocuteur direct de l'IDSR au quotidien, celui qui déclenche ses interventions et gère ses ordres de mission ?", r:["La coordination sécurité routière du département","Le préfet de département","Le chef de projet, maître d'œuvre de la politique départementale","L'observatoire départemental"]},
+    {mod:3, q:"Qui nomme l'IDSR, et que porte-t-il en intervention ?", r:["Le préfet de département, et il porte les messages officiels de l'État","Le maire, et il donne son avis de citoyen engagé","L'association de son choix, et il parle librement"]},
+    {mod:3, q:"Un participant demande l'avis personnel de l'IDSR sur une loi. Quel pilier mobiliser en premier ?", r:["La neutralité : l'avis personnel n'a pas sa place, l'IDSR explique pourquoi la règle existe","La factualité : donner son avis, mais avec des chiffres","L'objectivité : présenter les deux camps et dire lequel a raison"]},
+    {mod:4, q:"Comment l'objectif de la France pour 2030 est-il formulé ?", r:["Réduire de moitié les tués et les blessés graves par rapport à 2019","Par un nombre de morts à ne pas dépasser","Atteindre zéro tué sur les routes"]},
+    {mod:4, q:"Comment fonctionne le DGO ?", r:["Chaque département a son DGO : il reprend quatre enjeux nationaux obligatoires et peut ajouter jusqu'à deux enjeux locaux","Il existe un DGO national unique, appliqué à l'identique dans tous les départements","Chaque département choisit librement ses enjeux, sans cadre national"]},
+    {mod:5, q:"Qu'est-ce que le PDASR ?", r:["La déclinaison annuelle du DGO en plan d'actions","Un permis spécifique","Une amende forfaitaire"]},
+    {mod:5, q:"Quels sont les deux axes de la politique nationale de sécurité routière ?", r:["Faire comprendre la règle et faire respecter la règle","Construire et entretenir les routes","Vendre et réparer les véhicules"]},
+    {mod:6, q:"Qu'appelle-t-on un « tué » dans les statistiques d'accidentalité ?", r:["Une personne décédée dans les 30 jours suivant l'accident","Une personne hospitalisée plus de 24 heures","Toute personne impliquée dans l'accident"]},
+    {mod:6, q:"Quels sont les quatre éléments en jeu dans la survenue d'un accident ?", r:["Le véhicule, l'environnement, le conducteur et l'organisation","La vitesse, l'alcool, les stupéfiants et la fatigue","Le hasard, la malchance, la route et la météo"]},
+    {mod:7, q:"Un participant affirme : « un café et un grand verre d'eau, et dans une heure je peux repartir ». Quelle réponse apporter ?", r:["Rien n'accélère l'élimination de l'alcool : ni le café, ni l'eau, ni le repas, ni la douche. Seul le temps compte","C'est exact, le café accélère l'élimination","Cela dépend de la quantité d'eau bue"]},
+    {mod:7, q:"Un accident est causé par un refus de priorité. La vitesse joue-t-elle un rôle ?", r:["Oui : même sans être la cause, la vitesse au moment du choc détermine la gravité des blessures","Non, la cause est le refus de priorité, la vitesse n'intervient pas","Seulement si le conducteur dépassait la vitesse autorisée"]}
+  ];
+  var TOTAL = QUESTIONS.length;
+  var STORE = "elearning_idsr_mfinal";
+  var P = window.IDSR_PARCOURS;
+  var state = {ok:{}, fini:false};
+  try{ var s = JSON.parse(localStorage.getItem(STORE) || "null"); if(s && s.ok){ state = s; } }catch(e){}
+  function save(){ try{ localStorage.setItem(STORE, JSON.stringify(state)); }catch(e){} }
+
+  var hrefMod = {}; P.modules.forEach(function(m){ hrefMod[m.num] = m; });
+
+  /* ---- 1. Contrôle d'accès ---- */
+  var e = P.etat();
+  var ul = document.getElementById("etat-mods");
+  ul.innerHTML = e.liste.map(function(x){
+    return '<li class="' + (x.valide ? "ok" : "ko") + '"><span class="pt">' + x.m.num + '</span>' +
+      '<span class="lib">Module ' + x.m.num + ' · ' + x.m.titre + '</span>' +
+      '<span class="st">' + (x.valide ? "✓ Validé" : (x.commence ? "En cours" : "À suivre")) + '</span>' +
+      (x.valide ? "" : '<a href="' + x.m.href + '">' + (x.commence ? "Reprendre" : "Commencer") + ' →</a>') + '</li>';
+  }).join("");
+  var txt = document.getElementById("acces-texte");
+  if(!e.complet){
+    txt.innerHTML = "<strong>" + e.nb + " module" + (e.nb > 1 ? "s" : "") + " validé" + (e.nb > 1 ? "s" : "") + " sur 7.</strong> Le questionnaire des acquis et l'attestation s'ouvrent lorsque les sept modules de préparation sont validés.";
+    return;
+  }
+  txt.innerHTML = "<strong>Les sept modules sont validés.</strong> Le questionnaire des acquis est ouvert ci-dessous.";
+
+  /* ---- 2. Questionnaire ---- */
+  var zone = document.getElementById("questions");
+  var quiz = document.getElementById("bloc-questionnaire");
+  var nbOk = document.getElementById("nb-ok");
+  var barre = document.getElementById("barre");
+  quiz.hidden = false;
+
+  function melange(a){ a = a.slice(); for(var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
+
+  var html = "", dernierMod = 0;
+  QUESTIONS.forEach(function(q, i){
+    if(q.mod !== dernierMod){
+      if(dernierMod) html += "</div>";
+      html += '<div class="groupe-mod"><h3>Module ' + q.mod + ' · ' + esc(hrefMod[q.mod].titre) + '</h3>';
+      dernierMod = q.mod;
+    }
+    var opts = melange(q.r.map(function(r, k){ return {t:r, ok:k === 0}; }));
+    html += '<div class="verrou" data-i="' + i + '"><span class="v-tag">Question ' + (i + 1) + ' sur ' + TOTAL + '</span>' +
+      '<p class="q" id="q' + i + '">' + esc(q.q) + '</p><div class="opts" role="group" aria-labelledby="q' + i + '">' +
+      opts.map(function(o){ return '<button type="button" class="opt" data-ok="' + (o.ok ? 1 : 0) + '"><span class="mark"></span> ' + esc(o.t) + '</button>'; }).join("") +
+      '</div><p class="feedback" role="status"></p></div>';
+  });
+  html += "</div>";
+  zone.innerHTML = html;
+
+  function maj(){
+    var n = Object.keys(state.ok).length;
+    nbOk.textContent = n;
+    var pct = Math.round(n / TOTAL * 100);
+    barre.style.width = pct + "%";
+    barre.parentElement.setAttribute("aria-valuenow", pct);
+    if(n >= TOTAL && !state.fini){ state.fini = true; save(); }
+    if(state.fini){
+      var att = document.getElementById("bloc-attestation");
+      if(att.hidden){
+        att.hidden = false;
+        if(n >= TOTAL && document.readyState === "complete") att.scrollIntoView({behavior:"smooth"});
+      }
+    }
+  }
+
+  [].slice.call(zone.querySelectorAll(".verrou")).forEach(function(v){
+    var i = v.dataset.i, q = QUESTIONS[i];
+    var fb = v.querySelector(".feedback");
+    var opts = [].slice.call(v.querySelectorAll(".opt"));
+    function bonne(o){
+      o.classList.add("correct"); o.querySelector(".mark").textContent = "✓";
+      opts.forEach(function(x){ x.disabled = true; });
+      fb.textContent = "Bonne réponse."; fb.className = "feedback show ok";
+    }
+    if(state.ok[i]){ opts.forEach(function(o){ if(o.dataset.ok === "1") bonne(o); }); }
+    opts.forEach(function(o){
+      o.addEventListener("click", function(){
+        if(state.ok[i]) return;
+        if(o.dataset.ok === "1"){ bonne(o); state.ok[i] = true; save(); maj(); }
+        else{
+          o.classList.add("wrong"); o.querySelector(".mark").textContent = "✗";
+          var m = hrefMod[q.mod];
+          fb.innerHTML = 'Ce n\'est pas la bonne réponse. Une autre proposition peut être choisie, ou le <a href="' + m.href + '">module ' + m.num + '</a> revu.';
+          fb.className = "feedback show ko";
+          setTimeout(function(){ o.classList.remove("wrong"); o.querySelector(".mark").textContent = ""; }, 1400);
+        }
+      });
+    });
+  });
+  maj();
+})();
+</script>
+<script src="assets/js/attestation.js" defer></script>
+<script src="assets/js/lexique.js" defer></script>
+</body>
+</html>

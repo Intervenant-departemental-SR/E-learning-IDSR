@@ -150,6 +150,21 @@
       animation-iteration-count:1!important;transition-duration:.01ms!important;
       scroll-behavior:auto!important;}
   }
+
+    /* v1.9 · module final, lexique */
+    .carte-finale .bandeau{background:#000;}
+    .carte-finale .num{color:#000;}
+    .etat-final{display:inline-block;font-size:.74rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:.22rem .7rem;margin-bottom:.5rem;align-self:flex-start;}
+    .etat-final.verrou{background:#f4f4f4;color:#3a3a3a;border:1px solid #8c8c8c;}
+    .etat-final.ouvert{background:#FECF41;color:#000;border:1px solid #000;}
+    .etat-final.fait{background:#eafaf0;color:#14532D;border:1px solid #1f8a4c;}
+    .lexique-bloc{margin-top:3rem;display:flex;gap:1.5rem;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--jaune-clair);border:2px solid var(--jaune);border-radius:var(--rayon);padding:1.3rem 1.5rem;}
+    .lexique-bloc h2{margin:0 0 .3rem;font-size:1.25rem;}
+    .lexique-bloc p{margin:0;color:var(--gris);max-width:620px;font-size:.95rem;}
+    .lexique-actions{display:flex;gap:.6rem;flex-wrap:wrap;}
+    .btn-lex{display:inline-flex;align-items:center;gap:.4rem;border:none;border-radius:999px;padding:.7rem 1.2rem;font:inherit;font-weight:700;cursor:pointer;text-decoration:none;background:#000;color:#FECF41;}
+    .btn-lex-2{background:#fff;color:#000;border:2px solid #000;}
+    .btn-lex:hover,.btn-lex:focus-visible{background:#FECF41;color:#000;}
 </style>
 </head>
 <body>
@@ -174,7 +189,8 @@
     <div class="wrap">
       <h2 class="section-titre">1 · Préparation de la formation initiale IDSR</h2>
       <p class="section-intro">Les sept modules à suivre <strong>avant la journée de formation initiale en présentiel</strong>. Ils reprennent le déroulé de cette journée : en les faisant en amont, vous arrivez avec la culture sécurité routière déjà acquise. Le plus simple est de les suivre dans l'ordre, mais rien ne l'impose.</p>
-      <p class="bilan-duree">Environ 3 h 20 au total. Chaque module indique sa durée dans son coin, et votre progression est enregistrée : vous pouvez vous arrêter et reprendre plus tard.</p>
+      <p class="bilan-duree">Environ 3 h 30 au total, module final compris. Chaque module indique sa durée dans son coin, et votre progression est enregistrée : vous pouvez vous arrêter et reprendre plus tard.</p>
+      <p class="section-intro" style="margin-top:-1rem;">Une fois les sept modules validés, le <strong>module final</strong> s'ouvre : un questionnaire des acquis de quatorze questions, deux par module, puis la génération de l'attestation de suivi du parcours.</p>
 
       <div class="grille">
 
@@ -253,6 +269,17 @@
             <h3>Les apports techniques</h3>
             <p>Alcool, stupéfiants et médicaments, vitesse, protections, vigilance et distracteurs : les repères techniques essentiels.</p>
             <span class="lien">Commencer le module</span>
+          </span>
+        </a>
+
+        <a class="carte carte-finale" href="module-final-acquis.html" id="carte-finale">
+          <span class="bandeau"></span>
+          <span class="duree" title="Durée estimée du module final"><span class="sr">Durée estimée : </span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 4a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zm0 0V2m-2.6 0h5.2M18.6 5.9l1.6-1.6M12 8.6v4.4l2.8 2"/></svg>10 min</span>
+          <span class="contenu">
+            <span class="num">Module final</span>
+            <h3>Questionnaire des acquis et attestation</h3>
+            <p>Deux questions par module pour vérifier les acquis, puis la génération de l'attestation de suivi du parcours. S'ouvre une fois les sept modules validés.</p>
+            <span class="lien" id="carte-finale-lien">Voir l'état du parcours</span>
           </span>
         </a>
 
@@ -361,19 +388,31 @@
 
       </div>
 
-      <details style="margin-top:2.5rem;border:1px solid var(--bordure);border-radius:10px;padding:.4rem 1.2rem;background:var(--blanc);">
-        <summary style="cursor:pointer;font-weight:700;padding:.6rem 0;">📖 Lexique des sigles</summary>
-        <dl style="display:grid;grid-template-columns:auto 1fr;gap:.3rem 1rem;font-size:.9rem;margin:.6rem 0 1rem;">
-          <dt style="font-weight:800;">IDSR</dt><dd style="margin:0;">Intervenant Départemental de Sécurité Routière — bénévole nommé par le préfet pour mener des actions de prévention.</dd>
-          <dt style="font-weight:800;">DGO</dt><dd style="margin:0;">Document Général d'Orientations — les enjeux prioritaires du département, définis pour 5 ans.</dd>
-          <dt style="font-weight:800;">PDASR</dt><dd style="margin:0;">Plan Départemental d'Actions de Sécurité Routière — la déclinaison annuelle du DGO en actions concrètes.</dd>
-          <dt style="font-weight:800;">ONISR</dt><dd style="margin:0;">Observatoire National Interministériel de la Sécurité Routière — la source officielle des chiffres de l'accidentalité.</dd>
-          <dt style="font-weight:800;">DREAL</dt><dd style="margin:0;">Direction Régionale de l'Environnement, de l'Aménagement et du Logement — pilote régional, héberge le pôle d'appui sécurité routière.</dd>
-          <dt style="font-weight:800;">« Agir »</dt><dd style="margin:0;">Le programme national « Agir pour la sécurité routière », cadre d'intervention des IDSR.</dd>
-          <dt style="font-weight:800;">2RM</dt><dd style="margin:0;">Deux-roues motorisés (motos, cyclomoteurs).</dd>
-          <dt style="font-weight:800;">EDPM</dt><dd style="margin:0;">Engins de déplacement personnel motorisés (trottinettes électriques…).</dd>
-        </dl>
-      </details>
+      <h2 class="section-titre" style="margin-top:3rem;">4 · Statistiques de l'accidentalité</h2>
+      <p class="section-intro">Les chiffres de l'accidentalité en Hauts-de-France, à l'échelle de la région et de chacun des cinq départements : une carte cliquable donne accès aux statistiques régionales et à celles du département choisi.</p>
+
+      <div class="grille">
+        <a class="carte" href="statistiques.html">
+          <span class="bandeau"></span>
+          <span class="contenu">
+            <span class="num">Statistiques · Hauts-de-France</span>
+            <h3>Carte des statistiques régionales et départementales</h3>
+            <p>Aisne, Nord, Oise, Pas-de-Calais, Somme : un clic sur un département ouvre ses statistiques, avec un accès permanent aux chiffres de la région.</p>
+            <span class="lien">Ouvrir la carte</span>
+          </span>
+        </a>
+      </div>
+
+      <div class="lexique-bloc">
+        <div>
+          <h2>📖 Lexique des sigles</h2>
+          <p>DGO, PDASR, ONISR, BAAC… Les sigles employés dans les modules, avec une recherche instantanée. Le lexique reste accessible sur chaque page par l'onglet « Lexique des sigles », au bord droit de l'écran.</p>
+        </div>
+        <div class="lexique-actions">
+          <button type="button" class="btn-lex" data-lexique>Rechercher un sigle</button>
+          <a class="btn-lex btn-lex-2" href="assets/lexique-sigles-idsr.pdf" download>⬇ Fiche lexique (PDF)</a>
+        </div>
+      </div>
     </div>
   </main>
 
@@ -391,18 +430,20 @@
     </div>
   </footer>
 
+  <script src="assets/js/parcours.js"></script>
   <script>
   /* Badges de progression sur les cartes (lecture du localStorage des modules) */
   (function(){
     "use strict";
-    var TOTAUX = {m1:5, m2:5, m3:6, m4:5, m5:5, m6:6, m7:4, m8:6, m12:7, m9v2:7};
+    /* Modules 1 à 7 : registre commun (assets/js/parcours.js).
+       Modules 8 et 9 : nombre d'étapes de chaque page. */
+    var TOTAUX = {m7:4, m9v2:7};
+    var P = window.IDSR_PARCOURS;
     var LIENS = {
-      "module-1-etre-idsr.html":"m1", "module-2-organisation.html":"m2",
-      "module-3-posture-idsr.html":"m12", "module-4-enjeux-chiffres.html":"m3",
-      "module-5-politiques.html":"m4", "module-6-accident.html":"m5",
-      "module-7-apports-techniques.html":"m6", "module-8-valise-communication.html":"m7",
+      "module-8-valise-communication.html":"m7",
       "module-9-risque-routier-professionnel.html":"m9v2"
     };
+    if(P) P.modules.forEach(function(m){ LIENS[m.href] = m.id; TOTAUX[m.id] = m.etapes; });
     var css = document.createElement("style");
     css.textContent = ".badge-prog{display:inline-block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:.2rem .65rem;margin-bottom:.5rem;align-self:flex-start;}" +
       ".badge-prog.fini{background:#eafaf0;color:#1f8a4c;border:1px solid #1f8a4c;}" +
@@ -415,7 +456,7 @@
         var s = JSON.parse(localStorage.getItem("elearning_idsr_"+id) || "null");
         if(!s || typeof s.unlocked !== "number" || s.unlocked <= 0) return;
         var b = document.createElement("span");
-        if(s.unlocked >= TOTAUX[id]){
+        if(s.fini === true || s.unlocked >= TOTAUX[id]){
           b.className = "badge-prog fini"; b.textContent = "✓ Terminé";
         } else {
           b.className = "badge-prog encours"; b.textContent = "En cours";
@@ -424,6 +465,17 @@
         contenu.insertBefore(b, contenu.firstChild);
       }catch(e){}
     });
+    /* État du module final */
+    var carte = document.getElementById("carte-finale");
+    if(carte && P){
+      var e = P.etat(), fini = false;
+      try{ var f = JSON.parse(localStorage.getItem("elearning_idsr_mfinal") || "null"); fini = !!(f && f.fini); }catch(err){}
+      var b = document.createElement("span"), lien = document.getElementById("carte-finale-lien");
+      if(fini){ b.className = "etat-final fait"; b.textContent = "✓ Attestation disponible"; lien.textContent = "Générer à nouveau l'attestation"; }
+      else if(e.complet){ b.className = "etat-final ouvert"; b.textContent = "Ouvert"; lien.textContent = "Commencer le questionnaire"; }
+      else { b.className = "etat-final verrou"; b.textContent = "🔒 " + e.nb + " / 7 modules validés"; }
+      var c = carte.querySelector(".contenu"); c.insertBefore(b, c.firstChild);
+    }
   })();
   </script>
 
@@ -457,5 +509,6 @@
   maj();
 }());
 </script>
+<script src="assets/js/lexique.js" defer></script>
 </body>
 </html>

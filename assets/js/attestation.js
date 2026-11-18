@@ -2,7 +2,10 @@
    Attestation de suivi — E-learning IDSR
    Génère un PDF 100 % côté navigateur (aucune librairie,
    aucune donnée transmise) + envoi par mail (mailto).
-   S'insère automatiquement dans le bloc de fin de module.
+   Depuis la v1.9 : une seule attestation, en fin de parcours.
+   Le script ne s'insère que dans le conteneur
+   #attestation-finale du module final, lorsque celui-ci
+   est rendu visible (questionnaire des acquis réussi).
    ========================================================= */
 (function(){
   "use strict";
@@ -23,14 +26,14 @@
   // Boîte fonctionnelle régionale, utilisée à défaut de boîte départementale renseignée.
   var MAIL_DEFAUT = "ser-hdf@developpement-durable.gouv.fr";
 
-  /* ---- Infos du module courant ---- */
-  function infosModule(){
-    var h1 = document.querySelector(".module-hero h1");
-    var eyebrow = document.querySelector(".module-hero .eyebrow");
-    var num = (eyebrow ? eyebrow.textContent : "").split("·")[0].trim() || "Module";
+  /* ---- Infos du parcours attesté ---- */
+  function infosParcours(){
+    var P = window.IDSR_PARCOURS;
+    var mods = P ? P.modules.map(function(m){ return "Module " + m.num + " · " + m.titre; }) : [];
     return {
-      numero: num,
-      titre: h1 ? h1.textContent.trim() : document.title.split("|")[0].trim()
+      numero: "Parcours de préparation",
+      titre: "Préparation à la formation initiale des Intervenants Départementaux de Sécurité Routière",
+      modules: mods
     };
   }
 
@@ -79,17 +82,22 @@
     t("F1", 13, 80, 672, "E-learning des Intervenants Départementaux");
     t("F1", 13, 80, 655, "de Sécurité Routière");
 
-    var y = 585;
-    t("F1", 12, 60, y, "Je soussigné(e)"); y -= 26;
-    t("F2", 18, 60, y, nom); y -= 34;
-    t("F1", 12, 60, y, "atteste avoir suivi dans son intégralité et validé l'ensemble des étapes"); y -= 18;
-    t("F1", 12, 60, y, "du module de formation en ligne :"); y -= 30;
-    var lignes = wrap(mod.numero + " — " + mod.titre, 55);
-    lignes.forEach(function(l){
-      t("F2", 14, 60, y, l); y -= 20;
+    var y = 595;
+    t("F1", 12, 60, y, "Je soussigné(e)"); y -= 24;
+    t("F2", 18, 60, y, nom); y -= 30;
+    t("F1", 12, 60, y, "atteste avoir suivi dans leur intégralité et validé les sept modules"); y -= 17;
+    t("F1", 12, 60, y, "de préparation à la formation initiale des Intervenants Départementaux"); y -= 17;
+    t("F1", 12, 60, y, "de Sécurité Routière, ainsi que le questionnaire final des acquis :"); y -= 26;
+    mod.modules.forEach(function(l){
+      wrap(l, 72).forEach(function(seg, k){
+        if(k === 0) s.push("0.996 0.812 0.255 rg 60 " + (y - 1) + " 6 9 re f");
+        t(k === 0 ? "F2" : "F1", 11, 74, y, seg); y -= 16;
+      });
+      y -= 2;
     });
-    y -= 14;
-    t("F1", 12, 60, y, "Fait le " + dateStr + "."); y -= 60;
+    y -= 4;
+    t("F2", 11, 74, y, "Questionnaire final des acquis : quatorze questions, deux par module, réussies"); y -= 28;
+    t("F1", 12, 60, y, "Fait le " + dateStr + "."); y -= 48;
 
     s.push("0.89 0.89 0.89 RG 1 w 60 "+(y+20)+" m 535 "+(y+20)+" l S");
     t("F1", 10, 60, y, "Document déclaratif rempli par l'apprenant et généré sur son appareil.", "0.42 0.42 0.42"); y -= 14;
@@ -129,9 +137,9 @@
 
   /* ---- Interface ---- */
   function injecter(){
-    var fin = document.querySelector("#bloc-fin .fini");
+    var fin = document.getElementById("attestation-finale");
     if(!fin || document.querySelector(".attestation-bloc")) return;
-    var mod = infosModule();
+    var mod = infosParcours();
 
     var css = document.createElement("style");
     css.textContent =
@@ -149,7 +157,7 @@
     var bloc = document.createElement("div");
     bloc.className = "attestation-bloc";
     bloc.innerHTML =
-      '<h4>📄 Votre attestation déclarative de suivi</h4>' +
+      '<h4>📄 Votre attestation déclarative de suivi du parcours</h4>' +
       '<p>Indiquez votre prénom et votre nom tels qu’ils doivent apparaître sur l’attestation.</p>' +
       '<label class="sr-only" for="attestation-nom" style="position:absolute;left:-9999px;">Prénom et nom</label>' +
       '<input id="attestation-nom" type="text" autocomplete="name" placeholder="Prénom NOM" maxlength="60">' +
@@ -162,7 +170,7 @@
       '<button type="button" class="btn btn-primary" data-pdf>Télécharger l’attestation (PDF)</button>' +
       '<button type="button" class="btn btn-ghost" data-mail>Préparer l’envoi à ma coordination</button>' +
       '</div>' +
-      '<p class="note">Ce document est déclaratif : vous l’établissez vous-même, il ne vaut pas attestation délivrée par la préfecture. Il est fabriqué sur votre appareil, rien n’est transmis à ce stade. Votre prénom et votre nom sont conservés dans votre navigateur pour ne pas être ressaisis à chaque module ; sur un poste partagé, utilisez le bouton ci-dessous pour les effacer. Si vous choisissez d’envoyer l’attestation à votre coordination, ce courriel part de votre messagerie et relève de votre initiative : la coordination en devient alors destinataire au titre du suivi de votre parcours.</p>' +
+      '<p class="note">Ce document est déclaratif : vous l’établissez vous-même, il ne vaut pas attestation délivrée par la préfecture. Il est fabriqué sur votre appareil, rien n’est transmis à ce stade. Votre prénom et votre nom sont conservés dans votre navigateur pour ne pas être ressaisis si vous générez à nouveau l’attestation ; sur un poste partagé, utilisez le bouton ci-dessous pour les effacer. Si vous choisissez d’envoyer l’attestation à votre coordination, ce courriel part de votre messagerie et relève de votre initiative : la coordination en devient alors destinataire au titre du suivi de votre parcours.</p>' +
       '<p class="note"><button type="button" class="lien-oubli" data-oubli style="background:none;border:none;padding:0;font:inherit;text-decoration:underline;cursor:pointer;color:#6b6b6b;">Effacer mon nom de ce navigateur</button></p>';
     fin.appendChild(bloc);
 
@@ -187,7 +195,7 @@
       var blob = genererPDF(n, mod, dateFr());
       var a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
-      a.download = "attestation-" + slug(mod.numero) + "-" + slug(n) + ".pdf";
+      a.download = "attestation-parcours-idsr-" + slug(n) + ".pdf";
       document.body.appendChild(a); a.click();
       setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 2000);
     });
@@ -195,9 +203,8 @@
     bloc.querySelector("[data-mail]").addEventListener("click", function(){
       var n = nomValide(); if(!n) return;
       var dest = (select && select.value) ? select.value : MAIL_DEFAUT;
-      var sujet = "Attestation déclarative de suivi — " + mod.numero + " (" + n + ")";
-      var corps = "Bonjour,\n\nJe vous transmets mon attestation déclarative de suivi du " + mod.numero +
-        " « " + mod.titre + " » de l’espace e-learning IDSR, validé le " + dateFr() + ".\n\n" +
+      var sujet = "Attestation déclarative de suivi — parcours de préparation IDSR (" + n + ")";
+      var corps = "Bonjour,\n\nJe vous transmets mon attestation déclarative de suivi du parcours de préparation à la formation initiale des IDSR (espace e-learning) : les sept modules et le questionnaire final des acquis ont été validés le " + dateFr() + ".\n\n" +
         "(Attestation PDF à joindre : pensez à ajouter le fichier téléchargé à ce message.)\n\n" +
         "Cordialement,\n" + n;
       window.location.href = "mailto:" + dest +
@@ -213,8 +220,8 @@
     });
   }
 
-  /* Le bloc de fin n'apparaît qu'au terme du parcours : on injecte
-     dès maintenant (il est masqué tant que le module n'est pas fini). */
+  /* Le conteneur de l'attestation est révélé par le module final
+     une fois le questionnaire réussi : on injecte dès le chargement. */
   if(document.readyState === "loading"){
     document.addEventListener("DOMContentLoaded", injecter);
   } else { injecter(); }
